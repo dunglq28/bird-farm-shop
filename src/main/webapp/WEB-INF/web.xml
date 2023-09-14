@@ -4,9 +4,25 @@
         <servlet-name>AuthLoginServlet</servlet-name>
         <servlet-class>Controllers.Auth.AuthLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>Controllers.Customer.NewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewServlet1</servlet-name>
+        <servlet-class>Controllers.Public.NewServlet1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
         <url-pattern>/AuthLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewServlet1</servlet-name>
+        <url-pattern>/NewServlet1</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
