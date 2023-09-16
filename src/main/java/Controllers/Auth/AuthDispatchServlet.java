@@ -5,8 +5,13 @@
  */
 package Controllers.Auth;
 
+import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.Properties;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hj
  */
-@WebServlet(name = "AuthLoginServlet", urlPatterns = {"/AuthLoginServlet"})
-public class AuthLoginServlet extends HttpServlet {
+@WebServlet(name = "buyer", urlPatterns = {"/buyer"})
+public class AuthDispatchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +37,20 @@ public class AuthLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AuthLoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AuthLoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String button = request.getParameter("btAction");            
+        String url = "";
+        try {
+            if (button.equals("Login")) {
+                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                
+            } else if (button.equals("Register")) {
+                url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
+            }
+
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            out.close();
         }
     }
 
