@@ -1,0 +1,108 @@
+html {
+    font-size: 62.5%;
+    font-family: "Poppins", sans-serif;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(235, 233, 239);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+}
+
+
+.retrieval {
+    padding: 90px 75px;
+    background-color: rgb(255, 253, 255);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+}
+
+.retrieval-heading {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2696E9;
+    text-align: center;
+    margin-bottom: 35px;
+
+}
+
+
+
+
+.retrieval-label {
+    font-size: 16px;
+    color: #302E35;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.password-input {
+    display: block;
+    width: 100%;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #F2F0F6;
+    outline: none;
+    border: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    margin-bottom: 30px;
+
+}
+
+
+.password-submit {
+    padding: 25px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border: 0;
+    outline: none;
+    display: inline-block;
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgb(38, 150, 233);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px 0px rgba(38, 150, 233, 0.5);
+    margin-top: 25px;
+    margin-bottom: 15px;
+
+
+}
+
+
+.password-form-vertify {
+    display: inline-flex;
+    width: 100%;
+}
+
+.retrieval-form-getcode {
+    display: block;
+    width: 20%;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #D85040;
+    outline: none;
+    border: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    margin-bottom: 30px;
+    margin-left: 3px;
+    color: #ffffff;
+    font-weight: bold;
+}
