@@ -18,10 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author hj
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 @WebServlet
 =======
 @WebServlet(name = "AuthLoginServlet", urlPatterns = {"/AuthLoginServlet"})
 >>>>>>> origin/master
+=======
+@WebServlet(name = "AuthLoginServlet", urlPatterns = {"/AuthLoginServlet"})
+>>>>>>> 64152d87cfca1661a98ff9f0fa322fd301498a68
 public class AuthLoginServlet extends HttpServlet {
 
     /**

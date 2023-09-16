@@ -6,6 +6,7 @@
     </servlet>
     <servlet>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>Controllers.Customer.NewServlet</servlet-class>
     </servlet>
@@ -31,6 +32,8 @@
         </session-timeout>
     </session-config>
 =======
+=======
+>>>>>>> 64152d87cfca1661a98ff9f0fa322fd301498a68
         <servlet-name>PublicStartSerlvet</servlet-name>
         <servlet-class>Controllers.Public.PublicStartSerlvet</servlet-class>
     </servlet>
@@ -58,5 +61,8 @@
     <welcome-file-list>
         <welcome-file>PublicStartSerlvet</welcome-file>
     </welcome-file-list>
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> 64152d87cfca1661a98ff9f0fa322fd301498a68
 </web-app>
