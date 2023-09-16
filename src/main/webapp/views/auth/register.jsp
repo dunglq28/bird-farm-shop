@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
-
 <body>
     <div class="signup">
         <h1 class="signup-heading">Sign up</h1>
@@ -20,13 +19,17 @@
             <!-- <i class="fa fa-google signup-social-icon"></i> -->
             <!-- <i class="fa-brands fa-google"></i> -->
 
-            <span class="signup-social-text">Sign up with Google</span>
+            <span class="signup-social-text">
+                <a class="text-decoration-none text-white " href="#">Sign up with Google</a>
+            </span>
         </button>
         <button class="signup-social-fb">
             <!-- <i class="fa fa-google signup-social-icon"></i> -->
 
 
-            <span class="signup-social-text">Sign up with Facebook</span>
+            <span class="signup-social-text">
+                <a class="text-decoration-none text-white " href="#">Sign up with Facebook</a>
+            </span>
         </button>
         <div class="signup-or">
             <span>Or</span>
