@@ -5,25 +5,30 @@
  */
 package Controllers.Auth;
 
+import Daos.AccountDAO;
+import Daos.CustomerDAO;
+import Models.AccountDTO;
+import Models.CustomerDTO;
+import Utils.FacebookUtils;
 import Utils.MyAppConstants;
+import com.restfb.types.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.util.Properties;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hj
  */
-@WebServlet(name = "guest", urlPatterns = {"/guest"})
-public class AuthDispatchServlet extends HttpServlet {
+@WebServlet(name = "login-facebook", urlPatterns = {"/login-facebook"})
+public class AuthLoginFaceBookServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +42,46 @@ public class AuthDispatchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String button = request.getParameter("btAction");
         String url = "";
         try {
-            switch (button) {
-                case "loginPage":
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-                    break;
-                case "registerPage":
-                    url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
-                    break;
+            String code = request.getParameter("code");
+
+            if (code == null || code.isEmpty()) {
+                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+            } else {
+                String accessToken = FacebookUtils.getToken(code);
+                User user = FacebookUtils.getUserInfo(accessToken);
+                
+                AccountDAO dao = new AccountDAO();
+                AccountDTO account = dao.checkExistFaceBook(user.getId());
+                HttpSession session = request.getSession();
+                if (account != null) {                   
+                    session.setAttribute("USERNAME", account.getFullName());
+                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                } else {
+                    long millis = System.currentTimeMillis();
+                    java.sql.Date date = new java.sql.Date(millis);
+                    account = new AccountDTO(user.getId(), null, user.getName(), null, date, "FaceBook", 1, true);
+                    if (dao.createAccount(account)) {
+                        CustomerDTO customer = new CustomerDTO("1", account.getAccountID(), account.getFullName(), 
+                                null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
+                        CustomerDAO cusDao = new CustomerDAO();
+                        cusDao.createCustomer(customer);
+                        url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                        session.setAttribute("USERNAME", account.getFullName());
+                    } else {
+                        url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+                    }
+                }
             }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            out.close();
         }
     }
 

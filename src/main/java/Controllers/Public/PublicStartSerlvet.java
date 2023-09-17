@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Daos;
+package Controllers.Public;
 
+import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hj
  */
-@WebServlet(name = "j", urlPatterns = {"/j"})
-public class j extends HttpServlet {
+@WebServlet(name = "PublicStartSerlvet", urlPatterns = {"/PublicStartSerlvet"})
+public class PublicStartSerlvet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +35,13 @@ public class j extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet j</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet j at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        response.setContentType("text/html;charset=UTF-8");        
+
+        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
+
+        RequestDispatcher dis = request.getRequestDispatcher(url);
+        dis.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
