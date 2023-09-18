@@ -9,6 +9,7 @@ import Models.CustomerDTO;
 import Utils.DBHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,6 +17,41 @@ import java.sql.SQLException;
  * @author hj
  */
 public class CustomerDAO {
+
+    public String createCustomerID() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select MAX(CustomerID) as 'CustomerID' "
+                        + "From Customers "
+                        + "Where CustomerID like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "C" + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String CustomerIDMax = rs.getString("CustomerID");
+                    if (CustomerIDMax == null) {
+                        return "C1";
+                    } else {
+                        int num = Integer.parseInt(CustomerIDMax.substring(1)) + 1;
+                        String newCustomerID = "C";
+                        return newCustomerID.concat(String.valueOf(num));
+                    }
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
     public boolean createCustomer(CustomerDTO customer) throws SQLException, ClassNotFoundException {
         Connection con = null;

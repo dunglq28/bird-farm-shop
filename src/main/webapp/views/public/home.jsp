@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Home</h1>
-        <a>Login</a> <br><br>
+        <a href="guest?btAction=loginPage">Login</a><br><br>
         <a href="guest?btAction=registerPage">Register</a>
         <c:set var="username" value="${sessionScope.USERNAME}"/>
         <p>${username}</p>

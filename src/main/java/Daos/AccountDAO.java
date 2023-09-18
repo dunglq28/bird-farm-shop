@@ -8,6 +8,7 @@ package Daos;
 import Models.AccountDTO;
 import Utils.DBHelper;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,9 +62,10 @@ public class AccountDAO {
             if (con != null) {
                 String sql = "Select AccountID, FullName "
                         + "From Account "
-                        + "Where AccountID like ? ";
+                        + "Where AccountID like ? and Status = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + accountID + "%");
+                stm.setBoolean(2, true);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
@@ -76,6 +78,41 @@ public class AccountDAO {
             if (rs != null) {
                 rs.close();
             }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }    
+    
+    public String createAccountID() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select MAX(AccountID) as 'AccountID' "
+                        + "From Account "
+                        + "Where AccountID like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "A" + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String AccountIDMax = rs.getString("AccountID");
+                    if (AccountIDMax == null) {
+                        return "A1";
+                    } else {
+                        int num = Integer.parseInt(AccountIDMax.substring(1)) + 1;
+                        String newAccountID = "A";
+                        return newAccountID.concat(String.valueOf(num));
+                    }
+                }
+            }
+        } finally {
             if (stm != null) {
                 stm.close();
             }
@@ -121,4 +158,46 @@ public class AccountDAO {
         }
         return false;
     }
+    
+    public AccountDTO getAccountByEmail(String email) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        AccountDTO account = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select * "
+                        + "From Account "
+                        + "Where Email = ? and Status = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                stm.setBoolean(2, true);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String AccountID = rs.getString("AccountID");
+                    String Password = rs.getString("Password");
+                    String FullName = rs.getString("FullName");
+                    String Email = rs.getString("Email");
+                    Date date = rs.getDate("Date_created");
+                    String CreateBy = rs.getString("CreateBy");
+                    int RoleID = rs.getInt("RoleID");
+                    return account = new AccountDTO(AccountID, Password, FullName, Email, date, CreateBy, RoleID, true);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+    
+    
 }

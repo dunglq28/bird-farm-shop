@@ -54,6 +54,8 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                 
                 AccountDAO dao = new AccountDAO();
                 AccountDTO account = dao.checkExistFaceBook(user.getId());
+                
+                CustomerDAO cusDao = new CustomerDAO();
                 HttpSession session = request.getSession();
                 if (account != null) {                   
                     session.setAttribute("USERNAME", account.getFullName());
@@ -63,9 +65,9 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                     java.sql.Date date = new java.sql.Date(millis);
                     account = new AccountDTO(user.getId(), null, user.getName(), null, date, "FaceBook", 1, true);
                     if (dao.createAccount(account)) {
-                        CustomerDTO customer = new CustomerDTO("1", account.getAccountID(), account.getFullName(), 
+                        CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(), 
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
-                        CustomerDAO cusDao = new CustomerDAO();
+                        
                         cusDao.createCustomer(customer);
                         url = MyAppConstants.PublicFeatures.HOME_PAGE;
                         session.setAttribute("USERNAME", account.getFullName());

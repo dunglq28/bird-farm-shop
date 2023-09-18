@@ -38,6 +38,14 @@ public class AccountDTO {
         this.Status = Status;
     }
 
+    public AccountDTO(String AccountID, String FullName, int RoleID) {
+        this.AccountID = AccountID;
+        this.FullName = FullName;
+        this.RoleID = RoleID;
+    }
+
+    
+
     public String getAccountID() {
         return AccountID;
     }

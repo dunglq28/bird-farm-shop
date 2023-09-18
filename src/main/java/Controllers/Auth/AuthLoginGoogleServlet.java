@@ -52,9 +52,10 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                 String accessToken = GoogleUtils.getToken(code);
                 UserGoogleDTO googlePojo = GoogleUtils.getUserInfo(accessToken);
                 AccountDAO dao = new AccountDAO();
-                AccountDTO account = dao.checkExistEmail(googlePojo.getEmail());
+                AccountDTO account = dao.getAccountByEmail(googlePojo.getEmail());
+                CustomerDAO cusDao = new CustomerDAO();
                 HttpSession session = request.getSession();
-                if (account != null) {                   
+                if (account != null) {
                     session.setAttribute("USERNAME", account.getFullName());
                     url = MyAppConstants.PublicFeatures.HOME_PAGE;
                 } else {
@@ -62,9 +63,8 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                     java.sql.Date date = new java.sql.Date(millis);
                     account = new AccountDTO(googlePojo.getId(), null, googlePojo.getName(), googlePojo.getEmail(), date, "Google", 1, true);
                     if (dao.createAccount(account)) {
-                        CustomerDTO customer = new CustomerDTO("1", account.getAccountID(), account.getFullName(), 
+                        CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
-                        CustomerDAO cusDao = new CustomerDAO();
                         cusDao.createCustomer(customer);
                         url = MyAppConstants.PublicFeatures.HOME_PAGE;
                         session.setAttribute("USERNAME", account.getFullName());

@@ -5,20 +5,26 @@
  */
 package Controllers.Auth;
 
+import Daos.AccountDAO;
+import Models.AccountDTO;
+import Models.LoginError;
+import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hj
  */
-
-@WebServlet(name = "AuthLoginServlet", urlPatterns = {"/AuthLoginServlet"})
+@WebServlet(name = "log-in", urlPatterns = {"/log-in"})
 public class AuthLoginServlet extends HttpServlet {
 
     /**
@@ -33,17 +39,51 @@ public class AuthLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AuthLoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AuthLoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
+
+        String email = request.getParameter("txtEmailLogin");
+        String password = request.getParameter("txtPasswordLogin");
+
+        LoginError error = new LoginError();
+        boolean foundErr = false;
+        try {
+            if (email.trim().isEmpty()) {
+                foundErr = true;
+                error.setEmptyEmail("Please enter your Email!");
+            }
+            if (password.trim().isEmpty()) {
+                foundErr = true;
+                error.setEmptyPassword("Please enter your Password!");
+            }
+            if (foundErr) {
+                request.setAttribute("CREATE_ERROR", error);
+                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+            } else {
+                AccountDAO dao = new AccountDAO();
+                AccountDTO account = dao.getAccountByEmail(email);
+                if (account == null) {
+                    error.setWrongEmail("Email does not match!");
+                    request.setAttribute("CREATE_ERROR", error);
+                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                } else if (!password.equals(account.getPassword())) {
+                    error.setWrongPassword("Password does not match!");
+                    request.setAttribute("CREATE_ERROR", error);
+                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                } else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("USERNAME", account.getFullName());
+                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 
