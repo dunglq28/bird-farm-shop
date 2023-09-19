@@ -51,26 +51,26 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
             } else {
                 String accessToken = FacebookUtils.getToken(code);
                 User user = FacebookUtils.getUserInfo(accessToken);
-                
+
                 AccountDAO dao = new AccountDAO();
                 AccountDTO account = dao.checkExistFaceBook(user.getId());
-                
+
                 CustomerDAO cusDao = new CustomerDAO();
                 HttpSession session = request.getSession();
-                if (account != null) {                   
-                    session.setAttribute("USERNAME", account.getFullName());
+                if (account != null) {
+                    session.setAttribute("ACCOUNT", account);
                     url = MyAppConstants.PublicFeatures.HOME_PAGE;
                 } else {
                     long millis = System.currentTimeMillis();
                     java.sql.Date date = new java.sql.Date(millis);
                     account = new AccountDTO(user.getId(), null, user.getName(), null, date, "FaceBook", 1, true);
                     if (dao.createAccount(account)) {
-                        CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(), 
+                        CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
-                        
+
                         cusDao.createCustomer(customer);
                         url = MyAppConstants.PublicFeatures.HOME_PAGE;
-                        session.setAttribute("USERNAME", account.getFullName());
+                        session.setAttribute("ACCOUNT", account);
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
                     }

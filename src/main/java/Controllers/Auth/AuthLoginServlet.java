@@ -63,7 +63,7 @@ public class AuthLoginServlet extends HttpServlet {
                 AccountDAO dao = new AccountDAO();
                 AccountDTO account = dao.getAccountByEmail(email);
                 if (account == null) {
-                    error.setWrongEmail("Email does not match!");
+                    error.setWrongEmail("Email is not registered!");
                     request.setAttribute("CREATE_ERROR", error);
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
                 } else if (!password.equals(account.getPassword())) {
@@ -72,7 +72,7 @@ public class AuthLoginServlet extends HttpServlet {
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
                 } else {
                     HttpSession session = request.getSession();
-                    session.setAttribute("USERNAME", account.getFullName());
+                    session.setAttribute("ACCOUNT", account);
                     url = MyAppConstants.PublicFeatures.HOME_PAGE;
                 }
             }

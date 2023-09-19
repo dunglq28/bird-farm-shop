@@ -47,6 +47,18 @@ public class AuthDispatchServlet extends HttpServlet {
                 case "registerPage":
                     url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
                     break;
+                case "forgetPassPage":
+                    url = MyAppConstants.AuthFeatures.FORGET_PASS_PAGE;
+                    break;
+                case "Send":
+                    url = MyAppConstants.AuthFeatures.FORGET_PASS_CONTROLLER;
+                    break;
+                case "resetPassPage":
+                    url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
+                    break;
+                case "CreateNewPassword":
+                    url = MyAppConstants.AuthFeatures.RESET_PASS_CONTROLLER;
+                    break;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -79,7 +79,7 @@
 
                     <div class="col-md-6">
                         <p class="login-forgetpassword">
-                            <a href="forgetpass.html" class="login-forgetpassword-link">Forget password ?</a>
+                            <a href="guest?btAction=forgetPassPage" class="login-forgetpassword-link">Forget password ?</a>
                         </p>
                     </div>
                 </div>

@@ -6,12 +6,11 @@
 package Controllers.Auth;
 
 import Daos.AccountDAO;
-import Daos.CustomerDAO;
 import Models.AccountDTO;
-import Models.CustomerDTO;
-import Models.UserGoogleDTO;
-import Utils.GoogleUtils;
+import Models.LoginError;
+import Utils.EmailExample;
 import Utils.MyAppConstants;
+import Utils.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,8 +26,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "login-google", urlPatterns = {"/login-google"})
-public class AuthLoginGoogleServlet extends HttpServlet {
+@WebServlet(name = "forgetPass", urlPatterns = {"/forgetPass"})
+public class AuthForgetPassServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,37 +41,42 @@ public class AuthLoginGoogleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
+        String email = request.getParameter("txtContact");
+        String url = MyAppConstants.AuthFeatures.FORGET_PASS_PAGE;
+        EmailExample emailExample = new EmailExample();
+        LoginError error = new LoginError();
+        boolean foundErr = false;
         try {
-            String code = request.getParameter("code");
+            if (email.trim().isEmpty()) {
+                foundErr = true;
+                error.setEmptyEmail("Please enter your email!");
+            } else if (!emailExample.validate(email.trim())) {
+                foundErr = true;
+                error.setWrongEmail("Email invalidate!");
+            }
 
-            if (code == null || code.isEmpty()) {
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+            if (foundErr) {
+                request.setAttribute("CREATE_ERROR", error);
             } else {
-                String accessToken = GoogleUtils.getToken(code);
-                UserGoogleDTO googlePojo = GoogleUtils.getUserInfo(accessToken);
                 AccountDAO dao = new AccountDAO();
-                AccountDTO account = dao.getAccountByEmail(googlePojo.getEmail());
-                CustomerDAO cusDao = new CustomerDAO();
-                HttpSession session = request.getSession();
-                if (account != null) {
-                    session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                AccountDTO account = dao.getAccountByEmail(email);
+                if (account == null) {
+                    error.setWrongEmail("Email is not registered!");
+                    request.setAttribute("CREATE_ERROR", error);
                 } else {
-                    long millis = System.currentTimeMillis();
-                    java.sql.Date date = new java.sql.Date(millis);
-                    account = new AccountDTO(googlePojo.getId(), null, googlePojo.getName(), googlePojo.getEmail(), date, "Google", 1, true);
-                    if (dao.createAccount(account)) {
-                        CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
-                                null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
-                        cusDao.createCustomer(customer);
-                        url = MyAppConstants.PublicFeatures.HOME_PAGE;
-                        session.setAttribute("ACCOUNT", account);
-                    } else {
-                        url = MyAppConstants.PublicFeatures.ERROR_PAGE;
-                    }
+                    SendMail mailHome = new SendMail();
+                    String resetPassPage = "<a href=" +"http://localhost:8084/BirdFarmShop/guest?btAction=resetPassPage&txtContact="+account.getEmail() + ">click here</a>";
+                    String subject = "Change the password";
+                    String text = "Hello " + account.getFullName() + ", <br>"
+                            + "You have submitted a password change request. Please " +resetPassPage+ " to proceed with changing your password.<br>"
+                            + "Thank you for using BirdFarmShop's services <br>"
+                            + "Best regards, <br>"
+                            + "BirdFarmShop";
+                    mailHome.sendCode(email, subject, text);   
+                    request.setAttribute("NOTIFICATION", "We have sent an email to " +account.getEmail() + " with a link to reset your password.");
                 }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

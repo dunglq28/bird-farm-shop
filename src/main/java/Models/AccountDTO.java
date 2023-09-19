@@ -13,101 +13,98 @@ import java.sql.Date;
  */
 public class AccountDTO {
 
-    private String AccountID;
-    private String Password;
-    private String FullName;
-    private String Email;
-    private Date Date_created;
-    private String CreateBy;
-    private int RoleID;
-    private boolean Status;
+    private String accountID;
+    private String password;
+    private String fullName;
+    private String email;
+    private Date date_created;
+    private String createBy;
+    private int roleID;
+    private boolean status;
 
-    public AccountDTO(String AccountID, String FullName) {
-        this.AccountID = AccountID;
-        this.FullName = FullName;
+    public AccountDTO(String accountID, String password, String fullName, String email, Date date_created, String createBy, int roleID, boolean status) {
+        this.accountID = accountID;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.date_created = date_created;
+        this.createBy = createBy;
+        this.roleID = roleID;
+        this.status = status;
     }
 
-    public AccountDTO(String AccountID, String Password, String FullName, String Email, Date Date_created, String CreateBy, int RoleID, boolean Status) {
-        this.AccountID = AccountID;
-        this.Password = Password;
-        this.FullName = FullName;
-        this.Email = Email;
-        this.Date_created = Date_created;
-        this.CreateBy = CreateBy;
-        this.RoleID = RoleID;
-        this.Status = Status;
+    public AccountDTO(String accountID, String fullName, int roleID) {
+        this.accountID = accountID;
+        this.fullName = fullName;
+        this.roleID = roleID;
     }
-
-    public AccountDTO(String AccountID, String FullName, int RoleID) {
-        this.AccountID = AccountID;
-        this.FullName = FullName;
-        this.RoleID = RoleID;
-    }
-
+    
     
 
     public String getAccountID() {
-        return AccountID;
+        return accountID;
     }
 
-    public void setAccountID(String AccountID) {
-        this.AccountID = AccountID;
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
-    public void setFullName(String FullName) {
-        this.FullName = FullName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getDate_created() {
-        return Date_created;
+        return date_created;
     }
 
-    public void setDate_created(Date Date_created) {
-        this.Date_created = Date_created;
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
     }
 
     public String getCreateBy() {
-        return CreateBy;
+        return createBy;
     }
 
-    public void setCreateBy(String CreateBy) {
-        this.CreateBy = CreateBy;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 
     public int getRoleID() {
-        return RoleID;
+        return roleID;
     }
 
-    public void setRoleID(int RoleID) {
-        this.RoleID = RoleID;
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
     }
 
     public boolean isStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(boolean Status) {
-        this.Status = Status;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
+
+    
 
 }

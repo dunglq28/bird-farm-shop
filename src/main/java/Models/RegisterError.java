@@ -17,12 +17,13 @@ public class RegisterError {
     private String wrongVerification;
     private String emptyPassword;
     private String wrongPassword;
+    private String confirmError;
     private String emptyFullName;
 
     public RegisterError() {
     }
 
-    public RegisterError(String emptyEmail, String wrongEmail, String isExistEmail, String emptyVerification, String wrongVerification, String emptyPassword, String wrongPassword, String emptyFullName) {
+    public RegisterError(String emptyEmail, String wrongEmail, String isExistEmail, String emptyVerification, String wrongVerification, String emptyPassword, String wrongPassword, String confirmError, String emptyFullName) {
         this.emptyEmail = emptyEmail;
         this.wrongEmail = wrongEmail;
         this.isExistEmail = isExistEmail;
@@ -30,7 +31,16 @@ public class RegisterError {
         this.wrongVerification = wrongVerification;
         this.emptyPassword = emptyPassword;
         this.wrongPassword = wrongPassword;
+        this.confirmError = confirmError;
         this.emptyFullName = emptyFullName;
+    }
+
+    public String getConfirmError() {
+        return confirmError;
+    }
+
+    public void setConfirmError(String confirmError) {
+        this.confirmError = confirmError;
     }
 
     public String getEmptyEmail() {

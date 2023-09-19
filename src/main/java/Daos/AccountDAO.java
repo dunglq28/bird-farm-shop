@@ -26,7 +26,7 @@ public class AccountDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select AccountID, FullName "
+                String sql = "Select AccountID, FullName, RoleID "
                         + "From Account "
                         + "Where Email like ? ";
                 stm = con.prepareStatement(sql);
@@ -35,7 +35,8 @@ public class AccountDAO {
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
                     String FullName = rs.getString("FullName");
-                    AccountDTO account = new AccountDTO(AccountID, FullName);
+                    int RoleID = rs.getInt("RoleID");
+                    AccountDTO account = new AccountDTO(AccountID, FullName, RoleID);
                     return account;
                 }
             }
@@ -60,7 +61,7 @@ public class AccountDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select AccountID, FullName "
+                String sql = "Select AccountID, FullName, RoleID "
                         + "From Account "
                         + "Where AccountID like ? and Status = ? ";
                 stm = con.prepareStatement(sql);
@@ -70,7 +71,8 @@ public class AccountDAO {
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
                     String FullName = rs.getString("FullName");
-                    AccountDTO account = new AccountDTO(AccountID, FullName);
+                    int RoleID = rs.getInt("RoleID");
+                    AccountDTO account = new AccountDTO(AccountID, FullName, RoleID);
                     return account;
                 }
             }
@@ -148,6 +150,37 @@ public class AccountDAO {
                     return true;
                 }
             }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean updatePasswordByEmail(String email, String password)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Account "
+                        + "Set Password = ? "
+                        + "Where Email = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setString(2, email);
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    return true;
+                }
+            } // end of connection has opend
+
         } finally {
             if (stm != null) {
                 stm.close();

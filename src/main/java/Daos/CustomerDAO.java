@@ -73,7 +73,7 @@ public class CustomerDAO {
                 stm.setString(6, customer.getPhone_Number());
                 stm.setString(7, customer.getAddress());
                 stm.setString(8, customer.getCity());
-                stm.setDate(9, customer.getDOB());
+                stm.setDate(9, customer.getdOB());
                 stm.setDate(10, customer.getDate_created());
                 stm.setBoolean(11, true);
                 int row = stm.executeUpdate();

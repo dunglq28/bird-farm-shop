@@ -12,119 +12,121 @@ import java.sql.Date;
  * @author hj
  */
 public class CustomerDTO {
-    private String CustomerID;
-    private String AccountID;
-    private String FullName;
-    private String Gender;
-    private String Email;
-    private String Phone_Number;
-    private String Address;
-    private String City;
-    private Date DOB;
-    private Date Date_created;
-    private boolean Status;
+    private String customerID;
+    private String accountID;
+    private String fullName;
+    private String gender;
+    private String email;
+    private String phone_Number;
+    private String address;
+    private String city;
+    private Date dOB;
+    private Date date_created;
+    private boolean status;
 
-    public CustomerDTO(String CustomerID, String AccountID, String FullName, String Gender, String Email, String Phone_Number, String Address, String City, Date DOB, Date Date_created, boolean Status) {
-        this.CustomerID = CustomerID;
-        this.AccountID = AccountID;
-        this.FullName = FullName;
-        this.Gender = Gender;
-        this.Email = Email;
-        this.Phone_Number = Phone_Number;
-        this.Address = Address;
-        this.City = City;
-        this.DOB = DOB;
-        this.Date_created = Date_created;
-        this.Status = Status;
+    public CustomerDTO(String customerID, String accountID, String fullName, String gender, String email, String phone_Number, String address, String city, Date dOB, Date date_created, boolean status) {
+        this.customerID = customerID;
+        this.accountID = accountID;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.email = email;
+        this.phone_Number = phone_Number;
+        this.address = address;
+        this.city = city;
+        this.dOB = dOB;
+        this.date_created = date_created;
+        this.status = status;
     }
 
     public String getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
-    public void setCustomerID(String CustomerID) {
-        this.CustomerID = CustomerID;
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
     public String getAccountID() {
-        return AccountID;
+        return accountID;
     }
 
-    public void setAccountID(String AccountID) {
-        this.AccountID = AccountID;
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
-    public void setFullName(String FullName) {
-        this.FullName = FullName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
-    public void setGender(String Gender) {
-        this.Gender = Gender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone_Number() {
-        return Phone_Number;
+        return phone_Number;
     }
 
-    public void setPhone_Number(String Phone_Number) {
-        this.Phone_Number = Phone_Number;
+    public void setPhone_Number(String phone_Number) {
+        this.phone_Number = phone_Number;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
-    public void setCity(String City) {
-        this.City = City;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Date getDOB() {
-        return DOB;
+    public Date getdOB() {
+        return dOB;
     }
 
-    public void setDOB(Date DOB) {
-        this.DOB = DOB;
+    public void setdOB(Date dOB) {
+        this.dOB = dOB;
     }
 
     public Date getDate_created() {
-        return Date_created;
+        return date_created;
     }
 
-    public void setDate_created(Date Date_created) {
-        this.Date_created = Date_created;
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
     }
 
     public boolean isStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(boolean Status) {
-        this.Status = Status;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
+
+    
 
     
     

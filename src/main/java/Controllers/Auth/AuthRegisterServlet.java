@@ -60,7 +60,6 @@ public class AuthRegisterServlet extends HttpServlet {
 
         try {
             session.setAttribute("EMAIL", email);
-            session.setAttribute("USERNAME", fullname);
             boolean emailErr = false;
             if (email.trim().isEmpty()) {
                 foundErr = true;
@@ -86,7 +85,7 @@ public class AuthRegisterServlet extends HttpServlet {
                         + "<h1>" + ranNum + "</h1>"
                         + "Best regards, <br>"
                         + "BirdFarmShop";
-                mailHome.sendCode(email, ranNum, subject, text);
+                mailHome.sendCode(email, subject, text);
                 session.setAttribute("CODE", ranNum);
                 response.sendRedirect("http://localhost:8084/BirdFarmShop/guest?btAction=registerPage");
                 return;
@@ -124,6 +123,7 @@ public class AuthRegisterServlet extends HttpServlet {
                         null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
+                session.setAttribute("ACCOUNT", account);
                 url = MyAppConstants.PublicFeatures.HOME_PAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);

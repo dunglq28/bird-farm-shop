@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
  * @author hj
  */
 public class SendMail {
-    public static boolean sendCode(String email, int num, String subject, String text) {
+    public static boolean sendCode(String email, String subject, String text) {
         final String from = "thebird.farm.1704@gmail.com";
         final String password = "cnhldbalmrenfznp";
 
@@ -45,7 +45,7 @@ public class SendMail {
             msg.setFrom(from);
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setSubject(subject, "UTF-8");
-            msg.setContent(text, "text/html");
+            msg.setContent(text, "text/html; charset=UTF-8");
             Transport.send(msg);
             return true;
         } catch (Exception e) {

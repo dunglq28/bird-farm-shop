@@ -6,11 +6,7 @@
 package Controllers.Auth;
 
 import Daos.AccountDAO;
-import Daos.CustomerDAO;
-import Models.AccountDTO;
-import Models.CustomerDTO;
-import Models.UserGoogleDTO;
-import Utils.GoogleUtils;
+import Models.RegisterError;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "login-google", urlPatterns = {"/login-google"})
-public class AuthLoginGoogleServlet extends HttpServlet {
+@WebServlet(name = "AuthResetPassServlet", urlPatterns = {"/AuthResetPassServlet"})
+public class AuthResetPassServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,37 +38,38 @@ public class AuthLoginGoogleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
-        try {
-            String code = request.getParameter("code");
 
-            if (code == null || code.isEmpty()) {
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-            } else {
-                String accessToken = GoogleUtils.getToken(code);
-                UserGoogleDTO googlePojo = GoogleUtils.getUserInfo(accessToken);
-                AccountDAO dao = new AccountDAO();
-                AccountDTO account = dao.getAccountByEmail(googlePojo.getEmail());
-                CustomerDAO cusDao = new CustomerDAO();
-                HttpSession session = request.getSession();
-                if (account != null) {
-                    session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
-                } else {
-                    long millis = System.currentTimeMillis();
-                    java.sql.Date date = new java.sql.Date(millis);
-                    account = new AccountDTO(googlePojo.getId(), null, googlePojo.getName(), googlePojo.getEmail(), date, "Google", 1, true);
-                    if (dao.createAccount(account)) {
-                        CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
-                                null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
-                        cusDao.createCustomer(customer);
-                        url = MyAppConstants.PublicFeatures.HOME_PAGE;
-                        session.setAttribute("ACCOUNT", account);
-                    } else {
-                        url = MyAppConstants.PublicFeatures.ERROR_PAGE;
-                    }
-                }
+        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+
+        String password = request.getParameter("txtPassword");
+        String confirm = request.getParameter("txtConfirm");
+        String email = request.getParameter("txtContact");
+        RegisterError error = new RegisterError();
+        boolean foundErr = false;
+
+        try {
+            if (password.trim().isEmpty()) {
+                foundErr = true;
+                error.setEmptyPassword("Please enter your Password!");
+            } else if (password.trim().length() < 6 || password.trim().length() > 20) {
+                foundErr = true;
+                error.setWrongPassword("Password must be 6 to 20 characters");
             }
+
+            if (!confirm.trim().equals(password.trim())) {
+                foundErr = true;
+                error.setConfirmError("Password does not match Confirm");
+            }
+
+            if (foundErr) {
+                request.setAttribute("CREATE_ERROR", error);
+                url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
+            } else {
+                AccountDAO dao = new AccountDAO();
+                boolean result = dao.updatePasswordByEmail(email, password);
+                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
