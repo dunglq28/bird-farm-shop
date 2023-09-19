@@ -63,7 +63,7 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                 } else {
                     long millis = System.currentTimeMillis();
                     java.sql.Date date = new java.sql.Date(millis);
-                    account = new AccountDTO(user.getId(), null, user.getName(), null, date, "FaceBook", 1, true);
+                    account = new AccountDTO(user.getId(), null, user.getName(), null, date, "FaceBook", 1, "Customer", true);
                     if (dao.createAccount(account)) {
                         CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);

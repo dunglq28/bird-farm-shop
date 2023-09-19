@@ -26,8 +26,9 @@ public class AccountDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select AccountID, FullName, RoleID "
+                String sql = "Select AccountID, FullName, RoleName "
                         + "From Account "
+                        + "inner join Roles on Account.RoleID = Roles.RoleID "
                         + "Where Email like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + email + "%");
@@ -35,8 +36,8 @@ public class AccountDAO {
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
                     String FullName = rs.getString("FullName");
-                    int RoleID = rs.getInt("RoleID");
-                    AccountDTO account = new AccountDTO(AccountID, FullName, RoleID);
+                    String roleName = rs.getString("RoleName");
+                    AccountDTO account = new AccountDTO(AccountID, FullName, roleName);
                     return account;
                 }
             }
@@ -61,8 +62,9 @@ public class AccountDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select AccountID, FullName, RoleID "
+                String sql = "Select AccountID, FullName, RoleName "
                         + "From Account "
+                        + "inner join Roles on Account.RoleID = Roles.RoleID "
                         + "Where AccountID like ? and Status = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + accountID + "%");
@@ -71,8 +73,8 @@ public class AccountDAO {
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
                     String FullName = rs.getString("FullName");
-                    int RoleID = rs.getInt("RoleID");
-                    AccountDTO account = new AccountDTO(AccountID, FullName, RoleID);
+                    String roleName = rs.getString("RoleName");
+                    AccountDTO account = new AccountDTO(AccountID, FullName, roleName);
                     return account;
                 }
             }
@@ -88,8 +90,8 @@ public class AccountDAO {
             }
         }
         return null;
-    }    
-    
+    }
+
     public String createAccountID() throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -160,7 +162,7 @@ public class AccountDAO {
         }
         return false;
     }
-    
+
     public boolean updatePasswordByEmail(String email, String password)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -191,7 +193,7 @@ public class AccountDAO {
         }
         return false;
     }
-    
+
     public AccountDTO getAccountByEmail(String email) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -200,8 +202,9 @@ public class AccountDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select * "
+                String sql = "Select AccountID, FullName, RoleName "
                         + "From Account "
+                        + "inner join Roles on Account.RoleID = Roles.RoleID "
                         + "Where Email = ? and Status = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
@@ -209,13 +212,9 @@ public class AccountDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
-                    String Password = rs.getString("Password");
                     String FullName = rs.getString("FullName");
-                    String Email = rs.getString("Email");
-                    Date date = rs.getDate("Date_created");
-                    String CreateBy = rs.getString("CreateBy");
-                    int RoleID = rs.getInt("RoleID");
-                    return account = new AccountDTO(AccountID, Password, FullName, Email, date, CreateBy, RoleID, true);
+                    String roleName = rs.getString("RoleName");
+                    return account = new AccountDTO(AccountID, FullName, roleName);
                 }
             }
         } finally {
@@ -231,6 +230,5 @@ public class AccountDAO {
         }
         return null;
     }
-    
-    
+
 }

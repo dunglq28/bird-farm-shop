@@ -20,9 +20,10 @@ public class AccountDTO {
     private Date date_created;
     private String createBy;
     private int roleID;
+    private String roleName;
     private boolean status;
 
-    public AccountDTO(String accountID, String password, String fullName, String email, Date date_created, String createBy, int roleID, boolean status) {
+    public AccountDTO(String accountID, String password, String fullName, String email, Date date_created, String createBy, int roleID, String roleName, boolean status) {
         this.accountID = accountID;
         this.password = password;
         this.fullName = fullName;
@@ -30,15 +31,24 @@ public class AccountDTO {
         this.date_created = date_created;
         this.createBy = createBy;
         this.roleID = roleID;
+        this.roleName = roleName;
         this.status = status;
     }
+ 
 
-    public AccountDTO(String accountID, String fullName, int roleID) {
+    public AccountDTO(String accountID, String fullName, String roleName) {
         this.accountID = accountID;
         this.fullName = fullName;
+        this.roleName = roleName;
+    }
+
+    public int getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
-    
     
 
     public String getAccountID() {
@@ -89,12 +99,12 @@ public class AccountDTO {
         this.createBy = createBy;
     }
 
-    public int getRoleID() {
-        return roleID;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public boolean isStatus() {

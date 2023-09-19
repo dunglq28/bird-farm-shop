@@ -118,7 +118,7 @@ public class AuthRegisterServlet extends HttpServlet {
             } else {
                 long millis = System.currentTimeMillis();
                 java.sql.Date date = new java.sql.Date(millis);
-                AccountDTO account = new AccountDTO(accDao.createAccountID(), password, fullname, email, date, "Register", 1, true);
+                AccountDTO account = new AccountDTO(accDao.createAccountID(), password, fullname, email, date, "Register", 1, "Customer", true);
                 CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                         null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
                 accDao.createAccount(account);

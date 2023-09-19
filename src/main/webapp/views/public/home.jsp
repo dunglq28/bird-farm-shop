@@ -17,5 +17,6 @@
         <a href="guest?btAction=loginPage">Login</a><br><br>
         <a href="guest?btAction=registerPage">Register</a>
         <p>${sessionScope.ACCOUNT.fullName}</p>
+        <p>${sessionScope.ACCOUNT.roleName}</p>
     </body>
 </html>
