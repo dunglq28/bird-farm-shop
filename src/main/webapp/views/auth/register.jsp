@@ -23,18 +23,32 @@
     <body>
         <div class="signup">
             <h1 class="signup-heading">Sign up</h1>
-            <button class="signup-social">
-                <span class="signup-social-text">
-                    <a class="text-decoration-none text-white " href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/BirdFarmShop/login-google&response_type=code
-                       &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force">Sign up with Google</a>
-                </span>
-            </button>
-            <button class="signup-social-fb">
-                <span class="signup-social-text">
-                    <a class="text-decoration-none text-white " href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
-                       redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook">Sign up with Facebook</a>
-                </span>
-            </button>
+
+
+            <div class="signup-social-gg">
+                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/BirdFarmShop/login-google&response_type=code
+                       &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force"
+                   class="button-gg">
+                    <span class="button-text">
+                        Sign up with Google
+                    </span>
+                </a>
+
+            </div>
+
+            <div class="signup-social-fb">
+                <a href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
+                       redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" class="button">
+
+                    <span class="button-fb">
+                        Sign up with Facebook
+                    </span>
+                </a>
+            </div>
+
+
+
+
             <div class="signup-or">
                 <span>Or</span>
             </div>

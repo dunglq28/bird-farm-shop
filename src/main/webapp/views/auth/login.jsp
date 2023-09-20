@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html lang="en">
+    <html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="./assets/css/login.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <style>
             .login-error {
@@ -25,35 +25,42 @@
     <body>
         <div class="login">
             <h1 class="login-heading">Login</h1>
-            <button class="login-social">
-                <!-- <i class="fa fa-google signup-social-icon"></i> -->
-                <!-- <i class="fa-brands fa-google"></i> -->
 
-                <span class="login-social-text">
-                    <a class="text-decoration-none text-white " " href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/BirdFarmShop/login-google&response_type=code
-                       &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+            <div class="login-social-gg">
+                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/BirdFarmShop/login-google&response_type=code
+                &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force"
+                    class="button-gg">
+                    <span class="button-text">
+                        Login with Google
+                    </span>
+                </a>
+
+            </div>
+
+            <div class="login-social-fb">
+                <a href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
+                redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" class="button">
+            
+                <span class="button-fb">
+                    Login with Facebook
                 </span>
-            </button>
-            <button class="login-social-fb ">
-                <!-- <i class="fa fa-google signup-social-icon"></i> -->
+            </a>
+            </div>
 
 
-                <span class="login-social-text">
-                    <a class="text-decoration-none text-white " href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
-                       redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook">Login with Facebook</a>
-                </span>
-            </button>
+
             <div class="login-or">
                 <span>Or</span>
             </div>
 
             <form action="log-in" class="login-form" autocomplete="off" method="POST">
 
-                <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-                <c:set var="notification" value="${requestScope.NOTIFICATION}"/>
+                <c:set var="err" value="${requestScope.CREATE_ERROR}" />
+                <c:set var="notification" value="${requestScope.NOTIFICATION}" />
 
                 <label for="email" class="login-label">Email Address</label>
-                <input name="txtEmailLogin" value="${param.txtEmailLogin}" type="email" id="email" class="login-input" placeholder="example@gmail.com">
+                <input name="txtEmailLogin" value="${param.txtEmailLogin}" type="email" id="email" class="login-input"
+                    placeholder="example@gmail.com">
                 <c:if test="${not empty err.emptyEmail}">
                     <p class="login-error">${err.emptyEmail}</p>
                 </c:if>
@@ -73,13 +80,14 @@
                 <div class="check-forget">
                     <div class="col-md-6">
                         <div class="checkbox-1">
-                            <input type="checkbox" class="login-remember" value="remember" > Remember me ?
+                            <input type="checkbox" class="login-remember" value="remember"> Remember me ?
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <p class="login-forgetpassword">
-                            <a href="guest?btAction=forgetPassPage" class="login-forgetpassword-link">Forget password ?</a>
+                            <a href="guest?btAction=forgetPassPage" class="login-forgetpassword-link">Forget password
+                                ?</a>
                         </p>
                     </div>
                 </div>
@@ -92,8 +100,8 @@
                 <a href="guest?btAction=registerPage" class="signup-login-link">Register</a>
             </p>
         </div>
-    </div>
+        </div>
 
-</body>
+    </body>
 
-</html>
+    </html>
