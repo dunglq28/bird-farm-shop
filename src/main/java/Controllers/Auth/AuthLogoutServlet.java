@@ -8,22 +8,20 @@ package Controllers.Auth;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.util.Properties;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hj
  */
-@WebServlet(name = "guest", urlPatterns = {"/guest"})
-public class AuthDispatchServlet extends HttpServlet {
+@WebServlet(name = "AuthLogoutServlet", urlPatterns = {"/AuthLogoutServlet"})
+public class AuthLogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,36 +35,13 @@ public class AuthDispatchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String button = request.getParameter("btAction");
-        String url = "";
         try {
-            switch (button) {
-                case "loginPage":
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-                    break;
-                case "logout":
-                    url = MyAppConstants.AuthFeatures.LOGOUT_CONTROLLER;
-                    break;
-                case "registerPage":
-                    url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
-                    break;
-                case "forgetPassPage":
-                    url = MyAppConstants.AuthFeatures.FORGET_PASS_PAGE;
-                    break;
-                case "Send":
-                    url = MyAppConstants.AuthFeatures.FORGET_PASS_CONTROLLER;
-                    break;
-                case "resetPassPage":
-                    url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
-                    break;
-                case "CreateNewPassword":
-                    url = MyAppConstants.AuthFeatures.RESET_PASS_CONTROLLER;
-                    break;
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
             }
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            out.close();
+            response.sendRedirect("http://localhost:8084/BirdFarmShop/");
         }
     }
 

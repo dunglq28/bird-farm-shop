@@ -25,6 +25,8 @@ public class MyAppConstants {
         public static final String RESET_PASS_PAGE = "/views/auth/resetPass.jsp";
         public static final String FORGET_PASS_CONTROLLER = "forgetPass";
         public static final String RESET_PASS_CONTROLLER = "AuthResetPassServlet";
+        public static final String LOGOUT_CONTROLLER = "AuthLogoutServlet";
+
     }
 
     public class Google {

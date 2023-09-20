@@ -14,9 +14,14 @@
     </head>
     <body>
         <h1>Home</h1>
-        <a href="guest?btAction=loginPage">Login</a><br><br>
-        <a href="guest?btAction=registerPage">Register</a>
-        <p>${sessionScope.ACCOUNT.fullName}</p>
-        <p>${sessionScope.ACCOUNT.roleName}</p>
+        <c:if test="${empty sessionScope.ACCOUNT}">
+            <a href="guest?btAction=loginPage">Login</a><br><br>
+            <a href="guest?btAction=registerPage">Register</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.ACCOUNT}">
+            <p>${sessionScope.ACCOUNT.fullName}</p>
+            <p>${sessionScope.ACCOUNT.roleName}</p>
+            <a href="guest?btAction=logout">Login</a><br><br>
+        </c:if>
     </body>
 </html>
