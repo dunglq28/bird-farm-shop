@@ -39,9 +39,10 @@
 
             <div class="login-social-fb">
                 <a href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
-                redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" class="button">
+                redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" 
+                class="button-fb">
             
-                <span class="button-fb">
+                <span class="button-text">
                     Login with Facebook
                 </span>
             </a>

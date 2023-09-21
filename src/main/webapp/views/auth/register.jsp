@@ -27,7 +27,7 @@
 
             <div class="signup-social-gg">
                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/BirdFarmShop/login-google&response_type=code
-                       &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force"
+                   &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force"
                    class="button-gg">
                     <span class="button-text">
                         Sign up with Google
@@ -38,9 +38,10 @@
 
             <div class="signup-social-fb">
                 <a href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
-                       redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" class="button">
+                   redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" 
+                   class="button-fb">
 
-                    <span class="button-fb">
+                    <span class="button-text">
                         Sign up with Facebook
                     </span>
                 </a>
