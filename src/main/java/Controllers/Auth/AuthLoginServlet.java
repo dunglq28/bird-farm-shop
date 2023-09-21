@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers.Auth;
 
+import Utils.EncryptPassword;
 import Daos.AccountDAO;
 import Models.AccountDTO;
 import Models.LoginError;
 import Utils.MyAppConstants;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,22 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author hj
- */
 @WebServlet(name = "log-in", urlPatterns = {"/log-in"})
 public class AuthLoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -62,11 +44,13 @@ public class AuthLoginServlet extends HttpServlet {
             } else {
                 AccountDAO dao = new AccountDAO();
                 AccountDTO account = dao.getAccountByEmail(email);
+                EncryptPassword encrypt = new EncryptPassword();
+                String en_pass = encrypt.toSHA1(password);
                 if (account == null) {
                     error.setWrongEmail("Email is not registered!");
                     request.setAttribute("CREATE_ERROR", error);
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-                } else if (!password.equals(account.getPassword())) {
+                } else if (!en_pass.trim().equals(account.getPassword())) {
                     error.setWrongPassword("Password does not match!");
                     request.setAttribute("CREATE_ERROR", error);
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;

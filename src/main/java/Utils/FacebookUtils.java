@@ -15,10 +15,7 @@ import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 
-/**
- *
- * @author hj
- */
+
 public class FacebookUtils {
 
     public static String getToken(final String code) throws ClientProtocolException, IOException {

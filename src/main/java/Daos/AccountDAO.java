@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Daos;
 
 import Models.AccountDTO;
@@ -13,10 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author hj
- */
 public class AccountDAO {
 
     public AccountDTO checkExistEmail(String email) throws ClassNotFoundException, SQLException {
@@ -202,7 +193,7 @@ public class AccountDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select AccountID, FullName, RoleName "
+                String sql = "Select AccountID, FullName, RoleName, Password "
                         + "From Account "
                         + "inner join Roles on Account.RoleID = Roles.RoleID "
                         + "Where Email = ? and Status = ? ";
@@ -214,7 +205,8 @@ public class AccountDAO {
                     String AccountID = rs.getString("AccountID");
                     String FullName = rs.getString("FullName");
                     String roleName = rs.getString("RoleName");
-                    return account = new AccountDTO(AccountID, FullName, roleName);
+                    String passWord = rs.getString("Password");
+                    return account = new AccountDTO(AccountID, FullName, roleName, passWord);
                 }
             }
         } finally {

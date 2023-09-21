@@ -21,7 +21,7 @@
         <c:if test="${not empty sessionScope.ACCOUNT}">
             <p>${sessionScope.ACCOUNT.fullName}</p>
             <p>${sessionScope.ACCOUNT.roleName}</p>
-            <a href="guest?btAction=logout">Login</a><br><br>
+            <a href="guest?btAction=logout">Logout</a><br><br>
         </c:if>
     </body>
 </html>

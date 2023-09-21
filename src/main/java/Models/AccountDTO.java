@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
 import java.sql.Date;
 
-/**
- *
- * @author hj
- */
 public class AccountDTO {
 
     private String accountID;
@@ -41,6 +32,14 @@ public class AccountDTO {
         this.fullName = fullName;
         this.roleName = roleName;
     }
+    
+     public AccountDTO(String accountID, String fullName, String roleName, String passWord) {
+        this.accountID = accountID;
+        this.fullName = fullName;
+        this.roleName = roleName;
+        this.password = passWord;
+    }
+
 
     public int getRoleID() {
         return roleID;

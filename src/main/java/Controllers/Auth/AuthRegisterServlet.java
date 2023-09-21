@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers.Auth;
 
 import Daos.AccountDAO;
@@ -24,23 +19,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Utils.EncryptPassword;
 
-/**
- *
- * @author hj
- */
+
 @WebServlet(name = "sign-up", urlPatterns = {"/sign-up"})
 public class AuthRegisterServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -118,7 +103,9 @@ public class AuthRegisterServlet extends HttpServlet {
             } else {
                 long millis = System.currentTimeMillis();
                 java.sql.Date date = new java.sql.Date(millis);
-                AccountDTO account = new AccountDTO(accDao.createAccountID(), password, fullname, email, date, "Register", 1, "Customer", true);
+                EncryptPassword encrypt = new EncryptPassword();
+                String en_pass = encrypt.toSHA1(password);
+                AccountDTO account = new AccountDTO(accDao.createAccountID(), en_pass, fullname, email, date, "Register", 1, "Customer", true);
                 CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                         null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
                 accDao.createAccount(account);

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Utils;
 
 import Models.UserGoogleDTO;
@@ -13,10 +9,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 
-/**
- *
- * @author hj
- */
+
 public class GoogleUtils {
 
     public static String getToken(final String code) throws ClientProtocolException, IOException {
