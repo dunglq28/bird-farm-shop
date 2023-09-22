@@ -65,7 +65,7 @@ public class AuthForgetPassServlet extends HttpServlet {
                     request.setAttribute("CREATE_ERROR", error);
                 } else {
                     SendMail mailHome = new SendMail();
-                    String resetPassPage = "<a href=" +"http://localhost:8084/BirdFarmShop/guest?btAction=resetPassPage&txtContact="+account.getEmail() + ">click here</a>";
+                    String resetPassPage = "<a href=" +"http://localhost:8084/BirdFarmShop/guest?btAction=resetPassPage&txtContact="+email + ">click here</a>";
                     String subject = "Change the password";
                     String text = "Hello " + account.getFullName() + ", <br>"
                             + "You have submitted a password change request. Please " +resetPassPage+ " to proceed with changing your password.<br>"
@@ -73,7 +73,7 @@ public class AuthForgetPassServlet extends HttpServlet {
                             + "Best regards, <br>"
                             + "BirdFarmShop";
                     mailHome.sendCode(email, subject, text);   
-                    request.setAttribute("NOTIFICATION", "We have sent an email to " +account.getEmail() + " with a link to reset your password.");
+                    request.setAttribute("NOTIFICATION", "We have sent an email to " +email + " with a link to reset your password.");
                 }
             }
 

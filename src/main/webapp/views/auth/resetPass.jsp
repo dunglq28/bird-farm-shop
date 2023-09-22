@@ -10,50 +10,43 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reset Password Page</title>
-        <link rel="stylesheet" href="./assets/css/forgetpass.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <style>
-            .login-error {
-                color: red;
-                font-size: 15px;
-                margin-top: -18px;
-                margin-left: 2px;
-            }
-        </style>
+        <title>Reset Password</title>
+        <link rel="stylesheet" href="./assets/css/auth.css" type="text/css">
     </head>
     <body>      
 
-        <div class="retrieval">
-            <h1 class="retrieval-heading">Password retrieval</h1>
-            <form action="guest" class="retrieval-form" autocomplete="off" method="Post"> 
-
+        <div class="box">
+            <div class="header">
+                <header>Password retrieval</header>
+            </div>
+            <form action="guest" autocomplete="off" method="Post">
                 <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-
                 <input type="hidden" name="txtContact" value="${param.txtContact}">
+                <div class="input-box">
+                    <input name="txtPassword" type="password" class="input-field" id="password" autocomplete="off">
+                    <label for="password">Enter new password</label>
+                    <c:if test="${not empty err.emptyPassword}">
+                        <p class="input-error">${err.emptyPassword}</p><br>
+                    </c:if>
+                    <c:if test="${not empty err.wrongPassword}">
+                        <p class="input-error">${err.wrongPassword}</p><br>
+                    </c:if>
+                </div> <br>
 
-                <label for="password" class="retrieval-label">Enter new password</label>
-                <input name="txtPassword" type="password" class="password-input" placeholder="Eg: 123456">
-                <c:if test="${not empty err.emptyPassword}">
-                    <p class="login-error">${err.emptyPassword}</p><br>
-                </c:if>
-                <c:if test="${not empty err.wrongPassword}">
-                    <p class="login-error">${err.wrongPassword}</p><br>
-                </c:if>
+                <div class="input-box">
+                    <input name="txtConfirm" type="password" class="input-field" id="password" autocomplete="off">
+                    <label for="password">Confirm your password</label>
+                    <c:if test="${not empty err.confirmError}">
+                        <p class="login-error">${err.confirmError}</p><br>
+                    </c:if>
+                </div> <br>
 
-                <label for="password" class="retrieval-label">Confirm your password</label>
-                <input name="txtConfirm" type="password" class="password-input">
-                <c:if test="${not empty err.confirmError}">
-                    <p class="login-error">${err.confirmError}</p><br>
-                </c:if>
+                <div class="input-box">
+                    <input name="btAction" type="submit" class="input-submit" value="CreateNewPassword">
+                </div>
+            </form>
 
 
-                <button name="btAction" value="CreateNewPassword"class="password-submit">Create new password</button>
-            </form>     
-        </div>                
-       
+        </div>
     </body>
 </html>

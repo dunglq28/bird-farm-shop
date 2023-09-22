@@ -11,11 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign In</title>
-        <link rel="stylesheet" href="./assets/css/authLogin.css" type="text/css">
+        <link rel="stylesheet" href="./assets/css/auth.css" type="text/css">
     </head>
     <body>
-        <div class="login-box">
-            <div class="login-header">
+        <div class="box">
+            <div class="header">
                 <header>Sign In</header>
                 <p>We are happy to have you back!</p>
             </div>
@@ -27,25 +27,25 @@
                 <c:set var="notification" value="${requestScope.NOTIFICATION}" />
 
                 <div class="input-box">
-                    <input name="txtEmailLogin" value="${param.txtEmailLogin}" type="text" class="input-field" id="email" autocomplete="off" required>
-                    <label for="email">Email address</label>
+                    <input name="txtEmailLogin" value="${param.txtEmailLogin}" type="text" class="input-field" id="email" autocomplete="off">
+                    <label for="email">Email address</label> <br>        
                     <c:if test="${not empty err.emptyEmail}">
-                        <p class="login-error">${err.emptyEmail}</p>
+                        <p class="input-error">${err.emptyEmail}</p>
                     </c:if>
                     <c:if test="${not empty err.wrongEmail}">
-                        <p class="login-error">${err.wrongEmail}</p><br>
+                        <p class="input-error">${err.wrongEmail}</p>
                     </c:if>
                 </div>
-
+                    
 
                 <div class="input-box">
-                    <input name="txtPasswordLogin" type="password" class="input-field" id="password" autocomplete="off" required>
-                    <label for="password">Password</label>
+                    <input name="txtPasswordLogin" type="password" class="input-field" id="password" autocomplete="off">
+                    <label for="password">Password</label> <br>
                     <c:if test="${not empty err.emptyPassword}">
-                        <p class="login-error">${err.emptyPassword}</p><br>
+                        <p class="input-error">${err.emptyPassword}</p>
                     </c:if>
                     <c:if test="${not empty err.wrongPassword}">
-                        <p class="login-error">${err.wrongPassword}</p><br>
+                        <p class="input-error">${err.wrongPassword}</p>
                     </c:if>
                 </div>
                     
