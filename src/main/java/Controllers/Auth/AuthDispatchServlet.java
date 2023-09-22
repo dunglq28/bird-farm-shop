@@ -43,7 +43,7 @@ public class AuthDispatchServlet extends HttpServlet {
             switch (button) {
                 case "loginPage":
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-                    break;
+                    break;              
                 case "logout":
                     url = MyAppConstants.AuthFeatures.LOGOUT_CONTROLLER;
                     break;
