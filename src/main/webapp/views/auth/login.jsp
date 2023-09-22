@@ -1,108 +1,60 @@
+<%-- 
+    Document   : login
+    Created on : Sep 22, 2023, 2:04:26 PM
+    Author     : hj
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-    <html lang="en">
-
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel="stylesheet" href="./assets/css/login.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <style>
-            .login-error {
-                color: red;
-                font-size: 15px;
-                margin-top: -18px;
-                margin-left: 2px;
-            }
-        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Sign In</title>
+        <link rel="stylesheet" href="./assets/css/login.css" type="text/css">
     </head>
-
     <body>
-        <div class="login">
-            <h1 class="login-heading">Login</h1>
-
-            <div class="login-social-gg">
-                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/BirdFarmShop/login-google&response_type=code
-                &client_id=1070154375273-hib2mbbkpbb47ral7kt3s763c25piprp.apps.googleusercontent.com&approval_prompt=force"
-                    class="button-gg">
-                    <span class="button-text">
-                        Login with Google
-                    </span>
-                </a>
-
+        <div class="login-box">
+            <div class="login-header">
+                <header>Sign In</header>
+                <p>We are happy to have you back!</p>
             </div>
-
-            <div class="login-social-fb">
-                <a href="https://www.facebook.com/dialog/oauth?client_id=318980067328061&
-                redirect_uri=http://localhost:8084/BirdFarmShop/login-facebook" 
-                class="button-fb">
-            
-                <span class="button-text">
-                    Login with Facebook
-                </span>
-            </a>
+            <div class="input-box">
+                <input type="text" class="input-field" id="email" autocomplete="off" required>
+                <label for="email">Email or phone</label>
             </div>
-
-
-
-            <div class="login-or">
-                <span>Or</span>
+            <div class="input-box">
+                <input type="password" class="input-field" id="password" autocomplete="off" required>
+                <label for="password">Password</label>
             </div>
-
-            <form action="log-in" class="login-form" autocomplete="off" method="POST">
-
-                <c:set var="err" value="${requestScope.CREATE_ERROR}" />
-                <c:set var="notification" value="${requestScope.NOTIFICATION}" />
-
-                <label for="email" class="login-label">Email Address</label>
-                <input name="txtEmailLogin" value="${param.txtEmailLogin}" type="email" id="email" class="login-input"
-                    placeholder="example@gmail.com">
-                <c:if test="${not empty err.emptyEmail}">
-                    <p class="login-error">${err.emptyEmail}</p>
-                </c:if>
-                <c:if test="${not empty err.wrongEmail}">
-                    <p class="login-error">${err.wrongEmail}</p><br>
-                </c:if>
-
-                <label for="password" class="login-label">Password</label>
-                <input name="txtPasswordLogin" type="password" class="login-input-pass" placeholder="Eg: 123"><br>
-                <c:if test="${not empty err.emptyPassword}">
-                    <p class="login-error">${err.emptyPassword}</p><br>
-                </c:if>
-                <c:if test="${not empty err.wrongPassword}">
-                    <p class="login-error">${err.wrongPassword}</p><br>
-                </c:if>
-
-                <div class="check-forget">
-                    <div class="col-md-6">
-                        <div class="checkbox-1">
-                            <input type="checkbox" class="login-remember" value="remember"> Remember me ?
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <p class="login-forgetpassword">
-                            <a href="guest?btAction=forgetPassPage" class="login-forgetpassword-link">Forget password
-                                ?</a>
-                        </p>
-                    </div>
-                </div>
-                <button class="login-submit">Login</button>
-            </form>
-
-
-            <p class="login-already">
-                <span>Haven't a account ?</span>
-                <a href="guest?btAction=registerPage" class="signup-login-link">Register</a>
-            </p>
+            <div class="forgot">
+                <section>
+                    <input type="checkbox" id="check">
+                    <label for="check">Remember me</label>
+                </section>
+                <section>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </section>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="input-submit" value="Sign In">
+            </div>
+            <div class="middle-text">
+                <hr>
+                <p class="or-text">Or</p>
+            </div>
+            <div class="social-sign-in">
+                <button class="input-google">
+                    <img src="images/google.jpg" alt="">
+                    <p>Google</p>
+                </button>
+                <button class="input-facebook">
+                    <img src="images/facebook.png" alt="">
+                    <p>Facebook</p>
+                </button>
+            </div>
+            <div class="sign-up">
+                <p>Don't have account <a href="#">Sign up</a></p>
+            </div>
         </div>
-        </div>
-
     </body>
-
-    </html>
+</html>
