@@ -44,10 +44,9 @@
 
                 <div class="input-box">
                     <div class="form-vertify">
-                        <input name="txtVerification" type="text" class="input-field" autocomplete="off">
+                        <input name="txtVerification" type="text" class="input-field" autocomplete="off" placeholder="Verification codes">
                         <button name="btAction" value="Send" class="form-getcode">Send</button>
                     </div>
-                    <label>Verification codes</label>
                     <c:if test="${not empty err.emptyVerification}">
                         <p class="register-error">${err.emptyVerification}</p><br>
                     </c:if>
