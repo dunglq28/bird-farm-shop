@@ -56,7 +56,7 @@
  window.onscroll = () => {
   if (window.scrollY > 0) {
     header.style.backgroundColor = "#0D6780";
-  } else {
+  } else if (window.scrollY == 0)  {
     header.style.backgroundColor = "";
   }
 }

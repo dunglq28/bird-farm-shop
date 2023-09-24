@@ -13,55 +13,23 @@
         <title>Bird Farm Shop</title>
         <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="./assets/css/public.css">
+        <link rel="stylesheet" href="./assets/css/homePage.css">
     </head>
     <!--    <body>
 
 
 </body>-->
     <body>
-
-        <header>
-            <a href="#" class="brand">Bird Farm Shop</a>
-            <div class="menu-btn"></div>
-            <div class="navigation">
-                <div class="navigation-items">
-                    <div class="item">
-                        <a href="#">Home</a>
-                        <a href="#">Shop</a>
-                        <a href="#">Contact</a>
-                        <c:if test="${empty sessionScope.ACCOUNT}">
-                            <a href="guest?btAction=loginPage">Login </a>
-                            <div class="separator"></div>
-                            <a href="guest?btAction=registerPage">Register </a> 
-                        </c:if>
-                    </div>
-                    <c:if test="${not empty sessionScope.ACCOUNT}">
-                        <div class="dropdown">
-                            <button class="dropbtn"><i class="fa-regular fa-circle-user"></i>${sessionScope.ACCOUNT.fullName}</button>
-                            <div class="dropdown-content-wrapper">
-                                <div class="dropdown-content">
-                                    <a href="#">My account</a>
-                                    <a href="#">My purchase</a>
-                                    <a href="guest?btAction=logout">Logout</a>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-
-                </div>
-            </div>
-        </header>
-
+        <%@include file="/components/header.jsp" %>
         <div class="container">
             <div class="intro">
                 <section class="home">
 
-                    <video class="video-slide active" src="./assets/video/1.mp4" autoplay muted loop></video>
-                    <video class="video-slide" src="./assets/video/2.mp4" autoplay muted loop></video>
-                    <video class="video-slide" src="./assets/video/3.mp4" autoplay muted loop></video>
-                    <video class="video-slide" src="./assets/video/4.mp4" autoplay muted loop></video>
-                    <video class="video-slide" src="./assets/video/5.mp4" autoplay muted loop></video>
+                    <video class="video-slide active" src="./video/1.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="./video/2.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="./video/3.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="./video/4.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="./video/5.mp4" autoplay muted loop></video>
 
                     <div class="content active">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
@@ -117,7 +85,7 @@
                         <div class="nav-btn"></div>
                     </div>
                 </section>
-                <script src="./assets/js/navigation.js"></script>
+                <script src="navigation.js"></script>
             </div>
 
             <div class="food">
@@ -166,9 +134,6 @@
                     </div>
                     <div class="card">
                         <a href="">
-                            <div class="sale">
-                                <span>Giảm 30%</span>
-                            </div>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Papagaio-galego.jpg">
                         </a>
                         <div class="card-content">
@@ -263,6 +228,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="see-more"><h3>See more</h3></div>
 
             </div>
 
@@ -281,35 +247,9 @@
             </div>
 
 
-            <div class="footer">
-                <div class="column">
-                    <div class="card">
-                        <h4>About us</h4>
-                        <ul class="nav">
-                            <li class="nav-item"><a href="https://www.facebook.com/birdfarmshop" class="nav-link pl-0"><i class="fa-solid fa-question fa-lg"></i>Why choose BirdFarmShop</a></li>
-                            <li class="nav-item"><a href="" class="nav-link"><i class="fa-solid fa-people-group fa-lg"></i>Our team</a></li>
-                            <li class="nav-item"><a href="" class="nav-link"><i class="fa-solid fa-briefcase fa-lg"></i>Work with us</a></li>
-                        </ul>
-                    </div>
+            <%@include file="/components/footer.jsp" %>
+            <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
+            <script src="/assets/js/navigation.js"></script>
 
-                    <div class="card">
-                        <h4>Contact us</h4>
-                        <ul class="nav">
-                            <li class="nav-item"><a href="https://www.facebook.com/birdfarmshop" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i>Bird Farm Shop</a></li>
-                            <li class="nav-item"><a href="" class="nav-link"><i class="fa-regular fa-envelope fa-lg"></i>thebird.farm.1704@gmail.com</a></li>
-                            <li class="nav-item"><a href="" class="nav-link"><i class="fa-solid fa-phone fa-lg"></i>+84 83 234 5780</a></li>
-                            <li><a href="" class="nav-link"><i class="fa-solid fa-location-dot fa-lg"></i>Cukuin, Daklak</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <ul class="nav">
-                            <li class="nav-item"><a href="" class="nav-link pl-0"><i class="fa-solid fa-person fa-lg"></i>BECOME A MEMBER</a></li>
-                            <li class="nav-item"><a href="" class="nav-link"><i class="fa-regular fa-paper-plane fa-lg"></i>SEND US FEEDBACK</a></li>
-                    </div>
-                </div>
-                <p>Copyright &copy; 2023, BirdFarmShop.com.vn</p>
-
-            </div>
     </body>
 </html>
