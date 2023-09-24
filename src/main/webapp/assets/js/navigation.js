@@ -51,12 +51,4 @@
    
  }, 7000);
 
- const header = document.querySelector("header");
 
- window.onscroll = () => {
-  if (window.scrollY > 0) {
-    header.style.backgroundColor = "#0D6780";
-  } else if (window.scrollY == 0)  {
-    header.style.backgroundColor = "";
-  }
-}
