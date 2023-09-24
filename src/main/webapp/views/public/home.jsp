@@ -241,6 +241,7 @@
         <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
         <script src="./assets/js/navigation.js"></script>
         <script>
+            var header = document.querySelector("header");
             header.style.backgroundColor = "rgba(0, 0, 0, 0)";
             currentPageYOffset = 0;
             window.onscroll = () => {

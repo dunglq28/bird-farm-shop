@@ -18,7 +18,7 @@
                     </div>
 
 
-                    <form action="sign-up" method="get">
+                    <form action="sign-up" method="POST">
                     <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
                     <c:set var="email" value="${sessionScope.EMAIL}"/>
                     <c:set var="fullname" value="${sessionScope.USERNAME}"/>   
@@ -82,8 +82,8 @@
 
                     <div class="form-birthday grid__row">
                         <div class="grid__column-4">
-                            <select name="txtDay"  class="select-control">
-                                <option>Day</option>
+                            <select name="txtDay"  class="select-control" ${not empty sessionScope.CODE ? 'required""' : ""} >
+                                <option label="Day"></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -119,8 +119,8 @@
 
                         </div>
                         <div class="grid__column-4">
-                            <select name="txtMonth" class="select-control">
-                                <option>Month</option>
+                            <select name="txtMonth" class="select-control" ${not empty sessionScope.CODE ? 'required""' : ""}>
+                                <option label="Month"></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -136,8 +136,8 @@
                             </select>
                         </div>
                         <div class="grid__column-4">
-                            <select name="txtYear" class="select-control">
-                                <option>Year</option>
+                            <select name="txtYear" class="select-control" ${not empty sessionScope.CODE ? 'required""' : ""}>
+                                <option label="Year"></option>
                                 <option value="2008">2008</option>
                                 <option value="2007">2007</option>
                                 <option value="2006">2006</option>

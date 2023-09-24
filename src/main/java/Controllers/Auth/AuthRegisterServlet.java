@@ -20,6 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Utils.EncryptPassword;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @WebServlet(name = "sign-up", urlPatterns = {"/sign-up"})
 public class AuthRegisterServlet extends HttpServlet {
@@ -35,6 +39,9 @@ public class AuthRegisterServlet extends HttpServlet {
         String password = request.getParameter("txtPassword");
         String fullname = request.getParameter("txtFullName");
         String gender = request.getParameter("txtGender");
+        String day = request.getParameter("txtDay");
+        String month = request.getParameter("txtMonth");
+        String year = request.getParameter("txtYear");
 
         RegisterError error = new RegisterError();
         boolean foundErr = false;
@@ -44,6 +51,12 @@ public class AuthRegisterServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
+            Date dOB = null;
+            if (!day.isEmpty() && !month.isEmpty() && !year.isEmpty()) {
+                String dOBString = year + "-" + month + "-" + day;
+                 Date.valueOf(dOBString);
+            }
+
             session.setAttribute("EMAIL", email);
             boolean emailErr = false;
             if (email.trim().isEmpty()) {
@@ -76,14 +89,15 @@ public class AuthRegisterServlet extends HttpServlet {
                 return;
             }
 
-            if (password.trim().isEmpty() && !btn.equals("Send")) {
+            if (password.trim().isEmpty() && !btn.equals("Send") && session.getAttribute("CODE") != null ) {
                 foundErr = true;
                 error.setEmptyPassword("Please enter your Password!");
-            } else if (password.trim().length() < 6 && !btn.equals("Send") || password.trim().length() > 20 && !btn.equals("Send")) {
+            } else if (password.trim().length() < 6 && !btn.equals("Send") && session.getAttribute("CODE") != null ||
+                    password.trim().length() > 20 && !btn.equals("Send") && session.getAttribute("CODE") != null) {
                 foundErr = true;
                 error.setWrongPassword("Password must be 6 to 20 characters");
             }
-            if (fullname.trim().isEmpty() && !btn.equals("Send")) {
+            if (fullname.trim().isEmpty() && !btn.equals("Send") && session.getAttribute("CODE") != null) {
                 foundErr = true;
                 error.setEmptyFullName("Please enter your Fullname!");
             }
@@ -105,9 +119,9 @@ public class AuthRegisterServlet extends HttpServlet {
                 java.sql.Date date = new java.sql.Date(millis);
                 EncryptPassword encrypt = new EncryptPassword();
                 String en_pass = encrypt.toSHA1(password);
-                AccountDTO account = new AccountDTO(accDao.createAccountID(), en_pass, fullname, email, date, "Register", 1, "Customer", true);
+                AccountDTO account = new AccountDTO(accDao.createAccountID(), en_pass, fullname, email, date, "Register", 4, "Customer", true);
                 CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
-                        gender, account.getEmail(), null, null, null, null, account.getDate_created(), true);
+                        gender, account.getEmail(), null, null, null, dOB, account.getDate_created(), true);
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
                 session.setAttribute("ACCOUNT", account);
@@ -119,6 +133,7 @@ public class AuthRegisterServlet extends HttpServlet {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
+
         } finally {
 
         }

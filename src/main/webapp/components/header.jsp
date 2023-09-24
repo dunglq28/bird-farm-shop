@@ -7,7 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <c:set var="account" value="${sessionScope.ACCOUNT}"></c:set>
-
         <a href="home" class="brand">Bird Farm Shop</a>
         <div class="menu-btn"></div>
         <div class="search-container">
