@@ -21,21 +21,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Utils.EncryptPassword;
 
-
 @WebServlet(name = "sign-up", urlPatterns = {"/sign-up"})
 public class AuthRegisterServlet extends HttpServlet {
-
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
         String email = request.getParameter("txtEmail");
         String Verification = request.getParameter("txtVerification");
         String btn = request.getParameter("btAction");
         String password = request.getParameter("txtPassword");
         String fullname = request.getParameter("txtFullName");
+        String gender = request.getParameter("txtGender");
+
         RegisterError error = new RegisterError();
         boolean foundErr = false;
         AccountDAO accDao = new AccountDAO();
@@ -54,8 +54,8 @@ public class AuthRegisterServlet extends HttpServlet {
                 foundErr = true;
                 emailErr = true;
                 error.setWrongEmail("Email invalidate!");
-            }           
-           
+            }
+
             if (btn.equals("Send") && accDao.checkExistEmail(email.trim()) != null && !foundErr) {
                 foundErr = true;
                 emailErr = true;
@@ -87,7 +87,7 @@ public class AuthRegisterServlet extends HttpServlet {
                 foundErr = true;
                 error.setEmptyFullName("Please enter your Fullname!");
             }
-            
+
             if (Verification.trim().isEmpty() && session.getAttribute("CODE") != null || !emailErr && session.getAttribute("CODE") == null) {
                 foundErr = true;
                 error.setEmptyVerification("Please enter your Verification!");
@@ -95,7 +95,7 @@ public class AuthRegisterServlet extends HttpServlet {
                 foundErr = true;
                 error.setWrongVerification("Verification code is not correct!");
             }
-            
+
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", error);
                 url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
@@ -107,7 +107,7 @@ public class AuthRegisterServlet extends HttpServlet {
                 String en_pass = encrypt.toSHA1(password);
                 AccountDTO account = new AccountDTO(accDao.createAccountID(), en_pass, fullname, email, date, "Register", 1, "Customer", true);
                 CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
-                        null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
+                        gender, account.getEmail(), null, null, null, null, account.getDate_created(), true);
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
                 session.setAttribute("ACCOUNT", account);

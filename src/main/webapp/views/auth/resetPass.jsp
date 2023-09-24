@@ -12,41 +12,45 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reset Password</title>
         <link rel="stylesheet" href="./assets/css/auth.css" type="text/css">
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+
     </head>
     <body>      
+        <jsp:include page="/components/header.jsp"></jsp:include>
+            <div class="container-form">
+                <div class="box">
+                    <div class="header-form">
+                        <div class="header-form-title">Password retrieval</div>
+                    </div>
+                    <form action="guest" autocomplete="off" method="Post">
+                    <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
+                    <input type="hidden" name="txtContact" value="${param.txtContact}">
+                    <div class="input-box">
+                        <input name="txtPassword" type="password" class="input-field" id="password" autocomplete="off">
+                        <label for="password">Enter new password</label>
+                        <c:if test="${not empty err.emptyPassword}">
+                            <p class="input-error">${err.emptyPassword}</p><br>
+                        </c:if>
+                        <c:if test="${not empty err.wrongPassword}">
+                            <p class="input-error">${err.wrongPassword}</p><br>
+                        </c:if>
+                    </div> <br>
 
-        <div class="box">
-            <div class="header">
-                <header>Password retrieval</header>
+                    <div class="input-box">
+                        <input name="txtConfirm" type="password" class="input-field" id="password" autocomplete="off">
+                        <label for="password">Confirm your password</label>
+                        <c:if test="${not empty err.confirmError}">
+                            <p class="login-error">${err.confirmError}</p><br>
+                        </c:if>
+                    </div> <br>
+
+                    <div class="input-box">
+                        <input name="btAction" type="submit" class="input-submit" value="CreateNewPassword">
+                    </div>
+                </form>
             </div>
-            <form action="guest" autocomplete="off" method="Post">
-                <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-                <input type="hidden" name="txtContact" value="${param.txtContact}">
-                <div class="input-box">
-                    <input name="txtPassword" type="password" class="input-field" id="password" autocomplete="off">
-                    <label for="password">Enter new password</label>
-                    <c:if test="${not empty err.emptyPassword}">
-                        <p class="input-error">${err.emptyPassword}</p><br>
-                    </c:if>
-                    <c:if test="${not empty err.wrongPassword}">
-                        <p class="input-error">${err.wrongPassword}</p><br>
-                    </c:if>
-                </div> <br>
-
-                <div class="input-box">
-                    <input name="txtConfirm" type="password" class="input-field" id="password" autocomplete="off">
-                    <label for="password">Confirm your password</label>
-                    <c:if test="${not empty err.confirmError}">
-                        <p class="login-error">${err.confirmError}</p><br>
-                    </c:if>
-                </div> <br>
-
-                <div class="input-box">
-                    <input name="btAction" type="submit" class="input-submit" value="CreateNewPassword">
-                </div>
-            </form>
-
-
         </div>
+        <jsp:include page="/components/footer.jsp"></jsp:include>
+
     </body>
 </html>
