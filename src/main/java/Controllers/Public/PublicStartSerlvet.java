@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "PublicStartSerlvet", urlPatterns = {"/PublicStartSerlvet"})
+@WebServlet(name = "home", urlPatterns = {"/home"})
 public class PublicStartSerlvet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

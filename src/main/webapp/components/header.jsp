@@ -8,7 +8,7 @@
 <header>
     <c:set var="account" value="${sessionScope.ACCOUNT}"></c:set>
 
-        <a href="PublicStartSerlvet" class="brand">Bird Farm Shop</a>
+        <a href="home" class="brand">Bird Farm Shop</a>
         <div class="menu-btn"></div>
         <div class="search-container">
             <form action="" class="search-bar">
