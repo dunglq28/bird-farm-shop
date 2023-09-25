@@ -542,9 +542,9 @@ section {
     text-align: center;
   }
   
-  /*Footer*/
+ /*Footer*/
 
-.footer{
+.footer-bottom{
     width: 100%;
     padding: 2%;
     background-color: #292c2f;
@@ -553,31 +553,31 @@ section {
     padding-right: 100px;
 }
 
-.footer h4{
+.footer-bottom h4{
     margin-left: 150px;
 }
 
-.footer a{
+.footer-bottom a{
     color: #999;
     text-decoration: none;
     font-size: 15px;
     margin-left: 150px;
 }
 
-.footer ul li{
+.footer-bottom ul li{
     list-style: none;
 }
 
-.footer .column{
+.footer-bottom .column-footer{
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
 
-.footer i{
+.footer-bottom i{
     margin-right: 10px;
 }
 
-.footer p{
+.footer-bottom p{
     padding-top: 50px;
     padding-left: 500px;
 }
