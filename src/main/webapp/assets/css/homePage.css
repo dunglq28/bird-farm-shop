@@ -30,13 +30,10 @@ header {
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #0D6780;
-    opacity: 0.9;
-    padding: 15px 180px;
+    padding: 15px 150px;
     transition: 0.5s ease;
     justify-content: space-between;
     position: fixed;
-    
 }
 
 header .brand {
@@ -107,6 +104,27 @@ header .navigation .navigation-items .item a{
     width: 100%;
 }
 
+header .navigation .navigation-items .item a .list-cart-icon{
+    position: relative;
+}
+
+header .navigation .navigation-items .item a .cart-number{
+    background-color:  #ddd7d7;
+    position: absolute;
+    bottom: 15px;
+    right:0;
+    left: 12px;
+    color: #0D6780 ;
+    font-size: 11px;
+    border-radius: 12px;
+    width: 25px;
+    height: 15px;
+    text-align: center;
+}
+header .navigation .navigation-items .item a i{
+    font-size: 1em;
+}
+
 .dropbtn{
     cursor:pointer;
     color: #fff;
@@ -175,6 +193,8 @@ header .navigation .navigation-items .item a{
 .navigation .navigation-items .item i{
     padding-right: 5px;
 }
+
+
 
 
 div.separator{
@@ -409,8 +429,7 @@ section {
 
 .featured .see-more{
  width: 13%;
- margin-left: 45%; 
- cursor: pointer;
+ margin-left: 45%;
 }
 
 .featured .see-more h3{
@@ -541,43 +560,42 @@ section {
   .love p{
     text-align: center;
   }
-  
- /*Footer*/
 
-.footer-bottom{
+  /*Footer*/
+
+.footer-bottom-wrap-setion{
     width: 100%;
     padding: 2%;
     background-color: #292c2f;
     color: #bbb;
     height: 250px;
-    padding-right: 100px;
 }
 
-.footer-bottom h4{
-    margin-left: 150px;
+.footer-bottom-wrap-setion h4{
+    margin-left: 130px;
 }
 
-.footer-bottom a{
+.footer-bottom-wrap-setion a{
     color: #999;
     text-decoration: none;
     font-size: 15px;
-    margin-left: 150px;
+    margin-left: 130px;
 }
 
-.footer-bottom ul li{
+.footer-bottom-wrap-setion ul li{
     list-style: none;
 }
 
-.footer-bottom .column-footer{
+.footer-bottom-wrap-setion .column-footer-wrap{
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
 
-.footer-bottom i{
+.footer-bottom-wrap-setion i{
     margin-right: 10px;
 }
 
-.footer-bottom p{
+.footer-bottom-wrap-setion p{
     padding-top: 50px;
     padding-left: 500px;
 }
