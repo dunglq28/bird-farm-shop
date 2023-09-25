@@ -7,6 +7,7 @@ public class MyAppConstants {
 
         public static final String HOME_PAGE = "/views/public/home.jsp";
         public static final String ERROR_PAGE = "/views/errors/error.html";
+        public static final String CART_PAGE = "/views/public/cart.jsp";
     }
 
     public class AuthFeatures {

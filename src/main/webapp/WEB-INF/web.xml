@@ -16,6 +16,10 @@
         <servlet-name>AuthRegisterServlet</servlet-name>
         <servlet-class>Controllers.Auth.AuthRegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PublicCartServlet</servlet-name>
+        <servlet-class>Controllers.Public.PublicCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>sign-up</servlet-name>
         <url-pattern>/sign-up</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicCartServlet</servlet-name>
+        <url-pattern>/PublicCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

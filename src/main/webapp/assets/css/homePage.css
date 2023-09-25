@@ -34,10 +34,11 @@ header {
     transition: 0.5s ease;
     justify-content: space-between;
     position: fixed;
+    background-color: #0D6780;
 }
 
 header .brand {
-    color: #fff;
+    color: #fff !important;
     font-size: 1.5em;
     font-weight: 700;
     text-transform: uppercase;
@@ -111,15 +112,16 @@ header .navigation .navigation-items .item a .list-cart-icon{
 header .navigation .navigation-items .item a .cart-number{
     background-color:  #ddd7d7;
     position: absolute;
-    bottom: 15px;
+    bottom: 16px;
     right:0;
-    left: 12px;
+    left: 8px;
     color: #0D6780 ;
     font-size: 11px;
     border-radius: 12px;
     width: 25px;
     height: 15px;
     text-align: center;
+    font-weight: bold;
 }
 header .navigation .navigation-items .item a i{
     font-size: 1em;
@@ -568,11 +570,12 @@ section {
     padding: 2%;
     background-color: #292c2f;
     color: #bbb;
-    height: 250px;
+    height: 100%;
 }
 
 .footer-bottom-wrap-setion h4{
-    margin-left: 130px;
+    margin: 0 0 0 130px;
+    font-size: 16px;
 }
 
 .footer-bottom-wrap-setion a{
@@ -584,6 +587,7 @@ section {
 
 .footer-bottom-wrap-setion ul li{
     list-style: none;
+    padding: 0;
 }
 
 .footer-bottom-wrap-setion .column-footer-wrap{
@@ -595,7 +599,7 @@ section {
     margin-right: 10px;
 }
 
-.footer-bottom-wrap-setion p{
+.footer-text{
     padding-top: 50px;
     padding-left: 500px;
 }

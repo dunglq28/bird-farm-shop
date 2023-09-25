@@ -12,6 +12,7 @@
         <title>Cart</title>
         <link rel="stylesheet" href="./assets/css/cart.css">
         <link rel="stylesheet" href="./assets/css/homePage.css">
+        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -328,7 +329,7 @@
                                             <hr class="my-4">
 
                                             <div class="pt-5">
-                                                <h6 class="mb-0"><a href="#!" class="text-body"><i
+                                                <h6 class="mb-0"><a href="home" class="text-body"><i
                                                             class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a>
                                                 </h6>
                                             </div>
@@ -399,10 +400,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>s
+                        </div>
                     </div>
                 </div>
-
             </div>
         <jsp:include page="/components/footer.jsp"></jsp:include>
     </body>
