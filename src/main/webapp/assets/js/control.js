@@ -1,12 +1,12 @@
-var header = document.querySelector("header");
+
+
 header.style.backgroundColor = "rgba(0, 0, 0, 0)";
-currentPageYOffset = 0;
 window.onscroll = () => {
     var Y = this.scrollY;
-    if (currentPageYOffset == Y) {
+    if (currentscrollY == 0) {
         header.style.backgroundColor = "rgba(0, 0, 0, 0)";
-
-    } else if (currentPageYOffset < Y) {
+    } 
+    else if (currentscrollY != Y) {
         header.style.backgroundColor = "#0D6780";
     }
 }

@@ -35,6 +35,11 @@ header {
     justify-content: space-between;
     position: fixed;
     background-color: #0D6780;
+    opacity: 0.9;
+}
+
+header.hide {
+    top: -100px;
 }
 
 header .brand {
