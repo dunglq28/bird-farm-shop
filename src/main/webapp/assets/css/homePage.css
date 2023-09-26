@@ -35,6 +35,11 @@ header {
     justify-content: space-between;
     position: fixed;
     background-color: #0D6780;
+    opacity: 0.9;
+}
+
+header.hide {
+    top: -100px;
 }
 
 header .brand {
@@ -585,9 +590,12 @@ section {
     margin-left: 130px;
 }
 
+.nav-footer-wrap {
+    padding-left: 0;
+}
+
 .footer-bottom-wrap-setion ul li{
     list-style: none;
-    padding: 0;
 }
 
 .footer-bottom-wrap-setion .column-footer-wrap{
@@ -602,4 +610,5 @@ section {
 .footer-text{
     padding-top: 50px;
     padding-left: 500px;
+    margin: 0;
 }

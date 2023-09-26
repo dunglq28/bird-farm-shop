@@ -235,19 +235,6 @@
         <jsp:include page="/components/footer.jsp"></jsp:include>
         <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
         <script src="./assets/js/navigation.js"></script>
-        <script>
-            var header = document.querySelector("header");
-            header.style.backgroundColor = "rgba(0, 0, 0, 0)";
-            currentPageYOffset = 0;
-            window.onscroll = () => {
-                var Y = this.scrollY;
-                if (currentPageYOffset == Y) {
-                    header.style.backgroundColor = "rgba(0, 0, 0, 0)";
-
-                } else if (currentPageYOffset < Y) {
-                    header.style.backgroundColor = "#0D6780";
-                }
-            }
-        </script>
+        <script src="./assets/js/control.js"></script>
     </body>
 </html>

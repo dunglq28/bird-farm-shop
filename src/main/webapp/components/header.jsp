@@ -1,7 +1,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header>
+<header class="">
     <a href="home" class="brand">Bird Farm Shop</a>
     <div class="menu-btn"></div>
     <div class="search-container">
@@ -43,4 +43,5 @@
     </div>
 </header>
 <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
-<script src="./assets/js/navigation.js"></script>
+<script src="./assets/js/headerControl.js"></script>
+
