@@ -1,8 +1,4 @@
-<%-- 
-    Document   : header
-    Created on : Sep 24, 2023, 2:18:15 PM
-    Author     : tt
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
