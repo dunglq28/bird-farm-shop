@@ -585,9 +585,12 @@ section {
     margin-left: 130px;
 }
 
+.nav-footer-wrap {
+    padding-left: 0;
+}
+
 .footer-bottom-wrap-setion ul li{
     list-style: none;
-    padding: 0;
 }
 
 .footer-bottom-wrap-setion .column-footer-wrap{
@@ -602,4 +605,5 @@ section {
 .footer-text{
     padding-top: 50px;
     padding-left: 500px;
+    margin: 0;
 }
