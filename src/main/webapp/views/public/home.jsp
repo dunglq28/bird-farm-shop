@@ -1,8 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : Sep 24, 2023, 2:47:00 PM
-    Author     : tt
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

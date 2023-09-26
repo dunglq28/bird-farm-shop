@@ -1,10 +1,6 @@
-<%-- 
-    Document   : cart
-    Created on : Sep 25, 2023, 10:39:30 AM
-    Author     : hoang
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>

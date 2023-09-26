@@ -1,24 +1,38 @@
 package Controllers.Public;
 
-import Utils.MyAppConstants;
+import Obj.Birds;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "cart", urlPatterns = {"/cart"})
-public class PublicCartServlet extends HttpServlet {
+public class AddProductServlet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = MyAppConstants.PublicFeatures.CART_PAGE;
-
-        RequestDispatcher dis = request.getRequestDispatcher(url);
-        dis.forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            Birds bird = (Birds) session.getAttribute("BIRDCART");
+            if (bird == null) {
+                bird = new Birds();
+            }
+            String BirdName = request.getParameter("BirdName");
+            String BirdID = request.getParameter("BirdID");
+            String Image = request.getParameter("Image");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            float price = Float.parseFloat(request.getParameter("price"));
+            
+            bird.addItemToCart(BirdName, quantity, price, BirdID, Image);
+            session.setAttribute("BIRDCART", bird);
+            
+        }
+       finally{
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

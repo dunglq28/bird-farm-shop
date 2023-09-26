@@ -20,6 +20,10 @@
         <servlet-name>PublicCartServlet</servlet-name>
         <servlet-class>Controllers.Public.PublicCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>add-product</servlet-name>
+        <servlet-class>Controllers.Public.AddProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>PublicStartSerlvet</servlet-name>
         <url-pattern>/PublicStartSerlvet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>guest</servlet-name>
@@ -47,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>PublicCartServlet</servlet-name>
         <url-pattern>/PublicCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>add-product</servlet-name>
+        <url-pattern>/add-product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
