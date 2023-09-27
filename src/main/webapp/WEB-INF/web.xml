@@ -24,6 +24,10 @@
         <servlet-name>add-product</servlet-name>
         <servlet-class>Controllers.Public.AddProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PublicShopServlet</servlet-name>
+        <servlet-class>Controllers.Public.PublicShopServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -59,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>add-product</servlet-name>
         <url-pattern>/add-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicShopServlet</servlet-name>
+        <url-pattern>/PublicShopServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

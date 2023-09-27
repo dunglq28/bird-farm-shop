@@ -13,7 +13,7 @@
     <div class="navigation">
         <div class="navigation-items">
             <div class="item">
-                <a href="./views/public/shop.jsp"><i class="fa-solid fa-shop fa-lg"></i>Shop</a>
+                <a href="products"><i class="fa-solid fa-shop fa-lg"></i>Shop</a>
                 <a href="#"><i class="fa-solid fa-phone"></i>Contact</a>
                 <a href="cart" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
