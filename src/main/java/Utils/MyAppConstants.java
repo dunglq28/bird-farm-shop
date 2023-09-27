@@ -4,6 +4,7 @@ public class MyAppConstants {
 
     public class PublicFeatures {
 
+        public static final String HOME_CONTROLLER = "home";
         public static final String HOME_PAGE = "/views/public/home.jsp";
         public static final String ERROR_PAGE = "/views/errors/error.html";
         public static final String CART_PAGE = "/views/public/cart.jsp";

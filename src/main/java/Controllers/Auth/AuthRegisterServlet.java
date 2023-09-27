@@ -54,7 +54,7 @@ public class AuthRegisterServlet extends HttpServlet {
             Date dOB = null;
             if (!day.isEmpty() && !month.isEmpty() && !year.isEmpty()) {
                 String dOBString = year + "-" + month + "-" + day;
-                 Date.valueOf(dOBString);
+                Date.valueOf(dOBString);
             }
 
             session.setAttribute("EMAIL", email);
@@ -89,11 +89,11 @@ public class AuthRegisterServlet extends HttpServlet {
                 return;
             }
 
-            if (password.trim().isEmpty() && !btn.equals("Send") && session.getAttribute("CODE") != null ) {
+            if (password.trim().isEmpty() && !btn.equals("Send") && session.getAttribute("CODE") != null) {
                 foundErr = true;
                 error.setEmptyPassword("Please enter your Password!");
-            } else if (password.trim().length() < 6 && !btn.equals("Send") && session.getAttribute("CODE") != null ||
-                    password.trim().length() > 20 && !btn.equals("Send") && session.getAttribute("CODE") != null) {
+            } else if (password.trim().length() < 6 && !btn.equals("Send") && session.getAttribute("CODE") != null
+                    || password.trim().length() > 20 && !btn.equals("Send") && session.getAttribute("CODE") != null) {
                 foundErr = true;
                 error.setWrongPassword("Password must be 6 to 20 characters");
             }
@@ -125,10 +125,9 @@ public class AuthRegisterServlet extends HttpServlet {
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
                 session.setAttribute("ACCOUNT", account);
-                url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
             }
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

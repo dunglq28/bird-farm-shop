@@ -57,7 +57,7 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 if (account != null) {
                     session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 } else {
                     long millis = System.currentTimeMillis();
                     java.sql.Date date = new java.sql.Date(millis);
@@ -66,7 +66,7 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                         CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
                         cusDao.createCustomer(customer);
-                        url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                        url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                         session.setAttribute("ACCOUNT", account);
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
@@ -78,8 +78,7 @@ public class AuthLoginGoogleServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

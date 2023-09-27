@@ -22,7 +22,7 @@ public class AuthLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
+        String url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
 
         String email = request.getParameter("txtEmailLogin");
         String password = request.getParameter("txtPasswordLogin");
@@ -57,7 +57,7 @@ public class AuthLoginServlet extends HttpServlet {
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 }
             }
 
@@ -66,8 +66,7 @@ public class AuthLoginServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
