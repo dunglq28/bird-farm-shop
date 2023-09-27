@@ -49,6 +49,9 @@
     max-width: 50px;
     max-height: 50px;
     background-color: rgb(243, 243, 243);
+    text-align: center;
+
+    
 
 }
 
@@ -73,4 +76,11 @@
     width: auto;
     justify-content: center;
     align-items: center ;
+}
+.delete-icon{
+    color: black;   
+}
+
+a:hover {
+    color: rgb(13,103,128) !important;
 }

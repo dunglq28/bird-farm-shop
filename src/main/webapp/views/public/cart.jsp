@@ -49,9 +49,7 @@
                                                         <h6 class="text-black mb-0">Grey parrot</h6>
                                                         <div class="delete-product">
                                                             <a href="#" class="text-muted delete-icon text-decoration-none">
-                                                                <i class="fa-solid fa-trash "></i>
-
-                                                                <!-- <i class="fa-solid fa-x fa-2xs" style="color: #333333;"></i> -->
+                                                                <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
                                                                 Delete
                                                             </a>
                                                         </div>
@@ -67,7 +65,7 @@
                                                             <i class="fas fa-minus"></i>
                                                         </button>
                                                         <input id="form1" min="0" name="quantity" value="1" type="text"
-                                                               class="form-control form-control-sm" />
+                                                               class="form-control form-control-sm button-input"x   />
                                                         <button class="btn btn-link px-2 text-muted"
                                                                 onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                             <i class="fas fa-plus"></i>
@@ -119,8 +117,7 @@
                                                         <h6 class="text-black mb-0">Toco Toucan</h6>
                                                         <div class="delete-product">
                                                             <a href="#" class="text-muted delete-icon text-decoration-none">
-                                                                <i class="fa-solid fa-trash "></i>
-                                                                <!-- <i class="fa-regular fa-rectangle-xmark"></i> -->
+                                                                <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
                                                                 Delete
                                                             </a>
                                                         </div>
