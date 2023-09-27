@@ -48,7 +48,7 @@
                                                         <!-- <h6 class="text-muted">Bird</h6> -->
                                                         <h6 class="text-black mb-0">Grey parrot</h6>
                                                         <div class="delete-product">
-                                                            <a href="#" class="text-muted delete-icon text-decoration-none">
+                                                            <a href="#" class="delete-icon text-decoration-none ">
                                                                 <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
                                                                 Delete
                                                             </a>
@@ -116,7 +116,7 @@
                                                         <!-- <h6 class="text-muted">Bird</h6> -->
                                                         <h6 class="text-black mb-0">Toco Toucan</h6>
                                                         <div class="delete-product">
-                                                            <a href="#" class="text-muted delete-icon text-decoration-none">
+                                                            <a href="#" class="delete-icon text-decoration-none ">
                                                                 <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
                                                                 Delete
                                                             </a>
