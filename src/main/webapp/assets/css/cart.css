@@ -33,6 +33,11 @@
     }
 }
 
+.container{
+    max-width: 1700px !important;
+}
+
+
 .No-product {
     justify-content: center;
     align-items: center;
@@ -77,10 +82,12 @@
     justify-content: center;
     align-items: center ;
 }
-.delete-icon{
-    color: black;   
+
+.delete-icon {
+    color: black;
 }
 
-a:hover {
-    color: rgb(13,103,128) !important;
+.delete-icon:hover {
+    color: rgb(13,103,128) !important; 
 }
+
