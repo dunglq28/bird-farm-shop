@@ -235,6 +235,5 @@
         <jsp:include page="/components/footer.jsp"></jsp:include>
         <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
         <script src="./assets/js/navigation.js"></script>
-        <script src="./assets/js/control.js"></script>
     </body>
 </html>
