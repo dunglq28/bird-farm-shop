@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BirdDTO {
     private String birdID;
+    private String bird_Name;
     private int categoryID;
     private String age;
     private String color;
@@ -15,13 +16,14 @@ public class BirdDTO {
     private String detail;
     private Date date_created;
     private float discount;
-    private boolean status;
+    private String status;
 
     public BirdDTO() {
     }
 
-    public BirdDTO(String birdID, int categoryID, String age, String color, String gender, String image, int quantiry, float price, String characteristics, String detail, Date date_created, float discount, boolean status) {
+    public BirdDTO(String birdID, String bird_Name, int categoryID, String age, String color, String gender, String image, int quantiry, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.birdID = birdID;
+        this.bird_Name = bird_Name;
         this.categoryID = categoryID;
         this.age = age;
         this.color = color;
@@ -36,12 +38,29 @@ public class BirdDTO {
         this.status = status;
     }
 
+    public BirdDTO(String birdID, String bird_Name, String image, float price, float discount, String status) {
+        this.birdID = birdID;
+        this.bird_Name = bird_Name;
+        this.image = image;
+        this.price = price;
+        this.discount = discount;
+        this.status = status;
+    }
+
     public String getBirdID() {
         return birdID;
     }
 
     public void setBirdID(String birdID) {
         this.birdID = birdID;
+    }
+
+    public String getBird_Name() {
+        return bird_Name;
+    }
+
+    public void setBird_Name(String bird_Name) {
+        this.bird_Name = bird_Name;
     }
 
     public int getCategoryID() {
@@ -132,14 +151,17 @@ public class BirdDTO {
         this.discount = discount;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
+    
+    
+    
 
-  
+   
     
 }
