@@ -1,17 +1,17 @@
 package Obj;
 
-import Models.BirdsDTO;
+import Models.BirdDTO;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Birds {
-    private Map<String, BirdsDTO> items;
+    private Map<String, BirdDTO> items;
 
-    public Map<String, BirdsDTO> getItems() {
+    public Map<String, BirdDTO> getItems() {
         return items;
     }
 
-    BirdsDTO dto = new BirdsDTO();
+    BirdDTO dto = new BirdDTO();
     
     public void addItemToCart(String BirdName, int quantityBuy, float price, String BirdID, String Image) { 
         if (BirdID == null) {
