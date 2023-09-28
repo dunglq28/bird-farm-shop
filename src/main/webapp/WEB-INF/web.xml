@@ -28,6 +28,10 @@
         <servlet-name>PublicShopServlet</servlet-name>
         <servlet-class>Controllers.Public.PublicShopServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PublicPageServlet</servlet-name>
+        <servlet-class>Controllers.Public.PublicPageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>PublicShopServlet</servlet-name>
         <url-pattern>/PublicShopServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicPageServlet</servlet-name>
+        <url-pattern>/PublicPageServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

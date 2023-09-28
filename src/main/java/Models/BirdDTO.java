@@ -1,5 +1,6 @@
 package Models;
 
+import Utils.FormatCurrency;
 import java.sql.Date;
 
 public class BirdDTO {
@@ -12,6 +13,7 @@ public class BirdDTO {
     private String image;
     private int quantiry;
     private float price;
+    private String priceFormat;
     private String characteristics;
     private String detail;
     private Date date_created;
@@ -46,6 +48,15 @@ public class BirdDTO {
         this.discount = discount;
         this.status = status;
     }
+
+    public String getPriceFormat() {
+        return FormatCurrency.FormatPrice(this.price);
+    }
+
+    public void setPriceFormat(String priceFormat) {
+        this.priceFormat = priceFormat;
+    }
+    
 
     public String getBirdID() {
         return birdID;

@@ -26,7 +26,7 @@ public class BirdDao {
         return birdList;
     }
     
-    public List<BirdDTO> getPaging(int index)
+    public List<BirdDTO> getPagingByCreateDateDesc(int index)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -35,17 +35,21 @@ public class BirdDao {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select * "
-                        + "from Products "
-                        + "Order by ProductID "
+                String sql = "Select BirdID, Bird_Name, Price, Discount, Status "
+                        + "from Birds "
+                        + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 10 ROWS ONLY";
+                        + "FETCH FIRST 9 ROWS ONLY";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, (index - 1) * 10);
+                stm.setInt(1, (index - 1) * 9);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-     
-                    BirdDTO result = new BirdDTO(sql, sql, sql, index, index, sql);
+                    String birdID = rs.getString("BirdID");
+                    String birdName = rs.getString("Bird_Name");
+                    float price = rs.getFloat("Price");
+                    float discount = rs.getFloat("Discount");
+                    String status = rs.getString("Status");
+                    BirdDTO result = new BirdDTO(birdID, birdName, status, price, discount, status);
                     if (this.birdList == null) {
                         this.birdList = new ArrayList<BirdDTO>();
                     }
@@ -66,5 +70,40 @@ public class BirdDao {
             }
         }
         return null;
+    }
+    
+    public int getNumberPage ()
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From Birds ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage = total / 9;
+                    if (countPage % 9 != 0 && countPage % 2 != 0) {
+                        countPage++;
+                    }
+                    return countPage;
+                }
+            }    
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
     }
 }
