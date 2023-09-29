@@ -55,9 +55,6 @@
     max-height: 50px;
     background-color: rgb(243, 243, 243);
     text-align: center;
-
-    
-
 }
 
 .quantity-form {
@@ -89,5 +86,10 @@
 
 .delete-icon:hover {
     color: rgb(13,103,128) !important; 
+}
+
+.btn-back {
+    color: #fff;
+    background-color: #0D6780;
 }
 
