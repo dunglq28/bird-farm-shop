@@ -66,7 +66,8 @@ public class AuthLoginServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

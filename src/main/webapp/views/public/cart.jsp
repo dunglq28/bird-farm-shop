@@ -17,7 +17,7 @@
     </head>
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
-            <div class="container py-5 h-100 ">
+<!--            <div class="container py-5 h-100 ">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12">
                         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -45,7 +45,7 @@
                                                              class="img-fluid rounded-3" alt="Bird Image">
                                                     </div>
                                                     <div class="col-md-4 col-lg-4 col-xl-4">
-                                                        <!-- <h6 class="text-muted">Bird</h6> -->
+                                                         <h6 class="text-muted">Bird</h6> 
                                                         <h6 class="text-black mb-0">Grey parrot</h6>
                                                         <div class="delete-product">
                                                             <a href="#" class="delete-icon text-decoration-none ">
@@ -113,7 +113,7 @@
                                                              class="img-fluid rounded-3" alt="Bird Image">
                                                     </div>
                                                     <div class="col-md-4 col-lg-4 col-xl-4">
-                                                        <!-- <h6 class="text-muted">Bird</h6> -->
+                                                         <h6 class="text-muted">Bird</h6> 
                                                         <h6 class="text-black mb-0">Toco Toucan</h6>
                                                         <div class="delete-product">
                                                             <a href="#" class="delete-icon text-decoration-none ">
@@ -238,9 +238,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
-            </div>
+            <!--</div>-->
             <div class="container-fluid  mt-100 vh-100 justify-content-center align-content-center" style="margin:auto">
                 <div class="row">
 

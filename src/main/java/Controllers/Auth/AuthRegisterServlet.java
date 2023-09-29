@@ -127,7 +127,8 @@ public class AuthRegisterServlet extends HttpServlet {
                 session.setAttribute("ACCOUNT", account);
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
             }
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

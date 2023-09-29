@@ -24,7 +24,7 @@
                         <input name="txtContact" value="${param.txtContact}" type="text" class="input-field" id="email" autocomplete="off">
                         <label for="email">Email address</label>
                         <c:if test="${not empty err.emptyEmail}">
-                            <p class="login-error">${err.emptyEmail}</p>
+                            <p class="input-error">${err.emptyEmail}</p>
                         </c:if>
                         <c:if test="${not empty err.wrongEmail}">
                             <p class="input-error">${err.wrongEmail}</p><br>
