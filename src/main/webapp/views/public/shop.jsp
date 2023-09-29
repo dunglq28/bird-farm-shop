@@ -91,10 +91,10 @@
                                             />
                                         <div class="product_item_img_hover">
                                             <div class="view_detail">
-                                                <span
-                                                    ><i class="fa-solid fa-eye"></i>
+                                                <a href="#"
+                                                   ><i class="fa-solid fa-eye"></i>
                                                     View Details
-                                                </span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
