@@ -50,8 +50,8 @@
                                                                      class="img-fluid rounded-3" alt="Bird Image">
                                                             </div>
                                                             <div class="col-md-4 col-lg-4 col-xl-4">
-                                                                <h6 class="text-muted">Bird</h6> 
                                                                 <h6 class="text-black mb-0">${items.get(key).bird_Name} </h6>
+                                                                <h6 class="text-muted">${items.get(key).category_Name} </h6> 
                                                                 <div class="delete-product">
                                                                     <a href="remove-bird?BirdID=${key}" class="delete-icon text-decoration-none ">
                                                                         <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
@@ -168,7 +168,7 @@
                                                     <h5>${util.FormatPrice(total_order)}</h5>
                                                 </div>
 
-                                                <button type="button" class="btn btn-dark btn-block btn-lg"
+                                                <button type="button" class="btn-buy btn btn-dark btn-block btn-lg"
                                                         data-mdb-ripple-color="dark">
                                                     Buy now
                                                 </button>

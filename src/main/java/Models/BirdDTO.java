@@ -4,10 +4,10 @@ import Utils.FormatCurrency;
 import java.sql.Date;
 
 public class BirdDTO {
-
     private String birdID;
     private String bird_Name;
     private int categoryID;
+    private String category_Name;
     private String age;
     private String color;
     private String gender;
@@ -25,13 +25,16 @@ public class BirdDTO {
     public BirdDTO() {
     }
 
-    public BirdDTO(String bird_Name, String image, int quantity_Available, int quantity_Buy, float price) {
+    public BirdDTO(String bird_Name, String category_Name, String image, int quantity_Available, int quantity_Buy, float price) {
         this.bird_Name = bird_Name;
+        this.category_Name = category_Name;
         this.image = image;
         this.quantity_Available = quantity_Available;
         this.quantity_Buy = quantity_Buy;
         this.price = price;
     }
+    
+    
 
     public BirdDTO(String birdID, String bird_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.birdID = birdID;
@@ -50,9 +53,10 @@ public class BirdDTO {
         this.status = status;
     }
 
-    public BirdDTO(String birdID, String bird_Name, String image, int quantity_Available, float price, float discount, String status) {
+    public BirdDTO(String birdID, String bird_Name, String category_Name, String image, int quantity_Available, float price, float discount, String status) {
         this.birdID = birdID;
         this.bird_Name = bird_Name;
+        this.category_Name = category_Name;
         this.image = image;
         this.quantity_Available = quantity_Available;
         this.price = price;
@@ -60,6 +64,14 @@ public class BirdDTO {
         this.status = status;
     }
 
+    public String getCategory_Name() {
+        return category_Name;
+    }
+
+    public void setCategory_Name(String category_Name) {
+        this.category_Name = category_Name;
+    }
+    
     public int getQuantity_Buy() {
         return quantity_Buy;
     }

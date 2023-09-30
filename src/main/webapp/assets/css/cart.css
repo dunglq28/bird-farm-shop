@@ -92,7 +92,9 @@
     color: #fff !important;
     background-color: #0D6780 !important;
     border-color: #0D6780 !important;
-    color: #fff;
-    background-color: #0D6780;
+}
+
+.btn-buy {
+    background-color: #0D6780 !important;
 }
 

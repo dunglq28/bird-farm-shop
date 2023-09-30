@@ -22,7 +22,7 @@ import javax.naming.NamingException;
  *
  * @author hj
  */
-public class BirdDAO implements Serializable{
+public class BirdDAO implements Serializable {
 
     private List<BirdDTO> birdList;
 
@@ -39,8 +39,9 @@ public class BirdDAO implements Serializable{
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select BirdID, Bird_Name, Image, Quantity_Available, Price, Discount, Status "
+                String sql = "Select BirdID, Bird_Name, cate.Category_Name, Image, Quantity_Available, Price, Discount, Status "
                         + "from Birds "
+                        + "inner join Category cate on Birds.CategoryID =  cate.CategoryID "
                         + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
@@ -50,12 +51,13 @@ public class BirdDAO implements Serializable{
                 while (rs.next()) {
                     String birdID = rs.getString("BirdID");
                     String birdName = rs.getString("Bird_Name");
+                    String cate_Name = rs.getString("Category_Name");
                     String image = rs.getString("Image");
                     int quantity_Available = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String status = rs.getString("Status");
-                    BirdDTO result = new BirdDTO(birdID, birdName, image, quantity_Available, price, discount, status);
+                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, image, quantity_Available, price, discount, status);
                     if (this.birdList == null) {
                         this.birdList = new ArrayList<BirdDTO>();
                     }
@@ -287,5 +289,3 @@ public class BirdDAO implements Serializable{
         return result;
     }
 }
-
-

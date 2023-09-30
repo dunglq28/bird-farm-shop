@@ -20,8 +20,8 @@ public class CartObj {
 
     BirdDTO dto = new BirdDTO();
 
-    public void addItemToCart(String sku, int quantityBuy, int quantityAvailable, float price, String img, String name) { // (String sku, int quantity)
-        BirdDTO dto = new BirdDTO(name, img, quantityAvailable, quantityBuy, price);
+    public void addItemToCart(String sku, int quantityBuy, int quantityAvailable, float price, String img, String name, String cate_Name) { // (String sku, int quantity)
+        BirdDTO dto = new BirdDTO(name, cate_Name, img, quantityAvailable, quantityBuy, price);
         if (sku == null) {
             return;
         }

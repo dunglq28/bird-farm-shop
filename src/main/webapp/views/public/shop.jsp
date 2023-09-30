@@ -76,7 +76,8 @@
                                                 <form action="product-list" method="POST">
                                                     <input type="hidden" name="BirdID" value="${dto.birdID}"/>
                                                     <input type="hidden" name="BirdName" value="${dto.bird_Name}"/>
-                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
+                                                    <input type="hidden" name="category_Name" value="${dto.category_Name}"/>
+                                                    <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
                                                     <input type="hidden" name="price" value="${dto.price}"/>
                                                     <input type="hidden" name="image" value="${dto.image}"/>
                                                     <input type="hidden" name="quantity_Buy" value="1" />
