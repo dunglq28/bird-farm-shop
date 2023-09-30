@@ -35,7 +35,7 @@ public class BirdDao {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select BirdID, Bird_Name, Price, Discount, Status "
+                String sql = "Select BirdID, Bird_Name, Image, Price, Discount, Status "
                         + "from Birds "
                         + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
@@ -46,17 +46,17 @@ public class BirdDao {
                 while (rs.next()) {
                     String birdID = rs.getString("BirdID");
                     String birdName = rs.getString("Bird_Name");
+                    String image = rs.getString("Image");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String status = rs.getString("Status");
-                    BirdDTO result = new BirdDTO(birdID, birdName, status, price, discount, status);
+                    BirdDTO result = new BirdDTO(birdID, birdName, image, price, discount, status);
                     if (this.birdList == null) {
                         this.birdList = new ArrayList<BirdDTO>();
                     }
                     this.birdList.add(result);
                 }
                 return this.birdList;
-
             }  
         } finally {
             if (rs != null) {

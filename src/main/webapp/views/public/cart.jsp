@@ -258,7 +258,7 @@
                                          class="img-fluid mb-4 mr-3">
                                     <h3><strong>Your Cart is Empty</strong></h3>
                                     <h4>Add something to make me happy</h4>
-                                    <a href="#" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
+                                    <a href="home" class=" btn btn-back cart-btn-transform m-3 " data-abc="true">Continue
                                         Shopping</a>
                                 </div>
                             </div>

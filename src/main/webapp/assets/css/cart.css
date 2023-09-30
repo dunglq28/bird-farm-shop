@@ -89,7 +89,8 @@
 }
 
 .btn-back {
-    color: #fff;
-    background-color: #0D6780;
+    color: #fff !important;
+    background-color: #0D6780 !important;
+    border-color: #0D6780 !important;
 }
 

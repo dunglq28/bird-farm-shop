@@ -45,8 +45,10 @@ public class PublicShopServlet extends HttpServlet {
             if (page == null) {
                 page = "1";
             }
+            int indexPage = Integer.parseInt(page); 
+            
             BirdDao dao = new BirdDao();
-            List<BirdDTO> result = dao.getPagingByCreateDateDesc(1);
+            List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
             request.setAttribute("BIRD_LIST", result);
             HttpSession session = request.getSession();
             int start = 1;
@@ -54,7 +56,7 @@ public class PublicShopServlet extends HttpServlet {
             int end = start + distance;
             session.setAttribute("START", start);
             session.setAttribute("END", end);
-            request.setAttribute("pageCurrent", page);
+            request.setAttribute("pageCurrent", indexPage);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
