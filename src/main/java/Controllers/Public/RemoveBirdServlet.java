@@ -1,37 +1,43 @@
 package Controllers.Public;
 
 import Cart.CartObj;
+import Utils.MyAppConstants;
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AddProductServlet extends HttpServlet {
+@WebServlet(name = "remove-bird", urlPatterns = {"/remove-bird"})
+public class RemoveBirdServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
         try {
-            HttpSession session = request.getSession();
-            CartObj bird = (CartObj) session.getAttribute("BIRDCART");
-            if (bird == null) {
-                bird = new CartObj();
+            HttpSession session = request.getSession(false);
+            CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
+            if (cart == null) {
+                cart = new CartObj();
             }
-            String BirdName = request.getParameter("BirdName");
             String BirdID = request.getParameter("BirdID");
-            String Image = request.getParameter("Image");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            float price = Float.parseFloat(request.getParameter("price"));
-            
-            bird.addItemToCart(BirdName, quantity, price, BirdID, Image);
-            session.setAttribute("BIRDCART", bird);
-            
-        }
-       finally{
-            
+//            String name = request.getParameter("BirdName");
+//            String img = request.getParameter("image");
+//            float price = Float.parseFloat(request.getParameter("price"));
+//            int quantity = Integer.parseInt(request.getParameter("Bird_Quantity"));
+
+            cart.removeBirdFromCart(BirdID);
+            session.setAttribute("BIRDCART", cart);
+            session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
+
+            url = "cart";
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

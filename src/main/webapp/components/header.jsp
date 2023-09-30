@@ -1,12 +1,11 @@
 
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="">
     <a href="home" class="brand">Bird Farm Shop</a>
     <div class="menu-btn"></div>
     <div class="search-container">
-        <form action="" class="search-bar">
-            <input type="text" placeholder="Search anything" name="q">
+        <form action="search-product" class="search-bar">
+            <input type="text" placeholder="Search anything" name="lastSearch" value="${param.lastSearch}">
             <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ddd7d7;"></i></button>
         </form>
     </div>
@@ -17,7 +16,7 @@
                 <a href="#"><i class="fa-solid fa-phone"></i>Contact</a>
                 <a href="cart" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                    <span class="cart-number">0</span>
+                    <span class="cart-number">${empty sessionScope.CART_QUANTITY_PRODUCT ? 0 : sessionScope.CART_QUANTITY_PRODUCT}</span>
                     Cart
                 </a>
                 <c:if test="${empty sessionScope.ACCOUNT}">
@@ -38,7 +37,6 @@
                     </div>
                 </div>
             </c:if>
-
         </div>
     </div>
 </header>

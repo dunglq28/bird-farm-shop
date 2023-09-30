@@ -33,12 +33,20 @@
         <servlet-class>Controllers.Public.PublicPageServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProductDetailServlet</servlet-name>
-        <servlet-class>Controllers.Public.ProductDetailServlet</servlet-class>
+        <servlet-name>search-product</servlet-name>
+        <servlet-class>Controllers.Public.SearchProductServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>checkoutServlet</servlet-name>
-        <servlet-class>Controllers.Public.checkoutServlet</servlet-class>
+        <servlet-name>add-bird</servlet-name>
+        <servlet-class>Controllers.Public.AddBirdServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>Controllers.Public.NewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>remove-bird</servlet-name>
+        <servlet-class>Controllers.Public.RemoveBirdServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
@@ -85,12 +93,20 @@
         <url-pattern>/PublicPageServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductDetailServlet</servlet-name>
-        <url-pattern>/ProductDetailServlet</url-pattern>
+        <servlet-name>search-product</servlet-name>
+        <url-pattern>/search-product</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>checkoutServlet</servlet-name>
-        <url-pattern>/checkoutServlet</url-pattern>
+        <servlet-name>add-bird</servlet-name>
+        <url-pattern>/add-bird</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>remove-bird</servlet-name>
+        <url-pattern>/remove-bird</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

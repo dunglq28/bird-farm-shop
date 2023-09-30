@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "cart", urlPatterns = {"/cart"})
 public class PublicCartServlet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = MyAppConstants.PublicFeatures.CART_PAGE;
+        String url = MyAppConstants.PublicFeatures.CART_PAGE;
 
         RequestDispatcher dis = request.getRequestDispatcher(url);
         dis.forward(request, response);

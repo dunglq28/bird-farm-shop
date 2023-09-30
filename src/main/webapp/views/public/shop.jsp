@@ -1,5 +1,4 @@
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -74,10 +73,13 @@
                                             </h5>
                                             <h5>${dto.priceFormat}</h5>
                                             <div class="add_to_cart">
-                                                <form>
-                                                    <input type="hidden" name="" />
-                                                    <input type="hidden" name="" />
-                                                    <input type="hidden" name="" />
+                                                <form action="add-bird" method="POST">
+                                                    <input type="hidden" name="BirdID" value="${dto.birdID}"/>
+                                                    <input type="hidden" name="BirdName" value="${dto.bird_Name}"/>
+                                                    <input type="hidden" name="price" value="${dto.price}"/>
+                                                    <input type="hidden" name="image" value="${dto.image}"/>
+                                                    <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
+                                                    <input type="hidden" name="Bird_Quantity" value="1" />
                                                     <button type="submit">Add to cart</button>
                                                 </form>
                                             </div>
@@ -88,7 +90,7 @@
                         </c:if>
                     </div>
                     <div class="row">
-                        <jsp:useBean id="dao" class="Daos.BirdDao"></jsp:useBean>
+                        <jsp:useBean id="dao" class="Daos.BirdDAO"></jsp:useBean>
                             <div class="pagination d-flex justify-content-center">
                             <c:if test="${indexCurrent > 1}">
                                 <a href="product-list?page=1">&laquo;</a>

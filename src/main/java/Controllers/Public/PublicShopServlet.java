@@ -5,7 +5,7 @@
  */
 package Controllers.Public;
 
-import Daos.BirdDao;
+import Daos.BirdDAO;
 import Models.BirdDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -24,6 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
+
+
 @WebServlet(name = "product-list", urlPatterns = {"/product-list"})
 public class PublicShopServlet extends HttpServlet {
 
@@ -47,7 +49,7 @@ public class PublicShopServlet extends HttpServlet {
             }
             int indexPage = Integer.parseInt(page);
 
-            BirdDao dao = new BirdDao();
+            BirdDAO dao = new BirdDAO();
             int endPage = dao.getNumberPage();
             List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
             request.setAttribute("BIRD_LIST", result);
@@ -66,7 +68,6 @@ public class PublicShopServlet extends HttpServlet {
             request.setAttribute("START", start);
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
@@ -77,43 +78,48 @@ public class PublicShopServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

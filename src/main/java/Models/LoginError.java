@@ -58,5 +58,4 @@ public class LoginError {
         this.wrongPassword = wrongPassword;
     }
 
-    
 }

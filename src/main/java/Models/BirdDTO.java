@@ -23,6 +23,17 @@ public class BirdDTO {
     public BirdDTO() {
     }
 
+
+    public BirdDTO(String bird_Name, String image, int quantiry, float price) {
+        this.bird_Name = bird_Name;
+        this.image = image;
+        this.quantiry = quantiry;
+        this.price = price;
+    }
+
+
+    
+
     public BirdDTO(String birdID, String bird_Name, int categoryID, String age, String color, String gender, String image, int quantiry, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.birdID = birdID;
         this.bird_Name = bird_Name;
