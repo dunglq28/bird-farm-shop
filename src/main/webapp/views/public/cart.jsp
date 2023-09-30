@@ -64,14 +64,16 @@
                                                                 <!--<h6 class="mb-0 text-sm-center text-muted origin-price">${items.get(key).priceFormat}</h6>-->
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center quantity-form">
-                                                                <form action="cart">
+                                                                <form action="cart" method="POST">
 
                                                                     <button name="btn" value="des" class="btn btn-link px-2 text-muted"
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                                         <i class="fas fa-minus"></i>
                                                                     </button>
-                                                                    <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantiry}" type="text"
+                                                                    <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantity_Buy}" type="text"
                                                                            class="form-control form-control-sm button-input"x   />
+                                                                    <input name="txtBirdID" value="${key}" type="hidden" />
+                                                                    <input name="txtQuantityAvailable" value="${items.get(key).quantity_Available}" type="hidden" />
                                                                     <button name="btn" value="inc" class="btn btn-link px-2 text-muted"
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                                         <i class="fas fa-plus"></i>
@@ -81,35 +83,38 @@
 
                                                             <div
                                                                 class="col-md-2 col-lg-2 col-xl-2 text-md-end text-lg-start text-xl-start">
-                                                                <h6 class="mb-0">${util.FormatPrice(items.get(key).price * items.get(key).quantiry)}</h6>
+                                                                <h6 class="mb-0">${util.FormatPrice(items.get(key).price * items.get(key).quantity_Buy)}</h6>
+                                                                <c:set var="total_field" value="${items.get(key).price * items.get(key).quantity_Buy}" ></c:set>
+
+                                                                </div>
                                                             </div>
+                                                                 <c:set var="total_order" value="${totalOrder = totalOrder + total_field}" ></c:set>
+                                                            <!--                                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                                            
+                                                                                                                    <div class="form-check">
+                                                                                                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                                                                                                               id="exampleRadios1" value="option1" checked>
+                                                                                                                        <label class="form-check-label" for="exampleRadios1">
+                                                                                                                            Gift: bird food (500g)
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                                                                                                               id="exampleRadios2" value="option2">
+                                                                                                                        <label class="form-check-label" for="exampleRadios2">
+                                                                                                                            Gift: 50% discount voucher for your next purchase
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                                                                                                               id="exampleRadios3" value="option3">
+                                                                                                                        <label class="form-check-label" for="exampleRadios3">
+                                                                                                                            Gift: free bird care voucher
+                                                                                                                        </label>
+                                                                                                                    </div>
+                                                            
+                                                                                                                </div>-->
                                                         </div>
-                                                        <!--                                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                        
-                                                                                                                <div class="form-check">
-                                                                                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                                                                           id="exampleRadios1" value="option1" checked>
-                                                                                                                    <label class="form-check-label" for="exampleRadios1">
-                                                                                                                        Gift: bird food (500g)
-                                                                                                                    </label>
-                                                                                                                </div>
-                                                                                                                <div class="form-check">
-                                                                                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                                                                           id="exampleRadios2" value="option2">
-                                                                                                                    <label class="form-check-label" for="exampleRadios2">
-                                                                                                                        Gift: 50% discount voucher for your next purchase
-                                                                                                                    </label>
-                                                                                                                </div>
-                                                                                                                <div class="form-check">
-                                                                                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                                                                           id="exampleRadios3" value="option3">
-                                                                                                                    <label class="form-check-label" for="exampleRadios3">
-                                                                                                                        Gift: free bird care voucher
-                                                                                                                    </label>
-                                                                                                                </div>
-                                                        
-                                                                                                            </div>-->
-                                                    </div>
                                                 </c:forEach>
 
                                                 <!--<hr class="my-4">-->
@@ -130,12 +135,12 @@
 
                                                 <div class="d-flex justify-content-between mb-4">
                                                     <h5 class="text-uppercase">Total</h5>
-                                                    <h5>$ 59,000</h5>
+                                                    <h5>${util.FormatPrice(total_order)}</h5>
                                                 </div>
 
                                                 <div class="d-flex justify-content-between mb-4">
                                                     <h5 class="text-uppercase">Discount</h5>
-                                                    <h5>$ 0</h5>
+                                                    <h5>0</h5>
                                                 </div>
 
                                                 <h5 class="text-uppercase mb-3">Promotion received</h5>
@@ -160,7 +165,7 @@
                                                 <hr class="my-4">
                                                 <div class="d-flex justify-content-between mb-5">
                                                     <h5 class="text-uppercase">Total price</h5>
-                                                    <h5>$ 59,000</h5>
+                                                    <h5>${util.FormatPrice(total_order)}</h5>
                                                 </div>
 
                                                 <button type="button" class="btn btn-dark btn-block btn-lg"

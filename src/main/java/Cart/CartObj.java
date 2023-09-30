@@ -3,6 +3,7 @@ package Cart;
 import Models.BirdDTO;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 public class CartObj {
 
@@ -11,15 +12,16 @@ public class CartObj {
     public Map<String, BirdDTO> getItems() {
         return items;
     }
-    
+
     public int getItemsLength() {
         return items.size();
     }
 
+
     BirdDTO dto = new BirdDTO();
 
-    public void addItemToCart(String sku, int quantityBuy, float price, String img, String name) { // (String sku, int quantity)
-        BirdDTO dto = new BirdDTO(name, img, quantityBuy, price);
+    public void addItemToCart(String sku, int quantityBuy, int quantityAvailable, float price, String img, String name) { // (String sku, int quantity)
+        BirdDTO dto = new BirdDTO(name, img, quantityAvailable, quantityBuy, price);
         if (sku == null) {
             return;
         }
@@ -30,11 +32,26 @@ public class CartObj {
             this.items = new HashMap<>();
         }
         if (this.items.containsKey(sku)) {
-            quantityBuy = this.items.get(sku).getQuantiry() + quantityBuy;
+            quantityBuy = this.items.get(sku).getQuantity_Buy()+ quantityBuy;
         }
-        dto.setQuantiry(quantityBuy);
+        dto.setQuantity_Buy(quantityBuy);
         // 3. Update items
         this.items.put(sku, dto);
+    }
+    
+    public void updateQuantityBuy(String sku, int quantityBuy) { 
+        if (sku == null) {
+            return;
+        }
+        if (sku.trim().isEmpty()) {
+            return;
+        }
+        if (this.items == null) {
+            this.items = new HashMap<>();
+        }
+        if (this.items.containsKey(sku)) {
+            this.items.get(sku).setQuantity_Buy(quantityBuy);
+        }
     }
 
     public void removeBirdFromCart(String sku) { // remove All -> ass: bỏ based on quantity (String sku, int quantity)

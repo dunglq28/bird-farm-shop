@@ -14,9 +14,10 @@
             <div class="item">
                 <a href="product-list"><i class="fa-solid fa-shop fa-lg"></i>Shop</a>
                 <a href="#"><i class="fa-solid fa-phone"></i>Contact</a>
-                <a href="cart" class="list-cart-icon">
-                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                    <span class="cart-number">${empty sessionScope.CART_QUANTITY_PRODUCT ? 0 : sessionScope.CART_QUANTITY_PRODUCT}</span>
+                <jsp:useBean id="cart" class="Cart.CartObj"></jsp:useBean>
+                    <a href="cart" class="list-cart-icon">
+                        <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                        <span class="cart-number">${empty sessionScope.CART_QUANTITY_PRODUCT ? 0 : sessionScope.CART_QUANTITY_PRODUCT}</span>
                     Cart
                 </a>
                 <c:if test="${empty sessionScope.ACCOUNT}">

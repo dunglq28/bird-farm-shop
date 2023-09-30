@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="row">
-                        <c:set var="birdList" value="${requestScope.BIRD_LIST}"></c:set>
+                        <c:set var="birdList" value="${sessionScope.BIRD_LIST}"></c:set>
                         <c:if test="${not empty birdList}">
                             <c:forEach items="${birdList}" var="dto" varStatus="counter">
                                 <div class="col-lg-4 product_item_wrp">
@@ -73,14 +73,15 @@
                                             </h5>
                                             <h5>${dto.priceFormat}</h5>
                                             <div class="add_to_cart">
-                                                <form action="add-bird" method="POST">
+                                                <form action="product-list" method="POST">
                                                     <input type="hidden" name="BirdID" value="${dto.birdID}"/>
                                                     <input type="hidden" name="BirdName" value="${dto.bird_Name}"/>
+                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
                                                     <input type="hidden" name="price" value="${dto.price}"/>
                                                     <input type="hidden" name="image" value="${dto.image}"/>
+                                                    <input type="hidden" name="quantity_Buy" value="1" />
                                                     <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
-                                                    <input type="hidden" name="Bird_Quantity" value="1" />
-                                                    <button type="submit">Add to cart</button>
+                                                    <button name="btAction" value="Addtocart" type="submit">Add to cart</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -97,7 +98,7 @@
                                 <a href="product-list?page=${indexCurrent-1}">&lsaquo;</a>
                             </c:if>
 
-                            <c:forEach begin="${START}" end="${END}" var="i">
+                            <c:forEach begin="${sessionScope.START}" end="${sessionScope.END}" var="i">
                                 <a class="${indexCurrent==i ? "active" : ""}" href="product-list?page=${i}">${i}</a>
                             </c:forEach>
 

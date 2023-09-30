@@ -24,8 +24,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-
-
 @WebServlet(name = "product-list", urlPatterns = {"/product-list"})
 public class PublicShopServlet extends HttpServlet {
 
@@ -42,32 +40,44 @@ public class PublicShopServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
-        try {
-            String page = request.getParameter("page");
-            if (page == null) {
-                page = "1";
-            }
-            int indexPage = Integer.parseInt(page);
+        String button = request.getParameter("btAction");
+        String page = request.getParameter("page");
 
-            BirdDAO dao = new BirdDAO();
-            int endPage = dao.getNumberPage();
-            List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
-            request.setAttribute("BIRD_LIST", result);
-            HttpSession session = request.getSession();
-            int start = 1;
-            int distance = 4;
-            int end = start + distance;
-            if (indexPage >= 4) {
-                start = indexPage - 2;
-                end = indexPage + 2;
-                if (indexPage + distance >= endPage) {
-                    start = endPage - distance;
-                    end = endPage;
-                }
+        try {
+            if (button == null) {
+                button = "null";
             }
-            request.setAttribute("START", start);
-            request.setAttribute("END", end);
-            request.setAttribute("indexCurrent", indexPage);
+            switch (button) {
+                case "null":
+                    if (page == null) {
+                        page = "1";
+                    }
+                    int indexPage = Integer.parseInt(page);
+
+                    BirdDAO dao = new BirdDAO();
+                    int endPage = dao.getNumberPage();
+                    List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("BIRD_LIST", result);
+                    int start = 1;
+                    int distance = 4;
+                    int end = start + distance;
+                    if (indexPage >= 4) {
+                        start = indexPage - 2;
+                        end = indexPage + 2;
+                        if (indexPage + distance >= endPage) {
+                            start = endPage - distance;
+                            end = endPage;
+                        }
+                    }
+                    session.setAttribute("START", start);
+                    session.setAttribute("END", end);
+                    session.setAttribute("indexCurrent", indexPage);
+                    break;
+                case "Addtocart":
+                    url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
+                    break;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
@@ -78,48 +88,43 @@ public class PublicShopServlet extends HttpServlet {
         }
     }
 
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
+        processRequest(request, response);
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

@@ -11,6 +11,7 @@ public class MyAppConstants {
         public static final String SHOPPING_PAGE = "/views/public/shop.jsp";
         public static final String PRODUCT_DETAIL_PAGE = "/views/public/singleProduct.jsp";
         public static final String PRODUCT_LIST_CONTROLLER = "product-list";
+        public static final String ADD_TO_CART_CONTROLLER = "add-bird";
 
     }
 

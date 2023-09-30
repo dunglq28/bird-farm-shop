@@ -20,14 +20,17 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "add-bird", urlPatterns = {"/add-bird"})
 public class AddBirdServlet extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_LIST_CONTROLLER;;
+        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
         String BirdID = request.getParameter("BirdID");
         String name = request.getParameter("BirdName");
         String img = request.getParameter("image");
+        float price = Float.parseFloat(request.getParameter("price"));
+        int quantityBuy = Integer.parseInt(request.getParameter("quantity_Buy"));
+        int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
         String lastSearch = request.getParameter("lastsearch");
         try {
             HttpSession session = request.getSession(true);
@@ -35,23 +38,21 @@ public class AddBirdServlet extends HttpServlet {
             if (cart == null) {
                 cart = new CartObj();
             }
-
-            float price = Float.parseFloat(request.getParameter("price"));
-            int quantity = Integer.parseInt(request.getParameter("Bird_Quantity"));
-
-            cart.addItemToCart(BirdID, quantity, price, img, name);
+            
+            cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, price, img, name);
             session.setAttribute("BIRD_CART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-
+            
             if (!lastSearch.isEmpty()) {
                 url = "search-product"
                         + "?lastSearch=" + lastSearch;
+            } else {
+                url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
             }
-
+            
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            
         }
     }
 

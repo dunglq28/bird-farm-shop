@@ -1,5 +1,6 @@
 package Controllers.Public;
 
+import Cart.CartObj;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "cart", urlPatterns = {"/cart"})
 public class PublicCartServlet extends HttpServlet {
@@ -17,9 +19,34 @@ public class PublicCartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.CART_PAGE;
+        String quantityBuy = request.getParameter("txtQuantityBuy");
+        String quantityAvailable = request.getParameter("txtQuantityAvailable");
 
-        RequestDispatcher dis = request.getRequestDispatcher(url);
-        dis.forward(request, response);
+        String birdID = request.getParameter("txtBirdID");
+        String btn = request.getParameter("btn");
+        HttpSession session = request.getSession();
+
+        try {
+            CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
+            if (!quantityBuy.equals("1") && btn.equals("des")) {
+                cart.updateQuantityBuy(birdID, Integer.parseInt(quantityBuy) - 1);
+            } else if (!quantityBuy.equals(quantityAvailable) && btn.equals("inc")) {
+                cart.updateQuantityBuy(birdID, Integer.parseInt(quantityBuy) + 1);
+            }
+//            if (cart.getQuantity() <= 1) {
+//                cart.setQuantity(1);
+//            } else if (cart.getQuantity() > 10) {
+//                cart.setQuantity(10);
+//            }
+
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
+//            ex.printStackTrace();
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

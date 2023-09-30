@@ -1,37 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controllers.Public;
 
-import Cart.CartObj;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class AddProductServlet extends HttpServlet {
+/**
+ *
+ * @author hj
+ */
+@WebServlet(name = "checkout", urlPatterns = {"/checkout"})
+public class CheckoutServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            CartObj bird = (CartObj) session.getAttribute("BIRDCART");
-            if (bird == null) {
-                bird = new CartObj();
-            }
-            String BirdName = request.getParameter("BirdName");
-            String BirdID = request.getParameter("BirdID");
-            String Image = request.getParameter("Image");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            float price = Float.parseFloat(request.getParameter("price"));
-            
-            bird.addItemToCart(BirdName, quantity, price, BirdID, Image);
-            session.setAttribute("BIRDCART", bird);
-            
-        }
-       finally{
-            
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet checkoutServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet checkoutServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
