@@ -1,0 +1,95 @@
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.bg-grey {
+    background-color: #eae8e8;
+}
+
+@media (min-width: 992px) {
+    .card-registration-2 .bg-grey {
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+    .card-registration-2 .bg-grey {
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+.container{
+    max-width: 1300px !important;
+}
+
+
+.No-product {
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    margin-top: 30px;
+}
+
+#form1 {
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    background-color: rgb(243, 243, 243);
+    text-align: center;
+}
+
+.quantity-form {
+    justify-content: center;
+
+}
+
+.origin-price {
+    text-decoration: line-through;
+    color: rgb(213, 76, 76);
+    font-size: 80%;
+}
+
+.cart-blank{
+    margin: 100px 50px 0 50px;
+    width: 100%;
+    height: 100%;
+    
+}
+.cart-blank-icon{
+    width: auto;
+    justify-content: center;
+    align-items: center ;
+}
+
+.delete-icon {
+    color: black;
+}
+
+.delete-icon:hover {
+    color: rgb(13,103,128) !important; 
+}
+
+.btn-back {
+    color: #fff;
+    background-color: #0D6780;
+}
+
