@@ -5,27 +5,20 @@
  */
 package Controllers.Public;
 
-import Daos.BirdDao;
-import Models.BirdDTO;
-import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hj
  */
-@WebServlet(name = "product-list", urlPatterns = {"/product-list"})
-public class PublicShopServlet extends HttpServlet {
+@WebServlet(name = "checkout", urlPatterns = {"/checkout"})
+public class checkoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,41 +32,17 @@ public class PublicShopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
-        try {
-            String page = request.getParameter("page");
-            if (page == null) {
-                page = "1";
-            }
-            int indexPage = Integer.parseInt(page);
-
-            BirdDao dao = new BirdDao();
-            int endPage = dao.getNumberPage();
-            List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
-            request.setAttribute("BIRD_LIST", result);
-            HttpSession session = request.getSession();
-            int start = 1;
-            int distance = 4;
-            int end = start + distance;
-            if (indexPage >= 4) {
-                start = indexPage - 2;
-                end = indexPage + 2;
-                if (indexPage + distance >= endPage) {
-                    start = endPage - distance;
-                    end = endPage;
-                }
-            }
-            request.setAttribute("START", start);
-            request.setAttribute("END", end);
-            request.setAttribute("indexCurrent", indexPage);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet checkoutServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet checkoutServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

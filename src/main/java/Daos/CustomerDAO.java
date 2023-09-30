@@ -2,12 +2,13 @@ package Daos;
 
 import Models.CustomerDTO;
 import Utils.DBHelper;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerDAO {
+public class CustomerDAO implements Serializable {
 
     public String createCustomerID() throws SQLException, ClassNotFoundException {
         Connection con = null;

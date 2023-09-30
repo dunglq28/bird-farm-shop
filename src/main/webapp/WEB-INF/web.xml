@@ -32,6 +32,14 @@
         <servlet-name>PublicPageServlet</servlet-name>
         <servlet-class>Controllers.Public.PublicPageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>Controllers.Public.ProductDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkoutServlet</servlet-name>
+        <servlet-class>Controllers.Public.checkoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -75,6 +83,14 @@
     <servlet-mapping>
         <servlet-name>PublicPageServlet</servlet-name>
         <url-pattern>/PublicPageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/ProductDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkoutServlet</servlet-name>
+        <url-pattern>/checkoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -86,25 +86,22 @@
                                 </div>
                             </c:forEach>
                         </c:if>
-
-
-
                     </div>
                     <div class="row">
                         <jsp:useBean id="dao" class="Daos.BirdDao"></jsp:useBean>
                             <div class="pagination d-flex justify-content-center">
                             <c:if test="${indexCurrent > 1}">
-                                <a href="products?page=1">&laquo;</a>
-                                <a href="products?page=${indexCurrent-1}">&lsaquo;</a>
+                                <a href="product-list?page=1">&laquo;</a>
+                                <a href="product-list?page=${indexCurrent-1}">&lsaquo;</a>
                             </c:if>
 
                             <c:forEach begin="${START}" end="${END}" var="i">
-                                <a class="${indexCurrent==i ? "active" : ""}" href="products?page=${i}">${i}</a>
+                                <a class="${indexCurrent==i ? "active" : ""}" href="product-list?page=${i}">${i}</a>
                             </c:forEach>
 
                             <c:if test="${indexCurrent<dao.numberPage}">
-                                <a href="products?page=${indexCurrent+1}">&rsaquo;</a>
-                                <a href="products?page=${dao.numberPage}">&raquo;</a>
+                                <a href="product-list?page=${indexCurrent+1}">&rsaquo;</a>
+                                <a href="product-list?page=${dao.numberPage}">&raquo;</a>
                             </c:if>
 
                         </div>

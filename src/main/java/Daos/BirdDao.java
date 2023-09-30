@@ -7,6 +7,7 @@ package Daos;
 
 import Models.BirdDTO;
 import Utils.DBHelper;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author hj
  */
-public class BirdDao {
+public class BirdDao implements Serializable {
     private List<BirdDTO> birdList;
 
     public List<BirdDTO> getBirdList() {

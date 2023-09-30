@@ -2,13 +2,14 @@ package Daos;
 
 import Models.AccountDTO;
 import Utils.DBHelper;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AccountDAO {
+public class AccountDAO implements Serializable{
 
     public AccountDTO checkExistEmail(String email) throws ClassNotFoundException, SQLException {
         Connection con = null;
