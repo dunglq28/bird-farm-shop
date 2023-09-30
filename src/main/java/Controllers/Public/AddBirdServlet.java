@@ -1,6 +1,5 @@
 package Controllers.Public;
 
-import Daos.BirdDAO;
 import Models.BirdDTO;
 import Cart.CartObj;
 import Utils.MyAppConstants;
