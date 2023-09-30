@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "add-bird", urlPatterns = {"/add-bird"})
 public class AddBirdServlet extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
@@ -32,27 +32,33 @@ public class AddBirdServlet extends HttpServlet {
         int quantityBuy = Integer.parseInt(request.getParameter("quantity_Buy"));
         int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
         String lastSearch = request.getParameter("lastsearch");
+        HttpSession session = request.getSession(true);
+
         try {
-            HttpSession session = request.getSession(true);
-            CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
-            if (cart == null) {
-                cart = new CartObj();
-            }
-            
-            cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, price, img, name, cate_Name);
-            session.setAttribute("BIRD_CART", cart);
-            session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-            
-            if (!lastSearch.isEmpty()) {
-                url = "search-product"
-                        + "?lastSearch=" + lastSearch;
+            if (session.getAttribute("ACCOUNT") == null) {
+                url = "guest?btAction=loginPage";
+                response.sendRedirect(url);
+                return;
             } else {
-                url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
+                CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
+                if (cart == null) {
+                    cart = new CartObj();
+                }
+                cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, price, img, name, cate_Name);
+                session.setAttribute("BIRD_CART", cart);
+                session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
+
+                if (!lastSearch.isEmpty()) {
+                    url = "search-product"
+                            + "?lastSearch=" + lastSearch;
+                } else {
+                    url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
+                }
             }
-            
-        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+        } finally {
+
         }
     }
 
