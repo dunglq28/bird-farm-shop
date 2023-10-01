@@ -88,7 +88,7 @@
 
                                                                 </div>
                                                             </div>
-                                                                 <c:set var="total_order" value="${totalOrder = totalOrder + total_field}" ></c:set>
+                                                        <c:set var="total_order" value="${totalOrder = totalOrder + total_field}" ></c:set>
                                                             <!--                                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
                                                             
                                                                                                                     <div class="form-check">
@@ -167,11 +167,11 @@
                                                     <h5 class="text-uppercase">Total price</h5>
                                                     <h5>${util.FormatPrice(total_order)}</h5>
                                                 </div>
-
-                                                <button type="button" class="btn-buy btn btn-dark btn-block btn-lg"
-                                                        data-mdb-ripple-color="dark">
-                                                    Buy now
-                                                </button>
+                                                <form action="Checkout">
+                                                    <input name="btAction" value="Buy now" type="submit" class="btn-buy btn btn-dark btn-block btn-lg"
+                                                            data-mdb-ripple-color="dark">
+                                                    </input>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

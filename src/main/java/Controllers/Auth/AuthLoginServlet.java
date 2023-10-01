@@ -22,7 +22,9 @@ public class AuthLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+        HttpSession session = request.getSession();
+        String url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                : (String) session.getAttribute("BACK_CART");
 
         String email = request.getParameter("txtEmailLogin");
         String password = request.getParameter("txtPasswordLogin");
@@ -55,9 +57,9 @@ public class AuthLoginServlet extends HttpServlet {
                     request.setAttribute("CREATE_ERROR", error);
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
                 } else {
-                    HttpSession session = request.getSession();
                     session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                    url = url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                            : (String) session.getAttribute("BACK_CART");
                 }
             }
 

@@ -83,4 +83,44 @@ public class CustomerDAO implements Serializable {
         }
         return false;
     }
+    
+    public CustomerDTO getCustomerByAccountID(String accountId)
+            throws SQLException, ClassNotFoundException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        CustomerDTO result = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2.Create SQL statement string
+                String sql = "Select * "
+                        + "From Birds "
+                        + "Where BirdID = ? ";
+                //3.Create statement object
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accountId);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                if (rs.next()) {
+                    
+                }
+            }//end connection has opened
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

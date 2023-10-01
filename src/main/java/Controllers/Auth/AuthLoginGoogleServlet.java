@@ -42,7 +42,9 @@ public class AuthLoginGoogleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
+        HttpSession session = request.getSession();
+        String url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                : (String) session.getAttribute("BACK_CART");
         try {
             String code = request.getParameter("code");
 
@@ -54,10 +56,8 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                 AccountDAO dao = new AccountDAO();
                 AccountDTO account = dao.getAccountByEmail(googlePojo.getEmail());
                 CustomerDAO cusDao = new CustomerDAO();
-                HttpSession session = request.getSession();
                 if (account != null) {
                     session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 } else {
                     long millis = System.currentTimeMillis();
                     java.sql.Date date = new java.sql.Date(millis);
@@ -66,7 +66,6 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                         CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
                         cusDao.createCustomer(customer);
-                        url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                         session.setAttribute("ACCOUNT", account);
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;

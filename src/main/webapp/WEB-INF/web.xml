@@ -48,6 +48,10 @@
         <servlet-name>remove-bird</servlet-name>
         <servlet-class>Controllers.Public.RemoveBirdServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>Controllers.Public.CheckoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -107,6 +111,10 @@
     <servlet-mapping>
         <servlet-name>remove-bird</servlet-name>
         <url-pattern>/remove-bird</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/CheckoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

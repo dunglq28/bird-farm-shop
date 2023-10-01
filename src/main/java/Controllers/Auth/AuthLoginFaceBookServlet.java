@@ -42,7 +42,9 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
+        HttpSession session = request.getSession();
+        String url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                : (String) session.getAttribute("BACK_CART");
         try {
             String code = request.getParameter("code");
 
@@ -56,10 +58,10 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                 AccountDTO account = dao.checkExistFaceBook(user.getId());
 
                 CustomerDAO cusDao = new CustomerDAO();
-                HttpSession session = request.getSession();
                 if (account != null) {
                     session.setAttribute("ACCOUNT", account);
-                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                    url = url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                            : (String) session.getAttribute("BACK_CART");
                 } else {
                     long millis = System.currentTimeMillis();
                     java.sql.Date date = new java.sql.Date(millis);
@@ -69,7 +71,7 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
 
                         cusDao.createCustomer(customer);
-                        url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                        url = (String) session.getAttribute("BACK_URL");
                         session.setAttribute("ACCOUNT", account);
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
