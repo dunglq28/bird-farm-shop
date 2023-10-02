@@ -34,7 +34,7 @@
 }
 
 .container{
-    max-width: 1300px !important;
+    max-width: 1700px !important;
 }
 
 
@@ -55,6 +55,9 @@
     max-height: 50px;
     background-color: rgb(243, 243, 243);
     text-align: center;
+
+    
+
 }
 
 .quantity-form {
@@ -88,13 +91,15 @@
     color: rgb(13,103,128) !important; 
 }
 
-.btn-back {
-    color: #fff !important;
-    background-color: #0D6780 !important;
-    border-color: #0D6780 !important;
+.form-input-day{
+    align-items: center !important;
+    
 }
+.select-control{
+    max-width: 80px;
+    border-radius: 5px;
 
-.btn-buy {
-    background-color: #0D6780 !important;
 }
-
+.form-input-day {
+    margin: auto;
+}
