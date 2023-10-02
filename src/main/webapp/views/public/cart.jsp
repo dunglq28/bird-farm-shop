@@ -22,7 +22,7 @@
             <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light"
             style="background-color: rgb(13,103,128) !important;">
-            <div class="col-md-7" style="margin: 0 10px 0 50px ;">
+            <div class="col-md-6" style="margin: 0 10px 0 50px ;">
                 <a class="navbar-brand justify-content-center  " style="color: #fff !important;
                 font-size: 1.5em;
                 font-weight: 700;
@@ -30,7 +30,7 @@
                 text-decoration: none;
                 padding-right: 10px;" href="#">Bird farm shop</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto ">
                         <li class="nav-item active align-content-lg-end" style="display: flex;">
