@@ -45,15 +45,34 @@ public class CheckoutServlet extends HttpServlet {
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            CustomerDAO dao = new CustomerDAO();
+            CustomerDTO customer;
+
             if (account == null) {
                 url = "guest?btAction=loginPage";
                 session.setAttribute("BACK_CART", "cart");
+                customer = null;
             } else {
-                CustomerDAO dao = new CustomerDAO();
-                CustomerDTO customer = dao.getCustomerByAccountID(account.getAccountID());
-                if (customer.getAddress()==null && customer.getCity()==null && customer.getPhone_Number()==null) {
+                customer = dao.getCustomerByAccountID(account.getAccountID());
+                if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
+                    request.setAttribute("FULLNAME", customer.getFullName());
                     url = MyAppConstants.PublicFeatures.RECEIVING_INFO_PAGE;
                 }
+            }
+
+            switch (button) {
+                case "Continue":
+                    String fullName = request.getParameter("txtFullName");
+                    String phoneNumber = request.getParameter("txtPhone");
+                    String city = request.getParameter("txtCity");
+                    String address = request.getParameter("txtAddress");
+                    boolean result = dao.updateCustomer(fullName, phoneNumber, address, city, customer.getCustomerID());
+                    if (result) {
+                        url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                    }
+                    break;
+                case "Addtocart":
+                    break;
             }
 
         } catch (SQLException ex) {

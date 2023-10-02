@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,9 +93,9 @@
         <div>
             <h5>Another address</h3>
         </div>
-        <form method="Checkout" class="form-input">
+        <form action="Checkout" class="form-input" method="GET">
             <div class="form-group">
-                <input name="txtFullName"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                     placeholder="Enter FullName">
             </div>
             <div class="form-group">

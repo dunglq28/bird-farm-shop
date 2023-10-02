@@ -133,4 +133,43 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
+    
+    public boolean updateCustomer(String fullName, String phoneNumber, String address, String city, String customerId)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2. create SQL statement string
+                String sql = "Update Customers "
+                        + "Set FullName = ?, Phone_Number = ?, Address = ? , City = ? "
+                        + "Where CustomerID = ? ";
+                //3. Create statement object
+                stm = con.prepareStatement(sql);
+                stm.setString(1, fullName);
+                stm.setString(2, phoneNumber);
+                stm.setString(3, address);
+                stm.setString(4, city);
+                stm.setString(5, customerId);
+                //4. Excute query
+                int effectRows = stm.executeUpdate();
+                //5. Process
+                if (effectRows > 0) {
+                    return true;
+                }
+            } // end of connection has opend
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }
