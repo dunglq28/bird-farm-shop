@@ -116,6 +116,10 @@
         <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/CheckoutServlet</url-pattern>
     </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/views/public/errorPage.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30

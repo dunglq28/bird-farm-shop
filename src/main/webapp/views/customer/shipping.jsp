@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light"
             style="background-color: rgb(13,103,128) !important;">
-            <div class="col-md-7" style="margin: 0 10px 0 50px ;">
+            <div class="col-md-6" style="margin: 0 10px 0 50px ;">
                 <a class="navbar-brand justify-content-center  " style="color: #fff !important;
                 font-size: 1.5em;
                 font-weight: 700;
@@ -46,7 +48,7 @@
                 text-decoration: none;
                 padding-right: 10px;" href="#">Bird farm shop</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto ">
                         <li class="nav-item active align-content-lg-end" style="display: flex;">
@@ -91,18 +93,16 @@
         <div>
             <h5>Another address</h3>
         </div>
-        <form class="form-input">
+        <form action="Checkout" class="form-input" method="GET">
             <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter full name">
-
+                <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter FullName">
             </div>
             <div class="form-group">
-                <input type="tel" id="typePhone" class="form-control" placeholder="Enter your phone" />
-
+                <input name="txtPhone" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
             </div>
-                <div class="form-choose ">
-                    <select class="form-select" aria-label="Default select example">
+                <div  class="form-choose ">
+                    <select name="txtCity" class="form-select" aria-label="Default select example">
                         <option selected>Choose your city</option>
                         <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                         <option value="Hà Nội">Hà Nội</option>
@@ -169,17 +169,11 @@
                         <option value="Hậu Giang">Hậu Giang</option>
                     </select>
                 </div>
-
-   
-
             <div class="form-group">
-                <input type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
+                <input name="txtAddress" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="exampleInputAddress" placeholder="Note">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" style="background-color: #0d6780;">Continue</button>
+                <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
             </div>
 
         </form>

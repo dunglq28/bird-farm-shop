@@ -5,9 +5,13 @@
  */
 package Controllers.Public;
 
+import Daos.CustomerDAO;
+import Models.AccountDTO;
+import Models.CustomerDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,17 +44,41 @@ public class CheckoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            if (session.getAttribute("ACCOUNT") == null) {
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            CustomerDAO dao = new CustomerDAO();
+            CustomerDTO customer;
+
+            if (account == null) {
                 url = "guest?btAction=loginPage";
                 session.setAttribute("BACK_CART", "cart");
+                customer = null;
             } else {
-                
+                customer = dao.getCustomerByAccountID(account.getAccountID());
+                if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
+                    request.setAttribute("FULLNAME", customer.getFullName());
+                    url = MyAppConstants.PublicFeatures.RECEIVING_INFO_PAGE;
+                }
             }
 
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+            switch (button) {
+                case "Continue":
+                    String fullName = request.getParameter("txtFullName");
+                    String phoneNumber = request.getParameter("txtPhone");
+                    String city = request.getParameter("txtCity");
+                    String address = request.getParameter("txtAddress");
+                    boolean result = dao.updateCustomer(fullName, phoneNumber, address, city, customer.getCustomerID());
+                    if (result) {
+                        url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                    }
+                    break;
+                case "Addtocart":
+                    break;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
