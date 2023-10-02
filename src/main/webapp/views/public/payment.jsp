@@ -66,15 +66,13 @@
 
                                         <div class="row mb-4 d-flex justify-content-between align-items-center">
                                             <div class="form-check">
-                                                <input class="form-check-input-2" type="radio" name="exampleRadios"
-                                                    id="exampleRadios1" value="option1" checked>
+                                                <input class="form-check-input-2" type="radio" name="shippingMethod" id="exampleRadios1" value="option1" checked>
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     Payment on delivery (Cash)
                                                 </label>
                                             </div>
                                             <div class="form-check fisrt-element">
-                                                <input class="form-check-input-1" type="radio" name="exampleRadios"
-                                                    id="exampleRadios2" value="option2">
+                                                <input class="form-check-input-1" type="radio" name="shippingMethod" id="exampleRadios2" value="option2">
                                                 <label class="form-check-label" for="exampleRadios2">
                                                     Receive directly at shop
                                                 </label>
