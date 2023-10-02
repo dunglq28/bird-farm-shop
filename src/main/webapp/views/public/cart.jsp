@@ -64,7 +64,7 @@
                                                                 <!--<h6 class="mb-0 text-sm-center text-muted origin-price">${items.get(key).priceFormat}</h6>-->
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center quantity-form">
-                                                                <form action="cart" method="POST">
+                                                                <form action="cart" method="POST" style="display: flex">
 
                                                                     <button name="btn" value="des" class="btn btn-link px-2 text-muted"
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
