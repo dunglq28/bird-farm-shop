@@ -18,7 +18,7 @@
     </head>
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
-            <!-- content -->
+            <!-- image and detail-->
             <section class="py-5">
                 <div class="container">
                     <div class="row gx-5">
@@ -30,8 +30,6 @@
                                          src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B1.jpg" />
                                 </a>
                             </div>
-                            <!-- thumbs-wrap.// -->
-                            <!-- gallery-wrap .end// -->
                         </aside>
                         <main class="col-lg-6">
                             <div class="ps-lg-3">
@@ -52,7 +50,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="h5">$250</span>
+                                    <span class="h5" style="color:#0D6780">$250</span>
                                     <span class="text-muted">/for a bird</span>
                                 </div>
 
@@ -90,7 +88,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- col.// -->
                                     <div class="col-md-4 col-6 mb-3">
                                         <label class="mb-2 d-block">Quantity</label>
                                         <div class="input-group mb-3" style="width: 170px;">
@@ -108,9 +105,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Buying -->
                                 <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
-                                <a href="#" class="btn btn-primary shadow-0"> <i class="fa-solid fa-cart-shopping"></i> Add to
-                                    cart </a>
+                                <form action="" class="Addtocart">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <input type="submit" value="Add to cart">
+
+                                </form>
                                 <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
                                         class="me-1 fa fa-heart fa-lg"></i> Save </a>
                             </div>
@@ -118,30 +119,26 @@
                     </div>
                 </div>
             </section>
-            <!-- content -->
 
+            <!-- Spe and feedback navs -->
             <section class="bg-light border-top py-4">
                 <div class="container">
                     <div class="row gx-4">
                         <div class="col-lg-8 mb-4">
                             <div class="border rounded-2 px-3 py-2 bg-white">
-                                <!-- Pills navs -->
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                                 data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
                                                 aria-selected="true">Specification</button>
-                                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
-                                                aria-selected="false">Rating</button>
                                         <button class="nav-link" id="nav-comment-tab" data-bs-toggle="tab"
                                                 data-bs-target="#nav-comment" type="button" role="tab" aria-controls="nav-comment"
                                                 aria-selected="false">Feedback</button>
                                     </div>
                                 </nav>
-                                <!-- Pills navs -->
 
-                                <!-- Pills content -->
+                                <!-- Spe and feedback content -->
+                                <!-- spe -->
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                          aria-labelledby="nav-home-tab">
@@ -178,152 +175,69 @@
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                         aria-labelledby="nav-contact-tab">
-                                        <div class="card p-3">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="ratings">
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                </div>
-                                                <h8 class="review-count" style="color: rgb(128,128,137);">Item rating</h8>
-                                            </div>
-
-
-                                            <div class="mt-2 d-flex justify-content-between align-items-center">
-                                                <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                    Quality
-                                                </span>
-                                                <div class="small-ratings">
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="mt-1 d-flex justify-content-between align-items-center">
-                                                <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                    Variety
-                                                </span>
-                                                <div class="small-ratings">
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star "></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="mt-1 d-flex justify-content-between align-items-center">
-                                                <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                    Price
-                                                </span>
-                                                <div class="small-ratings">
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="mt-1 d-flex justify-content-between align-items-center">
-                                                <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                    Warranty and return
-                                                </span>
-                                                <div class="small-ratings">
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="mt-1 d-flex justify-content-between align-items-center">
-                                                <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                    Delivery fast
-                                                </span>
-                                                <div class="small-ratings">
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Comment -->
+                                    <!-- feedback Comment -->
                                     <div class="tab-pane fade" id="nav-comment" role="tabpanel"
                                          aria-labelledby="nav-comment-tab">
                                         <div class="row">
 
                                             <div class="col-10">
 
-                                                <div class="comment-box ml-2">
-
-                                                    <div class="mt-1 d-flex justify-content-between align-items-center">
-                                                        <span style="max-width: 300px; color: rgb(128,128,137); padding: 10px;">
-                                                            Product quantity
-                                                        </span>
-
-
-                                                        <div class="rating">
-                                                            <input type="radio" name="rating" value="5" id="5"><label
-                                                                for="5">☆</label>
-                                                            <input type="radio" name="rating" value="4" id="4"><label
-                                                                for="4">☆</label>
-                                                            <input type="radio" name="rating" value="3" id="3"><label
-                                                                for="3">☆</label>
-                                                            <input type="radio" name="rating" value="2" id="2"><label
-                                                                for="2">☆</label>
-                                                            <input type="radio" name="rating" value="1" id="1"><label
-                                                                for="1">☆</label>
-                                                        </div>
-
-
-                                                    </div>
-
-
-
-
-                                                    <div class="comment-area">
-
-                                                        <textarea class="form-control" placeholder="Share your thought for us"
-                                                                  rows="4"></textarea>
-
-                                                    </div>
-
-                                                    <div class="comment-btns mt-2">
-
+                                                <div class="comment-card" style="padding-top: 20px">
+                                                    <div class="comment-card-body">
                                                         <div class="row">
-
-                                                            <div class="col-6">
-
-                                                                <div class="pull-left">
-
-                                                                    <button class="btn btn-light cancel btn-sm">Cancel</button>
-
-                                                                </div>
-
+                                                            <div class="col-md-2">
+                                                                <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
+                                                                     class="img img-rounded img-fluid" />
+                                                                <p class="text-secondary text-center" style="font-size:12px">15
+                                                                    Minutes Ago</p>
                                                             </div>
+                                                            <div class="col-md-10 user-comment">
+                                                                <p>
+                                                                    <a class="float-left" href=""
+                                                                       style="text-decoration: none; color:#0D6780"><strong>Truong
+                                                                            Tuyet Ngan (K17 HCM)</strong></a>
+                                                                    <span class="float-right"><i
+                                                                            class="text-warning fa fa-star"></i></span>
+                                                                    <span class="float-right"><i
+                                                                            class="text-warning fa fa-star"></i></span>
+                                                                    <span class="float-right"><i
+                                                                            class="text-warning fa fa-star"></i></span>
+                                                                    <span class="float-right"><i
+                                                                            class="text-warning fa fa-star"></i></span>
 
-                                                            <div class="col-6">
+                                                                </p>
+                                                                <div class="clearfix"></div>
+                                                                <p>I got the bird. Its very beautiful!
+                                                                </p>
 
-                                                                <div class="pull-right">
+                                                                <a class="float-right btn btn-outline-primary ml-2"> <i
+                                                                        class="fa fa-reply"></i> Reply</a>
+                                                                <a class="float-right btn like text-white btn-danger"> <i
+                                                                        class="fa fa-heart"></i> Like</a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment-card comment-card-inner user-comment-reply">
+                                                            <div class="comment-card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
+                                                                             class="img img-rounded img-fluid" />
+                                                                        <p class="text-secondary text-center"
+                                                                           style="font-size:12px">15 Minutes Ago</p>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <p><a href=""
+                                                                              style="text-decoration: none; color:#0D6780"><strong>Tran
+                                                                                    Manh Cuong (K17 HCM)</strong></a></p>
 
-                                                                    <button class="btn btn-success send btn-sm">Submit</button>
+                                                                        <p>I just got the bird too, it's so fantastic!</p>
+                                                                        <a class="float-right btn btn-outline-primary ml-2">
+                                                                            <i class="fa fa-reply"></i> Reply</a>
+                                                                        <a class="float-right btn like text-white btn-danger">
+                                                                            <i class="fa fa-heart"></i> Like</a>
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -333,7 +247,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Pills content -->
                             </div>
                         </div>
 
@@ -350,7 +263,7 @@
                                             </a>
                                             <div class="info">
                                                 <a href="#" class="nav-link mb-1">Fuetes's parrot </a>
-                                                <strong class="text-dark"> $710</strong>
+                                                <strong style="color:#0D6780"> $710</strong>
                                             </div>
                                         </div>
 
@@ -361,7 +274,7 @@
                                             </a>
                                             <div class="info">
                                                 <a href="#" class="nav-link mb-1">Red-and-green macaw</a>
-                                                <strong class="text-dark"> $130</strong>
+                                                <strong style="color:#0D6780"> $130</strong>
                                             </div>
                                         </div>
 
@@ -372,7 +285,7 @@
                                             </a>
                                             <div class="info">
                                                 <a href="#" class="nav-link mb-1">Hyacinth macaw</a>
-                                                <strong class="text-dark"> $480</strong>
+                                                <strong style="color:#0D6780"> $480</strong>
                                             </div>
                                         </div>
 
@@ -383,7 +296,7 @@
                                             </a>
                                             <div class="info">
                                                 <a href="#" class="nav-link mb-1">Blue-throated macaw</a>
-                                                <strong class="text-dark"> $500</strong>
+                                                <strong style="color:#0D6780"> $500</strong>
                                             </div>
                                         </div>
                                     </div>
