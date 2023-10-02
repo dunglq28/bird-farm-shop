@@ -1,12 +1,14 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .change-icon {
     color: black;
 }
 
 .change-icon:hover {
     color: #0D6780 !important; 
-}
-
-.py-6 {
-    padding-top: 6rem!important;
-    padding-bottom: 6rem!important;
 }

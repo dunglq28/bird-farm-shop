@@ -40,6 +40,7 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String button = request.getParameter("btAction");
+        String totalOrder = request.getParameter("txtTotalOrder");
         String url = "";
         HttpSession session = request.getSession();
 
@@ -57,6 +58,10 @@ public class CheckoutServlet extends HttpServlet {
                 if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
                     request.setAttribute("FULLNAME", customer.getFullName());
                     url = MyAppConstants.PublicFeatures.RECEIVING_INFO_PAGE;
+                } else {
+                    url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                    request.setAttribute("CUSTOMER", customer);
+                    request.setAttribute("TOTAL_ORDER", totalOrder);
                 }
             }
 
@@ -67,8 +72,11 @@ public class CheckoutServlet extends HttpServlet {
                     String city = request.getParameter("txtCity");
                     String address = request.getParameter("txtAddress");
                     boolean result = dao.updateCustomer(fullName, phoneNumber, address, city, customer.getCustomerID());
+                    customer = dao.getCustomerByAccountID(account.getAccountID());
+                    request.setAttribute("CUSTOMER", customer);
                     if (result) {
                         url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                        request.setAttribute("TOTAL_ORDER", totalOrder);
                     }
                     break;
                 case "Addtocart":

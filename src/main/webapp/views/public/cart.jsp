@@ -129,7 +129,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 bg-grey">
+                                        <form action="Checkout" class="col-lg-4 bg-grey">
                                             <div class="p-5">
                                                 <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                                                 <hr class="my-4">
@@ -167,14 +167,13 @@
                                                 <div class="d-flex justify-content-between mb-5">
                                                     <h5 class="text-uppercase">Total price</h5>
                                                     <h5>${util.FormatPrice(total_order)}</h5>
+                                                    <input type="hidden" name="txtTotalOrder" value="${total_order}" />
                                                 </div>
-                                                <form action="Checkout">
                                                     <input name="btAction" value="Buy now" type="submit" class="btn-buy btn btn-dark btn-block btn-lg"
                                                            data-mdb-ripple-color="dark">
                                                     </input>
-                                                </form>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
