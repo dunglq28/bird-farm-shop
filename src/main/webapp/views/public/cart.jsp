@@ -7,7 +7,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cart</title>
         <link rel="stylesheet" href="./assets/css/cart.css">
-        <link rel="stylesheet" href="./assets/css/homePage.css">
+        <!--<link rel="stylesheet" href="./assets/css/homePage.css">-->
+        <link rel="stylesheet" href="./assets/css/shipping.css">
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,7 +17,57 @@
 
     </head>
     <body>
-        <jsp:include page="/components/header.jsp"></jsp:include>
+        <%--<jsp:include page="/components/header.jsp"></jsp:include>--%>
+        <!--<header>-->
+            <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"
+            style="background-color: rgb(13,103,128) !important;">
+            <div class="col-md-7" style="margin: 0 10px 0 50px ;">
+                <a class="navbar-brand justify-content-center  " style="color: #fff !important;
+                font-size: 1.5em;
+                font-weight: 700;
+                text-transform: uppercase;
+                text-decoration: none;
+                padding-right: 10px;" href="#">Bird farm shop</a>
+            </div>
+            <div class="col-md-4">
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto ">
+                        <li class="nav-item active align-content-lg-end" style="display: flex;">
+                            <a class="nav-link" style="color: #ffc107 ;margin: auto; align-items: center;"
+                                href="#">Login </a>
+                        </li>
+                        <li class="nav-item active align-content-lg-end material-symbols-outlined"
+                            style="color: #ffc107 ; margin: auto 0; display: flex;">
+                            arrow_forward
+                        </li>
+
+                        <li class="nav-item active align-content-lg-end" style="display: flex; max-width: auto;">
+                            <a class="nav-link" style="color: #ffc107 ;margin: auto;" href="#">Receiving information</a>
+                        </li>
+                        <li class="nav-item active align-content-lg-end material-symbols-outlined"
+                            style="color: #ffc107 ; margin: auto; display: flex;">
+                            arrow_forward
+                        </li>
+                        <li class="nav-item" style="display: flex;">
+                            <a class="nav-link" style="color: #ffc107 ;margin: auto;" href="#">Tranport method</a>
+                        </li>
+                        <li class="nav-item active align-content-lg-end material-symbols-outlined"
+                            style="color: #ffc107 ; margin: auto;">
+                            arrow_forward
+                        </li>
+                        <li class="nav-item" style="display: flex;">
+                            <a class="nav-link" style="color: #ffc107 ;margin: auto; " href="#">Pay</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </nav>
+    </header>
+        <!--</header>-->
+        
+        
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
         <c:set var="cart" value="${sessionScope.BIRD_CART}" />
         <c:if test="${not empty cart}"> 
