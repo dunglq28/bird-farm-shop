@@ -1,8 +1,4 @@
-<%-- 
-    Document   : errorPage
-    Created on : Oct 2, 2023, 7:45:27 PM
-    Author     : tt
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +16,7 @@
         <span class="four"><span class="screen-reader-text">4</span></span>
     </section>
     <div class="link-container">
-        <a target="_blank" href="https://www.silocreativo.com/en/creative-examples-404-error-css/" class="more-link">Go
+        <a target="_blank" href="home" class="more-link">Go
             to home</a>
     </div>
     </body>
