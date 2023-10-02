@@ -95,6 +95,10 @@
     align-items: center !important;
     
 }
+
+.btn-buy {
+    background-color: #0D6780 !important;
+}
 .select-control{
     max-width: 80px;
     border-radius: 5px;

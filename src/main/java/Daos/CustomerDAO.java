@@ -97,8 +97,8 @@ public class CustomerDAO implements Serializable {
             if (con != null) {
                 //2.Create SQL statement string
                 String sql = "Select * "
-                        + "From Birds "
-                        + "Where BirdID = ? ";
+                        + "from Customers "
+                        + "Where AccountID = ? ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, accountId);
@@ -106,7 +106,17 @@ public class CustomerDAO implements Serializable {
                 rs = stm.executeQuery();
                 //5.process
                 if (rs.next()) {
-                    
+                    return result = new CustomerDTO(rs.getString("CustomerID"),
+                            rs.getString("AccountID"), 
+                            rs.getString("FullName"), 
+                            rs.getString("Gender"), 
+                            rs.getString("Email"), 
+                            rs.getString("Phone_Number"), 
+                            rs.getString("Address"), 
+                            rs.getString("City"), 
+                            rs.getDate("DOB"), 
+                            rs.getDate("Date_created"), 
+                            rs.getBoolean("Status"));
                 }
             }//end connection has opened
 

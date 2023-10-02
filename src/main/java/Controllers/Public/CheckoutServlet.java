@@ -5,9 +5,13 @@
  */
 package Controllers.Public;
 
+import Daos.CustomerDAO;
+import Models.AccountDTO;
+import Models.CustomerDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,17 +44,22 @@ public class CheckoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            if (session.getAttribute("ACCOUNT") == null) {
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null) {
                 url = "guest?btAction=loginPage";
                 session.setAttribute("BACK_CART", "cart");
             } else {
-                
+                CustomerDAO dao = new CustomerDAO();
+                CustomerDTO customer = dao.getCustomerByAccountID(account.getAccountID());
+                if (customer.getAddress()==null && customer.getCity()==null && customer.getPhone_Number()==null) {
+                    url = MyAppConstants.PublicFeatures.RECEIVING_INFO_PAGE;
+                }
             }
 
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
