@@ -1,8 +1,4 @@
-<%-- 
-    Document   : footer
-    Created on : Sep 24, 2023, 2:18:25 PM
-    Author     : tt
---%>
+
 <div class="footer-bottom-wrap-setion">
     <div class="column-footer-wrap">
         <div class="card-footer-wrap">
