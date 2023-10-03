@@ -11,95 +11,95 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/shipping.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./assets/css/shipping.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </head>
 
-<body>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24
-        }
-    </style>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light"
-            style="background-color: rgb(13,103,128) !important;">
-            <div class="col-md-6" style="margin: 0 10px 0 50px ;">
-                <a class="navbar-brand justify-content-center  " style="color: #fff !important;
-                font-size: 1.5em;
-                font-weight: 700;
-                text-transform: uppercase;
-                text-decoration: none;
-                padding-right: 10px;" href="#">Bird farm shop</a>
-            </div>
-            <div class="col-md-5">
-                <div class="collapse navbar-collapse" id="navbarText">
-                    <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item active align-content-lg-end" style="display: flex;">
-                            <a class="nav-link" style="color: #ffc107 ;margin: auto; align-items: center;"
-                                href="#">Login </a>
-                        </li>
-                        <li class="nav-item active align-content-lg-end material-symbols-outlined"
-                            style="color: #ffc107 ; margin: auto 0; display: flex;">
-                            arrow_forward
-                        </li>
-
-                        <li class="nav-item active align-content-lg-end" style="display: flex; max-width: auto;">
-                            <a class="nav-link" style="color: #ffc107 ;margin: auto;" href="#">Receiving information</a>
-                        </li>
-                        <li class="nav-item active align-content-lg-end material-symbols-outlined"
-                            style="color: #ffc107 ; margin: auto; display: flex;">
-                            arrow_forward
-                        </li>
-                        <li class="nav-item" style="display: flex;">
-                            <a class="nav-link" style="color: azure ;margin: auto;" href="#">Tranport method</a>
-                        </li>
-                        <li class="nav-item active align-content-lg-end material-symbols-outlined"
-                            style="color: azure ; margin: auto;">
-                            arrow_forward
-                        </li>
-                        <li class="nav-item" style="display: flex;">
-                            <a class="nav-link" style="color: azure ;margin: auto; " href="#">Pay</a>
-                        </li>
-                    </ul>
+    <body>
+        <style>
+            .material-symbols-outlined {
+                font-variation-settings:
+                    'FILL' 0,
+                    'wght' 400,
+                    'GRAD' 0,
+                    'opsz' 24
+            }
+        </style>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light"
+                 style="background-color: rgb(13,103,128) !important;">
+                <div class="col-md-6" style="margin: 0 10px 0 50px ;">
+                    <a class="navbar-brand justify-content-center  " style="color: #fff !important;
+                       font-size: 1.5em;
+                       font-weight: 700;
+                       text-transform: uppercase;
+                       text-decoration: none;
+                       padding-right: 10px;" href="#">Bird farm shop</a>
                 </div>
-            </div>
-            <div class="col-md-1"></div>
-        </nav>
-    </header>
-    <div class="container justify-content-center ">
-        <div>
+                <div class="col-md-5">
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item active align-content-lg-end" style="display: flex;">
+                                <a class="nav-link" style="color: #ffc107 ;margin: auto; align-items: center;"
+                                   href="#">Login </a>
+                            </li>
+                            <li class="nav-item active align-content-lg-end material-symbols-outlined"
+                                style="color: #ffc107 ; margin: auto 0; display: flex;">
+                                arrow_forward
+                            </li>
 
-        </div>
-        <div>
-            <h3 style="font-weight: bold !important;color: black ;">Information receive</h3>
-        </div>
-        <div>
-            <h5>Another address</h3>
-        </div>
-        <form action="Checkout" class="form-input" method="GET">
-            <div class="form-group">
-                <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter FullName">
+                            <li class="nav-item active align-content-lg-end" style="display: flex; max-width: auto;">
+                                <a class="nav-link" style="color: #ffc107 ;margin: auto;" href="#">Receiving information</a>
+                            </li>
+                            <li class="nav-item active align-content-lg-end material-symbols-outlined"
+                                style="color: #ffc107 ; margin: auto; display: flex;">
+                                arrow_forward
+                            </li>
+                            <li class="nav-item" style="display: flex;">
+                                <a class="nav-link" style="color: azure ;margin: auto;" href="#">Tranport method</a>
+                            </li>
+                            <li class="nav-item active align-content-lg-end material-symbols-outlined"
+                                style="color: azure ; margin: auto;">
+                                arrow_forward
+                            </li>
+                            <li class="nav-item" style="display: flex;">
+                                <a class="nav-link" style="color: azure ;margin: auto; " href="#">Pay</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </nav>
+        </header>
+        <div class="container justify-content-center ">
+            <div>
+
             </div>
-            <div class="form-group">
-                <input name="txtPhone" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
+            <div>
+                <h3 style="font-weight: bold !important;color: black ;">Information receive</h3>
             </div>
+            <div>
+                <h5>Another address</h3>
+            </div>
+            <form action="Checkout" class="form-input" method="POST">
+                <div class="form-group">
+                    <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           placeholder="Enter FullName">
+                </div>
+                <div class="form-group">
+                    <input name="txtPhone" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
+                </div>
                 <div  class="form-choose ">
                     <select name="txtCity" class="form-select" aria-label="Default select example">
                         <option selected>Choose your city</option>
@@ -168,16 +168,17 @@
                         <option value="Hậu Giang">Hậu Giang</option>
                     </select>
                 </div>
-            <div class="form-group">
-                <input name="txtAddress" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
-            </div>
-            <div class="form-group">
-                <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
-            </div>
+                <div class="form-group">
+                    <input name="txtAddress" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
+                </div>
+                    <input type="hidden" name="txtTotalOrder" value="${param.txtTotalOrder}" />
+                <div class="form-group">
+                    <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
+                </div>
 
-        </form>
+            </form>
 
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>

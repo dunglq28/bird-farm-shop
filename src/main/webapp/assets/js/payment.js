@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var datePickerDiv = document.getElementById("datePickerDiv");
     var feeShip = document.getElementById("Ship");
+    var total_order = document.getElementById("total_order");
 
 
     radioInput2.addEventListener("change", function () {

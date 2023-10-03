@@ -54,7 +54,7 @@ public class AuthRegisterServlet extends HttpServlet {
             Date dOB = null;
             if (!day.isEmpty() && !month.isEmpty() && !year.isEmpty()) {
                 String dOBString = year + "-" + month + "-" + day;
-                Date.valueOf(dOBString);
+                dOB = Date.valueOf(dOBString);
             }
 
             session.setAttribute("EMAIL", email);

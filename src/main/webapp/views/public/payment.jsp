@@ -10,8 +10,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Payment</title>
-        <link rel="stylesheet" href="./assets/css/payment.css">
-        <link rel="stylesheet" href="./assets/css/shipping.css">
+        <!--<link rel="stylesheet" href="./assets/css/payment.css">-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -19,7 +18,6 @@
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="./assets/css/homePage.css">
-        <link rel="stylesheet" href="./assets/css/payment.css"
     </head>
 
     <body>
@@ -71,7 +69,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form class="container py-3 h-100 ">
+        <form action="Checkout" class="container py-3 h-100 " method="POST">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -109,48 +107,52 @@
 
                                         <div class="row mb-4 d-flex justify-content-between align-items-center">
                                             <div class="form-check">
-                                                <input class="form-check-input-2" type="radio" name="shippingMethod" id="exampleRadios1" value="option1" checked>
+                                                <input onchange="submit()" class="form-check-input-2" type="radio" 
+                                                       name="shippingMethod" id="exampleRadios1" value="Fast delivery" ${SHIPPING_METHOD == 'Fast delivery' ? 'checked' : ''}>
                                                 <label class="form-check-label" for="exampleRadios1">
-                                                    Payment on delivery (Cash)
+                                                    Fast delivery
                                                 </label>
                                             </div>
                                             <div class="form-check fisrt-element">
-                                                <input class="form-check-input-1" type="radio" name="shippingMethod" id="exampleRadios2" value="option2">
+                                                <input onchange="submit()" class="form-check-input-1" type="radio" 
+                                                       name="shippingMethod" id="exampleRadios2" value="Receive directly at shop" ${SHIPPING_METHOD == 'Receive directly at shop' ? 'checked' : ''}>
                                                 <label class="form-check-label" for="exampleRadios2">
                                                     Receive directly at shop
                                                 </label>
-                                                <div class="form-control justify-content-center"
-                                                     style="max-width: 300px;display: none; "
-                                                     id="datePickerDiv">
-                                                    <h6 class="" style="width: 100%;margin-left: 44px;">Enter the desired time</h6>
-                                                    <div class="d-flex">
-                                                        <div class="form-input-day">
-                                                            <select name="txtDay" class="select-control text-muted">
-                                                                <option label="Day"></option>
-                                                                <option value="1">1</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-input-day">
-                                                            <select name="txtMonth" class="select-control text-muted">
-                                                                <option label="Month"></option>
-                                                                <option value="1">1</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-input-day">
-                                                            <select name="txtYear" class="select-control text-muted">
-                                                                <option label="Year"></option>
-                                                                <option value="2008">2008</option>
-                                                            </select>
+                                                <c:if test="${SHIPPING_METHOD == 'Receive directly at shop'}">
+                                                    <div class="form-control justify-content-center"
+                                                         style="max-width: 300px;"
+                                                         id="datePickerDiv">
+                                                        <h6 class="" style="width: 100%;margin-left: 44px;">Enter the desired time</h6>
+                                                        <div class="d-flex">
+                                                            <div class="form-input-day">
+                                                                <select name="txtDay" class="select-control text-muted" required>
+                                                                    <option label="Day"></option>
+                                                                    <c:forEach var="i" begin="${requestScope.DAY}" end="${requestScope.DAY + 7}">
+                                                                        <option value="${i}">${i}</option>
+                                                                    </c:forEach>
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-input-day">
+                                                                <select name="txtMonth" class="select-control text-muted">
+                                                                    <option value="${requestScope.MONTH}">${requestScope.MONTH}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-input-day">
+                                                                <select name="txtYear" class="select-control text-muted">
+                                                                    <option value="${requestScope.YEAR}">${requestScope.YEAR}</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                </c:if>
 
-                                                </div>
                                             </div>
                                         </div>
 
-
-
                                         <hr class="my-4">
+                                        
                                         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
                                             <div>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -160,16 +162,16 @@
                                                 <div class="row mb-4 d-flex justify-content-between align-items-center">
 
                                                     <div class="element-1  form-check">
-                                                        <input class="form-check-input-2" type="radio" name="exampleRadios"
-                                                               id="exampleRadios1" value="option1">
-                                                        <label class="form-check-label" for="exampleRadios1">
-                                                            Payment on delivery (Cash)
+                                                        <input name="PaymentMethod" class="form-check-input-2" type="radio"
+                                                               id="COD" value="COD" checked>
+                                                        <label class="form-check-label" for="COD">
+                                                            Payment on delivery (COD)
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input-2" type="radio" name="exampleRadios"
-                                                               id="exampleRadios2" value="option2">
-                                                        <label class="form-check-label" for="exampleRadios2">
+                                                        <input name="PaymentMethod" class="form-check-input-2" type="radio"
+                                                               id="VNPAY" value="VNPAY">
+                                                        <label class="form-check-label" for="VNPAY">
                                                             VNPAY online payment
                                                             (<a href="#" class="text-decoration-none text-muted">Link VNPAY</a>)
                                                         </label>
@@ -245,11 +247,13 @@
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
                                             <h6>${util.FormatPrice(requestScope.TOTAL_ORDER)}</h6>
+                                            <input type="hidden" name="txtTotalOrder" value="${requestScope.TOTAL_ORDER}"/>
                                         </div>
 
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Tranport Fee</h6>
-                                            <h6 id="Ship">${util.FormatPrice(125000)}</h6>
+                                            <h6 id="Ship">${util.FormatPrice(requestScope.SHIPPING_CASH)}</h6>
+                                            <input type="hidden" name="txtShippingCash" value="${requestScope.SHIPPING_CASH}"/>
                                         </div>
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
@@ -257,14 +261,13 @@
                                         </div>
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="text-uppercase">Total price</h5>
-                                            <h5>$ 9,000</h5>
+
+                                            <h5 id="total_order">${util.FormatPrice(requestScope.TOTAL_ORDER - requestScope.TOTAL_ORDER * 0 + requestScope.SHIPPING_CASH)}</h5>
                                         </div>
 
-                                        <input type="submit" class="btn btn-dark btn-block btn-lg"
-                                               data-mdb-ripple-color="dark" value="Order"
-                                               style="background-color:rgb(13,103,128) ;">
-                                        </input>
-
+                                        <input name="btAction" value="Order" type="submit" class="btn btn-dark btn-block btn-lg"
+                                               data-mdb-ripple-color="dark" 
+                                               style="background-color:rgb(13,103,128) ;"/>
                                     </div>
                                 </div>
                             </div>
@@ -275,12 +278,15 @@
 
         </form>
 
-
-
         <!-- footer -->
         <jsp:include page="/components/footer.jsp"></jsp:include>
         <!-- close footer -->
-        <script src="./assets/js/payment.js"></script>
+        <script>
+            function submit()
+            {
+                document.querySelector(".myForm").onsubmit();
+            }
+        </script>
     </body>
 
 </html>

@@ -77,4 +77,21 @@ public class CartObj {
 //            }
         }
     }
+    
+    public void removeAllBird() { // remove All -> ass: bỏ based on quantity (String sku, int quantity)
+        // 1. Check existed items - ngăn chứa đồ
+        if (this.items == null) {
+            return;
+        }
+        
+        this.items.clear();
+        
+    }
+
+    public Iterable<Map.Entry<String, BirdDTO>> entrySet() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
 }
