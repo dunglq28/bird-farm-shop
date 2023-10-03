@@ -19,7 +19,7 @@
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="./assets/css/homePage.css">
-        <link rel="stylesheet" href="./assets/css/payment.css"
+        <link rel="stylesheet" href="./assets/css/payment.css">
     </head>
 
     <body>
