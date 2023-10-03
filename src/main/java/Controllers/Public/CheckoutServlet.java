@@ -133,8 +133,8 @@ public class CheckoutServlet extends HttpServlet {
                         odDto = new OrderDetailDTO(orderID, 1, key, null,
                                 cart.getItems().get(key).getPrice(),
                                 cart.getItems().get(key).getQuantity_Buy(), "Processing");
-                        int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() - cart.getItems().get(key).getQuantity_Buy();
-                        birdDao.updateQuantityAvailable(quantityAvaUpdate, key);
+//                        int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() - cart.getItems().get(key).getQuantity_Buy();
+//                        birdDao.updateQuantityAvailable(quantityAvaUpdate, key);
                         odDao.createOrderDetail(odDto);
                     }
                     cart.removeAllBird();

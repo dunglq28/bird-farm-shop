@@ -31,7 +31,7 @@
                        font-weight: 700;
                        text-transform: uppercase;
                        text-decoration: none;
-                       padding-right: 10px;" href="#">Bird farm shop</a>
+                       padding-right: 10px;" href="home">Bird farm shop</a>
                 </div>
                 <div class="col-md-5">
                     <div class="collapse navbar-collapse" id="navbarText">

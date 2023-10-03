@@ -1,19 +1,13 @@
-<%-- 
-    Document   : shipping
-    Created on : Sep 30, 2023, 11:38:09 AM
-    Author     : hoang
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Document</title>
         <link rel="stylesheet" href="./assets/css/shipping.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -45,7 +39,7 @@
                        font-weight: 700;
                        text-transform: uppercase;
                        text-decoration: none;
-                       padding-right: 10px;" href="#">Bird farm shop</a>
+                       padding-right: 10px;" href="home">Bird farm shop</a>
                 </div>
                 <div class="col-md-5">
                     <div class="collapse navbar-collapse" id="navbarText">
@@ -92,7 +86,7 @@
             <div>
                 <h5>Another address</h3>
             </div>
-            <form action="Checkout" class="form-input" method="POST">
+            <form action="Checkout" class="form-input" method="get">
                 <div class="form-group">
                     <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            placeholder="Enter FullName">
@@ -171,7 +165,7 @@
                 <div class="form-group">
                     <input name="txtAddress" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
                 </div>
-                    <input type="hidden" name="txtTotalOrder" value="${param.txtTotalOrder}" />
+                <input type="hidden" name="txtTotalOrder" value="${param.txtTotalOrder}" />
                 <div class="form-group">
                     <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
                 </div>
