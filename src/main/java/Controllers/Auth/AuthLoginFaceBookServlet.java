@@ -60,8 +60,6 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                 CustomerDAO cusDao = new CustomerDAO();
                 if (account != null) {
                     session.setAttribute("ACCOUNT", account);
-                    url = url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
-                            : (String) session.getAttribute("BACK_CART");
                 } else {
                     long millis = System.currentTimeMillis();
                     java.sql.Date date = new java.sql.Date(millis);
@@ -69,9 +67,7 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                     if (dao.createAccount(account)) {
                         CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
                                 null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
-
                         cusDao.createCustomer(customer);
-                        url = (String) session.getAttribute("BACK_URL");
                         session.setAttribute("ACCOUNT", account);
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
