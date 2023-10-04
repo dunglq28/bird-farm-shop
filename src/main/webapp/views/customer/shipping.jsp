@@ -86,7 +86,7 @@
             <div>
                 <h5>Another address</h3>
             </div>
-            <form action="Checkout" class="form-input" method="get">
+            <form action="Checkout" class="form-input" method="POST">
                 <div class="form-group">
                     <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            placeholder="Enter FullName">

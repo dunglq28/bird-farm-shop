@@ -10,7 +10,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Payment</title>
-        <!--<link rel="stylesheet" href="./assets/css/payment.css">-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -18,6 +17,8 @@
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="./assets/css/homePage.css">
+        <link rel="stylesheet" href="./assets/css/payment.css">
+
     </head>
 
     <body>
@@ -152,7 +153,7 @@
                                         </div>
 
                                         <hr class="my-4">
-                                        
+
                                         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
                                             <div>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">

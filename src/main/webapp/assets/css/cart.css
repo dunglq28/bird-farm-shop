@@ -103,3 +103,7 @@
 .form-input-day {
     margin: auto;
 }
+
+.btn-buy {
+    background-color: rgb(13,103,128) !important;
+}
