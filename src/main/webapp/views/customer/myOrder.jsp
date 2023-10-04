@@ -1,11 +1,5 @@
-<%-- 
-    Document   : myOrder
-    Created on : Oct 4, 2023, 7:14:46 PM
-    Author     : hoang
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 
