@@ -124,9 +124,13 @@
         <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/CheckoutServlet</url-pattern>
     </servlet-mapping>
-    <error-page>
+   <error-page>
         <error-code>404</error-code>
-        <location>/views/public/errorPage.jsp</location>
+        <location>/views/public/errorPage404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/views/public/errorPage404.jsp</location>
     </error-page>
     <servlet-mapping>
         <servlet-name>PaymentServlet</servlet-name>
