@@ -43,6 +43,7 @@ public class MyOrderServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.CustomerFeatures.MY_ORDER_PAGE;
+        String status = request.getParameter("Status");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -51,9 +52,12 @@ public class MyOrderServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
+            if (status == null) {
+                status = "All";
+            }
             OrderDAO oDao = new OrderDAO();
             OrderDetailDAO odDao = new OrderDetailDAO();
-            List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID());
+            List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status);
             session.setAttribute("ORDER_LIST", order);
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

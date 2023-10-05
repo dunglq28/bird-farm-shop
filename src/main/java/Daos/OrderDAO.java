@@ -105,23 +105,37 @@ public class OrderDAO implements Serializable {
         return orderList;
     }
 
-    public List<OrderDTO> getOrderByAccountID(String accountId)
+    public List<OrderDTO> getOrderByAccountID(String accountId, String status_choose)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         OrderDTO result = null;
+        String sql = null;
+
         try {
             //1.Make connection
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                String sql = "Select OrderID, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
-                        + "From Orders "
-                        + "where AccountID = ? ";
+                if (status_choose.equals("All")) {
+                    sql = "Select OrderID, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
+                            + "From Orders "
+                            + "where AccountID = ? "
+                            + "order by OrderDate desc ";
+                } else {
+                    sql = "Select OrderID, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
+                            + "From Orders "
+                            + "where AccountID = ? and Status = ? "
+                            + "order by OrderDate desc ";
+                }
+
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, accountId);
+                if (!status_choose.equals("All")) {
+                    stm.setString(2, status_choose);
+                }
                 //4.execute-query
                 rs = stm.executeQuery();
                 //5.process

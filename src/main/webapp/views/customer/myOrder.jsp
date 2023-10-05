@@ -107,14 +107,17 @@
                                             <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">My order</h1>
 
                                         </div>
-                                        <div class="mb-4 justify-content-between align-items-sm-start">
-                                            <div class="col-md-4 col-lg-6 col-xl-6">
-                                                <button type="button" class="btn btn-secondary" style="background-color: rgb(13,103,128);">All</button>
-                                                <button type="button" class="btn btn-secondary ">Processing</button>
-                                                <button type="button" class="btn btn-secondary ">Succeed</button>
-                                                <button type="button" class="btn btn-secondary ">Canceled</button>
+                                        <form action="Order">
+                                            <div class="mb-4 justify-content-between align-items-sm-start">
+                                                <div class="col-md-4 col-lg-6 col-xl-6">
+                                                    <input type="submit" name="Status" value="All" class="btn btn-secondary" style="background-color: rgb(13,103,128);"></input>
+                                                    <input type="submit" name="Status" value="Processing" class="btn btn-secondary "></input>
+                                                    <input type="submit" name="Status" value="Succeed" class="btn btn-secondary "></input>
+                                                    <input type="submit" name="Status" value="Canceled" class="btn btn-secondary "></input>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
+
 
                                         <hr class="my-4">
                                         <c:set var="orderList" value="${sessionScope.ORDER_LIST}"></c:set>
