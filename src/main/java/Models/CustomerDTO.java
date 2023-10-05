@@ -29,6 +29,15 @@ public class CustomerDTO {
         this.status = status;
     }
 
+    public CustomerDTO(String fullName, String phone_Number, String address, String city) {
+        this.fullName = fullName;
+        this.phone_Number = phone_Number;
+        this.address = address;
+        this.city = city;
+    }
+    
+    
+
     public String getCustomerID() {
         return customerID;
     }

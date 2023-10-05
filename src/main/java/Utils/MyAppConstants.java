@@ -30,6 +30,7 @@ public class MyAppConstants {
 
         public static final String RECEIVING_INFO_PAGE = "/views/customer/shipping.jsp";
         public static final String MY_ORDER_PAGE = "/views/customer/myOrder.jsp";
+        public static final String MY_ORDER_CONTROLLER = "Order";
 
     }
 

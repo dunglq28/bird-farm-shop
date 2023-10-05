@@ -52,6 +52,14 @@
         <servlet-name>CheckoutServlet</servlet-name>
         <servlet-class>Controllers.Public.CheckoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>Controllers.Public.CheckoutSucessfulServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InforReceiveServlet</servlet-name>
+        <servlet-class>Controllers.Public.InforReceiveServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -120,6 +128,14 @@
         <error-code>404</error-code>
         <location>/views/public/errorPage.jsp</location>
     </error-page>
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/PaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InforReceiveServlet</servlet-name>
+        <url-pattern>/InforReceiveServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

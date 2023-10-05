@@ -119,6 +119,7 @@
                                         <c:set var="orderList" value="${sessionScope.ORDER_LIST}"></c:set>
                                         <c:if test="${not empty orderList}">
                                             <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
+                                            <jsp:useBean id="odDao" class="Daos.OrderDetailDAO"></jsp:useBean>
                                             <c:forEach var="order" items="${orderList}">
                                                 <div class="product">
                                                     <div class="product-element">
@@ -131,7 +132,7 @@
                                                                         <h6 class="mb-0 text-sm-center"
                                                                             style="margin: 0 10px 0 10px;"> |
                                                                         </h6>
-                                                                        <h6 class="mb-0 text-sm-end">Order date: ${order.orderDate}</h6>
+                                                                        <h6 class="mb-0 text-sm-end">Order date: ${order.orderDateFormat}</h6>
 
                                                                     </div>
                                                                 </div>
@@ -171,141 +172,51 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </c:forEach>
-                                                <div class="col-12 d-flex mt-3">
-                                                    <div
-                                                        class="row mb-6 col-md-6 col-xl-6 d-flex justify-content-between align-items-center">
-                                                        <div class="col-md-2 col-lg-2 col-xl-2">
-                                                            <img src="https://img.birdsnow.com/slir/w600/birds/data/photos/636763/1694634846/bird-for-sale-in-stanton-ca.jpg"
-                                                                 class="img-fluid rounded-3" alt="Bird Image">
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Toco Toucan</h6>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center">SL: 2 </h6>
+                                                    <div class="row d-flex mt-3">
+                                                        <c:forEach var="od" items="${odDao.getOrderDetailByOrderID(order.orderID)}">
+                                                            <div
+                                                                class="row mb-6 col-md-6 col-xl-6 d-flex justify-content-between align-items-center mb-4">
+                                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                                    <img src="${od.bird_image}"
+                                                                         class="img-fluid rounded-3" alt="Bird Image">
                                                                 </div>
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center"> X </h6>
+                                                                <div class="col-md-5 col-lg-5 col-xl-5 ">
+                                                                    <div class="">
+                                                                        <h6 class="text-black mb-0">${od.bird_name}</h6>
+                                                                    </div>
+                                                                    <div class="d-flex">
+                                                                        <div class=" ">
+                                                                            <h6 class="mb-0 text-sm-center">Qty: ${od.quantity_Buy}</h6>
+                                                                        </div>
+                                                                        <div class="">
+                                                                            <h6 class="mb-0 text-sm-center"> x </h6>
+                                                                        </div>
+                                                                        <div class="">
+                                                                            <h6 class="mb-0">${od.priceFormat}</h6>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="">
-                                                                    <h6 class="mb-0"> 10,000</h6>
+                                                                <div class="col-md-5 col-lg-5 col-xl-5 ">
+                                                                    <div class="">
+                                                                        <h6 class="text-black mb-0">Color: ${od.bird_color}</h6>
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <h6 class="text-black mb-0">Age: ${od.bird_age}</h6>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Gender: male</h6>
-                                                            </div>
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Age: 5 Month</h6>
-                                                            </div>
-                                                        </div>
+                                                        </c:forEach>
                                                     </div>
-                                                    <div
-                                                        class="row mb-6 col-md-6 col-xl-6 d-flex justify-content-between align-items-center">
-                                                        <div class="col-md-2 col-lg-2 col-xl-2">
-                                                            <img src="https://img.birdsnow.com/slir/w600/birds/data/photos/636763/1694634846/bird-for-sale-in-stanton-ca.jpg"
-                                                                 class="img-fluid rounded-3" alt="Bird Image">
+                                                    <c:if test="${order.status == 'Complete'}">
+                                                        <div class="col-12 mt-3 d-flex justify-content-end">
+                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Buy again</button>
+                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">View rate</button>
                                                         </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Toco Toucan</h6>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center">SL: 2</h6>
-                                                                </div>
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center"> X </h6>
-                                                                </div>
-                                                                <div class="">
-                                                                    <h6 class="mb-0">$ 10,000</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Gender: male</h6>
-                                                            </div>
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Age: 5 Month</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    </c:if>
+                                                    <hr class="my-4">
+                                                    <input type="hidden" value=" ${odDao.orderTailList.clear()}">
                                                 </div>
-                                                <div class="col-12 d-flex mt-3">
-                                                    <div
-                                                        class="row mb-6 col-md-6 col-xl-6 d-flex justify-content-between align-items-center">
-                                                        <div class="col-md-2 col-lg-2 col-xl-2">
-                                                            <img src="https://img.birdsnow.com/slir/w600/birds/data/photos/636763/1694634846/bird-for-sale-in-stanton-ca.jpg"
-                                                                 class="img-fluid rounded-3" alt="Bird Image">
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Toco Toucan</h6>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center">SL: 2 </h6>
-                                                                </div>
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center"> X </h6>
-                                                                </div>
-                                                                <div class="">
-                                                                    <h6 class="mb-0"> 10,000</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Gender: male</h6>
-                                                            </div>
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Age: 5 Month</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="row mb-6 col-md-6 col-xl-6 d-flex justify-content-between align-items-center">
-                                                        <div class="col-md-2 col-lg-2 col-xl-2">
-                                                            <img src="https://img.birdsnow.com/slir/w600/birds/data/photos/636763/1694634846/bird-for-sale-in-stanton-ca.jpg"
-                                                                 class="img-fluid rounded-3" alt="Bird Image">
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Toco Toucan</h6>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center">SL: 2</h6>
-                                                                </div>
-                                                                <div class=" ">
-                                                                    <h6 class="mb-0 text-sm-center"> X </h6>
-                                                                </div>
-                                                                <div class="">
-                                                                    <h6 class="mb-0">$ 10,000</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Gender: male</h6>
-                                                            </div>
-                                                            <div class="">
-                                                                <h6 class="text-black mb-0">Age: 5 Month</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-3 d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Buy again</button>
-                                                    <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">View rate</button>
-                                                </div>
-                                                <hr class="my-4">
-                                            </div>
+                                            </c:forEach>
                                         </c:if>
 
                                         <c:if test="${empty orderList}">
@@ -322,7 +233,6 @@
                                                                          class="img-fluid mb-4 mr-3">
                                                                     <h3><strong>You don't have any orders yet</strong></h3>
                                                                     <a href="#" class="btn btn-primary cart-btn-transform m-3" style="background-color: rgb(13,103,128);" data-abc="true">Continue shopping</a>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -337,9 +247,8 @@
                     </div>
                 </div>
             </div>
+
         </div>
-
-
 
 
         <!-- footer -->

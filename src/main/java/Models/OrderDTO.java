@@ -6,6 +6,8 @@
 package Models;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
@@ -18,6 +20,7 @@ public class OrderDTO {
     private String form_Receipt;
     private String ShipperID;
     private Date orderDate;
+    private Date orderDateFormat;
     private Date receiptDate;
     private float discount;
     private float delivery_charges;
@@ -25,6 +28,7 @@ public class OrderDTO {
     private float total_order_final;
     private String payBy;
     private String status;
+    
 
     public OrderDTO() {
     }
@@ -55,6 +59,15 @@ public class OrderDTO {
         this.status = status;
     }
 
+    public String getOrderDateFormat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+        return sdf.format(this.orderDate);
+    }
+
+    public void setOrderDateFormat(Date orderDateFormat) {
+        this.orderDateFormat = orderDateFormat;
+    }
+
     public float getTotal_order_final() {
         return this.total_Order - this.total_Order * this.discount + this.delivery_charges;
     }
@@ -63,10 +76,6 @@ public class OrderDTO {
         this.total_order_final = total_order_final;
     }
     
-    
-    
-    
-
     public float getDelivery_charges() {
         return delivery_charges;
     }
@@ -164,6 +173,7 @@ public class OrderDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
     
 
     

@@ -6,8 +6,10 @@
 package Controllers.Customer;
 
 import Daos.OrderDAO;
+import Daos.OrderDetailDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
+import Models.OrderDetailDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,10 +51,11 @@ public class MyOrderServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
-            OrderDAO odDao = new OrderDAO();
-            List<OrderDTO> order = odDao.getOrderByAccountID(account.getAccountID());
+            OrderDAO oDao = new OrderDAO();
+            OrderDetailDAO odDao = new OrderDetailDAO();
+            List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID());
             session.setAttribute("ORDER_LIST", order);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {
@@ -60,7 +63,7 @@ public class MyOrderServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            
+
         }
     }
 

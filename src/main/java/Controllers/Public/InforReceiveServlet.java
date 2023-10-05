@@ -5,26 +5,13 @@
  */
 package Controllers.Public;
 
-import Cart.CartObj;
-import Daos.BirdDAO;
 import Daos.CustomerDAO;
-import Daos.OrderDAO;
-import Daos.OrderDetailDAO;
 import Models.AccountDTO;
-import Models.BirdDTO;
 import Models.CustomerDTO;
-import Models.OrderDTO;
-import Models.OrderDetailDTO;
 import Utils.MyAppConstants;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "Checkout", urlPatterns = {"/Checkout"})
-public class CheckoutServlet extends HttpServlet {
+@WebServlet(name = "InforReceive", urlPatterns = {"/InforReceive"})
+public class InforReceiveServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,15 +38,17 @@ public class CheckoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        String button = request.getParameter("btAction");
+        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
         String totalOrder = request.getParameter("txtTotalOrder");
         String shippingMethod = request.getParameter("shippingMethod");
-        String url = "";
+        String fullName = request.getParameter("txtFullName");
+        String phoneNumber = request.getParameter("txtPhone");
+        String city = request.getParameter("txtCity");
+        String address = request.getParameter("txtAddress");
         HttpSession session = request.getSession();
 
-    try {
+        try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = null;
@@ -67,37 +56,13 @@ public class CheckoutServlet extends HttpServlet {
             if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
                 request.setAttribute("SHIPPING_METHOD", "Fast delivery");
                 request.setAttribute("SHIPPING_CASH", 125000);
-            } else if (shippingMethod.equals("Receive directly at shop")) {
-                LocalDate localDate = LocalDate.now();
-                int year = localDate.getYear();
-                int month = localDate.getMonthValue();
-                int day = localDate.getDayOfMonth();
-                request.setAttribute("SHIPPING_METHOD", "Receive directly at shop");
-                request.setAttribute("SHIPPING_CASH", 0);
-                request.setAttribute("YEAR", year);
-                request.setAttribute("MONTH", month);
-                request.setAttribute("DAY", day);
             }
 
-            if (account == null) {
-                url = "guest?btAction=loginPage";
-                session.setAttribute("BACK_CART", "cart");
-            } else {
-                customer = dao.getCustomerByAccountID(account.getAccountID());
-                if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
-                    request.setAttribute("FULLNAME", customer.getFullName());
-                    url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
-                } else {
-                    url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
-                    request.setAttribute("CUSTOMER", customer);
-                    request.setAttribute("TOTAL_ORDER", totalOrder);
-                }
-            }
-            
-            if (button.equals("Continue")) {
-                url = "InforReceive";
-            } else if (button.equals("Order")) {
-                url = "Sucessful";
+            customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
+            request.setAttribute("CUSTOMER", customer);
+            if (customer != null) {
+                url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                request.setAttribute("TOTAL_ORDER", totalOrder);
             }
 
         } catch (SQLException ex) {

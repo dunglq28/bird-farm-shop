@@ -64,6 +64,16 @@ public class BirdDTO {
         this.status = status;
     }
 
+    public BirdDTO(String bird_Name, String category_Name, String age, String color, String gender) {
+        this.bird_Name = bird_Name;
+        this.category_Name = category_Name;
+        this.age = age;
+        this.color = color;
+        this.gender = gender;
+    }
+    
+    
+
     public String getCategory_Name() {
         return category_Name;
     }
