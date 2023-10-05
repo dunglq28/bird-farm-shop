@@ -86,7 +86,7 @@ public class CheckoutServlet extends HttpServlet {
                 customer = dao.getCustomerByAccountID(account.getAccountID());
                 if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
                     request.setAttribute("FULLNAME", customer.getFullName());
-                    url = MyAppConstants.PublicFeatures.RECEIVING_INFO_PAGE;
+                    url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
                 } else {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
                     request.setAttribute("CUSTOMER", customer);
@@ -134,13 +134,13 @@ public class CheckoutServlet extends HttpServlet {
                         odDto = new OrderDetailDTO(orderID, 1, key, null,
                                 cart.getItems().get(key).getPrice(),
                                 cart.getItems().get(key).getQuantity_Buy(), "Processing");
-//                        int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() - cart.getItems().get(key).getQuantity_Buy();
-//                        birdDao.updateQuantityAvailable(quantityAvaUpdate, key);
+                        int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() + cart.getItems().get(key).getQuantity_Buy();
+                        birdDao.updateQuantityAvailable(quantityAvaUpdate, key);
                         odDao.createOrderDetail(odDto);
                     }
                     cart.removeAllBird();
                     session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                    url = MyAppConstants.CustomerFeatures.MY_ORDER_PAGE;
             }
 
         } catch (SQLException ex) {

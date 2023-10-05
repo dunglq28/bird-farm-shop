@@ -22,6 +22,7 @@ public class OrderDTO {
     private float discount;
     private float delivery_charges;
     private float total_Order;
+    private float total_order_final;
     private String payBy;
     private String status;
 
@@ -42,6 +43,29 @@ public class OrderDTO {
         this.payBy = payBy;
         this.status = status;
     }
+
+    public OrderDTO(String orderID, String form_Receipt, Date orderDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
+        this.orderID = orderID;
+        this.form_Receipt = form_Receipt;
+        this.orderDate = orderDate;
+        this.discount = discount;
+        this.delivery_charges = delivery_charges;
+        this.total_Order = total_Order;
+        this.payBy = payBy;
+        this.status = status;
+    }
+
+    public float getTotal_order_final() {
+        return this.total_Order - this.total_Order * this.discount + this.delivery_charges;
+    }
+
+    public void setTotal_order_final(float total_order_final) {
+        this.total_order_final = total_order_final;
+    }
+    
+    
+    
+    
 
     public float getDelivery_charges() {
         return delivery_charges;

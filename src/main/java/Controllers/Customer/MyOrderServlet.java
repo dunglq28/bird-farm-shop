@@ -1,9 +1,18 @@
-package Controllers.Public;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controllers.Customer;
 
-import Cart.CartObj;
+import Daos.OrderDAO;
+import Models.AccountDTO;
+import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,35 +21,46 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "cart", urlPatterns = {"/cart"})
-public class PublicCartServlet extends HttpServlet {
+/**
+ *
+ * @author hj
+ */
+@WebServlet(name = "Order", urlPatterns = {"/Order"})
+public class MyOrderServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.CART_PAGE;
-        String quantityBuy = request.getParameter("txtQuantityBuy");
-        String quantityAvailable = request.getParameter("txtQuantityAvailable");
-
-        String birdID = request.getParameter("txtBirdID");
-        String btn = request.getParameter("btn");
+        String url = MyAppConstants.CustomerFeatures.MY_ORDER_PAGE;
         HttpSession session = request.getSession();
-
         try {
-            CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
-            if (!quantityBuy.equals("1") && btn.equals("des")) {
-                cart.updateQuantityBuy(birdID, Integer.parseInt(quantityBuy) - 1);
-            } else if (!quantityBuy.equals(quantityAvailable) && btn.equals("inc")) {
-                cart.updateQuantityBuy(birdID, Integer.parseInt(quantityBuy) + 1);
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                response.sendRedirect(url);
+                return;
             }
-
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
-        } finally {
+            OrderDAO odDao = new OrderDAO();
+            List<OrderDTO> order = odDao.getOrderByAccountID(account.getAccountID());
+            session.setAttribute("ORDER_LIST", order);
+            
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            
         }
     }
 

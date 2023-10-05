@@ -32,7 +32,7 @@
                     <div class="dropdown-content-wrapper">
                         <div class="dropdown-content">
                             <a href="">My account</a>
-                            <a href="">My purchase</a>
+                            <a href="Order">Order management</a>
                             <a href="guest?btAction=logout">Logout</a>
                         </div>
                     </div>

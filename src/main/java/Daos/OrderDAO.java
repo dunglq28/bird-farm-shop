@@ -9,9 +9,12 @@ import Models.OrderDTO;
 import Utils.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -94,5 +97,65 @@ public class OrderDAO implements Serializable {
             }
         }
         return false;
+    }
+
+    private List<OrderDTO> orderList;
+
+    public List<OrderDTO> getOrderList() {
+        return orderList;
+    }
+
+    public List<OrderDTO> getOrderByAccountID(String accountId)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        OrderDTO result = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2.Create SQL statement string
+                String sql = "Select OrderID, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
+                        + "From Orders "
+                        + "where AccountID = ? ";
+                //3.Create statement object
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accountId);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    String orderID = rs.getString("OrderID");
+                    String form_Receipt = rs.getString("Form_Receipt");
+                    Date orderDate = rs.getDate("OrderDate");
+                    float discount = rs.getFloat("Discount");
+                    float delivery_charges = rs.getFloat("Delivery_charges");
+                    float total_Order = rs.getFloat("Total_Order");
+                    String pay_with = rs.getString("Pay_with");
+                    String status = rs.getString("Status");
+
+                    result = new OrderDTO(orderID, form_Receipt, orderDate, discount, delivery_charges, total_Order, pay_with, status);
+                    if (this.orderList == null) {
+                        this.orderList = new ArrayList<OrderDTO>();
+                    }
+                    this.orderList.add(result);
+                }
+                return this.orderList;
+
+            }//end connection has opened
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 }

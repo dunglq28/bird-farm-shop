@@ -12,9 +12,7 @@ public class MyAppConstants {
         public static final String PRODUCT_DETAIL_PAGE = "/views/public/singleProduct.jsp";
         public static final String PRODUCT_LIST_CONTROLLER = "product-list";
         public static final String ADD_TO_CART_CONTROLLER = "add-bird";
-        public static final String RECEIVING_INFO_PAGE = "/views/customer/shipping.jsp";
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
-
     }
 
     public class AuthFeatures {
@@ -26,6 +24,12 @@ public class MyAppConstants {
         public static final String FORGET_PASS_CONTROLLER = "forgetPass";
         public static final String RESET_PASS_CONTROLLER = "AuthResetPassServlet";
         public static final String LOGOUT_CONTROLLER = "AuthLogoutServlet";
+    }
+
+    public class CustomerFeatures {
+
+        public static final String RECEIVING_INFO_PAGE = "/views/customer/shipping.jsp";
+        public static final String MY_ORDER_PAGE = "/views/customer/myOrder.jsp";
 
     }
 
