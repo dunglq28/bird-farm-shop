@@ -110,8 +110,9 @@
                                         <div class="mb-4 justify-content-between align-items-sm-start">
                                             <div class="col-md-4 col-lg-6 col-xl-6">
                                                 <button type="button" class="btn btn-secondary" style="background-color: rgb(13,103,128);">All</button>
+                                                <button type="button" class="btn btn-secondary ">Processing</button>
                                                 <button type="button" class="btn btn-secondary ">Succeed</button>
-                                                <button type="button" class="btn btn-secondary ">Cancelled</button>
+                                                <button type="button" class="btn btn-secondary ">Canceled</button>
                                             </div>
                                         </div>
 
