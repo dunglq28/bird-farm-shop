@@ -13,6 +13,9 @@ public class MyAppConstants {
         public static final String PRODUCT_LIST_CONTROLLER = "product-list";
         public static final String ADD_TO_CART_CONTROLLER = "add-bird";
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
+        public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
+        public static final String INFO_RECEIVE_CONTROLLER = "InforReceive";
+
     }
 
     public class AuthFeatures {

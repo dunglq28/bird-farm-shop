@@ -95,9 +95,9 @@ public class CheckoutServlet extends HttpServlet {
             }
             
             if (button.equals("Continue")) {
-                url = "InforReceive";
+                url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
             } else if (button.equals("Order")) {
-                url = "Sucessful";
+                url = MyAppConstants.PublicFeatures.CHECKOUT_SUCCESS_CONTROLLER;
             }
 
         } catch (SQLException ex) {
