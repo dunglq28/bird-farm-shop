@@ -104,6 +104,8 @@
     margin: auto;
 }
 
-.btn-buy {
+.btn-buy,
+.active {
     background-color: rgb(13,103,128) !important;
 }
+

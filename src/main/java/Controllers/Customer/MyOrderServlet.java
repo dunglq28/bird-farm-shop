@@ -59,6 +59,7 @@ public class MyOrderServlet extends HttpServlet {
             OrderDetailDAO odDao = new OrderDetailDAO();
             List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status);
             session.setAttribute("ORDER_LIST", order);
+            request.setAttribute("STATUS_ORDER", status);
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
