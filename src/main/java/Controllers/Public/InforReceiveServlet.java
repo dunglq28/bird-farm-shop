@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "InforReceive", urlPatterns = {"/InforReceive"})
+@WebServlet(name = "shipping", urlPatterns = {"/shipping"})
 public class InforReceiveServlet extends HttpServlet {
 
     /**
@@ -46,23 +46,31 @@ public class InforReceiveServlet extends HttpServlet {
         String phoneNumber = request.getParameter("txtPhone");
         String city = request.getParameter("txtCity");
         String address = request.getParameter("txtAddress");
+        String button = request.getParameter("btAction");
         HttpSession session = request.getSession();
 
         try {
+
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = null;
 
-            if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
-                request.setAttribute("SHIPPING_METHOD", "Fast delivery");
-                request.setAttribute("SHIPPING_CASH", 125000);
-            }
+            if (button == null) {
+                customer = dao.getCustomerByAccountID(account.getAccountID());
+                request.setAttribute("CUSTOMER", customer);
+                url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
+            } else if (button.equals("Continue")) {
+                if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
+                    request.setAttribute("SHIPPING_METHOD", "Fast delivery");
+                    request.setAttribute("SHIPPING_CASH", 125000);
+                }
 
-            customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
-            request.setAttribute("CUSTOMER", customer);
-            if (customer != null) {
-                url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
-                request.setAttribute("TOTAL_ORDER", totalOrder);
+                customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
+                request.setAttribute("CUSTOMER", customer);
+                if (customer != null) {
+                    url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                    request.setAttribute("TOTAL_ORDER", totalOrder);
+                }
             }
 
         } catch (SQLException ex) {

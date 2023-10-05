@@ -82,7 +82,7 @@
                                             <c:set var="customer" value="${requestScope.CUSTOMER}"></c:set>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                    <a href="#" class="change-icon text-decoration-none">
+                                                    <a href="shipping" class="change-icon text-decoration-none">
                                                         <h6 class="mb-0 text-muted ">Change information</h6>
                                                     </a>
                                                 </div>
@@ -94,10 +94,10 @@
 
                                                 <h6 class="mb-0 text-muted ">${customer.address}, ${customer.city}</h6>
                                             </div>
-                                            <div class="form-group mt-3">
+<!--                                            <div class="form-group mt-3">
                                                 <input type="text" class="form-control" id="exampleInputNote"
                                                        placeholder="Note">
-                                            </div>
+                                            </div>-->
                                         </div>
 
                                         <hr class="my-4">
@@ -193,7 +193,7 @@
                                         <div class="p-5">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h4 class="fw-bold mb-0 text-black">Order</h4>
-                                                <a href="#" class="change-icon change-infor-link text-decoration-none">
+                                                <a href="cart" class="change-icon change-infor-link text-decoration-none">
                                                     <h6 class="mb-0 text-muted ">Update</h6>
                                                 </a>
                                             </div>

@@ -25,7 +25,16 @@
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="#">Shop now</a>
+                        <a href="product-list">Shop now</a>
+                    </div>
+                    <div class="content">
+                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
+                        <p>
+                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
+                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
+                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
+                        </p>
+                        <a href="product-list">Shop now</a>
                     </div>
                     <div class="content">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
@@ -43,7 +52,7 @@
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="#">Shop now</a>
+                        <a href="product-list">Shop now</a>
                     </div>
                     <div class="content">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
@@ -52,16 +61,7 @@
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="#">Shop now</a>
-                    </div>
-                    <div class="content">
-                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                        <p>
-                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
-                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
-                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
-                        </p>
-                        <a href="#">Shop now</a>
+                        <a href="product-list">Shop now</a>
                     </div>
 
                     <div class="slider-navigation">

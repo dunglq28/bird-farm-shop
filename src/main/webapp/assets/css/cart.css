@@ -105,7 +105,9 @@
 }
 
 .btn-buy,
+.btn-back,
 .active {
     background-color: rgb(13,103,128) !important;
+    color: #fff !important;
 }
 

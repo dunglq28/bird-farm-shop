@@ -86,17 +86,22 @@
             <div>
                 <h5>Another address</h3>
             </div>
-            <form action="Checkout" class="form-input" method="POST">
-                <div class="form-group">
-                    <input name="txtFullName" value="${requestScope.FULLNAME}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            <c:set var="cus" value="${requestScope.CUSTOMER}"></c:set>
+                <form action="Checkout" class="form-input" method="POST">
+                    <div class="form-group">
+                        <input name="txtFullName" value="<c:if test="${not empty cus.fullName}">${cus.fullName}</c:if><c:if test="${not empty requestScope.FULLNAME}">${requestScope.FULLNAME}</c:if>"  
+                           class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            placeholder="Enter FullName">
                 </div>
                 <div class="form-group">
-                    <input name="txtPhone" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
+                    <input name="txtPhone" value="${cus.phone_Number}" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
                 </div>
                 <div  class="form-choose ">
                     <select name="txtCity" class="form-select" aria-label="Default select example">
-                        <option selected>Choose your city</option>
+                        <option>Choose your city</option>
+                        <c:if test="${not empty cus.city}">
+                            <option selected>${cus.city}</option>
+                        </c:if>
                         <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                         <option value="Hà Nội">Hà Nội</option>
                         <option value="Hải Phòng">Hải Phòng</option>
@@ -163,7 +168,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input name="txtAddress" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
+                    <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
                 </div>
                 <input type="hidden" name="txtTotalOrder" value="${param.txtTotalOrder}" />
                 <div class="form-group">
