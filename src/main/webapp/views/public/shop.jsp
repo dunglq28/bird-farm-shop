@@ -60,7 +60,7 @@
                                             <img src="${dto.image}" alt=""/>
                                             <div class="product_item_img_hover">
                                                 <div class="view_detail">
-                                                    <form action="action">
+                                                    <form action="product">
                                                         <i class="fa-solid fa-eye"></i>
                                                         <input type="submit" value="View Detail">
                                                     </form>

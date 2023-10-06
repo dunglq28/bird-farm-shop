@@ -79,10 +79,10 @@
                                 <div class="col-lg-8">
                                     <div class="p-5">
                                         <div>
-                                            <c:set var="customer" value="${requestScope.CUSTOMER}"></c:set>
+                                            <c:set var="customer" value="${sessionScope.CUSTOMER}"></c:set>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                    <a href="shipping" class="change-icon text-decoration-none">
+                                                    <a href="shipping?txtTotalOrder=${requestScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
                                                         <h6 class="mb-0 text-muted ">Change information</h6>
                                                     </a>
                                                 </div>
@@ -245,9 +245,10 @@
 
 
                                         <hr class="my-4">
+                                        <c:set var="total_order" value="${requestScope.TOTAL_ORDER}"></c:set>
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>${util.FormatPrice(requestScope.TOTAL_ORDER)}</h6>
+                                            <h6>${util.FormatPrice(total_order)}</h6>
                                             <input type="hidden" name="txtTotalOrder" value="${requestScope.TOTAL_ORDER}"/>
                                         </div>
 
@@ -263,7 +264,7 @@
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="text-uppercase">Total price</h5>
 
-                                            <h5 id="total_order">${util.FormatPrice(requestScope.TOTAL_ORDER - requestScope.TOTAL_ORDER * 0 + requestScope.SHIPPING_CASH)}</h5>
+                                            <h5 id="total_order">${util.FormatPrice(total_order - total_order * 0 + requestScope.SHIPPING_CASH)}</h5>
                                         </div>
 
                                         <input name="btAction" value="Order" type="submit" class="btn btn-dark btn-block btn-lg"

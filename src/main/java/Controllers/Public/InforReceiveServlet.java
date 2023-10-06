@@ -56,8 +56,7 @@ public class InforReceiveServlet extends HttpServlet {
             CustomerDTO customer = null;
 
             if (button == null) {
-                customer = dao.getCustomerByAccountID(account.getAccountID());
-                request.setAttribute("CUSTOMER", customer);
+                request.setAttribute("TOTAL_ORDER", totalOrder);
                 url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
             } else if (button.equals("Continue")) {
                 if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
@@ -66,7 +65,7 @@ public class InforReceiveServlet extends HttpServlet {
                 }
 
                 customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
-                request.setAttribute("CUSTOMER", customer);
+                session.setAttribute("CUSTOMER", customer);
                 if (customer != null) {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
                     request.setAttribute("TOTAL_ORDER", totalOrder);

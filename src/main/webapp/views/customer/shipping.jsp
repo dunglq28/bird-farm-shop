@@ -86,7 +86,7 @@
             <div>
                 <h5>Another address</h3>
             </div>
-            <c:set var="cus" value="${requestScope.CUSTOMER}"></c:set>
+            <c:set var="cus" value="${sessionScope.CUSTOMER}"></c:set>
                 <form action="Checkout" class="form-input" method="POST">
                     <div class="form-group">
                         <input name="txtFullName" value="<c:if test="${not empty cus.fullName}">${cus.fullName}</c:if><c:if test="${not empty requestScope.FULLNAME}">${requestScope.FULLNAME}</c:if>"  
@@ -170,7 +170,7 @@
                 <div class="form-group">
                     <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
                 </div>
-                <input type="hidden" name="txtTotalOrder" value="${param.txtTotalOrder}" />
+                    <input type="hidden" name="txtTotalOrder" value="${requestScope.TOTAL_ORDER}" />
                 <div class="form-group">
                     <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
                 </div>

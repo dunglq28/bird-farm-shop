@@ -89,7 +89,7 @@ public class CheckoutServlet extends HttpServlet {
                     url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
                 } else {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
-                    request.setAttribute("CUSTOMER", customer);
+                    session.setAttribute("CUSTOMER", customer);
                     request.setAttribute("TOTAL_ORDER", totalOrder);
                 }
             }

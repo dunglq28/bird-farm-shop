@@ -10,6 +10,7 @@ import Daos.BirdDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
+import Models.CustomerDTO;
 import Models.OrderDTO;
 import Models.OrderDetailDTO;
 import Utils.MyAppConstants;
@@ -56,6 +57,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
             } else {
                 AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+                CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
                 String paymentMethod = request.getParameter("PaymentMethod");
                 float shippingCash = Float.parseFloat(request.getParameter("txtShippingCash"));
                 long millis = System.currentTimeMillis();
@@ -70,7 +72,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 }
                 OrderDAO orderdao = new OrderDAO();
                 String orderID = orderdao.createOrderID();
-                OrderDTO newOrder = new OrderDTO(orderID, account.getAccountID(), null, shippingMethod, null,
+                OrderDTO newOrder = new OrderDTO(orderID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
                         orderDate, receiptDay, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Processing");
                 orderdao.createOrder(newOrder);
                 OrderDetailDAO odDao = new OrderDetailDAO();

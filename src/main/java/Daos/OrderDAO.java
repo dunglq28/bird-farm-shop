@@ -64,10 +64,10 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Orders ( "
-                        + "OrderID, AccountID, StaffID, Form_Receipt, ShipperID, OrderDate, ReceiptDate, Discount, Delivery_charges, "
+                        + "OrderID, AccountID, StaffID, Form_Receipt, ShipperID, ShipAddress, ShipCity, OrderDate, ReceiptDate, Discount, Delivery_charges, "
                         + "Total_Order, Pay_with, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, order.getOrderID());
@@ -75,13 +75,15 @@ public class OrderDAO implements Serializable {
                 stm.setString(3, order.getStaffID());
                 stm.setString(4, order.getForm_Receipt());
                 stm.setString(5, order.getShipperID());
-                stm.setDate(6, order.getOrderDate());
-                stm.setDate(7, order.getReceiptDate());
-                stm.setFloat(8, order.getDiscount());
-                stm.setFloat(9, order.getDelivery_charges());
-                stm.setFloat(10, order.getTotal_Order());
-                stm.setString(11, order.getPayBy());
-                stm.setString(12, order.getStatus());
+                stm.setString(6, order.getShipAddress());
+                stm.setString(7, order.getShipCity());
+                stm.setDate(8, order.getOrderDate());
+                stm.setDate(9, order.getReceiptDate());
+                stm.setFloat(10, order.getDiscount());
+                stm.setFloat(11, order.getDelivery_charges());
+                stm.setFloat(12, order.getTotal_Order());
+                stm.setString(13, order.getPayBy());
+                stm.setString(14, order.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {

@@ -16,6 +16,7 @@ and open the template in the editor.
 }
 
 .container {
+    padding-top: 40px;
     width: 100%;
 }
 

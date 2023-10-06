@@ -39,7 +39,7 @@ public class BirdDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select BirdID, Bird_Name, cate.Category_Name, Image, Quantity_Available, Price, Discount, Status "
+                String sql = "Select BirdID, Bird_Name, cate.Category_Name, Image, Age, Color, Gender, Quantity_Available, Price, Discount, Status "
                         + "from Birds "
                         + "inner join Category cate on Birds.CategoryID =  cate.CategoryID "
                         + "Order by Date_created desc "
@@ -53,11 +53,14 @@ public class BirdDAO implements Serializable {
                     String birdName = rs.getString("Bird_Name");
                     String cate_Name = rs.getString("Category_Name");
                     String image = rs.getString("Image");
+                    String age = rs.getString("Age");
+                    String color = rs.getString("Color");
+                    String gender = rs.getString("Gender");
                     int quantity_Available = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String status = rs.getString("Status");
-                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, image, quantity_Available, price, discount, status);
+                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, age, color, image, quantity_Available, price, discount, status);
                     if (this.birdList == null) {
                         this.birdList = new ArrayList<BirdDTO>();
                     }
@@ -288,7 +291,7 @@ public class BirdDAO implements Serializable {
         }
         return result;
     }
-    
+
     public boolean updateQuantityAvailable(int quantity_available, String birdID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;

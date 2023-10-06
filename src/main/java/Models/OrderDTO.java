@@ -14,11 +14,14 @@ import java.util.List;
  * @author hj
  */
 public class OrderDTO {
+
     private String orderID;
     private String accountID;
     private String staffID;
     private String form_Receipt;
-    private String ShipperID;
+    private String shipperID;
+    private String shipAddress;
+    private String shipCity;
     private Date orderDate;
     private Date orderDateFormat;
     private Date receiptDate;
@@ -28,17 +31,18 @@ public class OrderDTO {
     private float total_order_final;
     private String payBy;
     private String status;
-    
 
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, String accountID, String staffID, String form_Receipt, String ShipperID, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
         this.orderID = orderID;
         this.accountID = accountID;
         this.staffID = staffID;
         this.form_Receipt = form_Receipt;
-        this.ShipperID = ShipperID;
+        this.shipperID = shipperID;
+        this.shipAddress = shipAddress;
+        this.shipCity = shipCity;
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
         this.discount = discount;
@@ -47,6 +51,8 @@ public class OrderDTO {
         this.payBy = payBy;
         this.status = status;
     }
+    
+    
 
     public OrderDTO(String orderID, String form_Receipt, Date orderDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
         this.orderID = orderID;
@@ -75,7 +81,7 @@ public class OrderDTO {
     public void setTotal_order_final(float total_order_final) {
         this.total_order_final = total_order_final;
     }
-    
+
     public float getDelivery_charges() {
         return delivery_charges;
     }
@@ -83,8 +89,6 @@ public class OrderDTO {
     public void setDelivery_charges(float delivery_charges) {
         this.delivery_charges = delivery_charges;
     }
-
-   
 
     public String getOrderID() {
         return orderID;
@@ -119,12 +123,30 @@ public class OrderDTO {
     }
 
     public String getShipperID() {
-        return ShipperID;
+        return shipperID;
     }
 
-    public void setShipperID(String ShipperID) {
-        this.ShipperID = ShipperID;
+    public void setShipperID(String shipperID) {
+        this.shipperID = shipperID;
     }
+
+    public String getShipAddress() {
+        return shipAddress;
+    }
+
+    public void setShipAddress(String shipAddress) {
+        this.shipAddress = shipAddress;
+    }
+
+    public String getShipCity() {
+        return shipCity;
+    }
+
+    public void setShipCity(String shipCity) {
+        this.shipCity = shipCity;
+    }
+    
+    
 
     public Date getOrderDate() {
         return orderDate;
@@ -174,9 +196,4 @@ public class OrderDTO {
         this.status = status;
     }
 
-    
-
-    
-    
-    
 }
