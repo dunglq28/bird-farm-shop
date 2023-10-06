@@ -53,12 +53,23 @@
                                                             <div class="col-md-4 col-lg-4 col-xl-4">
                                                                 <h6 class="text-black mb-0">${items.get(key).bird_Name} </h6>
                                                                 <h6 class="text-muted">${items.get(key).category_Name} </h6> 
-                                                                <div class="delete-product">
+                                                                <div class="d-flex">
+                                                                    <h6 class="text-muted">Age: 90</h6>
+                                                                    <h6 class="mb-0 text-sm-center text-muted"
+                                                                    style="margin: 0 10px 0 10px;"> |
+                                                                </h6>
+                                                                    <h6 class="text-muted">Gender: Male</h6>
+                                                                </div>
+
+
+                                                                <h6 class="text-muted">Color: Tam beo</h6>
+                                                                <div class="delete-product mb-1">
                                                                     <a href="remove-bird?BirdID=${key}" class="delete-icon text-decoration-none ">
                                                                         <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
                                                                         Delete
                                                                     </a>
-                                                                </div>
+                                                                </div>                                                             
+
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 ">
                                                                 <h6 class="mb-0 text-sm-center">${items.get(key).priceFormat}</h6>
@@ -129,7 +140,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                                <form action="Checkout" class="col-lg-4 bg-grey" method="POST">
+                                        <form action="Checkout" class="col-lg-4 bg-grey" method="POST">
                                             <div class="p-5">
                                                 <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                                                 <hr class="my-4">
@@ -170,7 +181,7 @@
                                                     <input type="hidden" name="txtTotalOrder" value="${total_order}" />
                                                 </div>
                                                 <input value="Buy Now" type="submit" class="btn-buy btn btn-dark btn-block btn-lg"
-                                                           data-mdb-ripple-color="dark">
+                                                       data-mdb-ripple-color="dark">
                                             </div>
                                         </form>
                                     </div>

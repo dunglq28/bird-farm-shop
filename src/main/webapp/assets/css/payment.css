@@ -23,3 +23,11 @@
     line-height: 1.5;
     border: 1px solid #0D6780;
 }
+
+.change_info:hover {
+    color: rgb(13,103,128) !important;
+}
+
+.update_info{
+   color: rgb(13,103,128) !important; 
+}
