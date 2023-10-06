@@ -111,3 +111,6 @@
     color: #fff !important;
 }
 
+.see_details_tag:hover {
+    color: rgb(13,103,128) !important;
+}

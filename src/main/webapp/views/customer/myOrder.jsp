@@ -155,14 +155,14 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5 col-lg-5 col-xl-5 align-content-center "
-                                                                     style="margin-left: 40px;">
-                                                                    <a href="#" class="text-muted text-decoration-none">See details
+                                                                     style="margin-left: 40px; ">
+                                                                    <a href="#" class="text-muted text-decoration-none see_details_tag">See details
                                                                         <i class="fa-solid fa-arrow-right"></i></a>
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-xl-12 d-flex"style=" margin-top: 8px;">
-                                                                <div class="col-md-4 col-lg-4 col-xl-4 align-content-center">
+                                                                <div class=" align-content-center">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Receiving method: ${order.form_Receipt} </h6>
                                                                     </div>
@@ -170,10 +170,11 @@
                                                                 <h6 class="mb-0 text-sm-center"
                                                                     style="margin: 0 10px 0 10px;"> |
                                                                 </h6>
-                                                                <div class="col-md-3 col-lg-3 col-xl-3 align-content-center ">
+                                                                <div class=" align-content-center ">
                                                                     <h6 class="text-sm-start">Total: ${util.FormatPrice(order.total_order_final)}</h6>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="row d-flex mt-3">
@@ -188,6 +189,9 @@
                                                                     <div class="">
                                                                         <h6 class="text-black mb-0">${od.bird_name}</h6>
                                                                     </div>
+                                                                    <div class="">
+                                                                        <h6 class="text-black mb-0">Category: Bird</h6>
+                                                                    </div> 
                                                                     <div class="d-flex">
                                                                         <div class=" ">
                                                                             <h6 class="mb-0 text-sm-center">Qty: ${od.quantity_Buy}</h6>
@@ -199,6 +203,9 @@
                                                                             <h6 class="mb-0">${od.priceFormat}</h6>
                                                                         </div>
                                                                     </div>
+                                                                                                                                           
+
+
                                                                 </div>
                                                                 <div class="col-md-5 col-lg-5 col-xl-5 ">
                                                                     <div class="">
@@ -207,6 +214,10 @@
                                                                     <div class="">
                                                                         <h6 class="text-black mb-0">Age: ${od.bird_age}</h6>
                                                                     </div>
+                                                                    <div class="">
+                                                                        <h6 class="text-black mb-0">Gender: Male</h6>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </c:forEach>
