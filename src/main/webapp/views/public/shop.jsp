@@ -43,7 +43,7 @@
                             <div class="fiter_item">
                                 <span>Sort by</span>
                                 <div>
-                                    <a>Mới nhất</a>
+                                    <a class="active-sort" href="#" >Mới nhất</a>
                                 </div>
                                 <div>
                                     <a>Bán chạy</a>
@@ -60,10 +60,10 @@
                                             <img src="${dto.image}" alt=""/>
                                             <div class="product_item_img_hover">
                                                 <div class="view_detail">
-                                                    <span
-                                                        ><i class="fa-solid fa-eye"></i>
-                                                        View Details
-                                                    </span>
+                                                    <form action="action">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                        <input type="submit" value="View Detail">
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

@@ -59,6 +59,12 @@
   padding: 5%;
 }
 
+.active-sort {
+  background: rgb(255, 187, 0) !important;
+  color: #fff;
+  text-decoration: none;
+}
+
 /* product */
 
 .product_item_wrp {
@@ -111,9 +117,10 @@
   justify-content: center;
 }
 
-.view_detail a {
-  text-decoration: none;
-  color: #fff;
+.view_detail form input[type='submit'] {
+    background: transparent;
+    color: #fff;
+    border: none;
 }
 
 .product_item_text {
