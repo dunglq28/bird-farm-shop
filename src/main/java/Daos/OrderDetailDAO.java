@@ -74,7 +74,7 @@ public class OrderDetailDAO {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                String sql = "select bird.Bird_Name, od.Price, od.Quantity_Buy, bird.Image, bird.Color, bird.Age, cate.Category_Name "
+                String sql = "select bird.Bird_Name, od.Price, od.Quantity_Buy, bird.Image, bird.Color, bird.Age, bird.Gender, cate.Category_Name "
                         + "from Order_Details od "
                         + "inner join Birds bird on bird.BirdID = od.BirdID "
                         + "inner join Category cate on cate.CategoryID = bird.CategoryID "
@@ -92,8 +92,9 @@ public class OrderDetailDAO {
                     String image = rs.getString("Image");
                     String color = rs.getString("Color");
                     String age = rs.getString("Age");
+                    String gender = rs.getString("Gender");
                     String cate_Name = rs.getString("Category_Name");
-                    result = new OrderDetailDTO(bird_Name, cate_Name, image, color, age, price, quantity_Buy);
+                    result = new OrderDetailDTO(bird_Name, cate_Name, gender, image, color, age, price, quantity_Buy);
                     if (this.orderDetailList == null) {
                         this.orderDetailList = new ArrayList<OrderDetailDTO>();
                     }
