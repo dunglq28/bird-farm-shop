@@ -42,7 +42,7 @@ public class BirdDAO implements Serializable {
                 String sql = "Select BirdID, Bird_Name, cate.Category_Name, Image, Quantity_Available, Price, Discount, Status "
                         + "from Birds "
                         + "inner join Category cate on Birds.CategoryID =  cate.CategoryID "
-                        + "Order by Bird_Name asc "
+                        + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
                 stm = con.prepareStatement(sql);
