@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 30, 2023, 11:39:14 AM
+    Author     : hoang
+*/
+
+.form-group{
+    margin: 20px 0;
+}
+.form-control ,.form-select{
+    background-color: rgb(231,235,238) !important;
+    height: 50px;
+    
+}
+.container{
+    margin-top: 20px;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;    
+}    
+
+
+
