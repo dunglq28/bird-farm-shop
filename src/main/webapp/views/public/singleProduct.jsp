@@ -102,10 +102,10 @@
                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                 <i class="fas fa-minus"></i>
                                             </button>
-                                            <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantity_Buy}" type="text"
+                                            <input id="form1" name="txtQuantityBuy" value="" type="number"
                                                    class="form-control form-control-sm button-input"x   />
                                             <input name="txtBirdID" value="${key}" type="hidden" />
-                                            <input name="txtQuantityAvailable" value="${items.get(key).quantity_Available}" type="hidden" />
+                                            <input name="txtQuantityAvailable" value="" type="hidden" />
                                             <button name="btn" value="inc" class="btn btn-link px-2 text-muted"
                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                 <i class="fas fa-plus"></i>
