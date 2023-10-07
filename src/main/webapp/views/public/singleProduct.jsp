@@ -106,7 +106,23 @@
                                         </select>
                                     </div>
 
-
+                                    <div class="col-md-4 col-6 mb-3">
+                                        <label class="mb-2 d-block">Quantity</label>
+                                        <div class="input-group mb-3" style="width: 170px;">
+                                            <button name="btn" value="des" class="btn btn-link px-2 text-muted"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input id="form1" name="txtQuantityBuy" value="" type="number"
+                                                   class="form-control form-control-sm button-input"x   />
+                                            <input name="txtBirdID" value="${key}" type="hidden" />
+                                            <input name="txtQuantityAvailable" value="" type="hidden" />
+                                            <button name="btn" value="inc" class="btn btn-link px-2 text-muted"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- Buying -->
                                 <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>

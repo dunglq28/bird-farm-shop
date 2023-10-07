@@ -147,8 +147,9 @@
 
                                                     <div class="Promotion-received"></div>
 
-                                                    <div class="Promotion-received-element">
+                                                    <div class="Promotion-received-element d-flex justify-content-between">
                                                         <h6>Gift: High quality bird cage</h6>
+                                                        <h6>X3</h6>
                                                     </div>
 
 

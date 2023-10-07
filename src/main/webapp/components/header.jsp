@@ -11,8 +11,16 @@
     </div>
     <div class="navigation">
         <div class="navigation-items">
+            <div class="dropdown">
+                <button class="dropbtn" style="margin-left: 15px;"><i class="fa-solid fa-shop fa-lg"></i>Shop</button>
+                <div class="dropdown-content-wrapper">
+                    <div class="dropdown-content">
+                        <a href="">Buying birds</a>
+                        <a href="">Ordering bird nests</a>
+                    </div>
+                </div>
+            </div>
             <div class="item">
-                <a href="product-list"><i class="fa-solid fa-shop fa-lg"></i>Shop</a>
                 <a href="#"><i class="fa-solid fa-phone"></i>Contact</a>
                 <jsp:useBean id="cart" class="Cart.CartObj"></jsp:useBean>
                     <a href="cart" class="list-cart-icon">
