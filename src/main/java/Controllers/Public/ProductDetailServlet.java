@@ -11,6 +11,7 @@ import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,17 +42,55 @@ public class ProductDetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
         String bird_name = request.getParameter("txtBirdName");
-        String birdID = request.getParameter("txtBirdID");
+        String birdID = "";
+        String ageChoose = request.getParameter("txtAge");
+        String genderChoose = request.getParameter("txtGender");
+
         HttpSession session = request.getSession();
 
         try {
             BirdDAO dao = new BirdDAO();
+            BirdDTO bird = null;
             List<BirdDTO> result = dao.getBirdByName(bird_name);
-            BirdDTO bird = dao.getBirdByID(birdID);
-            url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
+            List<String> ageList = new ArrayList<String>();
+            List<String> genderList = new ArrayList<String>();
+            for (BirdDTO birdDTO : result) {
+                if (!ageList.contains(birdDTO.getAge())) {
+                    ageList.add(birdDTO.getAge());
+                }
+                if (!genderList.contains(birdDTO.getGender())) {
+                    genderList.add(birdDTO.getGender());
+                }
+            }
+            if (birdID.isEmpty()) {
+                bird = (BirdDTO) session.getAttribute("BIRD_CURRENT");
+            }
+
+            if (ageChoose != null && genderChoose != null) {
+                for (BirdDTO birdDTO : result) {
+                    if (birdDTO.getGender().equals(genderChoose) && birdDTO.getAge().equals(ageChoose)) {
+                        birdID = birdDTO.getBirdID();
+                    }
+                }
+            }
+
+            if (bird != null && !ageChoose.equals(bird.getAge())) {
+                genderList.clear();
+                for (BirdDTO birdDTO : result) {
+                    if (birdDTO.getAge().equals(ageChoose)) {
+                        birdID = birdDTO.getBirdID();
+                        genderList.add(birdDTO.getGender());
+                    }
+                }
+            }
+
+            request.setAttribute("AGE_LIST", ageList);
+            request.setAttribute("GENDER_LIST", genderList);
+            bird = dao.getBirdByID(birdID);
 
             session.setAttribute("BIRD_CURRENT", bird);
             session.setAttribute("BIRD_SAME_NAME", result);
+            url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

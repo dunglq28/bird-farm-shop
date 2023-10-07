@@ -62,8 +62,10 @@
                                                 <div class="view_detail">
                                                     <form action="product" method="get">
                                                         <i class="fa-solid fa-eye"></i>
-                                                        <input type="hidden" name="txtBirdID" value="${dto.birdID}"/>
+                                                        <!--<input type="hidden" name="txtBirdID" value="${dto.birdID}"/>-->
                                                         <input type="hidden" name="txtBirdName" value="${dto.bird_Name}"/>
+                                                        <input type="hidden" name="txtAge" value="${dto.age}"/>
+                                                        <input type="hidden" name="txtGender" value="${dto.gender}"/>
                                                         <input type="submit" value="View Detail">
                                                     </form>
                                                 </div>

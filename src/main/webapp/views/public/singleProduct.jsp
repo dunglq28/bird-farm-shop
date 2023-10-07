@@ -23,8 +23,8 @@
 
         <c:if test="${not empty bird_current}">
             <section class="py-5">
-                <div class="container">
-                    <div class="row gx-5">
+                <form method="product" id="myForm" class="container" method="get">
+                      <div class="row gx-5">
                         <aside class="col-lg-6">
                             <div class="border rounded-4 mb-3 d-flex justify-content-center">
                                 <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
@@ -37,6 +37,8 @@
                         <main class="col-lg-6">
                             <div class="ps-lg-3">
                                 <h2 class="title text-dark">${bird_current.bird_Name}</h2>
+                                <input type="hidden" name="txtBirdName" value="${bird_current.bird_Name}"/>
+
                                 <div class="d-flex flex-row my-3">
                                     <div class="text-warning mb-1 me-2">
                                         <i class="fa fa-star"></i>
@@ -70,62 +72,55 @@
                                 </div>
 
                                 <hr />
+                                <jsp:useBean id="util" class="Utils.FuncHelper"></jsp:useBean>
+                                    <div class="row mb-4">
+                                        <div class="col-md-4 col-6">
+                                            <label class="mb-2">Age</label>
+                                            <select name="txtAge" onchange="submit()" class="form-select border border-secondary" style="height: 35px;">
 
-                                <div class="row mb-4">
-                                    <div class="col-md-4 col-6">
-                                        <label class="mb-2">Age</label>
-                                        <select class="form-select border border-secondary" style="height: 35px;">
-                                            <c:if test="${not empty bird_current.age}">
-                                                <option selected>${bird_current.age}</option>
-                                            </c:if>
-                                            <c:forEach var="other_bird" items="${bird_same_name}">
-                                                <option>${other_bird.age}</option>
-                                            </c:forEach>
+                                            <c:set var="age_list" value="${requestScope.AGE_LIST}"></c:set>
+                                            <option ${util.checkExist(age_list, 'Baby') ? '' : 'disabled'} ${bird_current.age == 'Baby' ? 'selected' : ''}>
+                                                Baby
+                                            </option>
+                                            <option ${util.checkExist(age_list, 'Young') ? '' : 'disabled'} ${bird_current.age == 'Young' ? 'selected' : ''}>
+                                                Young
+                                            </option>
+                                            <option ${util.checkExist(age_list, 'Mature') ? '' : 'disabled'} ${bird_current.age == 'Mature' ? 'selected' : ''}>
+                                                Mature
+                                            </option>
+                                            <option ${util.checkExist(age_list, 'Adult') ? '' : 'disabled'} ${bird_current.age == 'Adult' ? 'selected' : ''}>
+                                                Adult
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-6">
                                         <label class="mb-2">Gender</label>
-                                        <select class="form-select border border-secondary" style="height: 35px;">
-                                            <c:if test="${not empty bird_current.gender}">
-                                                <option selected>${bird_current.gender}</option>
-                                            </c:if>
-                                            <c:forEach var="other_bird" items="${bird_same_name}">
-                                                <option>${other_bird.gender}</option>
-                                            </c:forEach>
+                                        <select name="txtGender" onchange="submit()" class="form-select border border-secondary" style="height: 35px;">
+                                            <c:set var="gender_list" value="${requestScope.GENDER_LIST}"></c:set>
+                                            <option ${util.checkExist(gender_list, 'Male') ? '' : 'disabled'} ${bird_current.gender == 'Male' ? 'selected' : ''}>
+                                                Male
+                                            </option>
+                                            <option ${util.checkExist(gender_list, 'Female') ? '' : 'disabled'} ${bird_current.gender == 'Female' ? 'selected' : ''}>
+                                                Female
+                                            </option>
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4 col-6 mb-3">
-                                        <label class="mb-2 d-block">Quantity</label>
-                                        <div class="input-group mb-3" style="width: 170px;">
-                                            <button name="btn" value="des" class="btn btn-link px-2 text-muted"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                            <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantity_Buy}" type="text"
-                                                   class="form-control form-control-sm button-input"x   />
-                                            <input name="txtBirdID" value="${key}" type="hidden" />
-                                            <input name="txtQuantityAvailable" value="${items.get(key).quantity_Available}" type="hidden" />
-                                            <button name="btn" value="inc" class="btn btn-link px-2 text-muted"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <!-- Buying -->
                                 <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
-                                <form action="" class="Addtocart">
+                                <div class="Addtocart">
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                    <input type="submit" value="Add to cart">
+                                    <input  type="submit" value="Add to cart">
 
-                                </form>
+                                </div>
                                 <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
                                         class="me-1 fa fa-heart fa-lg"></i> Save </a>
                             </div>
                         </main>
                     </div>
-                </div>
+                </form>
             </section>
         </c:if>
 
@@ -322,5 +317,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <jsp:include page="/components/footer.jsp"></jsp:include>
+        <script>
+                                            function submit()
+                                            {
+                                                document.querySelector(".myForm").onsubmit();
+                                            }
+        </script>
     </body>
 </html>
