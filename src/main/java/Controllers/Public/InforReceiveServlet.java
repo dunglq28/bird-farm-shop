@@ -66,9 +66,9 @@ public class InforReceiveServlet extends HttpServlet {
 
                 customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
                 session.setAttribute("CUSTOMER", customer);
+                request.setAttribute("TOTAL_ORDER", totalOrder);
                 if (customer != null) {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
-                    request.setAttribute("TOTAL_ORDER", totalOrder);
                 }
             }
 
