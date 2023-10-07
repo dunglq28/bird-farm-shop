@@ -140,21 +140,8 @@
                                                     <h5 class="text-uppercase">Discount</h5>
                                                     <h5>0</h5>
                                                 </div>
-                                                <div class=" justify-content-between mb-4">
-                                                    <h5 class="text-uppercase mb-0">Gift include</h5>
-                                                    <div class="mt-2">
-                                                        <h6 class="mb-0 text-muted ">Gift: Tâm Béo </h6>
-                                                        <h6 class="mb-0 text-muted ">Gift: Tâm Béo </h6>
-                                                        <h6 class="mb-0 text-muted ">Gift: Tâm Béo </h6>
-                                                    </div>
-
-
-                                                </div>
-
-<<<<<<< HEAD
-=======
+                   
                                                 <h5 class="text-uppercase mb-3">Gifts included</h5>
->>>>>>> 6b4c1b5d0b8f2718255e57dc0cad4841b4f1d91c
 
                                                 <div class="mb-5">
 

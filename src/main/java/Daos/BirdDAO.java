@@ -144,7 +144,7 @@ public class BirdDAO implements Serializable {
                     String age = rs.getString("Age");
                     String color = rs.getString("Color");
                     String gender = rs.getString("Gender");
-                    int quantity = rs.getInt("Quantity");
+                    int quantity = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String characteristics = rs.getString("Characteristics");
@@ -204,7 +204,7 @@ public class BirdDAO implements Serializable {
                     String age = rs.getString("Age");
                     String color = rs.getString("Color");
                     String gender = rs.getString("Gender");
-                    int quantity = rs.getInt("Quantity");
+                    int quantity = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String characteristics = rs.getString("Characteristics");

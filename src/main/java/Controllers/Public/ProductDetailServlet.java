@@ -46,12 +46,12 @@ public class ProductDetailServlet extends HttpServlet {
 
         try {
             BirdDAO dao = new BirdDAO();
-//            List<BirdDTO> result = dao.getBirdByName(bird_name);
+            List<BirdDTO> result = dao.getBirdByName(bird_name);
             BirdDTO bird = dao.getBirdByID(birdID);
             url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
 
             session.setAttribute("BIRD_DETAIL", bird);
-//            session.setAttribute("BIRD_SAME_NAME", result);
+            session.setAttribute("BIRD_SAME_NAME", result);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
