@@ -59,7 +59,7 @@ public class CheckoutServlet extends HttpServlet {
         String url = "";
         HttpSession session = request.getSession();
 
-    try {
+        try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = null;
@@ -86,6 +86,8 @@ public class CheckoutServlet extends HttpServlet {
                 customer = dao.getCustomerByAccountID(account.getAccountID());
                 if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
                     request.setAttribute("FULLNAME", customer.getFullName());
+                    request.setAttribute("TOTAL_ORDER", totalOrder);
+
                     url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
                 } else {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
@@ -93,7 +95,7 @@ public class CheckoutServlet extends HttpServlet {
                     request.setAttribute("TOTAL_ORDER", totalOrder);
                 }
             }
-            
+
             if (button.equals("Continue")) {
                 url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
             } else if (button.equals("Order")) {

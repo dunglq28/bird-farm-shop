@@ -251,7 +251,7 @@
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
                                             <h6>${util.FormatPrice(total_order)}</h6>
-                                            <input type="hidden" name="txtTotalOrder" value="${requestScope.TOTAL_ORDER}"/>
+                                            <input type="hidden" name="txtTotalOrder" value="${total_order}"/>
                                         </div>
 
                                         <div class="d-flex justify-content-between mb-1">
