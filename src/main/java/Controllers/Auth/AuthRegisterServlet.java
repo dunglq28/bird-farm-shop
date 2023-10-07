@@ -126,7 +126,8 @@ public class AuthRegisterServlet extends HttpServlet {
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
                 session.setAttribute("ACCOUNT", account);
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                        : (String) session.getAttribute("BACK_CART");
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

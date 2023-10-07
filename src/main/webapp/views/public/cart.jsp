@@ -56,8 +56,8 @@
                                                                 <div class="d-flex">
                                                                     <h6 class="text-muted">Age: ${items.get(key).age}</h6>
                                                                     <h6 class="mb-0 text-sm-center text-muted"
-                                                                    style="margin: 0 10px 0 10px;"> |
-                                                                </h6>
+                                                                        style="margin: 0 10px 0 10px;"> |
+                                                                    </h6>
                                                                     <h6 class="text-muted">Gender: ${items.get(key).gender}</h6>
                                                                 </div>
 
@@ -101,31 +101,17 @@
                                                                 </div>
                                                             </div>
                                                         <c:set var="total_order" value="${totalOrder = totalOrder + total_field}" ></c:set>
-                                                            <!--                                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                            
-                                                                                                                    <div class="form-check">
-                                                                                                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                                                                               id="exampleRadios1" value="option1" checked>
-                                                                                                                        <label class="form-check-label" for="exampleRadios1">
-                                                                                                                            Gift: bird food (500g)
-                                                                                                                        </label>
-                                                                                                                    </div>
-                                                                                                                    <div class="form-check">
-                                                                                                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                                                                               id="exampleRadios2" value="option2">
-                                                                                                                        <label class="form-check-label" for="exampleRadios2">
-                                                                                                                            Gift: 50% discount voucher for your next purchase
-                                                                                                                        </label>
-                                                                                                                    </div>
-                                                                                                                    <div class="form-check">
-                                                                                                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                                                                               id="exampleRadios3" value="option3">
-                                                                                                                        <label class="form-check-label" for="exampleRadios3">
-                                                                                                                            Gift: free bird care voucher
-                                                                                                                        </label>
-                                                                                                                    </div>
-                                                            
-                                                                                                                </div>-->
+                                                            <div class="row mb-4 d-flex justify-content-between align-items-center">
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                                                           id="exampleRadios1" value="option1" checked>
+                                                                    <label class="form-check-label" for="exampleRadios1">
+                                                                        Gift: High quality bird cage
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                 </c:forEach>
 
@@ -155,24 +141,19 @@
                                                     <h5>0</h5>
                                                 </div>
 
-                                                <h5 class="text-uppercase mb-3">Promotion received</h5>
+                                                <h5 class="text-uppercase mb-3">Gifts included</h5>
 
-                                                <!--                                            <div class="mb-5">
-                                                
-                                                                                                <div class="Promotion-received"></div>
-                                                
-                                                                                                <div class="Promotion-received-element">
-                                                                                                    <h6>Gift: bird food (500g)</h6>
-                                                                                                </div>
-                                                                                                <div class="Promotion-received-element">
-                                                                                                    <h6>Gift: 50% discount voucher for your next purchase</h6>
-                                                                                                </div>
-                                                                                                <div class="Promotion-received-element">
-                                                                                                    <h6>Gift: free bird care voucher</h6>
-                                                                                                </div>
-                                                
-                                                
-                                                                                            </div>-->
+                                                <div class="mb-5">
+
+                                                    <div class="Promotion-received"></div>
+
+                                                    <div class="Promotion-received-element">
+                                                        <h6>Gift: High quality bird cage</h6>
+                                                    </div>
+
+
+
+                                                </div>
 
                                                 <hr class="my-4">
                                                 <div class="d-flex justify-content-between mb-5">
