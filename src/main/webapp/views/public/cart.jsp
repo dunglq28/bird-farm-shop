@@ -56,8 +56,8 @@
                                                                 <div class="d-flex">
                                                                     <h6 class="text-muted">Age: ${items.get(key).age}</h6>
                                                                     <h6 class="mb-0 text-sm-center text-muted"
-                                                                    style="margin: 0 10px 0 10px;"> |
-                                                                </h6>
+                                                                        style="margin: 0 10px 0 10px;"> |
+                                                                    </h6>
                                                                     <h6 class="text-muted">Gender: ${items.get(key).gender}</h6>
                                                                 </div>
 
@@ -154,8 +154,17 @@
                                                     <h5 class="text-uppercase">Discount</h5>
                                                     <h5>0</h5>
                                                 </div>
+                                                <div class=" justify-content-between mb-4">
+                                                    <h5 class="text-uppercase mb-0">Gift include</h5>
+                                                    <div class="mt-2">
+                                                        <h6 class="mb-0 text-muted ">Gift: Tâm Béo </h6>
+                                                        <h6 class="mb-0 text-muted ">Gift: Tâm Béo </h6>
+                                                        <h6 class="mb-0 text-muted ">Gift: Tâm Béo </h6>
+                                                    </div>
 
-                                                <h5 class="text-uppercase mb-3">Promotion received</h5>
+
+                                                </div>
+
 
                                                 <!--                                            <div class="mb-5">
                                                 

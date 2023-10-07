@@ -96,15 +96,16 @@
                                     <div class="col-md-4 col-6 mb-3">
                                         <label class="mb-2 d-block">Quantity</label>
                                         <div class="input-group mb-3" style="width: 170px;">
-                                            <button class="btn btn-white border border-secondary px-3" type="button"
-                                                    id="button-addon1" data-mdb-ripple-color="dark">
+                                            <button name="btn" value="des" class="btn btn-link px-2 text-muted"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                 <i class="fas fa-minus"></i>
                                             </button>
-                                            <input type="text" class="form-control text-center border border-secondary"
-                                                   placeholder="14" aria-label="Example text with button addon"
-                                                   aria-describedby="button-addon1" />
-                                            <button class="btn btn-white border border-secondary px-3" type="button"
-                                                    id="button-addon2" data-mdb-ripple-color="dark">
+                                            <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantity_Buy}" type="text"
+                                                   class="form-control form-control-sm button-input"x   />
+                                            <input name="txtBirdID" value="${key}" type="hidden" />
+                                            <input name="txtQuantityAvailable" value="${items.get(key).quantity_Available}" type="hidden" />
+                                            <button name="btn" value="inc" class="btn btn-link px-2 text-muted"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
