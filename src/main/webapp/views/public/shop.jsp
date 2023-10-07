@@ -60,8 +60,10 @@
                                             <img src="${dto.image}" alt=""/>
                                             <div class="product_item_img_hover">
                                                 <div class="view_detail">
-                                                    <form action="product">
+                                                    <form action="product" method="get">
                                                         <i class="fa-solid fa-eye"></i>
+                                                        <input type="hidden" name="txtBirdID" value="${dto.birdID}"/>
+                                                        <input type="hidden" name="txtBirdName" value="${dto.bird_Name}"/>
                                                         <input type="submit" value="View Detail">
                                                     </form>
                                                 </div>
@@ -80,6 +82,9 @@
                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
                                                     <input type="hidden" name="price" value="${dto.price}"/>
                                                     <input type="hidden" name="image" value="${dto.image}"/>
+                                                    <input type="hidden" name="age" value="${dto.age}"/>
+                                                    <input type="hidden" name="color" value="${dto.color}"/>
+                                                    <input type="hidden" name="gender" value="${dto.gender}"/>
                                                     <input type="hidden" name="quantity_Buy" value="1" />
                                                     <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
                                                     <button name="btAction" value="Addtocart" type="submit">Add to cart</button>

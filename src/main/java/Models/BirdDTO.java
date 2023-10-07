@@ -25,16 +25,18 @@ public class BirdDTO {
     public BirdDTO() {
     }
 
-    public BirdDTO(String bird_Name, String category_Name, String image, int quantity_Available, int quantity_Buy, float price) {
+    public BirdDTO(String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Buy, float price, float discount) {
         this.bird_Name = bird_Name;
         this.category_Name = category_Name;
+        this.age = age;
+        this.color = color;
+        this.gender = gender;
         this.image = image;
         this.quantity_Available = quantity_Available;
         this.quantity_Buy = quantity_Buy;
         this.price = price;
+        this.discount = discount;
     }
-    
-    
 
     public BirdDTO(String birdID, String bird_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.birdID = birdID;
@@ -52,13 +54,16 @@ public class BirdDTO {
         this.discount = discount;
         this.status = status;
     }
+
     
-    public BirdDTO(String birdID, String bird_Name, String category_Name, String age, String color, String image, int quantity_Available, float price, float discount, String status) {
+    
+    public BirdDTO(String birdID, String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, float price, float discount, String status) {
         this.birdID = birdID;
         this.bird_Name = bird_Name;
         this.category_Name = category_Name;
         this.age = age;
         this.color = color;
+        this.gender = gender;
         this.image = image;
         this.quantity_Available = quantity_Available;
         this.price = price;

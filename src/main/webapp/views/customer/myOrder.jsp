@@ -190,7 +190,7 @@
                                                                         <h6 class="text-black mb-0">${od.bird_name}</h6>
                                                                     </div>
                                                                     <div class="">
-                                                                        <h6 class="text-black mb-0">Category: Bird</h6>
+                                                                        <h6 class="text-black mb-0">Category: ${od.cate_name}</h6>
                                                                     </div> 
                                                                     <div class="d-flex">
                                                                         <div class=" ">
@@ -205,7 +205,6 @@
                                                                     </div>
                                                                                                                                            
 
-
                                                                 </div>
                                                                 <div class="col-md-5 col-lg-5 col-xl-5 ">
                                                                     <div class="">
@@ -215,7 +214,7 @@
                                                                         <h6 class="text-black mb-0">Age: ${od.bird_age}</h6>
                                                                     </div>
                                                                     <div class="">
-                                                                        <h6 class="text-black mb-0">Gender: Male</h6>
+                                                                        <h6 class="text-black mb-0">Gender: ${od.bird_gender}</h6>
                                                                     </div>
 
                                                                 </div>

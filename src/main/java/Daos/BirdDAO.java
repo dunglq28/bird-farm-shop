@@ -60,7 +60,7 @@ public class BirdDAO implements Serializable {
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String status = rs.getString("Status");
-                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, age, color, image, quantity_Available, price, discount, status);
+                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, age, color, gender, image, quantity_Available, price, discount, status);
                     if (this.birdList == null) {
                         this.birdList = new ArrayList<BirdDTO>();
                     }
@@ -117,8 +117,8 @@ public class BirdDAO implements Serializable {
         return 0;
     }
 
-    public void searchBird(String bird)
-            throws SQLException, NamingException, ClassNotFoundException {
+    public List<BirdDTO> getBirdByName(String bird_name)
+            throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -127,12 +127,12 @@ public class BirdDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                String sql = "Select * " // phai co cach sau username
+                String sql = "Select * "
                         + "From Birds "
                         + "Where Bird_Name like ? ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "%" + bird + "%");
+                stm.setString(1, "%" + bird_name + "%");
                 //4.execute-query
                 rs = stm.executeQuery();
                 //5.process
@@ -162,6 +162,7 @@ public class BirdDAO implements Serializable {
                     }
                     this.birdList.add(dto);
                 }
+                return this.birdList;
             }//end connection has opened
 
         } finally {
@@ -175,6 +176,7 @@ public class BirdDAO implements Serializable {
                 con.close();
             }
         }
+        return null;
     }
 
     public void showAllBird()
@@ -236,35 +238,28 @@ public class BirdDAO implements Serializable {
     }
 
     public BirdDTO getBirdByID(String id)
-            throws SQLException, NamingException, ClassNotFoundException {
-
+            throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        BirdDTO result = null;
         try {
-            //1.Make connection
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2.Create SQL statement string
                 String sql = "Select * "
                         + "From Birds "
                         + "Where BirdID = ? ";
-                //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
-                //4.execute-query
                 rs = stm.executeQuery();
-                //5.process
-                if (rs.next()) {
+                while (rs.next()) {
                     String birdID = rs.getString("BirdID");
-                    String bird_Name = rs.getString("Bird_Name");
-                    int categoryID = rs.getInt("CategoryID");
+                    String bird_name = rs.getString("Bird_Name");
+                    int cateID = rs.getInt("CategoryID");
                     String image = rs.getString("Image");
                     String age = rs.getString("Age");
                     String color = rs.getString("Color");
                     String gender = rs.getString("Gender");
-                    int quantity = rs.getInt("Quantity");
+                    int quantity = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String characteristics = rs.getString("Characteristics");
@@ -272,12 +267,11 @@ public class BirdDAO implements Serializable {
                     Date date_created = rs.getDate("Date_created");
                     String status = rs.getString("Status");
 
-                    result = new BirdDTO(birdID, bird_Name, categoryID, age, color,
-                            gender, image, quantity, price, characteristics,
-                            detail, date_created, discount, status);
+                    BirdDTO bird = new BirdDTO(birdID, bird_name, cateID, age, color, gender, image,
+                            quantity, price, characteristics, detail, date_created, discount, status);
+                    return bird;
                 }
-            }//end connection has opened
-
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -289,7 +283,7 @@ public class BirdDAO implements Serializable {
                 con.close();
             }
         }
-        return result;
+        return null;
     }
 
     public boolean updateQuantityAvailable(int quantity_available, String birdID)

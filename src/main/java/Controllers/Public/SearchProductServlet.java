@@ -26,7 +26,7 @@ public class SearchProductServlet extends HttpServlet {
         try {
             BirdDAO dao = new BirdDAO();
             if (!search.trim().isEmpty()) {
-                dao.searchBird(search);
+                dao.getBirdByName(search);
                 List<BirdDTO> result = dao.getBirdList();
                 request.setAttribute("SEARCHBIRD_RESULT", result);
             } else {

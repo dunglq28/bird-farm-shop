@@ -54,15 +54,15 @@
                                                                 <h6 class="text-black mb-0">${items.get(key).bird_Name} </h6>
                                                                 <h6 class="text-muted">${items.get(key).category_Name} </h6> 
                                                                 <div class="d-flex">
-                                                                    <h6 class="text-muted">Age: 90</h6>
+                                                                    <h6 class="text-muted">Age: ${items.get(key).age}</h6>
                                                                     <h6 class="mb-0 text-sm-center text-muted"
                                                                     style="margin: 0 10px 0 10px;"> |
                                                                 </h6>
-                                                                    <h6 class="text-muted">Gender: Male</h6>
+                                                                    <h6 class="text-muted">Gender: ${items.get(key).gender}</h6>
                                                                 </div>
 
 
-                                                                <h6 class="text-muted">Color: Tam beo</h6>
+                                                                <h6 class="text-muted">Color: ${items.get(key).color}</h6>
                                                                 <div class="delete-product mb-1">
                                                                     <a href="remove-bird?BirdID=${key}" class="delete-icon text-decoration-none ">
                                                                         <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>

@@ -5,15 +5,20 @@
  */
 package Controllers.Public;
 
+import Daos.BirdDAO;
+import Models.BirdDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,14 +39,24 @@ public class ProductDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
-        try {
-           
+        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+        String bird_name = request.getParameter("txtBirdName");
+        String birdID = request.getParameter("txtBirdID");
+        HttpSession session = request.getSession();
 
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+        try {
+            BirdDAO dao = new BirdDAO();
+//            List<BirdDTO> result = dao.getBirdByName(bird_name);
+            BirdDTO bird = dao.getBirdByID(birdID);
+            url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
+
+            session.setAttribute("BIRD_DETAIL", bird);
+//            session.setAttribute("BIRD_SAME_NAME", result);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
