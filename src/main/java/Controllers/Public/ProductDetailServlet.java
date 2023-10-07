@@ -50,7 +50,7 @@ public class ProductDetailServlet extends HttpServlet {
             BirdDTO bird = dao.getBirdByID(birdID);
             url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
 
-            session.setAttribute("BIRD_DETAIL", bird);
+            session.setAttribute("BIRD_CURRENT", bird);
             session.setAttribute("BIRD_SAME_NAME", result);
 
         } catch (SQLException ex) {

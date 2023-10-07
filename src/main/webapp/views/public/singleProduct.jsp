@@ -18,23 +18,25 @@
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
             <!-- image and detail-->
-        <c:set var="bird_detail" value="${sessionScope.BIRD_DETAIL}"></c:set>
-        <c:if test="${not empty bird_detail}">
+        <c:set var="bird_current" value="${sessionScope.BIRD_CURRENT}"></c:set>
+        <c:set var="bird_same_name" value="${sessionScope.BIRD_SAME_NAME}"></c:set>
+
+        <c:if test="${not empty bird_current}">
             <section class="py-5">
                 <div class="container">
                     <div class="row gx-5">
                         <aside class="col-lg-6">
                             <div class="border rounded-4 mb-3 d-flex justify-content-center">
                                 <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
-                                   href="${bird_detail.image}">
+                                   href="${bird_current.image}">
                                     <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-2 fit"
-                                         src="${bird_detail.image}" />
+                                         src="${bird_current.image}" />
                                 </a>
                             </div>
                         </aside>
                         <main class="col-lg-6">
                             <div class="ps-lg-3">
-                                <h2 class="title text-dark">${bird_detail.bird_Name}</h2>
+                                <h2 class="title text-dark">${bird_current.bird_Name}</h2>
                                 <div class="d-flex flex-row my-3">
                                     <div class="text-warning mb-1 me-2">
                                         <i class="fa fa-star"></i>
@@ -51,20 +53,20 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="h5" style="color:#0D6780">${bird_detail.priceFormat}</span>
+                                    <span class="h5" style="color:#0D6780">${bird_current.priceFormat}</span>
                                     <span class="text-muted">/for a bird</span>
                                 </div>
 
                                 <p>
-                                    ${bird_detail.detail}
+                                    ${bird_current.detail}
                                 </p>
 
                                 <div class="row">
                                     <dt class="col-3">Color</dt>
-                                    <dd class="col-9">${bird_detail.color}</dd>
+                                    <dd class="col-9">${bird_current.color}</dd>
 
                                     <dt class="col-3">Characteristic</dt>
-                                    <dd class="col-9">${bird_detail.characteristics}</dd>
+                                    <dd class="col-9">${bird_current.characteristics}</dd>
                                 </div>
 
                                 <hr />
@@ -73,23 +75,23 @@
                                     <div class="col-md-4 col-6">
                                         <label class="mb-2">Age</label>
                                         <select class="form-select border border-secondary" style="height: 35px;">
-                                            <c:if test="${not empty bird_detail.age}">
-                                                <option selected>${bird_detail.age}</option>
+                                            <c:if test="${not empty bird_current.age}">
+                                                <option selected>${bird_current.age}</option>
                                             </c:if>
-                                            <option>Baby</option>
-                                            <option>Young</option>
-                                            <option>Mature</option>
-                                            <option>Audult</option>
+                                            <c:forEach var="other_bird" items="${bird_same_name}">
+                                                <option>${other_bird.age}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-6">
                                         <label class="mb-2">Gender</label>
                                         <select class="form-select border border-secondary" style="height: 35px;">
-                                            <c:if test="${not empty bird_detail.gender}">
-                                                <option selected>${bird_detail.gender}</option>
+                                            <c:if test="${not empty bird_current.gender}">
+                                                <option selected>${bird_current.gender}</option>
                                             </c:if>
-                                            <option>Male</option>
-                                            <option>Female</option>
+                                            <c:forEach var="other_bird" items="${bird_same_name}">
+                                                <option>${other_bird.gender}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
 
