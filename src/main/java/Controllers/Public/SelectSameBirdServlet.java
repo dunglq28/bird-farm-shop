@@ -25,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "product", urlPatterns = {"/product"})
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet(name = "SelectSameBirdServlet", urlPatterns = {"/SelectSameBirdServlet"})
+public class SelectSameBirdServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,24 +43,61 @@ public class ProductDetailServlet extends HttpServlet {
         String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
         String button = request.getParameter("btAction");
 
+        String bird_name = request.getParameter("txtBirdName");
+        String birdID = "";
+        String ageChoose = request.getParameter("txtAge");
+        String genderChoose = request.getParameter("txtGender");
+
+        HttpSession session = request.getSession();
+
         try {
-            if (button == null) {
-                button = "null";
+            BirdDAO dao = new BirdDAO();
+            BirdDTO bird = null;
+            List<BirdDTO> result = dao.getBirdByName(bird_name);
+            List<String> ageList = new ArrayList<String>();
+            List<String> genderList = new ArrayList<String>();
+            for (BirdDTO birdDTO : result) {
+                if (!ageList.contains(birdDTO.getAge())) {
+                    ageList.add(birdDTO.getAge());
+                }
+                if (!genderList.contains(birdDTO.getGender())) {
+                    genderList.add(birdDTO.getGender());
+                }
             }
-            switch (button) {
-                case "null":
-                    url = MyAppConstants.PublicFeatures.SELECT_SAME_BIRD_CONTROLLER;
-                    break;
-                case "Addtocart":
-                    request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SELECT_SAME_BIRD_CONTROLLER);
-                    url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
-                    break;
+            if (birdID.isEmpty()) {
+                bird = (BirdDTO) session.getAttribute("BIRD_CURRENT");
             }
 
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+            if (ageChoose != null && genderChoose != null) {
+                for (BirdDTO birdDTO : result) {
+                    if (birdDTO.getGender().equals(genderChoose) && birdDTO.getAge().equals(ageChoose)) {
+                        birdID = birdDTO.getBirdID();
+                    }
+                }
+            }
+
+            if (bird != null && !ageChoose.equals(bird.getAge())) {
+                genderList.clear();
+                for (BirdDTO birdDTO : result) {
+                    if (birdDTO.getAge().equals(ageChoose)) {
+                        birdID = birdDTO.getBirdID();
+                        genderList.add(birdDTO.getGender());
+                    }
+                }
+            }
+
+            request.setAttribute("AGE_LIST", ageList);
+            request.setAttribute("GENDER_LIST", genderList);
+            bird = dao.getBirdByID(birdID);
+
+            session.setAttribute("BIRD_CURRENT", bird);
+            session.setAttribute("BIRD_SAME_NAME", result);
+            url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

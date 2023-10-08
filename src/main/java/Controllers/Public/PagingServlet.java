@@ -11,7 +11,6 @@ import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "product", urlPatterns = {"/product"})
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet(name = "PagingServlet", urlPatterns = {"/PagingServlet"})
+public class PagingServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,27 +39,39 @@ public class ProductDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
-        String button = request.getParameter("btAction");
+        String page = request.getParameter("page");
+        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
 
         try {
-            if (button == null) {
-                button = "null";
-            }
-            switch (button) {
-                case "null":
-                    url = MyAppConstants.PublicFeatures.SELECT_SAME_BIRD_CONTROLLER;
-                    break;
-                case "Addtocart":
-                    request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SELECT_SAME_BIRD_CONTROLLER);
-                    url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
-                    break;
-            }
 
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+            if (page == null) {
+                page = "1";
+            }
+            int indexPage = Integer.parseInt(page);
+
+            BirdDAO dao = new BirdDAO();
+            int endPage = dao.getNumberPage();
+            List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
+            HttpSession session = request.getSession();
+            session.setAttribute("BIRD_LIST", result);
+            int start = 1;
+            int distance = 4;
+            int end = start + distance;
+            if (indexPage >= 4) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
+                }
+            }
+            session.setAttribute("START", start);
+            session.setAttribute("END", end);
+            session.setAttribute("indexCurrent", indexPage);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

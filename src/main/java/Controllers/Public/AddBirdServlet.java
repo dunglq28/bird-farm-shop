@@ -23,14 +23,14 @@ public class AddBirdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
+        String url = "";
         String BirdID = request.getParameter("BirdID");
-        String name = request.getParameter("BirdName");
+        String name = request.getParameter("txtBirdName");
         String cate_Name = request.getParameter("category_Name");
         String img = request.getParameter("image");
-        String age = request.getParameter("age");
+        String age = request.getParameter("txtAge");
         String color = request.getParameter("color");
-        String gender = request.getParameter("gender");
+        String gender = request.getParameter("txtGender");
         float price = Float.parseFloat(request.getParameter("price"));
         int quantityBuy = Integer.parseInt(request.getParameter("quantity_Buy"));
         int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
@@ -46,12 +46,13 @@ public class AddBirdServlet extends HttpServlet {
             cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, quantitySold, price, img, age, color, gender, name, cate_Name);
             session.setAttribute("BIRD_CART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-
+            url = (String) request.getAttribute("HISTORY_URL");
+            
             if (!lastSearch.isEmpty()) {
                 url = "search-product"
                         + "?lastSearch=" + lastSearch;
             } else {
-                url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
+                url = (String) request.getAttribute("HISTORY_URL");
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

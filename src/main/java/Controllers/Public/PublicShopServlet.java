@@ -41,47 +41,24 @@ public class PublicShopServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
         String button = request.getParameter("btAction");
-        String page = request.getParameter("page");
 
         try {
             if (button == null) {
                 button = "null";
             }
+            request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SHOPPING_PAGE);
             switch (button) {
                 case "null":
-                    if (page == null) {
-                        page = "1";
-                    }
-                    int indexPage = Integer.parseInt(page);
-
-                    BirdDAO dao = new BirdDAO();
-                    int endPage = dao.getNumberPage();
-                    List<BirdDTO> result = dao.getPagingByCreateDateDesc(indexPage);
-                    HttpSession session = request.getSession();
-                    session.setAttribute("BIRD_LIST", result);
-                    int start = 1;
-                    int distance = 4;
-                    int end = start + distance;
-                    if (indexPage >= 4) {
-                        start = indexPage - 2;
-                        end = indexPage + 2;
-                        if (indexPage + distance >= endPage) {
-                            start = endPage - distance;
-                            end = endPage;
-                        }
-                    }
-                    session.setAttribute("START", start);
-                    session.setAttribute("END", end);
-                    session.setAttribute("indexCurrent", indexPage);
+                    url = MyAppConstants.PublicFeatures.PAGING_CONTROLLER;
                     break;
                 case "Addtocart":
                     url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
                     break;
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
+//            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -10,11 +10,14 @@ public class MyAppConstants {
         public static final String CART_PAGE = "/views/public/cart.jsp";
         public static final String SHOPPING_PAGE = "/views/public/shop.jsp";
         public static final String PRODUCT_DETAIL_PAGE = "/views/public/singleProduct.jsp";
+        public static final String PRODUCT_DETAIL_CONTROLLER = "product";
         public static final String PRODUCT_LIST_CONTROLLER = "product-list";
+        public static final String PAGING_CONTROLLER = "PagingServlet";
         public static final String ADD_TO_CART_CONTROLLER = "add-bird";
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
         public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
+        public static final String SELECT_SAME_BIRD_CONTROLLER = "SelectSameBirdServlet";
         public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
     }
 

@@ -249,8 +249,9 @@ public class BirdDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select * "
+                String sql = "Select *, cate.Category_Name "
                         + "From Birds "
+                        + "inner join Category cate on Birds.CategoryID =  cate.CategoryID "
                         + "Where BirdID = ? and Customer_Bird = 'false' ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
@@ -259,20 +260,23 @@ public class BirdDAO implements Serializable {
                     String birdID = rs.getString("BirdID");
                     String bird_name = rs.getString("Bird_Name");
                     int cateID = rs.getInt("CategoryID");
+                    String cate_Name = rs.getString("Category_Name");
                     String image = rs.getString("Image");
                     String age = rs.getString("Age");
                     String color = rs.getString("Color");
                     String gender = rs.getString("Gender");
-                    int quantity = rs.getInt("Quantity_Available");
+                    int quantity_Available = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
                     String characteristics = rs.getString("Characteristics");
                     String detail = rs.getString("Detail");
+                    int quantity_Sold = rs.getInt("Quantity_Sold");
                     Date date_created = rs.getDate("Date_created");
                     String status = rs.getString("Status");
 
-                    BirdDTO bird = new BirdDTO(birdID, bird_name, cateID, age, color, gender, image,
-                            quantity, price, characteristics, detail, date_created, discount, status);
+                    BirdDTO bird = new BirdDTO(birdID, bird_name, cate_Name, age, color, gender, image,
+                            quantity_Available, quantity_Sold, price, discount, status);
+
                     return bird;
                 }
             }
