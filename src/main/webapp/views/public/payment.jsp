@@ -83,21 +83,21 @@
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Information receive</h4>
                                                     <a href="shipping?txtTotalOrder=${requestScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
-                                                        <h6 class="mb-0 text-muted change_info">Change information</h6>
-                                                    </a>
-                                                </div>
-                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <h6 class="mb-0 text-muted change_info">Change information</h6>
+                                                </a>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
 
-                                                    <h6 class="mb-0 text-muted ">${customer.fullName} - ${customer.phone_Number}</h6>
+                                                <h6 class="mb-0 text-muted ">${customer.fullName} - ${customer.phone_Number}</h6>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
 
                                                 <h6 class="mb-0 text-muted ">${customer.address}, ${customer.city}</h6>
                                             </div>
-<!--                                            <div class="form-group mt-3">
-                                                <input type="text" class="form-control" id="exampleInputNote"
-                                                       placeholder="Note">
-                                            </div>-->
+                                            <!--                                            <div class="form-group mt-3">
+                                                                                            <input type="text" class="form-control" id="exampleInputNote"
+                                                                                                   placeholder="Note">
+                                                                                        </div>-->
                                         </div>
 
                                         <hr class="my-4">
@@ -204,7 +204,7 @@
                                             <c:if test="${not empty items}">
                                                 <c:forEach items="${items.keySet()}" var="key" varStatus="counter">
                                                     <c:if test="${counter.count > 1}"><hr></c:if>
-                                                        <div class="row mb-12 d-flex justify-content-between align-items-center">
+                                                        <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
                                                             <div class="col-md-4">
                                                                 <img src="${items.get(key).image}"
                                                                  class="img-fluid rounded-3" alt="Bird Image">
@@ -217,9 +217,10 @@
                                                                     <h6 class="mb-0 text-muted ">x${items.get(key).priceFormat}</h6>
                                                                 </a>
                                                             </div>
-                                                                <h6 class="mb-0 text-muted ">Gift include: Tâm Béo </h6>
-                                                                
                                                         </div>
+                                                    </div>
+                                                    <div class="Promotion-received-element d-flex justify-content-between ">
+                                                        <h6>Gift: High quality bird cage</h6>
                                                     </div>
                                                 </c:forEach>
                                             </c:if>
@@ -248,9 +249,9 @@
 
                                         <hr class="my-4">
                                         <c:set var="total_order" value="${requestScope.TOTAL_ORDER}"></c:set>
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>${util.FormatPrice(total_order)}</h6>
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <h6 class="text-uppercase">Temporary</h6>
+                                                <h6>${util.FormatPrice(total_order)}</h6>
                                             <input type="hidden" name="txtTotalOrder" value="${total_order}"/>
                                         </div>
 

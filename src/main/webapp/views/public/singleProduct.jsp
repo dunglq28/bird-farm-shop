@@ -113,7 +113,7 @@
                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                 <i class="fas fa-minus"></i>
                                             </button>
-                                            <input id="form1" name="txtQuantityBuy" value="" type="number"
+                                            <input id="form1" name="txtQuantityBuy" value="1" type="number"
                                                    class="form-control form-control-sm button-input"x   />
                                             <input name="txtBirdID" value="${key}" type="hidden" />
                                             <input name="txtQuantityAvailable" value="" type="hidden" />
@@ -123,6 +123,7 @@
                                             </button>
                                         </div>
                                     </div>
+                                            
                                 </div>
                                 <!-- Buying -->
                                 <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>

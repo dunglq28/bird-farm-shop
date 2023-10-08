@@ -15,7 +15,7 @@ public class MyAppConstants {
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
         public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
-
+        public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
     }
 
     public class AuthFeatures {

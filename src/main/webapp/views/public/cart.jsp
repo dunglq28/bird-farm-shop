@@ -102,17 +102,17 @@
                                                             </div>
                                                         <c:set var="total_order" value="${totalOrder = totalOrder + total_field}" ></c:set>
                                                             <div class="row mb-4 d-flex justify-content-between align-items-center">
-
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                                           id="exampleRadios1" value="option1" checked>
-                                                                    <label class="form-check-label" for="exampleRadios1">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                           id="exampleRadios1"checked>
+                                                                    <label class="form-check-label">
                                                                         Gift: High quality bird cage
                                                                     </label>
                                                                 </div>
-
                                                             </div>
+                                                            
                                                         </div>
+                                                        <c:set var="total_buy" value="${totalBuy = totalBuy + items.get(key).quantity_Buy}"></c:set>
                                                 </c:forEach>
 
                                                 <!--<hr class="my-4">-->
@@ -149,10 +149,8 @@
 
                                                     <div class="Promotion-received-element d-flex justify-content-between">
                                                         <h6>Gift: High quality bird cage</h6>
-                                                        <h6>X3</h6>
+                                                        <h6>x ${total_buy}</h6>
                                                     </div>
-
-
 
                                                 </div>
 

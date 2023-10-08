@@ -34,6 +34,7 @@ public class AddBirdServlet extends HttpServlet {
         float price = Float.parseFloat(request.getParameter("price"));
         int quantityBuy = Integer.parseInt(request.getParameter("quantity_Buy"));
         int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
+        int quantitySold = Integer.parseInt(request.getParameter("quantity_Sold"));
         String lastSearch = request.getParameter("lastsearch");
         HttpSession session = request.getSession(true);
 
@@ -42,7 +43,7 @@ public class AddBirdServlet extends HttpServlet {
             if (cart == null) {
                 cart = new CartObj();
             }
-            cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, price, img, age, color, gender, name, cate_Name);
+            cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, quantitySold, price, img, age, color, gender, name, cate_Name);
             session.setAttribute("BIRD_CART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
 

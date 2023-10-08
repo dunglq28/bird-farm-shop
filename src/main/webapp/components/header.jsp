@@ -15,8 +15,8 @@
                 <button class="dropbtn" style="margin-left: 15px;"><i class="fa-solid fa-shop fa-lg"></i>Shop</button>
                 <div class="dropdown-content-wrapper">
                     <div class="dropdown-content">
-                        <a href="">Buying birds</a>
-                        <a href="">Ordering bird nests</a>
+                        <a href="product-list">Buying birds</a>
+                        <a href="Bird-Nest-Services">Ordering bird nests</a>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ public class BirdDTO {
     private String image;
     private int quantity_Available;
     private int quantity_Buy;
+    private int quantity_Sold;
     private float price;
     private String priceFormat;
     private String characteristics;
@@ -25,7 +26,7 @@ public class BirdDTO {
     public BirdDTO() {
     }
 
-    public BirdDTO(String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Buy, float price, float discount) {
+    public BirdDTO(String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Buy, int quantity_Sold, float price, float discount) {
         this.bird_Name = bird_Name;
         this.category_Name = category_Name;
         this.age = age;
@@ -34,6 +35,7 @@ public class BirdDTO {
         this.image = image;
         this.quantity_Available = quantity_Available;
         this.quantity_Buy = quantity_Buy;
+        this.quantity_Sold = quantity_Sold;
         this.price = price;
         this.discount = discount;
     }
@@ -55,9 +57,7 @@ public class BirdDTO {
         this.status = status;
     }
 
-    
-    
-    public BirdDTO(String birdID, String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, float price, float discount, String status) {
+    public BirdDTO(String birdID, String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, float discount, String status) {
         this.birdID = birdID;
         this.bird_Name = bird_Name;
         this.category_Name = category_Name;
@@ -66,10 +66,15 @@ public class BirdDTO {
         this.gender = gender;
         this.image = image;
         this.quantity_Available = quantity_Available;
+        this.quantity_Sold = quantity_Sold;
         this.price = price;
         this.discount = discount;
         this.status = status;
     }
+
+    
+    
+    
     
     
 
@@ -99,6 +104,14 @@ public class BirdDTO {
         this.quantity_Buy = quantity_Buy;
     }
 
+    public int getQuantity_Sold() {
+        return quantity_Sold;
+    }
+
+    public void setQuantity_Sold(int quantity_Sold) {
+        this.quantity_Sold = quantity_Sold;
+    }
+    
     public String getPriceFormat() {
         return FormatCurrency.FormatPrice(this.price);
     }

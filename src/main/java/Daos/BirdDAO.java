@@ -39,9 +39,10 @@ public class BirdDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select BirdID, Bird_Name, cate.Category_Name, Image, Age, Color, Gender, Quantity_Available, Price, Discount, Status "
+                String sql = "Select BirdID, Bird_Name, cate.Category_Name, Image, Age, Color, Gender, Quantity_Available, Price, Discount, Quantity_Sold, Status "
                         + "from Birds "
                         + "inner join Category cate on Birds.CategoryID =  cate.CategoryID "
+                        + "where Customer_Bird = 'false' "
                         + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
@@ -59,8 +60,9 @@ public class BirdDAO implements Serializable {
                     int quantity_Available = rs.getInt("Quantity_Available");
                     float price = rs.getFloat("Price");
                     float discount = rs.getFloat("Discount");
+                    int quantity_Sold = rs.getInt("Quantity_Sold");
                     String status = rs.getString("Status");
-                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, age, color, gender, image, quantity_Available, price, discount, status);
+                    BirdDTO result = new BirdDTO(birdID, birdName, cate_Name, age, color, gender, image, quantity_Available, quantity_Sold, price, discount, status);
                     if (this.birdList == null) {
                         this.birdList = new ArrayList<BirdDTO>();
                     }
@@ -91,7 +93,8 @@ public class BirdDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Select count(*) "
-                        + "From Birds ";
+                        + "From Birds "
+                        + "where Customer_Bird = 'false' ";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -129,7 +132,7 @@ public class BirdDAO implements Serializable {
                 //2.Create SQL statement string
                 String sql = "Select * "
                         + "From Birds "
-                        + "Where Bird_Name like ? ";
+                        + "Where Bird_Name like ? and Customer_Bird = 'false' ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + bird_name + "%");
@@ -190,7 +193,8 @@ public class BirdDAO implements Serializable {
             if (con != null) {
                 //2.Create SQL statement string
                 String sql = "Select * " // phai co cach sau username
-                        + "From Birds ";
+                        + "From Birds "
+                        + "where Customer_Bird = 'false' ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 //4.execute-query
@@ -247,7 +251,7 @@ public class BirdDAO implements Serializable {
             if (con != null) {
                 String sql = "Select * "
                         + "From Birds "
-                        + "Where BirdID = ? ";
+                        + "Where BirdID = ? and Customer_Bird = 'false' ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -286,7 +290,7 @@ public class BirdDAO implements Serializable {
         return null;
     }
 
-    public boolean updateQuantityAvailable(int quantity_available, String birdID)
+    public boolean updateQuantityAfterBuy(int quantity_available, int quantity_sold, String birdID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -297,12 +301,13 @@ public class BirdDAO implements Serializable {
             if (con != null) {
                 //2. create SQL statement string
                 String sql = "Update Birds "
-                        + "Set Quantity_Available = ? "
-                        + "Where BirdID = ? ";
+                        + "Set Quantity_Available = ?, Quantity_Sold = ? "
+                        + "Where BirdID = ? and Customer_Bird = 'false' ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, quantity_available);
-                stm.setString(2, birdID);
+                stm.setInt(2, quantity_sold);
+                stm.setString(3, birdID);
                 //4. Excute query
                 int effectRows = stm.executeUpdate();
                 //5. Process
