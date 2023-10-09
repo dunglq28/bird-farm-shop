@@ -203,7 +203,7 @@
                                                                             <h6 class="mb-0">${od.priceFormat}</h6>
                                                                         </div>
                                                                     </div>
-                                                                                                                                           
+
 
                                                                 </div>
                                                                 <div class="col-md-5 col-lg-5 col-xl-5 ">
@@ -221,6 +221,11 @@
                                                             </div>
                                                         </c:forEach>
                                                     </div>
+                                                    <c:if test="${order.status == 'Processing'}">
+                                                        <div class="col-12 mt-3 d-flex justify-content-end">
+                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
+                                                        </div>
+                                                    </c:if>
                                                     <c:if test="${order.status == 'Complete'}">
                                                         <div class="col-12 mt-3 d-flex justify-content-end">
                                                             <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Buy again</button>

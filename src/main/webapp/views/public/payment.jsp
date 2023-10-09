@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout" class="container py-3 h-100 " method="POST">
+        <form action="Checkout" class="container py-3 h-100 " method="get">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -82,7 +82,7 @@
                                             <c:set var="customer" value="${sessionScope.CUSTOMER}"></c:set>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                    <a href="shipping?txtTotalOrder=${requestScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
+                                                    <a href="shipping?txtTotalOrder=${sessionScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
                                                     <h6 class="mb-0 text-muted change_info">Change information</h6>
                                                 </a>
                                             </div>
@@ -109,19 +109,19 @@
                                         <div class="row mb-4 d-flex justify-content-between align-items-center">
                                             <div class="form-check">
                                                 <input onchange="submit()" class="form-check-input-2" type="radio" 
-                                                       name="shippingMethod" id="exampleRadios1" value="Fast delivery" ${SHIPPING_METHOD == 'Fast delivery' ? 'checked' : ''}>
+                                                       name="shippingMethod" id="exampleRadios1" value="Fast delivery" ${sessionScope.SHIPPING_METHOD == 'Fast delivery' ? 'checked' : ''}>
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     Fast delivery
                                                 </label>
                                             </div>
                                             <div class="form-check fisrt-element">
                                                 <input onchange="submit()" class="form-check-input-1" type="radio" 
-                                                       name="shippingMethod" id="exampleRadios2" value="Receive directly at shop" ${SHIPPING_METHOD == 'Receive directly at shop' ? 'checked' : ''}>
+                                                       name="shippingMethod" id="exampleRadios2" value="Receive directly at shop" ${sessionScope.SHIPPING_METHOD == 'Receive directly at shop' ? 'checked' : ''}>
                                                 <label class="form-check-label" for="exampleRadios2">
                                                     Receive directly at shop
                                                 </label>
                                                 <c:if test="${SHIPPING_METHOD == 'Receive directly at shop'}">
-                                                    <div class="form-control justify-content-center"
+<!--                                                    <div class="form-control justify-content-center"
                                                          style="max-width: 300px;"
                                                          id="datePickerDiv">
                                                         <h6 class="" style="width: 100%;margin-left: 44px;">Enter the desired time</h6>
@@ -129,15 +129,19 @@
                                                             <div class="form-input-day">
                                                                 <select name="txtDay" class="select-control text-muted" required>
                                                                     <option label="Day"></option>
-                                                                    <c:forEach var="i" begin="${requestScope.DAY}" end="${requestScope.DAY + 7}">
+                                                                    <c:forEach var="i" begin="${requestScope.DAY}" end="${requestScope.END_OF_MONTH - requestScope.DAY < 7 
+                                                                                                ?  requestScope.END_OF_MONTH : requestScope.DAY + 7 - requestScope.DAY_NEED}">
                                                                         <option value="${i}">${i}</option>
                                                                     </c:forEach>
 
                                                                 </select>
                                                             </div>
                                                             <div class="form-input-day">
-                                                                <select name="txtMonth" class="select-control text-muted">
+                                                                <select onchange="submit()" name="txtMonth" class="select-control text-muted">
                                                                     <option value="${requestScope.MONTH}">${requestScope.MONTH}</option>
+                                                                    <c:if test="${requestScope.END_OF_MONTH - requestScope.DAY < 7 }">
+                                                                        <option value="${requestScope.MONTH + 1}">${requestScope.MONTH + 1}</option>
+                                                                    </c:if>
                                                                 </select>
                                                             </div>
                                                             <div class="form-input-day">
@@ -146,7 +150,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                 </c:if>
 
                                             </div>
@@ -248,7 +252,7 @@
 
 
                                         <hr class="my-4">
-                                        <c:set var="total_order" value="${requestScope.TOTAL_ORDER}"></c:set>
+                                        <c:set var="total_order" value="${sessionScope.TOTAL_ORDER}"></c:set>
                                             <div class="d-flex justify-content-between mb-1">
                                                 <h6 class="text-uppercase">Temporary</h6>
                                                 <h6>${util.FormatPrice(total_order)}</h6>
@@ -257,8 +261,8 @@
 
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Tranport Fee</h6>
-                                            <h6 id="Ship">${util.FormatPrice(requestScope.SHIPPING_CASH)}</h6>
-                                            <input type="hidden" name="txtShippingCash" value="${requestScope.SHIPPING_CASH}"/>
+                                            <h6 id="Ship">${util.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
+<!--                                            <input type="hidden" name="txtShippingCash" value="${sessionScope.SHIPPING_CASH}"/>-->
                                         </div>
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
@@ -267,7 +271,8 @@
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="text-uppercase">Total price</h5>
 
-                                            <h5 id="total_order">${util.FormatPrice(total_order - total_order * 0 + requestScope.SHIPPING_CASH)}</h5>
+                                            <h5 id="total_order">${util.FormatPrice(total_order - total_order * 0 + sessionScope.SHIPPING_CASH)}</h5>
+                                            <input name="total_order_final" type="hidden" value="${total_order - total_order * 0 + sessionScope.SHIPPING_CASH}">
                                         </div>
 
                                         <input name="btAction" value="Order" type="submit" class="btn btn-dark btn-block btn-lg"

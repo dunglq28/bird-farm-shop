@@ -156,8 +156,11 @@
             var param_quantity = document.querySelector('#param_quantity')
             param_quantity.value = input_quantity.value;
             btn_inc.onclick = () => {
-                input_quantity.value++;
-                param_quantity.value++
+                if (input_quantity.value < ${bird_current.quantity_Available}) {
+                    input_quantity.value++;
+                    param_quantity.value++
+                }
+
             }
             btn_desc.onclick = () => {
                 if (input_quantity.value > 1) {

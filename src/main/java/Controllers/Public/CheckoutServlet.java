@@ -56,7 +56,9 @@ public class CheckoutServlet extends HttpServlet {
         String button = request.getParameter("btAction");
         String totalOrder = request.getParameter("txtTotalOrder");
         String shippingMethod = request.getParameter("shippingMethod");
-        String url = "";
+        String paymentMethod = request.getParameter("PaymentMethod");
+
+        String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;;
         HttpSession session = request.getSession();
 
         try {
@@ -65,18 +67,11 @@ public class CheckoutServlet extends HttpServlet {
             CustomerDTO customer = null;
 
             if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
-                request.setAttribute("SHIPPING_METHOD", "Fast delivery");
-                request.setAttribute("SHIPPING_CASH", 125000);
+                session.setAttribute("SHIPPING_METHOD", "Fast delivery");
+                session.setAttribute("SHIPPING_CASH", 125000);
             } else if (shippingMethod.equals("Receive directly at shop")) {
-                LocalDate localDate = LocalDate.now();
-                int year = localDate.getYear();
-                int month = localDate.getMonthValue();
-                int day = localDate.getDayOfMonth();
-                request.setAttribute("SHIPPING_METHOD", "Receive directly at shop");
-                request.setAttribute("SHIPPING_CASH", 0);
-                request.setAttribute("YEAR", year);
-                request.setAttribute("MONTH", month);
-                request.setAttribute("DAY", day);
+                session.setAttribute("SHIPPING_METHOD", "Receive directly at shop");
+                session.setAttribute("SHIPPING_CASH", 0);
             }
 
             if (account == null) {
@@ -84,22 +79,27 @@ public class CheckoutServlet extends HttpServlet {
                 session.setAttribute("BACK_CART", "cart");
             } else {
                 customer = dao.getCustomerByAccountID(account.getAccountID());
+                session.setAttribute("TOTAL_ORDER", totalOrder);
+
                 if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
                     request.setAttribute("FULLNAME", customer.getFullName());
-                    request.setAttribute("TOTAL_ORDER", totalOrder);
-
                     url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
                 } else {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
                     session.setAttribute("CUSTOMER", customer);
-                    request.setAttribute("TOTAL_ORDER", totalOrder);
                 }
             }
 
             if (button.equals("Continue")) {
                 url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
-            } else if (button.equals("Order")) {
+            } else if (button.equals("Order") && paymentMethod.equals("COD")) {
+                session.setAttribute("PAYMENT_METHOD", "COD");
+                session.setAttribute("TOTAL_ORDER", totalOrder);
+
                 url = MyAppConstants.PublicFeatures.CHECKOUT_SUCCESS_CONTROLLER;
+            } else if (button.equals("Order") && paymentMethod.equals("VNPAY")) {
+                session.setAttribute("PAYMENT_METHOD", "VNPAY");
+                url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
             }
 
         } catch (SQLException ex) {

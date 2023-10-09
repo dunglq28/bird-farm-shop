@@ -46,51 +46,52 @@ public class CheckoutSucessfulServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String totalOrder = request.getParameter("txtTotalOrder");
-        String shippingMethod = request.getParameter("shippingMethod");
+
+        String vnPayStatus = request.getParameter("vnp_TransactionStatus");
         String url = "";
         HttpSession session = request.getSession();
-
+        PrintWriter out = response.getWriter();
         try {
+            String paymentMethod = (String) session.getAttribute("PAYMENT_METHOD");
+
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
             if (cart == null) {
                 url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
             } else {
-                AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-                CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
-                String paymentMethod = request.getParameter("PaymentMethod");
-                float shippingCash = Float.parseFloat(request.getParameter("txtShippingCash"));
-                long millis = System.currentTimeMillis();
-                java.sql.Date orderDate = new java.sql.Date(millis);
-                Date receiptDay = null;
-                if (shippingMethod.equals("Receive directly at shop")) {
-                    String received_Day = request.getParameter("txtDay");
-                    String received_Month = request.getParameter("txtMonth");
-                    String received_Year = request.getParameter("txtYear");
-                    String receiptDayString = received_Year + "-" + received_Month + "-" + received_Day;
-                    receiptDay = Date.valueOf(receiptDayString);
-                }
-                OrderDAO orderdao = new OrderDAO();
-                String orderID = orderdao.createOrderID();
-                OrderDTO newOrder = new OrderDTO(orderID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
-                        orderDate, receiptDay, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Processing");
-                orderdao.createOrder(newOrder);
-                OrderDetailDAO odDao = new OrderDetailDAO();
-                OrderDetailDTO odDto;
-                BirdDAO birdDao = new BirdDAO();
-                for (String key : cart.getItems().keySet()) {
-                    odDto = new OrderDetailDTO(orderID, 1, key, null,
-                            cart.getItems().get(key).getPrice(),
-                            cart.getItems().get(key).getQuantity_Buy(), "Processing");
+                if (paymentMethod.equals("COD") || paymentMethod.equals("VNPAY") && vnPayStatus.equals("00")) {
+                    String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
+                    AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+                    CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
+                    int temp = (Integer) session.getAttribute("SHIPPING_CASH");
+                    float shippingCash = (float) temp;
+
+                    String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
+
+                    long millis = System.currentTimeMillis();
+                    java.sql.Date orderDate = new java.sql.Date(millis);
+               
+                    OrderDAO orderdao = new OrderDAO();
+                    String orderID = orderdao.createOrderID();
+                    OrderDTO newOrder = new OrderDTO(orderID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
+                            orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Processing");
+                    orderdao.createOrder(newOrder);
+                    OrderDetailDAO odDao = new OrderDetailDAO();
+                    OrderDetailDTO odDto;
+                    BirdDAO birdDao = new BirdDAO();
+                    for (String key : cart.getItems().keySet()) {
+                        odDto = new OrderDetailDTO(orderID, 1, key, null,
+                                cart.getItems().get(key).getPrice(),
+                                cart.getItems().get(key).getQuantity_Buy(), "Processing");
 //                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() + cart.getItems().get(key).getQuantity_Buy();
 //                    int quantitySold = cart.getItems().get(key).getQuantity_Sold() + cart.getItems().get(key).getQuantity_Buy();
 //                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate,quantitySold, key);
-                    odDao.createOrderDetail(odDto);
+                        odDao.createOrderDetail(odDto);
+                    }
+                    cart.removeAllBird();
+                    session.removeAttribute("BIRD_CART");
+                    session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
+                    url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
                 }
-                cart.removeAllBird();
-                session.removeAttribute("BIRD_CART");
-                session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-                url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

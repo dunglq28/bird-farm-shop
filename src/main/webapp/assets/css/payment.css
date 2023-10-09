@@ -28,6 +28,6 @@
     color: rgb(13,103,128) !important;
 }
 
-.update_info{
+.update_info:hover{
    color: rgb(13,103,128) !important; 
 }
