@@ -48,7 +48,7 @@
                                 <p><strong>Available at shop</strong></p>
                                 <p>
                                 </p>
-                                <button class="btn" data-toggle="modal" data-target="#myModal">Order</button>
+                                <button class="btn">Order</button>
                             </div>
                         </div>
                         <div class="col-sm-4">
