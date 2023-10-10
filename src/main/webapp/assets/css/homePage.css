@@ -38,7 +38,7 @@ header {
     opacity: 0.9;
 }
 
-header.hide {
+header.disappear {
     top: -100px;
 }
 

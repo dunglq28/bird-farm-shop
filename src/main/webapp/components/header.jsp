@@ -12,7 +12,11 @@
     <div class="navigation">
         <div class="navigation-items">
             <div class="dropdown">
-                <button class="dropbtn" style="margin-left: 15px;"><i class="fa-solid fa-shop fa-lg"></i>Shop</button>
+                <button class="dropbtn" style="margin-left: 15px;">
+                    <i class="fa-solid fa-shop fa-lg"></i>
+                    Shop
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
                 <div class="dropdown-content-wrapper">
                     <div class="dropdown-content">
                         <a href="product-list">Buying birds</a>
