@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Utils;
 
 import java.util.Properties;
@@ -14,10 +9,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author hj
- */
 public class SendMail {
     public static boolean sendCode(String email, String subject, String text) {
         final String from = "thebird.farm.1704@gmail.com";

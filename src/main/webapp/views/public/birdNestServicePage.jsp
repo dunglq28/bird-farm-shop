@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -26,6 +24,13 @@
                         with clear origins and certified documents. Order a bird now, our birds will be an exciting part of
                         your
                         life - we guarantee it! "</p>
+                    <p>
+                       1. All orders must be prepaid 50% to follow the status of the bird nests.
+                       2. If a customer want shop to combine customer birds with shop birds. Customers must bring customer birds after finishing orders. Shop will not keep those birds.
+                       3. Shop cannot sure all eggs in a bird nest could be hatch if there are some eggs in birds nest cannot be hatch shop will not take responsibilities
+                       4.Bird nest price will base on the numbers of eggs and the rarity of eggs plus applicable sales tax, delivery charge if shop delivers it to customer
+                       5. All birds or eggs in a single order must be paid for by using the same payment method.
+                    </p>
                 </div>
 
             </div>
