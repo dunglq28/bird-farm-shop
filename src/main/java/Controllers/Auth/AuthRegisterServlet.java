@@ -80,8 +80,8 @@ public class AuthRegisterServlet extends HttpServlet {
                 String subject = "Confirm your Email";
                 String text = "Confirm your Email, <br><br>"
                         + "NOTE DO NOT SHARE THE CODE WITH ANYONE, including BirdFarmShop employees!! <br><br>"
-                        + "To complete your request with BirdFarmSHop Account Registration, please enter 6 digits on the Email Verification Page: <br>"
                         + "<h1>" + ranNum + "</h1>"
+                        + "To complete your request with BirdFarmSHop Account Registration, please enter 6 digits on the Email Verification Page: <br>"
                         + "Best regards, <br>"
                         + "BirdFarmShop";
                 mailHome.sendCode(email, subject, text);
