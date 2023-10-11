@@ -1,0 +1,68 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 11, 2023, 10:59:49 AM
+    Author     : tt
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Buying */
+.Addtocart {
+    display: inline-block;
+    padding: 1.5%;
+    background-color: #0D6780;
+    border: none;
+    color: #FFFF;
+    border-radius: 5px;
+}
+
+.Addtocart input[type="submit"] {
+    background: transparent;
+    border: none;
+    color: #FFFF;
+}
+
+.Addtocart:hover {
+    background-color: #074152;
+}
+
+
+
+/* comment */
+.comment-card-inner {
+    margin-left: 4rem;
+}
+
+.user-comment {
+    border: 1px solid rgb(212, 206, 206);
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+    padding: 2px 5px;
+}
+
+.user-comment-reply {
+    border: 1px solid rgb(212, 206, 206);
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 2px 5px;
+}
+
+.like {
+    background-color: #0D6780;
+    border: none;
+}
+
+.like:hover {
+    background-color: #074152;
+}
