@@ -51,6 +51,9 @@ public class PublicShopServlet extends HttpServlet {
                 case "null":
                     url = MyAppConstants.PublicFeatures.PAGING_CONTROLLER;
                     break;
+                case "OrderAvailableBirdNest":
+                    url = MyAppConstants.PublicFeatures.PAGING_CONTROLLER;
+                    break;
                 case "Addtocart":
                     url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
                     break;

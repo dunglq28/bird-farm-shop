@@ -249,7 +249,7 @@ public class BirdDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select *, cate.Category_Name "
+                String sql = "Select * "
                         + "From Birds "
                         + "inner join Category cate on Birds.CategoryID =  cate.CategoryID "
                         + "Where BirdID = ? and Customer_Bird = 'false' ";
@@ -274,8 +274,8 @@ public class BirdDAO implements Serializable {
                     Date date_created = rs.getDate("Date_created");
                     String status = rs.getString("Status");
 
-                    BirdDTO bird = new BirdDTO(birdID, bird_name, cate_Name, age, color, gender, image,
-                            quantity_Available, quantity_Sold, price, discount, status);
+                    BirdDTO bird = new BirdDTO(birdID, bird_name, cateID, cate_Name, age, color, gender,
+                            image, quantity_Available, quantity_Sold, price, characteristics, detail, date_created, discount, status);
 
                     return bird;
                 }
