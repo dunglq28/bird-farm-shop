@@ -58,26 +58,27 @@
                                     <input type="hidden" name="btAction" value="OrderAvailableBirdNest">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="thumbnail">
-                                    <img src="https://www.thesprucepets.com/thmb/X6Se5sWlNMb0pDUD4vh-jM65NXU=/2121x0/filters:no_upscale():strip_icc()/australian-finch--taeniopygia-guttata--807072894-79e2ba40ea54453fa9c64429d8d234e1.jpg"
-                                         width="400" height="400">
-                                    <p><strong>Based on the bird lists at shop</strong></p>
-                                    <p>
-                                    </p>
-                                    <button class="btn" data-toggle="modal" data-target="#myModal2">Order</button>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="thumbnail">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQEaIl1E9gv1vDDHVs_DsFy93aXSJxGmu-phrzzwecCC0FySyV36kA2MVAhRi82-INQh8&usqp=CAU"
-                                         width="400" height="400">
-                                    <p><strong>Based on customer's birds</strong></p>
-                                    <p></p>
-                                    <button class="btn" data-toggle="modal" data-target="#myModal">Order</button>
-                                </div>
-                            </div>
                         </form>
+
+                        <div class="col-sm-4">
+                            <div class="thumbnail">
+                                <img src="https://www.thesprucepets.com/thmb/X6Se5sWlNMb0pDUD4vh-jM65NXU=/2121x0/filters:no_upscale():strip_icc()/australian-finch--taeniopygia-guttata--807072894-79e2ba40ea54453fa9c64429d8d234e1.jpg"
+                                     width="400" height="400">
+                                <p><strong>Based on the bird lists at shop</strong></p>
+                                <p>
+                                </p>
+                                <button class="btn" data-toggle="modal" data-target="#myModal2">Order</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="thumbnail">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQEaIl1E9gv1vDDHVs_DsFy93aXSJxGmu-phrzzwecCC0FySyV36kA2MVAhRi82-INQh8&usqp=CAU"
+                                     width="400" height="400">
+                                <p><strong>Based on customer's birds</strong></p>
+                                <p></p>
+                                <button class="btn" data-toggle="modal" data-target="#myModal">Order</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
