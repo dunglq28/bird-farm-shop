@@ -72,6 +72,25 @@ public class BirdDTO {
         this.status = status;
     }
 
+    public BirdDTO(String birdID, String bird_Name, int categoryID, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
+        this.birdID = birdID;
+        this.bird_Name = bird_Name;
+        this.categoryID = categoryID;
+        this.category_Name = category_Name;
+        this.age = age;
+        this.color = color;
+        this.gender = gender;
+        this.image = image;
+        this.quantity_Available = quantity_Available;
+        this.quantity_Sold = quantity_Sold;
+        this.price = price;
+        this.characteristics = characteristics;
+        this.detail = detail;
+        this.date_created = date_created;
+        this.discount = discount;
+        this.status = status;
+    }
+
     
     
     

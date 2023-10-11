@@ -73,7 +73,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                     OrderDAO orderdao = new OrderDAO();
                     String orderID = orderdao.createOrderID();
                     OrderDTO newOrder = new OrderDTO(orderID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
-                            orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Processing");
+                            orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                     orderdao.createOrder(newOrder);
                     OrderDetailDAO odDao = new OrderDetailDAO();
                     OrderDetailDTO odDto;
@@ -81,7 +81,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                     for (String key : cart.getItems().keySet()) {
                         odDto = new OrderDetailDTO(orderID, 1, key, null,
                                 cart.getItems().get(key).getPrice(),
-                                cart.getItems().get(key).getQuantity_Buy(), "Processing");
+                                cart.getItems().get(key).getQuantity_Buy(), "Wait for confirmation");
 //                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() + cart.getItems().get(key).getQuantity_Buy();
 //                    int quantitySold = cart.getItems().get(key).getQuantity_Sold() + cart.getItems().get(key).getQuantity_Buy();
 //                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate,quantitySold, key);

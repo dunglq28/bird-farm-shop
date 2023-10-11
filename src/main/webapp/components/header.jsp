@@ -20,7 +20,7 @@
                 <div class="dropdown-content-wrapper">
                     <div class="dropdown-content">
                         <a href="product-list">Buying birds</a>
-                        <a href="birdNestServicePage.jsp">Ordering bird nests</a>
+                        <a href="Bird-Nest-Services">Ordering bird nests</a>
                     </div>
                 </div>
             </div>
