@@ -58,13 +58,14 @@ public class CheckoutServlet extends HttpServlet {
         String shippingMethod = request.getParameter("shippingMethod");
         String paymentMethod = request.getParameter("PaymentMethod");
 
-        String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;;
+        String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = null;
+            session.setAttribute("TOTAL_ORDER", totalOrder);
 
             if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
                 session.setAttribute("SHIPPING_METHOD", "Fast delivery");
@@ -79,7 +80,6 @@ public class CheckoutServlet extends HttpServlet {
                 session.setAttribute("BACK_CART", "cart");
             } else {
                 customer = dao.getCustomerByAccountID(account.getAccountID());
-                session.setAttribute("TOTAL_ORDER", totalOrder);
 
                 if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
                     request.setAttribute("FULLNAME", customer.getFullName());
@@ -94,8 +94,6 @@ public class CheckoutServlet extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("COD")) {
                 session.setAttribute("PAYMENT_METHOD", "COD");
-                session.setAttribute("TOTAL_ORDER", totalOrder);
-
                 url = MyAppConstants.PublicFeatures.CHECKOUT_SUCCESS_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("VNPAY")) {
                 session.setAttribute("PAYMENT_METHOD", "VNPAY");
