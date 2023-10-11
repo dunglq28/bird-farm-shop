@@ -8,6 +8,7 @@ package Controllers.Public;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,9 +35,22 @@ public class BirdNestServicesSerlvet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.BIRD_NEST_SERVICE_PAGE;
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        String url = "";
+        String button = request.getParameter("btAction");
+        try {
+            if (button == null) {
+                 url = MyAppConstants.PublicFeatures.BIRD_NEST_SERVICE_PAGE;
+            } else if (button.equals("OrderAvailableBirdNest")) {
+                url = MyAppConstants.PublicFeatures.PRODUCT_LIST_CONTROLLER;
+                    response.sendRedirect(url);
+                    return;
+            }
+           
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        } finally {
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
