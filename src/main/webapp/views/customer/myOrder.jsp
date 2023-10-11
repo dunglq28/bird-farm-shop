@@ -52,7 +52,7 @@
                                                 <a href="#" class="text-muted text-decoration-none">
                                                     <h5>Account management</h6>
                                                 </a>
-                                            </div>
+                                                </div>
                                             <hr>
                                             <div class="Promotion-received-element mb-3">
                                                 <a href="#" class="text-muted text-decoration-none">
@@ -130,7 +130,7 @@
                                                         <div class="row d-flex justify-content-between align-items-center bg-grey"
                                                              style="margin-bottom: 15px; padding: 10px; border-radius: 10px;">
                                                             <div class="col-md-7 col-lg-7 col-xl-7 d-flex align-content-center">
-                                                                <div class="col-md-8 col-lg-8 col-xl-8 d-flex align-items-center">
+                                                                <div class=" d-flex align-items-center" style="margin-right: 20px">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Order code: ${order.orderID}</h6>
                                                                         <h6 class="mb-0 text-sm-center"
@@ -140,8 +140,8 @@
 
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4 col-lg-4 col-xl-4 align-content-center "
-                                                                     style="margin-left: 40px;">
+                                                                <div class=" align-content-center"
+                                                                     style="margin: auto">
                                                                     <div class="justify-content-center align-content-center mb-0"
                                                                          style="background-color: rgb(13,103,128); width: fit-content; padding: 5px 20px 5px 20px; border-radius: 5px; color: azure;">
                                                                         <h6 class="mb-0">${order.status}</h6>
@@ -221,7 +221,7 @@
                                                             </div>
                                                         </c:forEach>
                                                     </div>
-                                                    <c:if test="${order.status == 'Processing'}">
+                                                    <c:if test="${order.status == 'Wait for confirmation'}">
                                                         <div class="col-12 mt-3 d-flex justify-content-end">
                                                             <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
                                                         </div>
