@@ -126,7 +126,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <form action="Checkout" class="col-lg-4 bg-grey" method="POST">
+                                        <form action="Checkout" class="col-lg-4 bg-grey" method="get">
                                             <div class="p-5">
                                                 <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                                                 <hr class="my-4">

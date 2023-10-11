@@ -58,10 +58,7 @@ public class PublicShopServlet extends HttpServlet {
                     url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
                     break;
             }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
