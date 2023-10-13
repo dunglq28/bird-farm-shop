@@ -9,9 +9,7 @@ import Utils.EmailExample;
 import Utils.MyAppConstants;
 import Utils.SendMail;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,9 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Utils.EncryptPassword;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 @WebServlet(name = "sign-up", urlPatterns = {"/sign-up"})
 public class AuthRegisterServlet extends HttpServlet {

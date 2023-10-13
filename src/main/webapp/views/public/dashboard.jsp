@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Dashboard
-    Created on : Oct 11, 2023, 10:31:41 AM
-    Author     : Admin
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,7 +54,7 @@
           </a>
         </li>
         <li class="logout">
-          <a href="#">
+          <a href="guest?btAction=logout">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
           </a>
@@ -77,7 +72,7 @@
             <i class="fa-solid fa-search"></i>
             <input type="text" placeholder="search" />
           </div>
-          Tran Manh Cuong
+          ${sessionScope.ACCOUNT.fullName}
         </div>
       </div>
       <div class="tabular--wrapper">
