@@ -49,7 +49,7 @@
                         <form action="Bird-Nest-Services" method="POST">
                             <div class="col-sm-4">
                                 <div class="thumbnail">
-                                    <img src="https://cdn.pixabay.com/photo/2021/07/05/08/33/common-redstart-6388494_1280.jpg"
+                                    <img src="https://cdn.pixabay.com/photo/2018/05/24/02/07/bird-eggs-3425657_1280.jpg"
                                          width="400" height="400">
                                     <p><strong>Available at shop</strong></p>
                                     <p>
