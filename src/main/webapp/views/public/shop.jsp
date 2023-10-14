@@ -23,6 +23,8 @@
     </head>
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
+        <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
+
             <div class="container">
                 <div class="row">
                     <div class="category col-lg-3">
@@ -51,19 +53,20 @@
                             </div>
                         </div>
                         <div class="row">
-                        <c:set var="birdList" value="${sessionScope.BIRD_LIST}"></c:set>
-                        <c:if test="${not empty birdList}">
-                            <c:forEach items="${birdList}" var="dto" varStatus="counter">
+                        <c:set var="productList" value="${sessionScope.PRODUCT_LIST}"></c:set>
+                        <c:if test="${not empty productList}">
+                            <c:forEach items="${productList}" var="dto" varStatus="counter">
                                 <div class="col-lg-4 product_item_wrp">
                                     <div class="product_item">
                                         <div class="product_item_img">
                                             <img src="${dto.image}" alt=""/>
                                             <div class="product_item_img_hover">
                                                 <div class="view_detail">
-                                                    <form action="product" method="Post">
+                                                    <form action="product" method="post">
                                                         <i class="fa-solid fa-eye"></i>
-                                                        <!--<input type="hidden" name="txtBirdID" value="${dto.birdID}"/>-->
-                                                        <input type="hidden" name="txtBirdName" value="${dto.bird_Name}"/>
+                                                        <input type="hidden" name="txtproductID" value="${dto.productID}"/>
+                                                        <input type="hidden" name="txtproductName" value="${dto.product_Name}"/>
+                                                        <input type="hidden" name="txtproductTypeID" value="${dto.product_TypeID}"/>
                                                         <input type="hidden" name="txtAge" value="${dto.age}"/>
                                                         <input type="hidden" name="txtGender" value="${dto.gender}"/>
                                                         <input type="submit" value="View Detail">
@@ -73,16 +76,16 @@
                                         </div>
                                         <div class="product_item_text">
                                             <h5>
-                                                <a href="#">${dto.bird_Name}</a>
+                                                <a href="#">${dto.product_Name}</a>
                                             </h5>
-                                            <h5>${dto.priceFormat}</h5>
+                                            <h5>${util.FormatPrice(dto.price)}</h5>
                                             <div class="add_to_cart">
-                                                <form action="product-list" method="POST">
-                                                    <input type="hidden" name="BirdID" value="${dto.birdID}"/>
-                                                    <input type="hidden" name="txtBirdName" value="${dto.bird_Name}"/>
+                                                <form action="product_list" method="POST">
+                                                    <input type="hidden" name="txtproductID" value="${dto.productID}"/>
+                                                    <input type="hidden" name="txtproductName" value="${dto.product_Name}"/>
                                                     <input type="hidden" name="category_Name" value="${dto.category_Name}"/>
                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
-                                                     <input type="hidden" name="quantity_Sold" value="${dto.quantity_Sold}"/>
+                                                    <input type="hidden" name="quantity_Sold" value="${dto.quantity_Sold}"/>
                                                     <input type="hidden" name="price" value="${dto.price}"/>
                                                     <input type="hidden" name="image" value="${dto.image}"/>
                                                     <input type="hidden" name="txtAge" value="${dto.age}"/>
@@ -98,24 +101,26 @@
                                 </div>
                             </c:forEach>
                         </c:if>
-                    </div>
-                    <div class="row">
-                        <jsp:useBean id="dao" class="Daos.BirdDAO"></jsp:useBean>
+
+
+                        <div class="row">
                             <div class="pagination d-flex justify-content-center">
-                            <c:if test="${indexCurrent > 1}">
-                                <a href="product-list?page=1">&laquo;</a>
-                                <a href="product-list?page=${indexCurrent-1}">&lsaquo;</a>
-                            </c:if>
+                            <c:set var="productType" value="${sessionScope.PRODUCT_TYPE}"></c:set>
+                                <c:if test="${indexCurrent > 1}">
+                                    <a href="product_list?productType=${productType}&page=1">&laquo;</a>
+                                    <a href="product_list?productType=${productType}&page=${indexCurrent-1}">&lsaquo;</a>
+                                </c:if>
 
-                            <c:forEach begin="${sessionScope.START}" end="${sessionScope.END}" var="i">
-                                <a class="${indexCurrent==i ? "active" : ""}" href="product-list?page=${i}">${i}</a>
-                            </c:forEach>
+                                <c:forEach begin="${sessionScope.START}" end="${sessionScope.END}" var="i">
+                                    <a class="${indexCurrent==i ? "active" : ""}" href="product_list?productType=${productType}&page=${i}">${i}</a>
+                                </c:forEach>
 
-                            <c:if test="${indexCurrent<dao.numberPage}">
-                                <a href="product-list?page=${indexCurrent+1}">&rsaquo;</a>
-                                <a href="product-list?page=${dao.numberPage}">&raquo;</a>
-                            </c:if>
+                                <c:if test="${indexCurrent<sessionScope.endPage}">
+                                    <a href="product_list?productType=${productType}&page=${indexCurrent+1}">&rsaquo;</a>
+                                    <a href="product_list?productType=${productType}&page=${sessionScope.endPage}">&raquo;</a>
+                                </c:if>
 
+                            </div>
                         </div>
                     </div>
                 </div>

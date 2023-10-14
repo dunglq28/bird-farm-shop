@@ -1,7 +1,8 @@
 package Controllers.Public;
 
-import Models.BirdDTO;
+import Models.ProductDTO;
 import Cart.CartObj;
+import Object.Products;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,9 +24,9 @@ public class AddBirdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
-        String BirdID = request.getParameter("BirdID");
-        String name = request.getParameter("txtBirdName");
+        String url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+        String BirdID = request.getParameter("txtproductID");
+        String name = request.getParameter("txtproductName");
         String cate_Name = request.getParameter("category_Name");
         String img = request.getParameter("image");
         String age = request.getParameter("txtAge");
@@ -43,11 +44,18 @@ public class AddBirdServlet extends HttpServlet {
             if (cart == null) {
                 cart = new CartObj();
             }
-            cart.addItemToCart(BirdID, quantityBuy, quantityAvailable, quantitySold, price, img, age, color, gender, name, cate_Name);
+            Products prodcut = null;
+            if (age == null && color == null && gender == null) {
+                prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
+            } else {
+                prodcut = new Products(name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
+            }
+
+            cart.addItemToCart(BirdID, prodcut);
             session.setAttribute("BIRD_CART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
             url = (String) request.getAttribute("HISTORY_URL");
-            
+
             if (!lastSearch.isEmpty()) {
                 url = "search-product"
                         + "?lastSearch=" + lastSearch;
@@ -55,6 +63,7 @@ public class AddBirdServlet extends HttpServlet {
                 url = (String) request.getAttribute("HISTORY_URL");
             }
         } finally {
+//            response.sendRedirect(url);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

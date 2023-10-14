@@ -6,7 +6,7 @@
 package Controllers.Public;
 
 import Cart.CartObj;
-import Daos.BirdDAO;
+import Daos.ProductDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
@@ -77,11 +77,11 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                     orderdao.createOrder(newOrder);
                     OrderDetailDAO odDao = new OrderDetailDAO();
                     OrderDetailDTO odDto;
-                    BirdDAO birdDao = new BirdDAO();
+                    ProductDAO birdDao = new ProductDAO();
                     for (String key : cart.getItems().keySet()) {
-                        odDto = new OrderDetailDTO(orderID, 1, key, null,
+                        odDto = new OrderDetailDTO(orderID, 1, key,
                                 cart.getItems().get(key).getPrice(),
-                                cart.getItems().get(key).getQuantity_Buy(), "Wait for confirmation");
+                                cart.getItems().get(key).getQuantityBuy(), "Wait for confirmation");
 //                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() + cart.getItems().get(key).getQuantity_Buy();
 //                    int quantitySold = cart.getItems().get(key).getQuantity_Sold() + cart.getItems().get(key).getQuantity_Buy();
 //                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate,quantitySold, key);

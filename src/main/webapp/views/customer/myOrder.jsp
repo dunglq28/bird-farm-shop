@@ -52,7 +52,7 @@
                                                 <a href="#" class="text-muted text-decoration-none">
                                                     <h5>Account management</h6>
                                                 </a>
-                                                </div>
+                                            </div>
                                             <hr>
                                             <div class="Promotion-received-element mb-3">
                                                 <a href="#" class="text-muted text-decoration-none">
@@ -180,21 +180,21 @@
                                                     <div class="row d-flex mt-3">
                                                         <c:forEach var="od" items="${odDao.getOrderDetailByOrderID(order.orderID)}">
                                                             <div
-                                                                class="row mb-6 col-md-6 col-xl-6 d-flex justify-content-between align-items-center mb-4">
+                                                                class="row mb-6 col-md-6 col-xl-6 d-flex align-items-center mb-4">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2">
-                                                                    <img src="${od.bird_image}"
+                                                                    <img src="${od.image}"
                                                                          class="img-fluid rounded-3" alt="Bird Image">
                                                                 </div>
                                                                 <div class="col-md-5 col-lg-5 col-xl-5 ">
                                                                     <div class="">
-                                                                        <h6 class="text-black mb-0">${od.bird_name}</h6>
+                                                                        <h6 class="text-black mb-0">${od.name}</h6>
                                                                     </div>
                                                                     <div class="">
                                                                         <h6 class="text-black mb-0">Category: ${od.cate_name}</h6>
                                                                     </div> 
                                                                     <div class="d-flex">
                                                                         <div class=" ">
-                                                                            <h6 class="mb-0 text-sm-center">Qty: ${od.quantity_Buy}</h6>
+                                                                            <h6 class="mb-0 text-sm-center">Qty: ${od.quantityBuy}</h6>
                                                                         </div>
                                                                         <div class="">
                                                                             <h6 class="mb-0 text-sm-center"> x </h6>
@@ -206,18 +206,19 @@
 
 
                                                                 </div>
-                                                                <div class="col-md-5 col-lg-5 col-xl-5 ">
-                                                                    <div class="">
-                                                                        <h6 class="text-black mb-0">Color: ${od.bird_color}</h6>
+                                                                <c:if test="${not empty od.color}">
+                                                                    <div class="col-md-5 col-lg-5 col-xl-5 ">
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Color: ${od.color}</h6>
+                                                                        </div>
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Age: ${od.age}</h6>
+                                                                        </div>
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Gender: ${od.gender}</h6>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="">
-                                                                        <h6 class="text-black mb-0">Age: ${od.bird_age}</h6>
-                                                                    </div>
-                                                                    <div class="">
-                                                                        <h6 class="text-black mb-0">Gender: ${od.bird_gender}</h6>
-                                                                    </div>
-
-                                                                </div>
+                                                                </c:if>
                                                             </div>
                                                         </c:forEach>
                                                     </div>

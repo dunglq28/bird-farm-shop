@@ -5,8 +5,8 @@
  */
 package Controllers.Public;
 
-import Daos.BirdDAO;
-import Models.BirdDTO;
+import Daos.ProductDAO;
+import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +40,7 @@ public class ProductDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
         String button = request.getParameter("btAction");
 
         try {
@@ -49,18 +49,13 @@ public class ProductDetailServlet extends HttpServlet {
             }
             switch (button) {
                 case "null":
-                    url = MyAppConstants.PublicFeatures.SELECT_SAME_BIRD_CONTROLLER;
+                    url = MyAppConstants.PublicFeatures.SELECT_SAME_PRODUCT_CONTROLLER;
                     break;
                 case "Addtocart":
-                    request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SELECT_SAME_BIRD_CONTROLLER);
+                    request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SELECT_SAME_PRODUCT_CONTROLLER);
                     url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
                     break;
             }
-
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

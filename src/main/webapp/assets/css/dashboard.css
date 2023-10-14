@@ -24,7 +24,7 @@ body {
   color: #fff;
   overflow: hidden;
   transition: all 0.5 linear;
-  background: #17aaf3;
+  background: #0D6780;
 }
 
 .sidebar:hover {
@@ -100,7 +100,7 @@ body {
 }
 
 .header--title {
-  color: #17aaf3;
+  color: #0D6780;
 }
 
 .user--info {
@@ -152,7 +152,7 @@ table {
 }
 
 thead {
-  background: #17aaf3;
+  background: #0D6780;
   color: #fff;
 }
 

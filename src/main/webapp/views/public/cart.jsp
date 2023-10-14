@@ -51,18 +51,19 @@
                                                                      class="img-fluid rounded-3" alt="Bird Image">
                                                             </div>
                                                             <div class="col-md-4 col-lg-4 col-xl-4">
-                                                                <h6 class="text-black mb-0">${items.get(key).bird_Name} </h6>
-                                                                <h6 class="text-muted">${items.get(key).category_Name} </h6> 
-                                                                <div class="d-flex">
-                                                                    <h6 class="text-muted">Age: ${items.get(key).age}</h6>
-                                                                    <h6 class="mb-0 text-sm-center text-muted"
-                                                                        style="margin: 0 10px 0 10px;"> |
-                                                                    </h6>
-                                                                    <h6 class="text-muted">Gender: ${items.get(key).gender}</h6>
-                                                                </div>
+                                                                <h6 class="text-black mb-0">${items.get(key).name} </h6>
+                                                                <h6 class="text-muted">${items.get(key).cate_name} </h6> 
+                                                                <c:if test="${not empty items.get(key).age}">
+                                                                    <div class="d-flex">
+                                                                        <h6 class="text-muted">Age: ${items.get(key).age}</h6>
+                                                                        <h6 class="mb-0 text-sm-center text-muted"
+                                                                            style="margin: 0 10px 0 10px;"> |
+                                                                        </h6>
+                                                                        <h6 class="text-muted">Gender: ${items.get(key).gender}</h6>
+                                                                    </div>
+                                                                    <h6 class="text-muted">Color: ${items.get(key).color}</h6>
+                                                                </c:if>
 
-
-                                                                <h6 class="text-muted">Color: ${items.get(key).color}</h6>
                                                                 <div class="delete-product mb-1">
                                                                     <a href="remove-bird?BirdID=${key}" class="delete-icon text-decoration-none ">
                                                                         <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
@@ -82,10 +83,10 @@
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                                         <i class="fas fa-minus"></i>
                                                                     </button>
-                                                                    <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantity_Buy}" type="text"
+                                                                    <input id="form1" name="txtQuantityBuy" value="${items.get(key).quantityBuy}" type="text"
                                                                            class="form-control form-control-sm button-input"x   />
                                                                     <input name="txtBirdID" value="${key}" type="hidden" />
-                                                                    <input name="txtQuantityAvailable" value="${items.get(key).quantity_Available}" type="hidden" />
+                                                                    <input name="txtQuantityAvailable" value="${items.get(key).quantityAvailable}" type="hidden" />
                                                                     <button name="btn" value="inc" class="btn btn-link px-2 text-muted"
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                                         <i class="fas fa-plus"></i>
@@ -95,8 +96,8 @@
 
                                                             <div
                                                                 class="col-md-2 col-lg-2 col-xl-2 text-md-end text-lg-start text-xl-start">
-                                                                <h6 class="mb-0">${util.FormatPrice(items.get(key).price * items.get(key).quantity_Buy)}</h6>
-                                                                <c:set var="total_field" value="${items.get(key).price * items.get(key).quantity_Buy}" ></c:set>
+                                                                <h6 class="mb-0">${util.FormatPrice(items.get(key).price * items.get(key).quantityBuy)}</h6>
+                                                                <c:set var="total_field" value="${items.get(key).price * items.get(key).quantityBuy}" ></c:set>
 
                                                                 </div>
                                                             </div>
@@ -110,9 +111,9 @@
                                                                     </label>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                         </div>
-                                                        <c:set var="total_buy" value="${totalBuy = totalBuy + items.get(key).quantity_Buy}"></c:set>
+                                                    <c:set var="total_buy" value="${totalBuy = totalBuy + items.get(key).quantityBuy}"></c:set>
                                                 </c:forEach>
 
                                                 <!--<hr class="my-4">-->
@@ -120,13 +121,13 @@
                                                 <hr class="my-4">
 
                                                 <div class="pt-5">
-                                                    <h6 class="mb-0"><a href="product-list" class="text-body"><i
+                                                    <h6 class="mb-0"><a href="product_list?productType=bird" class="text-body"><i
                                                                 class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a>
                                                     </h6>
                                                 </div>
                                             </div>
                                         </div>
-                                        <form action="Checkout" class="col-lg-4 bg-grey" method="get">
+                                        <form action="Checkout" class="col-lg-4 bg-grey" method="post">
                                             <div class="p-5">
                                                 <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                                                 <hr class="my-4">
@@ -140,7 +141,7 @@
                                                     <h5 class="text-uppercase">Discount</h5>
                                                     <h5>0</h5>
                                                 </div>
-                   
+
                                                 <h5 class="text-uppercase mb-3">Gifts included</h5>
 
                                                 <div class="mb-5">
@@ -190,7 +191,7 @@
                                          class="img-fluid mb-4 mr-3">
                                     <h3><strong>Your Cart is Empty</strong></h3>
                                     <h4>Add something to make me happy</h4>
-                                    <a href="product-list" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
+                                    <a href="product_list?productType=bird" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
                                         Shopping</a>
                                 </div>
                             </div>

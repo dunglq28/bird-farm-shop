@@ -214,9 +214,9 @@
                                                                  class="img-fluid rounded-3" alt="Bird Image">
                                                         </div>
                                                         <div class="col-md-8 justify-content-center">
-                                                            <h5 class="text-black mb-0">${items.get(key).bird_Name}</h5>
+                                                            <h5 class="text-black mb-0">${items.get(key).name}</h5>
                                                             <div class="d-flex justify-content-between align-items-center mb-0">
-                                                                <h6 class="mb-0 text-muted ">Qty: ${items.get(key).quantity_Buy}</h6>
+                                                                <h6 class="mb-0 text-muted ">Qty: ${items.get(key).quantityBuy}</h6>
                                                                 <a href="#" class="change-infor-link text-decoration-none">
                                                                     <h6 class="mb-0 text-muted ">x${items.get(key).priceFormat}</h6>
                                                                 </a>
