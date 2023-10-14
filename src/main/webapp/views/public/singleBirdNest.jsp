@@ -14,252 +14,261 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="./assets/css/homePage.css">
-        <link rel="stylesheet" href="/assets/css/birdNestSingle.css">
+        <link rel="stylesheet" href="../../assets/css/homePage.css">
+        <link rel="stylesheet" href="../../assets/css/birdNestSingle.css">
     </head>
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
-            <!-- image and detail-->
-            <section class="py-5">
-                <div class="container">
-                    <div class="row gx-5">
-                        <aside class="col-lg-6">
-                            <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                                <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
-                                   href="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg">
-                                    <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
-                                         src="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg" />
-                                </a>
-                            </div>
-                            <div class="d-flex justify-content-center mb-3">
-                                <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                                   href="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg"
-                                   class="item-thumb">
-                                    <img width="100" height="100" class="rounded-2"
-                                         src="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg" />
-                                </a>
-                                <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                                   href="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B6.jpg"
-                                   class="item-thumb">
-                                    <img width="100" height="100" class="rounded-2"
-                                         src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B6.jpg" />
-                                </a>
-                                <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                                   href="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B7.jpg"
-                                   class="item-thumb">
-                                    <img width="100" height="100" class="rounded-2"
-                                         src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B7.jpg" />
-                                </a>
-
-                            </div>
-                            <!-- thumbs-wrap.// -->
-                            <!-- gallery-wrap .end// -->
-                        </aside>
-                        <main class="col-lg-6">
-                            <div class="ps-lg-3">
-                                <h2 class="title text-dark">Java Rice Finch Nest</h2>
-                                <div class="d-flex flex-row my-3">
-                                    <div class="text-warning mb-1 me-2">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span class="ms-1">
-                                            4.5
-                                        </span>
-                                    </div>
-                                    <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i>154 orders</span>
-                                    <span class="text-success ms-2">Available</span>
-                                </div>
-
-                                <div class="mb-3">
-                                    <span class="h5" style="color:#0D6780">$250</span>
-                                    <span class="text-muted">/for a nest</span>
-                                </div>
-
-                                <p>
-                                    The hatched chicks are gray-brown above and pale white below, with some gray streaks on the
-                                    chest, and the beak is horn-colored, but fades and is pink at the base.
-                                </p>
-
-                                <div class="row">
-                                    <dt class="col-4">Father bird</dt>
-                                    <dd class="col-8">Turquoise parrot</dd>
-
-                                    <dt class="col-4">Mother bird </dt>
-                                    <dd class="col-8">Senegal parrot</dd>
-
-                                    <dt class="col-4">Width</dt>
-                                    <dd class="col-8">22mm</dd>
-
-                                    <dt class="col-4">Length</dt>
-                                    <dd class="col-8">29mm</dd>
-
-                                    <dt class="col-4">Quantity of egg</dt>
-                                    <dd class="col-8">4 - 5 eggs</dd>
-
-
-
-
-                                </div>
-
-                                <hr />
-
-
-                                <div class="row mb-4">
-                                    <div class="col-md-5 col-6">
-                                        <label class="mb-2">Quantity of egg per nest</label>
-                                        <select class="form-select border border-secondary" style="height: 35px;">
-                                            <option>4 eggs</option>
-                                            <option>5 eggs</option>
-                                            <option>6 eggs</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 col-6 mb-3">
-                                        <label class="mb-2 d-block">Quantity of nest</label>
-                                        <div class="input-group mb-3" style="width: 170px;">
-                                            <button class="btn btn-white border border-secondary px-3" type="button"
-                                                    id="button-addon1" data-mdb-ripple-color="dark">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                            <input type="text" class="form-control text-center border border-secondary"
-                                                   placeholder="14" aria-label="Example text with button addon"
-                                                   aria-describedby="button-addon1" />
-                                            <button class="btn btn-white border border-secondary px-3" type="button"
-                                                    id="button-addon2" data-mdb-ripple-color="dark">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Buying -->
-                                <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
-                                <form action="" class="Addtocart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <input type="submit" value="Add to cart">
-
-                                </form>
-                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
-                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>
-                            </div>
-                        </main>
+             <!-- image and detail-->
+    <div class="py-5">
+        <div class="container">
+            <div class="row gx-5" style="padding-top: 60px">
+                <aside class="col-lg-6">
+                    <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                        <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
+                            href="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg">
+                            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
+                                src="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg" />
+                        </a>
                     </div>
-                </div>
-            </section>
+                    <div class="d-flex justify-content-center mb-3">
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
+                            href="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg"
+                            class="item-thumb">
+                            <img width="100" height="100" class="rounded-2"
+                                src="https://www.thespruce.com/thmb/TBFfGRP5cc0ElhQsuG-O3gpO6lY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/house-finch-nest-1168008180-67d8900a15d8480a93afc354ab5b6983.jpg" />
+                        </a>
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
+                            href="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B6.jpg"
+                            class="item-thumb">
+                            <img width="100" height="100" class="rounded-2"
+                                src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B6.jpg" />
+                        </a>
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
+                            href="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B7.jpg"
+                            class="item-thumb">
+                            <img width="100" height="100" class="rounded-2"
+                                src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_image/B7.jpg" />
+                        </a>
 
-            <!-- Spe and feedback navs -->
-            <section class="bg-light border-top py-4">
-                <div class="container">
-                    <div class="row gx-4">
-                        <div class="col-lg-8 mb-4">
-                            <div class="border rounded-2 px-3 py-2 bg-white">
-                                <nav>
-                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                                aria-selected="true">Specification</button>
-                                        <button class="nav-link" id="nav-comment-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-comment" type="button" role="tab" aria-controls="nav-comment"
-                                                aria-selected="false">Feedback</button>
-                                    </div>
-                                </nav>
+                    </div>
+                    <!-- thumbs-wrap.// -->
+                    <!-- gallery-wrap .end// -->
+                </aside>
+                <main class="col-lg-6">
+                    <div class="ps-lg-3">
+                        <h2 class="title text-dark">Java Rice Finch Nest</h2>
+                        <div class="d-flex flex-row my-3">
+                            <div class="text-warning mb-1 me-2">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="ms-1">
+                                    4.5
+                                </span>
+                            </div>
+                            <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i>154 orders</span>
+                            <span class="text-success ms-2">Available</span>
+                        </div>
 
-                                <!-- Spe and feedback content -->
-                                <!-- spe -->
-                                <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                         aria-labelledby="nav-home-tab">
-                                        <div style="display: flex; flex-direction:column; padding-top: 2%; padding-left: 2%;">
-                                            <div class="ProductTitleInformation">
-                                                <div class="ProductTitleInformationFormore"
-                                                     style="display: grid; grid-template-columns: 55% 45%; gap: 4px;">
-                                                    <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                        Parent's species
-                                                    </span>
-                                                    <span class="ProductAtribute">
-                                                        <p>Parrot</p>
-                                                    </span>
-                                                    <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                        Parent's origin
-                                                    </span>
-                                                    <span class="ProductAtribute">
-                                                        <p>Eastern Autralia, Asia</p>
-                                                    </span>
-                                                    <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                        Parent's color
-                                                    </span>
-                                                    <span class="ProductAtribute">
-                                                        <p>Bronw, Gray</p>
-                                                    </span>
-                                                </div>
+                        <div class="mb-3">
+                            <span class="h5" style="color:#0D6780">$250 - $3000</span>
+                            <span class="text-muted">/for an egg</span>
+                        </div>
+
+                        <p>
+                            The hatched chicks are gray-brown above and pale white below, with some gray streaks on the
+                            chest, and the beak is horn-colored, but fades and is pink at the base.
+                        </p>
+
+                        <div class="row">
+                            <dt class="col-4">Father bird</dt>
+                            <dd class="col-8">Turquoise parrot</dd>
+
+                            <dt class="col-4">Mother bird </dt>
+                            <dd class="col-8">Senegal parrot</dd>
+
+                            <dt class="col-4">Width</dt>
+                            <dd class="col-8">22mm</dd>
+
+                            <dt class="col-4">Length</dt>
+                            <dd class="col-8">29mm</dd>
+
+                            <dt class="col-4">Quantity of egg</dt>
+                            <dd class="col-8">4 - 6 eggs</dd>
+
+
+
+
+                        </div>
+
+                        <hr />
+
+
+                        <div class="row mb-4">
+                            <div class="col-md-4 col-4">
+                                <label class="mb-2">Quantity of egg</label>
+                                <select class="form-select border border-secondary" style="height: 35px;">
+                                    <option>4 eggs</option>
+                                    <option>5 eggs</option>
+                                    <option>6 eggs</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <label class="mb-2">Classification</label>
+                                <select class="form-select border border-secondary" style="height: 35px;">
+                                    <option>Incubation</option>
+                                    <option>No incubation</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-4 mb-3">
+                                <label class="mb-2 d-block">Quantity of nest</label>
+                                <div class="input-group mb-3" style="width: 170px;">
+                                    <button class="btn btn-white border border-secondary px-3" type="button"
+                                        id="button-addon1" data-mdb-ripple-color="dark">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="text" class="form-control text-center border border-secondary"
+                                        placeholder="14" aria-label="Example text with button addon"
+                                        aria-describedby="button-addon1" />
+                                    <button class="btn btn-white border border-secondary px-3" type="button"
+                                        id="button-addon2" data-mdb-ripple-color="dark">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Buying -->
+                        <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
+                        <form action="" class="Addtocart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <input type="submit" value="Add to cart">
+
+                        </form>
+                        <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
+                                class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                    </div>
+                </main>
+            </div>
+        </div>
+        </div>
+
+        <!-- Spe and feedback navs -->
+        <div class="bg-light border-top py-4">
+            <div class="container">
+                <div class="row gx-4">
+                    <div class="col-lg-8 mb-4">
+                        <div class="border rounded-2 px-3 py-2 bg-white">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                        aria-selected="true">Specification</button>
+                                    <button class="nav-link" id="nav-comment-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-comment" type="button" role="tab"
+                                        aria-controls="nav-comment" aria-selected="false">Feedback</button>
+                                </div>
+                            </nav>
+
+                            <!-- Spe and feedback content -->
+                            <!-- spe -->
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                    aria-labelledby="nav-home-tab">
+                                    <div
+                                        style="display: flex; flex-direction:column; padding-top: 2%; padding-left: 2%;">
+                                        <div class="ProductTitleInformation">
+                                            <div class="ProductTitleInformationFormore"
+                                                style="display: grid; grid-template-columns: 55% 45%; gap: 4px;">
+                                                <span style="max-width: 300px; color: rgb(128,128,137);">
+                                                    Parent's species
+                                                </span>
+                                                <span class="ProductAtribute">
+                                                    <p>Parrot</p>
+                                                </span>
+                                                <span style="max-width: 300px; color: rgb(128,128,137);">
+                                                    Parent's origin
+                                                </span>
+                                                <span class="ProductAtribute">
+                                                    <p>Eastern Autralia, Asia</p>
+                                                </span>
+                                                <span style="max-width: 300px; color: rgb(128,128,137);">
+                                                    Parent's color
+                                                </span>
+                                                <span class="ProductAtribute">
+                                                    <p>Bronw, Gray</p>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <!-- feedback Comment -->
-                                    <div class="tab-pane fade" id="nav-comment" role="tabpanel"
-                                         aria-labelledby="nav-comment-tab">
-                                        <div class="row">
+                                <!-- feedback Comment -->
+                                <div class="tab-pane fade" id="nav-comment" role="tabpanel"
+                                    aria-labelledby="nav-comment-tab">
+                                    <div class="row">
 
-                                            <div class="col-10">
+                                        <div class="col-10">
 
-                                                <div class="comment-card" style="padding-top: 20px">
-                                                    <div class="comment-card-body">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
-                                                                     class="img img-rounded img-fluid" />
-                                                                <p class="text-secondary text-center" style="font-size:12px">15
-                                                                    Minutes Ago</p>
-                                                            </div>
-                                                            <div class="col-md-10 user-comment">
-                                                                <p>
-                                                                    <a class="float-left" href=""
-                                                                       style="text-decoration: none; color:#0D6780"><strong>Truong
-                                                                            Tuyet Ngan (K17 HCM)</strong></a>
-                                                                    <span class="float-right"><i
-                                                                            class="text-warning fa fa-star"></i></span>
-                                                                    <span class="float-right"><i
-                                                                            class="text-warning fa fa-star"></i></span>
-                                                                    <span class="float-right"><i
-                                                                            class="text-warning fa fa-star"></i></span>
-                                                                    <span class="float-right"><i
-                                                                            class="text-warning fa fa-star"></i></span>
-
-                                                                </p>
-                                                                <div class="clearfix"></div>
-                                                                <p>I got the bird. Its very beautiful!
-                                                                </p>
-
-                                                                <a class="float-right btn btn-outline-primary ml-2"> <i
-                                                                        class="fa fa-reply"></i> Reply</a>
-                                                                <a class="float-right btn like text-white btn-danger"> <i
-                                                                        class="fa fa-heart"></i> Like</a>
-                                                                </p>
-                                                            </div>
+                                            <div class="comment-card" style="padding-top: 20px">
+                                                <div class="comment-card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
+                                                                class="img img-rounded img-fluid" />
+                                                            <p class="text-secondary text-center"
+                                                                style="font-size:12px">15
+                                                                Minutes Ago</p>
                                                         </div>
-                                                        <div class="comment-card comment-card-inner user-comment-reply">
-                                                            <div class="comment-card-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-2">
-                                                                        <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
-                                                                             class="img img-rounded img-fluid" />
-                                                                        <p class="text-secondary text-center"
-                                                                           style="font-size:12px">15 Minutes Ago</p>
-                                                                    </div>
-                                                                    <div class="col-md-10">
-                                                                        <p><a href=""
-                                                                              style="text-decoration: none; color:#0D6780"><strong>Tran
-                                                                                    Manh Cuong (K17 HCM)</strong></a></p>
+                                                        <div class="col-md-10 user-comment">
+                                                            <p>
+                                                                <a class="float-left" href=""
+                                                                    style="text-decoration: none; color:#0D6780"><strong>Truong
+                                                                        Tuyet Ngan (K17 HCM)</strong></a>
+                                                                <span class="float-right"><i
+                                                                        class="text-warning fa fa-star"></i></span>
+                                                                <span class="float-right"><i
+                                                                        class="text-warning fa fa-star"></i></span>
+                                                                <span class="float-right"><i
+                                                                        class="text-warning fa fa-star"></i></span>
+                                                                <span class="float-right"><i
+                                                                        class="text-warning fa fa-star"></i></span>
 
-                                                                        <p>I just got the bird too, it's so fantastic!</p>
-                                                                        <a class="float-right btn btn-outline-primary ml-2">
-                                                                            <i class="fa fa-reply"></i> Reply</a>
-                                                                        <a class="float-right btn like text-white btn-danger">
-                                                                            <i class="fa fa-heart"></i> Like</a>
-                                                                        </p>
-                                                                    </div>
+                                                            </p>
+                                                            <div class="clearfix"></div>
+                                                            <p>I got the bird. Its very beautiful!
+                                                            </p>
+
+                                                            <a class="float-right btn btn-outline-primary ml-2"> <i
+                                                                    class="fa fa-reply"></i> Reply</a>
+                                                            <a class="float-right btn like text-white btn-danger"> <i
+                                                                    class="fa fa-heart"></i> Like</a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-card comment-card-inner user-comment-reply">
+                                                        <div class="comment-card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
+                                                                        class="img img-rounded img-fluid" />
+                                                                    <p class="text-secondary text-center"
+                                                                        style="font-size:12px">15 Minutes Ago</p>
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <p><a href=""
+                                                                            style="text-decoration: none; color:#0D6780"><strong>Tran
+                                                                                Manh Cuong (K17 HCM)</strong></a></p>
+
+                                                                    <p>I just got the bird too, it's so fantastic!</p>
+                                                                    <a class="float-right btn btn-outline-primary ml-2">
+                                                                        <i class="fa fa-reply"></i> Reply</a>
+                                                                    <a
+                                                                        class="float-right btn like text-white btn-danger">
+                                                                        <i class="fa fa-heart"></i> Like</a>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -271,55 +280,55 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Similar item -->
-                        <div class="col-lg-4">
-                            <div class="px-0 border rounded-2 shadow-0">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Similar items</h5>
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://www.thespruce.com/thmb/AXicfhpphbFBcCky6gvldScua-8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/nest-northern-mockingbird-5900cf7d3df78ca159e30cf8.jpg"
-                                                     style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="info">
-                                                <a href="#" class="nav-link mb-1">Roller Pigeon Nest </a>
-                                                <strong style="color:#0D6780"> $710</strong>
-                                            </div>
+                    <!-- Similar item -->
+                    <div class="col-lg-4">
+                        <div class="px-0 border rounded-2 shadow-0">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Similar items</h5>
+                                    <div class="d-flex mb-3">
+                                        <a href="#" class="me-3">
+                                            <img src="https://www.thespruce.com/thmb/AXicfhpphbFBcCky6gvldScua-8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/nest-northern-mockingbird-5900cf7d3df78ca159e30cf8.jpg"
+                                                style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                        </a>
+                                        <div class="info">
+                                            <a href="#" class="nav-link mb-1">Roller Pigeon Nest </a>
+                                            <strong style="color:#0D6780"> $710</strong>
                                         </div>
+                                    </div>
 
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://th.bing.com/th/id/R.3d30228a4294a52143b8054700071d2b?rik=oTw8%2b4mn7wQAVA&riu=http%3a%2f%2f4.bp.blogspot.com%2f-Ih8fceC9LUk%2fTy5VCOn8SZI%2fAAAAAAAAAG8%2fbjgF12d4Hcc%2fs1600%2fIMAG0121.jpg&ehk=BuAqQZVoyHWAT7jsFAMER0ukqBYn0Vdt0l2NhBlzyUM%3d&risl=&pid=ImgRaw&r=0"
-                                                     style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="info">
-                                                <a href="#" class="nav-link mb-1">Black-Capped Chickadee Nest</a>
-                                                <strong style="color:#0D6780"> $130</strong>
-                                            </div>
+                                    <div class="d-flex mb-3">
+                                        <a href="#" class="me-3">
+                                            <img src="https://th.bing.com/th/id/R.3d30228a4294a52143b8054700071d2b?rik=oTw8%2b4mn7wQAVA&riu=http%3a%2f%2f4.bp.blogspot.com%2f-Ih8fceC9LUk%2fTy5VCOn8SZI%2fAAAAAAAAAG8%2fbjgF12d4Hcc%2fs1600%2fIMAG0121.jpg&ehk=BuAqQZVoyHWAT7jsFAMER0ukqBYn0Vdt0l2NhBlzyUM%3d&risl=&pid=ImgRaw&r=0"
+                                                style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                        </a>
+                                        <div class="info">
+                                            <a href="#" class="nav-link mb-1">Black-Capped Chickadee Nest</a>
+                                            <strong style="color:#0D6780"> $130</strong>
                                         </div>
+                                    </div>
 
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://4.bp.blogspot.com/-SUjocbJkP4o/UyMnYmgRMII/AAAAAAAAIXk/Oc0tlkQhsJo/s1600/IMG_6934.JPG"
-                                                     style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="info">
-                                                <a href="#" class="nav-link mb-1">Spanish Timbrado Canary Nest</a>
-                                                <strong style="color:#0D6780"> $480</strong>
-                                            </div>
+                                    <div class="d-flex mb-3">
+                                        <a href="#" class="me-3">
+                                            <img src="https://4.bp.blogspot.com/-SUjocbJkP4o/UyMnYmgRMII/AAAAAAAAIXk/Oc0tlkQhsJo/s1600/IMG_6934.JPG"
+                                                style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                        </a>
+                                        <div class="info">
+                                            <a href="#" class="nav-link mb-1">Spanish Timbrado Canary Nest</a>
+                                            <strong style="color:#0D6780"> $480</strong>
                                         </div>
+                                    </div>
 
-                                        <div class="d-flex">
-                                            <a href="#" class="me-3">
-                                                <img src="https://www.thespruce.com/thmb/_ZUyjpEsRmENQkHANA1auntHIUc=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/robin-s-eggs-138066946-d33cac25e97c4c6bb71f90291e30ff15.jpg"
-                                                     style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="info">
-                                                <a href="#" class="nav-link mb-1">American Robin Nest</a>
-                                                <strong style="color:#0D6780"> $500</strong>
-                                            </div>
+                                    <div class="d-flex">
+                                        <a href="#" class="me-3">
+                                            <img src="https://www.thespruce.com/thmb/_ZUyjpEsRmENQkHANA1auntHIUc=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/robin-s-eggs-138066946-d33cac25e97c4c6bb71f90291e30ff15.jpg"
+                                                style="width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                        </a>
+                                        <div class="info">
+                                            <a href="#" class="nav-link mb-1">American Robin Nest</a>
+                                            <strong style="color:#0D6780"> $500</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +336,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+    </div>
         <jsp:include page="/components/footer.jsp"></jsp:include>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
