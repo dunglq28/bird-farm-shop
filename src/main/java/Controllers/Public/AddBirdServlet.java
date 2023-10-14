@@ -37,6 +37,7 @@ public class AddBirdServlet extends HttpServlet {
         int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
         int quantitySold = Integer.parseInt(request.getParameter("quantity_Sold"));
         String lastSearch = request.getParameter("lastsearch");
+        String page = request.getParameter("page");
         HttpSession session = request.getSession(true);
 
         try {
@@ -54,18 +55,12 @@ public class AddBirdServlet extends HttpServlet {
             cart.addItemToCart(BirdID, prodcut);
             session.setAttribute("BIRD_CART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-            url = (String) request.getAttribute("HISTORY_URL");
 
-            if (!lastSearch.isEmpty()) {
-                url = "search-product"
-                        + "?lastSearch=" + lastSearch;
-            } else {
-                url = (String) request.getAttribute("HISTORY_URL");
-            }
+            url = (String) session.getAttribute("HISTORY_URL");
+
         } finally {
-//            response.sendRedirect(url);
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
+
         }
     }
 

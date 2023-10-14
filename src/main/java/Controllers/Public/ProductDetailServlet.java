@@ -42,6 +42,7 @@ public class ProductDetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.HOME_PAGE;
         String button = request.getParameter("btAction");
+        HttpSession session = request.getSession();
 
         try {
             if (button == null) {
@@ -52,7 +53,7 @@ public class ProductDetailServlet extends HttpServlet {
                     url = MyAppConstants.PublicFeatures.SELECT_SAME_PRODUCT_CONTROLLER;
                     break;
                 case "Addtocart":
-                    request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SELECT_SAME_PRODUCT_CONTROLLER);
+                    session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
                     url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
                     break;
             }

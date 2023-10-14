@@ -55,8 +55,8 @@ public class PublicShopServlet extends HttpServlet {
                     session.setAttribute("PRODUCT_TYPE_ID", 2);
                 }
             }             
+          
             
-            request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE);
             switch (button) {
                 case "null":
                     url = MyAppConstants.PublicFeatures.PAGING_PRODUCT_CONTROLLER;
