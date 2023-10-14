@@ -58,8 +58,12 @@ public class AuthLoginServlet extends HttpServlet {
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
                 } else {
                     session.setAttribute("ACCOUNT", account);
-                    url = url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                    if(account.getRoleName().equals("Customer")){
+                        url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
                             : (String) session.getAttribute("BACK_CART");
+                    } else{
+                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                    }
                 }
             }
 

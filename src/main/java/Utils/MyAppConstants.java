@@ -21,6 +21,7 @@ public class MyAppConstants {
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
         public static final String SELECT_SAME_PRODUCT_CONTROLLER = "SelectSameProductServlet";
         public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
+        public static final String MANAGE_PAGE = "/views/public/dashboard.jsp";
     }
 
     public class AuthFeatures {
