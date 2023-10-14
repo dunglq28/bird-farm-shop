@@ -1,15 +1,15 @@
 package Cart;
 
-import Models.BirdDTO;
+import Object.Products;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 public class CartObj {
 
-    private Map<String, BirdDTO> items;
+    private Map<String, Products> items;
 
-    public Map<String, BirdDTO> getItems() {
+    public Map<String, Products> getItems() {
         return items;
     }
 
@@ -18,11 +18,8 @@ public class CartObj {
     }
 
 
-    BirdDTO dto = new BirdDTO();
 
-    public void addItemToCart(String sku, int quantityBuy, int quantityAvailable, int quantitySold, float price, String img, String age, String color, String gender,
-            String name, String cate_Name) { // (String sku, int quantity)
-        BirdDTO dto = new BirdDTO(name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
+    public void addItemToCart(String sku, Products product) { // (String sku, int quantity)
         if (sku == null) {
             return;
         }
@@ -32,12 +29,12 @@ public class CartObj {
         if (this.items == null) {
             this.items = new HashMap<>();
         }
-        if (this.items.containsKey(sku)) {
-            quantityBuy = this.items.get(sku).getQuantity_Buy()+ quantityBuy;
+         if (this.items.containsKey(sku)) {
+            int quantityBuy = this.items.get(sku).getQuantityBuy() + product.getQuantityBuy();
+            product.setQuantityBuy(quantityBuy);
         }
-        dto.setQuantity_Buy(quantityBuy);
         // 3. Update items
-        this.items.put(sku, dto);
+        this.items.put(sku, product);
     }
     
     public void updateQuantityBuy(String sku, int quantityBuy) { 
@@ -51,7 +48,7 @@ public class CartObj {
             this.items = new HashMap<>();
         }
         if (this.items.containsKey(sku)) {
-            this.items.get(sku).setQuantity_Buy(quantityBuy);
+            this.items.get(sku).setQuantityBuy(quantityBuy);
         }
     }
 
@@ -69,13 +66,6 @@ public class CartObj {
             } else {
                 this.items.remove(sku);
             }
-//            if (this.items.get(sku).getQuantiry() == quantity
-//                    || this.items.get(sku).getQuantiry() < quantity) {
-//                this.items.remove(sku);
-//            } else {
-//                quantity = this.items.get(sku).getQuantiry() - quantity;
-//                this.items.get(sku).setQuantiry(quantity);
-//            }
         }
     }
     
@@ -88,11 +78,5 @@ public class CartObj {
         this.items.clear();
         
     }
-
-    public Iterable<Map.Entry<String, BirdDTO>> entrySet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
 
 }

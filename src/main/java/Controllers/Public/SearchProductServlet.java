@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Daos.BirdDAO;
-import Models.BirdDTO;
+import Daos.ProductDAO;
+import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,16 +22,16 @@ public class SearchProductServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String search = request.getParameter("lastSearch");
-        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
+        String url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
         try {
-            BirdDAO dao = new BirdDAO();
+            ProductDAO dao = new ProductDAO();
             if (!search.trim().isEmpty()) {
-                dao.getBirdByName(search);
-                List<BirdDTO> result = dao.getBirdList();
+                dao.getProductByName(search);
+                List<ProductDTO> result = dao.getProductList();
                 request.setAttribute("SEARCHBIRD_RESULT", result);
             } else {
                 dao.showAllBird();
-                List<BirdDTO> result = dao.getBirdList();
+                List<ProductDTO> result = dao.getProductList();
                 request.setAttribute("SEARCHBIRD_RESULT", result);
             }
         } finally {

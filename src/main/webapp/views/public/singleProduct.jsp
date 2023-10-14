@@ -18,25 +18,28 @@
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
             <!-- image and detail-->
-        <c:set var="bird_current" value="${sessionScope.BIRD_CURRENT}"></c:set>
-        <c:set var="bird_same_name" value="${sessionScope.BIRD_SAME_NAME}"></c:set>
+        <jsp:useBean id="utilPrice" class="Utils.FormatCurrency"></jsp:useBean>
+        <jsp:useBean id="util" class="Utils.FuncHelper"></jsp:useBean>
 
-        <c:if test="${not empty bird_current}">
+        <c:set var="product_current" value="${sessionScope.PRODUCT_CURRENT}"></c:set>
+        <c:set var="product_same_name" value="${sessionScope.PRODUCT_SAME_NAME}"></c:set>
+
+        <c:if test="${not empty product_current}">
             <section class="py-5">
                 <div id="myForm" class="container">
                     <div class="row gx-5">
                         <aside class="col-lg-6">
                             <div class="border rounded-4 mb-3 d-flex justify-content-center">
                                 <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
-                                   href="${bird_current.image}">
+                                   href="${product_current.image}">
                                     <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-2 fit"
-                                         src="${bird_current.image}" />
+                                         src="${product_current.image}" />
                                 </a>
                             </div>
                         </aside>
                         <main class="col-lg-6">
                             <div class="ps-lg-3">
-                                <h2 class="title text-dark">${bird_current.bird_Name}</h2>
+                                <h2 class="title text-dark">${product_current.product_Name}</h2>
 
 
                                 <div class="d-flex flex-row my-3">
@@ -55,42 +58,41 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="h5" style="color:#0D6780">${bird_current.priceFormat}</span>
+                                    <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.price)}</span>
                                     <span class="text-muted">/for a bird</span>
                                 </div>
 
                                 <p>
-                                    ${bird_current.detail}
+                                    ${product_current.detail}
                                 </p>
 
                                 <div class="row">
                                     <dt class="col-3">Color</dt>
-                                    <dd class="col-9">${bird_current.color}</dd>
+                                    <dd class="col-9">${product_current.color}</dd>
 
                                     <dt class="col-3">Characteristic</dt>
-                                    <dd class="col-9">${bird_current.characteristics}</dd>
+                                    <dd class="col-9">${product_current.characteristics}</dd>
                                 </div>
 
                                 <hr />
-                                <jsp:useBean id="util" class="Utils.FuncHelper"></jsp:useBean>
-                                    <div class="row mb-4">
-                                        <form action="product" id="myForm" class="row col-lg-8" method="Post">
-                                            <input type="hidden" name="txtBirdName" value="${bird_current.bird_Name}"/>
+                                <div class="row mb-4">
+                                    <form action="product" id="myForm" class="row col-lg-8" method="get">
+                                        <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
+                                        <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
                                         <div class="col-md-6 col-6">
                                             <label class="mb-2">Age</label>
                                             <select name="txtAge" onchange="submit()" class="form-select border border-secondary" style="height: 35px;">
-
                                                 <c:set var="age_list" value="${requestScope.AGE_LIST}"></c:set>
-                                                <option ${util.checkExist(age_list, 'Baby') ? '' : 'disabled'} ${bird_current.age == 'Baby' ? 'selected' : ''}>
+                                                <option ${util.checkExist(age_list, 'Baby') ? '' : 'disabled'} ${product_current.age == 'Baby' ? 'selected' : ''}>
                                                     Baby
                                                 </option>
-                                                <option ${util.checkExist(age_list, 'Young') ? '' : 'disabled'} ${bird_current.age == 'Young' ? 'selected' : ''}>
+                                                <option ${util.checkExist(age_list, 'Young') ? '' : 'disabled'} ${product_current.age == 'Young' ? 'selected' : ''}>
                                                     Young
                                                 </option>
-                                                <option ${util.checkExist(age_list, 'Mature') ? '' : 'disabled'} ${bird_current.age == 'Mature' ? 'selected' : ''}>
+                                                <option ${util.checkExist(age_list, 'Mature') ? '' : 'disabled'} ${product_current.age == 'Mature' ? 'selected' : ''}>
                                                     Mature
                                                 </option>
-                                                <option ${util.checkExist(age_list, 'Adult') ? '' : 'disabled'} ${bird_current.age == 'Adult' ? 'selected' : ''}>
+                                                <option ${util.checkExist(age_list, 'Adult') ? '' : 'disabled'} ${product_current.age == 'Adult' ? 'selected' : ''}>
                                                     Adult
                                                 </option>
                                             </select>
@@ -99,10 +101,10 @@
                                             <label class="mb-2">Gender</label>
                                             <select name="txtGender" onchange="submit()" class="form-select border border-secondary" style="height: 35px;">
                                                 <c:set var="gender_list" value="${requestScope.GENDER_LIST}"></c:set>
-                                                <option ${util.checkExist(gender_list, 'Male') ? '' : 'disabled'} ${bird_current.gender == 'Male' ? 'selected' : ''}>
+                                                <option ${util.checkExist(gender_list, 'Male') ? '' : 'disabled'} ${product_current.gender == 'Male' ? 'selected' : ''}>
                                                     Male
                                                 </option>
-                                                <option ${util.checkExist(gender_list, 'Female') ? '' : 'disabled'} ${bird_current.gender == 'Female' ? 'selected' : ''}>
+                                                <option ${util.checkExist(gender_list, 'Female') ? '' : 'disabled'} ${product_current.gender == 'Female' ? 'selected' : ''}>
                                                     Female
                                                 </option>
                                             </select>
@@ -129,16 +131,17 @@
                                     <i class="fa-solid fa-cart-shopping"></i>
                                     <input type="submit" value="Add to cart"> 
                                     <input name="btAction" type="hidden" value="Addtocart"> 
-                                    <input type="hidden" name="BirdID" value="${bird_current.birdID}"/>
-                                    <input type="hidden" name="txtBirdName" value="${bird_current.bird_Name}"/>
-                                    <input type="hidden" name="category_Name" value="${bird_current.category_Name}"/>
-                                    <input type="hidden" name="quantity_Available" value="${bird_current.quantity_Available}"/>
-                                    <input type="hidden" name="quantity_Sold" value="${bird_current.quantity_Sold}"/>
-                                    <input type="hidden" name="price" value="${bird_current.price}"/>
-                                    <input type="hidden" name="image" value="${bird_current.image}"/>
-                                    <input type="hidden" name="txtAge" value="${bird_current.age}"/>
-                                    <input type="hidden" name="color" value="${bird_current.color}"/>
-                                    <input type="hidden" name="txtGender" value="${bird_current.gender}"/>
+                                    <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
+                                    <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
+                                    <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
+                                    <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
+                                    <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
+                                    <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
+                                    <input type="hidden" name="price" value="${product_current.price}"/>
+                                    <input type="hidden" name="image" value="${product_current.image}"/>
+                                    <input type="hidden" name="txtAge" value="${product_current.age}"/>
+                                    <input type="hidden" name="color" value="${product_current.color}"/>
+                                    <input type="hidden" name="txtGender" value="${product_current.gender}"/>
                                     <input type="hidden" id="param_quantity" name="quantity_Buy" value="" />
                                 </form>
                                 <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
@@ -156,7 +159,7 @@
             var param_quantity = document.querySelector('#param_quantity')
             param_quantity.value = input_quantity.value;
             btn_inc.onclick = () => {
-                if (input_quantity.value < ${bird_current.quantity_Available}) {
+                if (input_quantity.value < ${product_current.quantity_Available}) {
                     input_quantity.value++;
                     param_quantity.value++
                 }

@@ -170,7 +170,7 @@
                 <div class="form-group">
                     <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
                 </div>
-                    <input type="hidden" name="txtTotalOrder" value="${requestScope.TOTAL_ORDER}" />
+                    <input type="hidden" name="txtTotalOrder" value="${sessionScope.TOTAL_ORDER}" />
                 <div class="form-group">
                     <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
                 </div>

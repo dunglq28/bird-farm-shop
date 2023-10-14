@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "Bird-Nest-Services", urlPatterns = {"/Bird-Nest-Services"})
 public class BirdNestServicesSerlvet extends HttpServlet {
@@ -17,15 +18,20 @@ public class BirdNestServicesSerlvet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
         String button = request.getParameter("btAction");
+        HttpSession session = request.getSession();
+
         try {
             if (button == null) {
-                 url = MyAppConstants.PublicFeatures.BIRD_NEST_SERVICE_PAGE;
+                url = MyAppConstants.PublicFeatures.BIRD_NEST_SERVICE_PAGE;
             } else if (button.equals("OrderAvailableBirdNest")) {
-                url = MyAppConstants.PublicFeatures.PRODUCT_LIST_CONTROLLER;
-                    response.sendRedirect(url);
-                    return;
+                session.setAttribute("BUTTON", "OrderBirdNest");
+                url = "product_list"
+                        + "?productType=birdNest";
+                response.sendRedirect(url);
+                return;
+            } else if (button.equals("Addtocart")) {
+                url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
             }
-           
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } finally {

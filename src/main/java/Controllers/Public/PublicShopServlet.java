@@ -5,8 +5,8 @@
  */
 package Controllers.Public;
 
-import Models.BirdDTO;
-import Daos.BirdDAO;
+import Models.ProductDTO;
+import Daos.ProductDAO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "product-list", urlPatterns = {"/product-list"})
+@WebServlet(name = "product_list", urlPatterns = {"/product_list"})
 public class PublicShopServlet extends HttpServlet {
 
     /**
@@ -39,20 +39,27 @@ public class PublicShopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.SHOPPING_PAGE;
+        String url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
         String button = request.getParameter("btAction");
+        String productType = request.getParameter("productType");
+        HttpSession session = request.getSession();
 
         try {
             if (button == null) {
                 button = "null";
-            }
-            request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.SHOPPING_PAGE);
+                if (productType.equals("bird")) {
+                    session.setAttribute("PRODUCT_TYPE", "bird");
+                    session.setAttribute("PRODUCT_TYPE_ID", 1);
+                } else if (productType.equals("birdNest")) {
+                    session.setAttribute("PRODUCT_TYPE", "birdNest");
+                    session.setAttribute("PRODUCT_TYPE_ID", 2);
+                }
+            }             
+            
+            request.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE);
             switch (button) {
                 case "null":
-                    url = MyAppConstants.PublicFeatures.PAGING_CONTROLLER;
-                    break;
-                case "OrderAvailableBirdNest":
-                    url = MyAppConstants.PublicFeatures.PAGING_CONTROLLER;
+                    url = MyAppConstants.PublicFeatures.PAGING_PRODUCT_CONTROLLER;
                     break;
                 case "Addtocart":
                     url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;

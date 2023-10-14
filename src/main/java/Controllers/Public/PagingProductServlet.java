@@ -5,13 +5,12 @@
  */
 package Controllers.Public;
 
-import Daos.BirdDAO;
-import Models.BirdDTO;
+import Daos.ProductDAO;
+import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "SelectSameBirdServlet", urlPatterns = {"/SelectSameBirdServlet"})
-public class SelectSameBirdServlet extends HttpServlet {
+@WebServlet(name = "PagingProductServlet", urlPatterns = {"/PagingProductServlet"})
+public class PagingProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,60 +39,44 @@ public class SelectSameBirdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
-        String button = request.getParameter("btAction");
-
-        String bird_name = request.getParameter("txtBirdName");
-        String birdID = "";
-        String ageChoose = request.getParameter("txtAge");
-        String genderChoose = request.getParameter("txtGender");
-
+        String page = request.getParameter("page");
+        String url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
         HttpSession session = request.getSession();
 
         try {
-            BirdDAO dao = new BirdDAO();
-            BirdDTO bird = null;
-            List<BirdDTO> result = dao.getBirdByName(bird_name);
-            List<String> ageList = new ArrayList<String>();
-            List<String> genderList = new ArrayList<String>();
-            for (BirdDTO birdDTO : result) {
-                if (!ageList.contains(birdDTO.getAge())) {
-                    ageList.add(birdDTO.getAge());
-                }
-                if (!genderList.contains(birdDTO.getGender())) {
-                    genderList.add(birdDTO.getGender());
-                }
-            }
-            if (birdID.isEmpty()) {
-                bird = (BirdDTO) session.getAttribute("BIRD_CURRENT");
-            }
 
-            if (ageChoose != null && genderChoose != null) {
-                for (BirdDTO birdDTO : result) {
-                    if (birdDTO.getGender().equals(genderChoose) && birdDTO.getAge().equals(ageChoose)) {
-                        birdID = birdDTO.getBirdID();
-                    }
-                }
+            if (page == null) {
+                page = "1";
+            }
+            int indexPage = Integer.parseInt(page);
+
+            ProductDAO dao = new ProductDAO();
+            int product_typeID = (int) session.getAttribute("PRODUCT_TYPE_ID");
+            int endPage = dao.getNumberPage(product_typeID);
+            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID);
+            session.setAttribute("PRODUCT_LIST", result);
+            int start = 1;
+            int distance = 4;
+
+            int end;
+            if (endPage < distance) {
+                end = endPage;
+            } else {
+                end = start + distance;
             }
 
-            if (bird != null && !ageChoose.equals(bird.getAge())) {
-                genderList.clear();
-                for (BirdDTO birdDTO : result) {
-                    if (birdDTO.getAge().equals(ageChoose)) {
-                        birdID = birdDTO.getBirdID();
-                        genderList.add(birdDTO.getGender());
-                    }
+            if (indexPage >= 4) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
                 }
             }
-
-            request.setAttribute("AGE_LIST", ageList);
-            request.setAttribute("GENDER_LIST", genderList);
-            bird = dao.getBirdByID(birdID);
-
-            session.setAttribute("BIRD_CURRENT", bird);
-            session.setAttribute("BIRD_SAME_NAME", result);
-            url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
-
+            session.setAttribute("START", start);
+            session.setAttribute("END", end);
+            session.setAttribute("indexCurrent", indexPage);
+            session.setAttribute("endPage", endPage);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

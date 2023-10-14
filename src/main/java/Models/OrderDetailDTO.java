@@ -15,8 +15,7 @@ public class OrderDetailDTO {
 
     private String orderID;
     private int serviceID;
-    private String birdID;
-    private String bird_Nest_ID;
+    private String productID;
     private String bird_name;
     private String cate_name;
     private String bird_image;
@@ -28,11 +27,10 @@ public class OrderDetailDTO {
     private int quantity_Buy;
     private String status;
 
-    public OrderDetailDTO(String orderID, int serviceID, String birdID, String bird_Nest_ID, float price, int quantity_Buy, String status) {
+    public OrderDetailDTO(String orderID, int serviceID, String productID, float price, int quantity_Buy, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
-        this.birdID = birdID;
-        this.bird_Nest_ID = bird_Nest_ID;
+        this.productID = productID;
         this.price = price;
         this.quantity_Buy = quantity_Buy;
         this.status = status;
@@ -73,21 +71,14 @@ public class OrderDetailDTO {
         this.serviceID = serviceID;
     }
 
-    public String getBirdID() {
-        return birdID;
+    public String getProductID() {
+        return productID;
     }
 
-    public void setBirdID(String birdID) {
-        this.birdID = birdID;
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 
-    public String getBird_Nest_ID() {
-        return bird_Nest_ID;
-    }
-
-    public void setBird_Nest_ID(String bird_Nest_ID) {
-        this.bird_Nest_ID = bird_Nest_ID;
-    }
 
     public String getBird_name() {
         return bird_name;
@@ -96,7 +87,6 @@ public class OrderDetailDTO {
     public void setBird_name(String bird_name) {
         this.bird_name = bird_name;
     }
-    
 
     public String getCate_name() {
         return cate_name;
@@ -121,8 +111,6 @@ public class OrderDetailDTO {
     public void setBird_gender(String bird_gender) {
         this.bird_gender = bird_gender;
     }
-    
-    
 
     public String getBird_color() {
         return bird_color;

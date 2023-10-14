@@ -19,7 +19,7 @@
                 </button>
                 <div class="dropdown-content-wrapper">
                     <div class="dropdown-content">
-                        <a href="product-list">Buying birds</a>
+                        <a href="product_list?productType=bird">Buying birds</a>
                         <a href="Bird-Nest-Services">Ordering bird nests</a>
                     </div>
                 </div>

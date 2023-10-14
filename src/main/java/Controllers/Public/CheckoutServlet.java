@@ -6,12 +6,12 @@
 package Controllers.Public;
 
 import Cart.CartObj;
-import Daos.BirdDAO;
+import Daos.ProductDAO;
 import Daos.CustomerDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
-import Models.BirdDTO;
+import Models.ProductDTO;
 import Models.CustomerDTO;
 import Models.OrderDTO;
 import Models.OrderDetailDTO;

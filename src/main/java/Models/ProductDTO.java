@@ -3,46 +3,35 @@ package Models;
 import Utils.FormatCurrency;
 import java.sql.Date;
 
-public class BirdDTO {
-    private String birdID;
-    private String bird_Name;
+public class ProductDTO {
+
+    private String productID;
+    private String product_Name;
     private int categoryID;
     private String category_Name;
+    private int product_TypeID;
+    private String dad_Bird_ID;
+    private String mom_Bird_ID;
     private String age;
     private String color;
     private String gender;
     private String image;
     private int quantity_Available;
-    private int quantity_Buy;
     private int quantity_Sold;
     private float price;
-    private String priceFormat;
     private String characteristics;
     private String detail;
+    private boolean customer_Product;
     private Date date_created;
     private float discount;
     private String status;
 
-    public BirdDTO() {
+    public ProductDTO() {
     }
 
-    public BirdDTO(String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Buy, int quantity_Sold, float price, float discount) {
-        this.bird_Name = bird_Name;
-        this.category_Name = category_Name;
-        this.age = age;
-        this.color = color;
-        this.gender = gender;
-        this.image = image;
-        this.quantity_Available = quantity_Available;
-        this.quantity_Buy = quantity_Buy;
-        this.quantity_Sold = quantity_Sold;
-        this.price = price;
-        this.discount = discount;
-    }
-
-    public BirdDTO(String birdID, String bird_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
-        this.birdID = birdID;
-        this.bird_Name = bird_Name;
+    public ProductDTO(String productID, String product_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
+        this.productID = productID;
+        this.product_Name = product_Name;
         this.categoryID = categoryID;
         this.age = age;
         this.color = color;
@@ -57,10 +46,12 @@ public class BirdDTO {
         this.status = status;
     }
 
-    public BirdDTO(String birdID, String bird_Name, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, float discount, String status) {
-        this.birdID = birdID;
-        this.bird_Name = bird_Name;
+
+    public ProductDTO(String productID, String product_Name, String category_Name, int product_TypeID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, float discount, String status) {
+        this.productID = productID;
+        this.product_Name = product_Name;
         this.category_Name = category_Name;
+        this.product_TypeID = product_TypeID;
         this.age = age;
         this.color = color;
         this.gender = gender;
@@ -71,12 +62,17 @@ public class BirdDTO {
         this.discount = discount;
         this.status = status;
     }
+    
+    
 
-    public BirdDTO(String birdID, String bird_Name, int categoryID, String category_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
-        this.birdID = birdID;
-        this.bird_Name = bird_Name;
+    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, boolean customer_Product, Date date_created, float discount, String status) {
+        this.productID = productID;
+        this.product_Name = product_Name;
         this.categoryID = categoryID;
         this.category_Name = category_Name;
+        this.product_TypeID = product_TypeID;
+        this.dad_Bird_ID = dad_Bird_ID;
+        this.mom_Bird_ID = mom_Bird_ID;
         this.age = age;
         this.color = color;
         this.gender = gender;
@@ -86,73 +82,36 @@ public class BirdDTO {
         this.price = price;
         this.characteristics = characteristics;
         this.detail = detail;
+        this.customer_Product = customer_Product;
         this.date_created = date_created;
         this.discount = discount;
         this.status = status;
     }
-
-    
-    
-    
     
     
 
-    public BirdDTO(String bird_Name, String category_Name, String age, String color, String gender) {
-        this.bird_Name = bird_Name;
+    public ProductDTO(String product_Name, String category_Name, String age, String color, String gender) {
+        this.product_Name = product_Name;
         this.category_Name = category_Name;
         this.age = age;
         this.color = color;
         this.gender = gender;
     }
-    
-    
 
-    public String getCategory_Name() {
-        return category_Name;
+    public String getProductID() {
+        return productID;
     }
 
-    public void setCategory_Name(String category_Name) {
-        this.category_Name = category_Name;
-    }
-    
-    public int getQuantity_Buy() {
-        return quantity_Buy;
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 
-    public void setQuantity_Buy(int quantity_Buy) {
-        this.quantity_Buy = quantity_Buy;
+    public String getProduct_Name() {
+        return product_Name;
     }
 
-    public int getQuantity_Sold() {
-        return quantity_Sold;
-    }
-
-    public void setQuantity_Sold(int quantity_Sold) {
-        this.quantity_Sold = quantity_Sold;
-    }
-    
-    public String getPriceFormat() {
-        return FormatCurrency.FormatPrice(this.price);
-    }
-
-    public void setPriceFormat(String priceFormat) {
-        this.priceFormat = priceFormat;
-    }
-
-    public String getBirdID() {
-        return birdID;
-    }
-
-    public void setBirdID(String birdID) {
-        this.birdID = birdID;
-    }
-
-    public String getBird_Name() {
-        return bird_Name;
-    }
-
-    public void setBird_Name(String bird_Name) {
-        this.bird_Name = bird_Name;
+    public void setProduct_Name(String product_Name) {
+        this.product_Name = product_Name;
     }
 
     public int getCategoryID() {
@@ -161,6 +120,38 @@ public class BirdDTO {
 
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public String getCategory_Name() {
+        return category_Name;
+    }
+
+    public void setCategory_Name(String category_Name) {
+        this.category_Name = category_Name;
+    }
+
+    public int getProduct_TypeID() {
+        return product_TypeID;
+    }
+
+    public void setProduct_TypeID(int product_TypeID) {
+        this.product_TypeID = product_TypeID;
+    }
+
+    public String getDad_Bird_ID() {
+        return dad_Bird_ID;
+    }
+
+    public void setDad_Bird_ID(String dad_Bird_ID) {
+        this.dad_Bird_ID = dad_Bird_ID;
+    }
+
+    public String getMom_Bird_ID() {
+        return mom_Bird_ID;
+    }
+
+    public void setMom_Bird_ID(String mom_Bird_ID) {
+        this.mom_Bird_ID = mom_Bird_ID;
     }
 
     public String getAge() {
@@ -203,6 +194,14 @@ public class BirdDTO {
         this.quantity_Available = quantity_Available;
     }
 
+    public int getQuantity_Sold() {
+        return quantity_Sold;
+    }
+
+    public void setQuantity_Sold(int quantity_Sold) {
+        this.quantity_Sold = quantity_Sold;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -225,6 +224,14 @@ public class BirdDTO {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public boolean getCustomer_Product() {
+        return customer_Product;
+    }
+
+    public void setCustomer_Product(boolean customer_Product) {
+        this.customer_Product = customer_Product;
     }
 
     public Date getDate_created() {
@@ -250,5 +257,7 @@ public class BirdDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    
 
 }
