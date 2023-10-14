@@ -62,7 +62,7 @@ public class AuthLoginServlet extends HttpServlet {
                         url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
                             : (String) session.getAttribute("BACK_CART");
                     } else{
-                    url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                    url = MyAppConstants.PublicFeatures.MANAGE_PAGE;
                     }
                 }
             }
