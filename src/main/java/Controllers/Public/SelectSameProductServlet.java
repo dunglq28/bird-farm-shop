@@ -52,6 +52,15 @@ public class SelectSameProductServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
+            ProductDTO productCurrent = (ProductDTO) session.getAttribute("PRODUCT_CURRENT");
+
+            if (product_name == null && productTypeID == null && ageChoose == null && genderChoose == null) {
+                product_name = productCurrent.getProduct_Name();
+                productTypeID = String.valueOf(productCurrent.getProduct_TypeID());
+                ageChoose = productCurrent.getAge();
+                genderChoose = productCurrent.getGender();
+            }
+
             ProductDAO dao = new ProductDAO();
             ProductDTO product = null;
             List<ProductDTO> result = null;
@@ -97,10 +106,14 @@ public class SelectSameProductServlet extends HttpServlet {
                 session.setAttribute("PRODUCT_CURRENT", product);
                 session.setAttribute("PRODUCT_SAME_NAME", result);
                 url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
+
             } else if (productTypeID.equals("2")) {
                 productID = request.getParameter("txtproductID");
+                if (productID == null) {
+                    productID = productCurrent.getProductID();
+                }
                 product = dao.getProductByID(productID);
-                
+
                 session.setAttribute("PRODUCT_CURRENT", product);
                 session.setAttribute("BIRD_DAD", dao.getProductByID(product.getDad_Bird_ID()));
                 session.setAttribute("BIRD_MOM", dao.getProductByID(product.getMom_Bird_ID()));

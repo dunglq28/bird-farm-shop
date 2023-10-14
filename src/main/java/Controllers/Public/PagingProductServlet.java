@@ -77,6 +77,23 @@ public class PagingProductServlet extends HttpServlet {
             session.setAttribute("END", end);
             session.setAttribute("indexCurrent", indexPage);
             session.setAttribute("endPage", endPage);
+
+            if (page == null) {
+                url ="";
+            }
+            else if (page.equals("1")) {
+                url = "product_list"
+                        + "?productType=" + session.getAttribute("PRODUCT_TYPE");
+                session.setAttribute("HISTORY_URL", url);
+            } else if (!page.equals("1")) {
+                url = "product_list"
+                        + "?productType=" + session.getAttribute("PRODUCT_TYPE")
+                        + "&page=" + indexPage;
+                session.setAttribute("HISTORY_URL", url);
+            }
+            
+            url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
