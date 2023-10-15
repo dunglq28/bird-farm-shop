@@ -8,7 +8,7 @@ public class MyAppConstants {
         public static final String HOME_PAGE = "/views/public/home.jsp";
         public static final String ERROR_PAGE = "/views/errors/error.html";
         public static final String CART_PAGE = "/views/public/cart.jsp";
-        public static final String BIRD_SHOP_PAGE = "/views/public/shop.jsp";
+        public static final String PRODUCT_SHOP_PAGE = "/views/public/shop.jsp";
         public static final String PRODUCT_DETAIL_PAGE = "/views/public/singleProduct.jsp";
         public static final String BIRD_NEST_DETAIL_PAGE = "/views/public/singleBirdNest.jsp";
         public static final String PRODUCT_DETAIL_CONTROLLER = "product";

@@ -60,7 +60,6 @@ public class AddBirdServlet extends HttpServlet {
 
         } finally {
             response.sendRedirect(url);
-
         }
     }
 

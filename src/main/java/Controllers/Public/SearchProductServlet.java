@@ -22,7 +22,7 @@ public class SearchProductServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String search = request.getParameter("lastSearch");
-        String url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
+        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
         try {
             ProductDAO dao = new ProductDAO();
             if (!search.trim().isEmpty()) {
