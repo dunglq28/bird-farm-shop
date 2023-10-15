@@ -40,7 +40,7 @@ public class PagingProductServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
-        String url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
+        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
         HttpSession session = request.getSession();
 
         try {
@@ -92,7 +92,7 @@ public class PagingProductServlet extends HttpServlet {
                 session.setAttribute("HISTORY_URL", url);
             }
             
-            url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
+            url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

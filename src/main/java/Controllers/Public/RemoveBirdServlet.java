@@ -17,7 +17,7 @@ public class RemoveBirdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.BIRD_SHOP_PAGE;
+        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
         try {
             HttpSession session = request.getSession(false);
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
