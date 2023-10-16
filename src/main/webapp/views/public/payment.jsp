@@ -260,7 +260,7 @@
                                         </div>
 
                                         <div class="d-flex justify-content-between mb-1">
-                                            <h6 class="text-uppercase">Tranport Fee</h6>
+                                            <h6 class="text-uppercase">Transport Fee</h6>
                                             <h6 id="Ship">${util.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
 <!--                                            <input type="hidden" name="txtShippingCash" value="${sessionScope.SHIPPING_CASH}"/>-->
                                         </div>

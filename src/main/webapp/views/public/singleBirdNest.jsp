@@ -121,25 +121,30 @@
                                     </div>
                                 </div>
                                 <!-- Buying -->
-                                <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
-                                <form action="product" class="Addtocart" method="post">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <input type="submit" value="Add to cart"> 
-                                    <input name="btAction" type="hidden" value="Addtocart"> 
-                                    <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
-                                    <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
-                                    <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
-                                    <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
-                                    <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
-                                    <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
-                                    <input type="hidden" id="param_quantity" name="quantity_Buy" value="" />
-                                    <input type="hidden" name="price" value="${product_current.price}"/>
-                                    <input type="hidden" name="image" value="${product_current.image}"/>
-                                    <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
-                                </form>
-                                 <a href="#" class="btn btn-success  shadow-0">Order service</a>
-<!--                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
-                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>-->
+                                <div style="display: block">
+                                    <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
+                                    <form action="product" class="Addtocart" method="post">
+                                        <i class="fa-solid fa-cart-shopping "></i>
+                                        <input type="submit" value="Add to cart"> 
+                                        <input name="btAction" type="hidden" value="Addtocart"> 
+                                        <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
+                                        <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
+                                        <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
+                                        <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
+                                        <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
+                                        <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
+                                        <input type="hidden" id="param_quantity" name="quantity_Buy" value="" />
+                                        <input type="hidden" name="price" value="${product_current.price}"/>
+                                        <input type="hidden" name="image" value="${product_current.image}"/>
+                                        <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
+                                    </form>
+                                    <form style="display: inline">
+                                        <input class="btn btn-success  shadow-0" type="submit" value="Order service"> 
+                                    </form>
+                                </div>
+
+                                <!--                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
+                                                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>-->
                             </div>
                         </main>
                     </div>
