@@ -57,15 +57,16 @@ public class CheckoutServlet extends HttpServlet {
         String totalOrder = request.getParameter("txtTotalOrder");
         String shippingMethod = request.getParameter("shippingMethod");
         String paymentMethod = request.getParameter("PaymentMethod");
+        String serviceID = request.getParameter("txtServiceID");
 
         String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
         HttpSession session = request.getSession();
-
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = null;
             session.setAttribute("TOTAL_ORDER", totalOrder);
+            session.setAttribute("SERVICE_ID", serviceID);
 
             if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
                 session.setAttribute("SHIPPING_METHOD", "Fast delivery");

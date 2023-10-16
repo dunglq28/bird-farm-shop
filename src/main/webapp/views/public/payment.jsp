@@ -121,36 +121,36 @@
                                                     Receive directly at shop
                                                 </label>
                                                 <c:if test="${SHIPPING_METHOD == 'Receive directly at shop'}">
-<!--                                                    <div class="form-control justify-content-center"
-                                                         style="max-width: 300px;"
-                                                         id="datePickerDiv">
-                                                        <h6 class="" style="width: 100%;margin-left: 44px;">Enter the desired time</h6>
-                                                        <div class="d-flex">
-                                                            <div class="form-input-day">
-                                                                <select name="txtDay" class="select-control text-muted" required>
-                                                                    <option label="Day"></option>
-                                                                    <c:forEach var="i" begin="${requestScope.DAY}" end="${requestScope.END_OF_MONTH - requestScope.DAY < 7 
-                                                                                                ?  requestScope.END_OF_MONTH : requestScope.DAY + 7 - requestScope.DAY_NEED}">
-                                                                        <option value="${i}">${i}</option>
-                                                                    </c:forEach>
+                                                    <!--                                                    <div class="form-control justify-content-center"
+                                                                                                             style="max-width: 300px;"
+                                                                                                             id="datePickerDiv">
+                                                                                                            <h6 class="" style="width: 100%;margin-left: 44px;">Enter the desired time</h6>
+                                                                                                            <div class="d-flex">
+                                                                                                                <div class="form-input-day">
+                                                                                                                    <select name="txtDay" class="select-control text-muted" required>
+                                                                                                                        <option label="Day"></option>
+                                                    <c:forEach var="i" begin="${requestScope.DAY}" end="${requestScope.END_OF_MONTH - requestScope.DAY < 7 
+                                                                                ?  requestScope.END_OF_MONTH : requestScope.DAY + 7 - requestScope.DAY_NEED}">
+                                                        <option value="${i}">${i}</option>
+                                                    </c:forEach>
 
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-input-day">
-                                                                <select onchange="submit()" name="txtMonth" class="select-control text-muted">
-                                                                    <option value="${requestScope.MONTH}">${requestScope.MONTH}</option>
-                                                                    <c:if test="${requestScope.END_OF_MONTH - requestScope.DAY < 7 }">
-                                                                        <option value="${requestScope.MONTH + 1}">${requestScope.MONTH + 1}</option>
-                                                                    </c:if>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-input-day">
-                                                                <select name="txtYear" class="select-control text-muted">
-                                                                    <option value="${requestScope.YEAR}">${requestScope.YEAR}</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
+                                                </select>
+                                            </div>
+                                            <div class="form-input-day">
+                                                <select onchange="submit()" name="txtMonth" class="select-control text-muted">
+                                                    <option value="${requestScope.MONTH}">${requestScope.MONTH}</option>
+                                                    <c:if test="${requestScope.END_OF_MONTH - requestScope.DAY < 7 }">
+                                                        <option value="${requestScope.MONTH + 1}">${requestScope.MONTH + 1}</option>
+                                                    </c:if>
+                                                </select>
+                                            </div>
+                                            <div class="form-input-day">
+                                                <select name="txtYear" class="select-control text-muted">
+                                                    <option value="${requestScope.YEAR}">${requestScope.YEAR}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>-->
                                                 </c:if>
 
                                             </div>
@@ -274,7 +274,7 @@
                                             <h5 id="total_order">${util.FormatPrice(total_order - total_order * 0 + sessionScope.SHIPPING_CASH)}</h5>
                                             <input name="total_order_final" type="hidden" value="${total_order - total_order * 0 + sessionScope.SHIPPING_CASH}">
                                         </div>
-
+                                        <input name="txtServiceID" type="hidden" value="${sessionScope.SERVICE_ID}">
                                         <input name="btAction" value="Order" type="submit" class="btn btn-dark btn-block btn-lg"
                                                data-mdb-ripple-color="dark" 
                                                style="background-color:rgb(13,103,128) ;"/>

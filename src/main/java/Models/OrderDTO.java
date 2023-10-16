@@ -16,6 +16,7 @@ import java.util.List;
 public class OrderDTO {
 
     private String orderID;
+    private int serviceID;
     private String accountID;
     private String staffID;
     private String form_Receipt;
@@ -35,8 +36,9 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
         this.orderID = orderID;
+        this.serviceID = serviceID;
         this.accountID = accountID;
         this.staffID = staffID;
         this.form_Receipt = form_Receipt;
@@ -51,7 +53,6 @@ public class OrderDTO {
         this.payBy = payBy;
         this.status = status;
     }
-    
     
 
     public OrderDTO(String orderID, String form_Receipt, Date orderDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
@@ -97,6 +98,16 @@ public class OrderDTO {
     public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
+
+    public int getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(int serviceID) {
+        this.serviceID = serviceID;
+    }
+    
+    
 
     public String getAccountID() {
         return accountID;
