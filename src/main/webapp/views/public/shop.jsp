@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="./assets/css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="./assets/css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="./assets/css/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="./assets/css/shop.css" type="text/css">
+        <link rel="stylesheet" href="./assets/css/shopping.css">
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
     </head>
