@@ -53,6 +53,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String paymentMethod = (String) session.getAttribute("PAYMENT_METHOD");
+            int serviceID =  Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
 
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
             if (cart == null) {
@@ -72,14 +73,14 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                
                     OrderDAO orderdao = new OrderDAO();
                     String orderID = orderdao.createOrderID();
-                    OrderDTO newOrder = new OrderDTO(orderID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
+                    OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
                             orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                     orderdao.createOrder(newOrder);
                     OrderDetailDAO odDao = new OrderDetailDAO();
                     OrderDetailDTO odDto;
                     ProductDAO birdDao = new ProductDAO();
                     for (String key : cart.getItems().keySet()) {
-                        odDto = new OrderDetailDTO(orderID, 1, key,
+                        odDto = new OrderDetailDTO(orderID, key,
                                 cart.getItems().get(key).getPrice(),
                                 cart.getItems().get(key).getQuantityBuy(), "Wait for confirmation");
 //                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() + cart.getItems().get(key).getQuantity_Buy();

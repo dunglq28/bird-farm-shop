@@ -161,6 +161,7 @@
                                                     <h5>${util.FormatPrice(total_order)}</h5>
                                                     <input type="hidden" name="txtTotalOrder" value="${total_order}" />
                                                 </div>
+                                                <input type="hidden" name="txtServiceID" value="1" />
                                                 <input value="Buy Now" type="submit" class="btn-buy btn btn-dark btn-block btn-lg"
                                                        data-mdb-ripple-color="dark">
                                             </div>

@@ -14,7 +14,6 @@ import Utils.FormatCurrency;
 public class OrderDetailDTO {
 
     private String orderID;
-    private int serviceID;
     private String productID;
     private String bird_name;
     private String cate_name;
@@ -27,9 +26,8 @@ public class OrderDetailDTO {
     private int quantity_Buy;
     private String status;
 
-    public OrderDetailDTO(String orderID, int serviceID, String productID, float price, int quantity_Buy, String status) {
+    public OrderDetailDTO(String orderID, String productID, float price, int quantity_Buy, String status) {
         this.orderID = orderID;
-        this.serviceID = serviceID;
         this.productID = productID;
         this.price = price;
         this.quantity_Buy = quantity_Buy;
@@ -61,14 +59,6 @@ public class OrderDetailDTO {
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
-    }
-
-    public int getServiceID() {
-        return serviceID;
-    }
-
-    public void setServiceID(int serviceID) {
-        this.serviceID = serviceID;
     }
 
     public String getProductID() {
