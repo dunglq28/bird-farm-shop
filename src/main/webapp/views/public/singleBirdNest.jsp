@@ -106,7 +106,7 @@
 
 
                                 <div class="row mb-4">
-                                    <div class="col-md-4 col-6 mb-3 text-center">
+                                    <div class="col-md-5 col-6 mb-3 text-center">
                                         <label class="mb-2 d-block">Quantity of egg</label>
                                         <div class="input-group mb-3" style="width: 170px;">
                                             <button id="btn_desc" class="btn btn-link px-2 text-muted">
@@ -137,8 +137,9 @@
                                     <input type="hidden" name="image" value="${product_current.image}"/>
                                     <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
                                 </form>
-                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
-                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                                 <a href="#" class="btn btn-success  shadow-0">Order service</a>
+<!--                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
+                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>-->
                             </div>
                         </main>
                     </div>
