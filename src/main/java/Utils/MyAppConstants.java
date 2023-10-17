@@ -11,17 +11,19 @@ public class MyAppConstants {
         public static final String PRODUCT_SHOP_PAGE = "/views/public/shop.jsp";
         public static final String PRODUCT_DETAIL_PAGE = "/views/public/singleProduct.jsp";
         public static final String BIRD_NEST_DETAIL_PAGE = "/views/public/singleBirdNest.jsp";
+        public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
+         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
         public static final String PRODUCT_DETAIL_CONTROLLER = "product";
         public static final String PRODUCT_LIST_CONTROLLER = "product_list";
         public static final String PAGING_PRODUCT_CONTROLLER = "PagingProductServlet";
         public static final String ADD_TO_CART_CONTROLLER = "add-bird";
-        public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
-        public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
         public static final String CHECKOUT_VNPAY_CONTROLLER = "CheckoutVNPayServlet";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
+        public static final String BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER = "BirdNestAvailableServlet";
+        public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
         public static final String SELECT_SAME_PRODUCT_CONTROLLER = "SelectSameProductServlet";
-        public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
-        public static final String MANAGE_PAGE = "/views/public/dashboard.jsp";
+        
+        
     }
 
     public class AuthFeatures {
@@ -42,6 +44,12 @@ public class MyAppConstants {
         public static final String SERVICE_TRACKING_PAGE = "/views/customer/babyBirdTracking.jsp";
         public static final String MY_ORDER_CONTROLLER = "Order";
         public static final String SERVICE_TRACKING_CONTROLLER = "Service_Tracking";
+
+    }
+    
+     public class StaffFeatures {
+
+      public static final String MANAGE_PAGE = "/views/public/dashboard.jsp";
 
     }
 

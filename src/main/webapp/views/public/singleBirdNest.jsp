@@ -138,8 +138,10 @@
                                         <input type="hidden" name="image" value="${product_current.image}"/>
                                         <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
                                     </form>
-                                    <form style="display: inline">
+                                    <form action="Checkout" style="display: inline" method="get">
                                         <input class="btn btn-success  shadow-0" type="submit" value="Order service"> 
+                                        <input type="hidden" name="btAction" value="Egg incubation is available">
+                                        <input type="hidden" name="txtServiceID" value="2" />
                                     </form>
                                 </div>
 

@@ -23,8 +23,8 @@ public class AuthLoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
-                : (String) session.getAttribute("BACK_CART");
+        String url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                : (String) session.getAttribute("HISTORY_URL");
 
         String email = request.getParameter("txtEmailLogin");
         String password = request.getParameter("txtPasswordLogin");
@@ -59,10 +59,10 @@ public class AuthLoginServlet extends HttpServlet {
                 } else {
                     session.setAttribute("ACCOUNT", account);
                     if(account.getRoleName().equals("Customer")){
-                        url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
-                            : (String) session.getAttribute("BACK_CART");
+                        url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                            : (String) session.getAttribute("HISTORY_URL");
                     } else{
-                    url = MyAppConstants.PublicFeatures.MANAGE_PAGE;
+                    url = MyAppConstants.StaffFeatures.MANAGE_PAGE;
                     }
                 }
             }

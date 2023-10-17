@@ -76,9 +76,16 @@ public class CheckoutServlet extends HttpServlet {
                 session.setAttribute("SHIPPING_CASH", 0);
             }
 
-            if (account == null) {
+            if (account == null  && serviceID.equals("1")) {
                 url = "guest?btAction=loginPage";
-                session.setAttribute("BACK_CART", "cart");
+                session.setAttribute("HISTORY_URL", "cart");
+                response.sendRedirect(url);
+                return;
+            } else if (account == null && serviceID.equals("2")) {
+                session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
+                url = "guest?btAction=loginPage";
+                response.sendRedirect(url);
+                return;
             } else {
                 customer = dao.getCustomerByAccountID(account.getAccountID());
 
@@ -99,15 +106,16 @@ public class CheckoutServlet extends HttpServlet {
             } else if (button.equals("Order") && paymentMethod.equals("VNPAY")) {
                 session.setAttribute("PAYMENT_METHOD", "VNPAY");
                 url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
+            } else if (button.equals("Egg incubation is available")) {
+                url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
             }
 
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
 

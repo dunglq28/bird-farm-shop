@@ -23,8 +23,8 @@ public class AuthLoginGoogleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String url = session.getAttribute("BACK_CART") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
-                : (String) session.getAttribute("BACK_CART");
+        String url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                : (String) session.getAttribute("HISTORY_URL");
         try {
             String code = request.getParameter("code");
 

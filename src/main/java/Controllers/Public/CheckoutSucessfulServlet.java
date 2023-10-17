@@ -53,24 +53,22 @@ public class CheckoutSucessfulServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String paymentMethod = (String) session.getAttribute("PAYMENT_METHOD");
-            int serviceID =  Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
+            int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
 
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
             if (cart == null) {
                 url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
             } else {
+                String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
+                AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+                CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
+                int temp = (Integer) session.getAttribute("SHIPPING_CASH");
+                float shippingCash = (float) temp;
+                String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
+                long millis = System.currentTimeMillis();
+                java.sql.Date orderDate = new java.sql.Date(millis);
+                
                 if (paymentMethod.equals("COD") || paymentMethod.equals("VNPAY") && vnPayStatus.equals("00")) {
-                    String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
-                    AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-                    CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
-                    int temp = (Integer) session.getAttribute("SHIPPING_CASH");
-                    float shippingCash = (float) temp;
-
-                    String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
-
-                    long millis = System.currentTimeMillis();
-                    java.sql.Date orderDate = new java.sql.Date(millis);
-               
                     OrderDAO orderdao = new OrderDAO();
                     String orderID = orderdao.createOrderID();
                     OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
