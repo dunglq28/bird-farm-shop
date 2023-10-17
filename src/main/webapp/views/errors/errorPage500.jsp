@@ -1,3 +1,8 @@
+<%-- 
+    Document   : errorPage500
+    Created on : Oct 17, 2023, 7:25:44 PM
+    Author     : tt
+--%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +23,7 @@
                     <div class="col-sm-12 ">
                         <div class="col-sm-10 col-sm-offset-1  text-center">
                             <div class="four_zero_four_bg">
-                                <h1 class="text-center " style="color: #0D6780;">404</h1>
+                                <h1 class="text-center " style="color: #0D6780;">500</h1>
 
 
                             </div>
@@ -39,3 +44,4 @@
         </div>
     </body>
 </html>
+
