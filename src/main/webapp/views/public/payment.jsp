@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout" class="container py-3 h-100 " method="post">
+        <form action="Checkout" class="container py-3 h-100 " method="get">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -82,7 +82,7 @@
                                             <c:set var="customer" value="${sessionScope.CUSTOMER}"></c:set>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                    <a href="shipping?txtTotalOrder=${sessionScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
+                                                    <a href="shipping?txtServiceID=${sessionScope.SERVICE_ID}?txtTotalOrder=${sessionScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
                                                     <h6 class="mb-0 text-muted change_info">Change information</h6>
                                                 </a>
                                             </div>
@@ -274,7 +274,7 @@
                                             <h5 id="total_order">${util.FormatPrice(total_order - total_order * 0 + sessionScope.SHIPPING_CASH)}</h5>
                                             <input name="total_order_final" type="hidden" value="${total_order - total_order * 0 + sessionScope.SHIPPING_CASH}">
                                         </div>
-                                        <input name="txtServiceID" type="hidden" value="${sessionScope.SERVICE_ID}">
+                                        <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
                                         <input name="btAction" value="Order" type="submit" class="btn btn-dark btn-block btn-lg"
                                                data-mdb-ripple-color="dark" 
                                                style="background-color:rgb(13,103,128) ;"/>

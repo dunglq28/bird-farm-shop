@@ -4,8 +4,9 @@
     Author     : tt
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,8 +18,8 @@
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="../../assets/css/homePage.css">
-        <link rel="stylesheet" href="../../assets/css/payment.css">
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+        <link rel="stylesheet" href="./assets/css/payment.css">
     </head>
     <body>
         <!-- option1 -->
@@ -70,34 +71,60 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout" class="container py-3 h-100 " method="post">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12">
-                    <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-                        <div class="card-body p-0">
-                            <div class="row g-0">
-                                <div class="col-lg-8">
-                                    <div class="p-5">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                <a href="" class="change-icon text-decoration-none">
+        <form action="Checkout" class="container py-3 h-100 " method="get">
+            <jsp:useBean id="utilPrice" class="Utils.FormatCurrency"></jsp:useBean>
+
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12">
+                        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                            <div class="card-body p-0">
+                                <div class="row g-0">
+                                    <div class="col-lg-8">
+                                        <div class="p-5">
+                                            <div>
+                                            <c:set var="customer" value="${sessionScope.CUSTOMER}"></c:set>
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="fw-bold mb-0 text-black">Information receive</h4>
+                                                    <a href="shipping?txtServiceID=${sessionScope.SERVICE_ID}" class="change-icon text-decoration-none">
                                                     <h6 class="mb-0 text-muted change_info">Change information</h6>
                                                 </a>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center mb-1">
 
-                                                <h6 class="mb-0 text-muted ">Truong Tuyet Ngan (K17 HCM) - 012345
+                                                <h6 class="mb-0 text-muted ">${customer.fullName} - ${customer.phone_Number}
                                                 </h6>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
 
-                                                <h6 class="mb-0 text-muted ">Vinhome, HCM</h6>
+                                                <h6 class="mb-0 text-muted ">${customer.address}, ${customer.city}</h6>
                                             </div>
                                         </div>
 
                                         <hr class="my-4">
 
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="fw-bold mb-0 text-black">Shipping method </h4>
+                                        </div>
+
+                                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                            <div class="form-check">
+                                                <input onchange="submit()" class="form-check-input-2" type="radio" 
+                                                       name="shippingMethod" id="exampleRadios1" value="Fast delivery" ${sessionScope.SHIPPING_METHOD == 'Fast delivery' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Fast delivery
+                                                </label>
+                                            </div>
+                                            <div class="form-check fisrt-element">
+                                                <input onchange="submit()" class="form-check-input-1" type="radio" 
+                                                       name="shippingMethod" id="exampleRadios2" value="Receive directly at shop" ${sessionScope.SHIPPING_METHOD == 'Receive directly at shop' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    Receive directly at shop
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+                                        <hr class="my-4">
 
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
@@ -124,7 +151,7 @@
                                                 incubation fee.</h7>
                                             <label class="container"
                                                    style="text-align:right; font-weight: bold; font-style: italic;">
-                                                <input type="checkbox">
+                                                <input type="checkbox" required="">
                                                 <span class="checkmark"></span>
                                                 Agree to private and policy
                                             </label>
@@ -132,6 +159,8 @@
                                         </div>
 
                                         <hr class="my-4">
+
+
 
                                         <div class="pt-5">
                                             <h6 class="mb-0"><a href="#!" class="text-body"><i
@@ -144,34 +173,36 @@
                                     <div class="p-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="fw-bold mb-0 text-black">Order</h4>
-                                            <a href="cart" class="change-icon change-infor-link text-decoration-none">
+                                            <a href="product" class="change-icon change-infor-link text-decoration-none">
                                                 <h6 class="mb-0 text-muted update_info">Update</h6>
                                             </a>
                                         </div>
                                         <hr class="my-4">
-                                        <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
-                                            <div class="col-md-4">
-                                                <img src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/Bird_Nest_image/Green Parakeet Nest.jpg"
+                                        <c:set var="bird_nest" value="${sessionScope.BIRD_NEST_CHOOSE}"></c:set>
+
+                                            <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-4">
+                                                    <img src="${bird_nest.image}"
                                                      class="img-fluid rounded-3" alt="Bird Nest Image">
                                             </div>
                                             <div class="col-md-8 justify-content-center">
-                                                <h5 class="text-black mb-0">Green Parakeet Nest</h5>
+                                                <h5 class="text-black mb-0">${bird_nest.name}</h5>
                                                 <div class="d-flex justify-content-between align-items-center mb-0">
-                                                    <h6 class="mb-0 text-muted ">Qty: 4</h6>
+                                                    <h6 class="mb-0 text-muted ">Qty: ${bird_nest.quantityBuy}</h6>
                                                     <a href="#" class="change-infor-link text-decoration-none">
-                                                        <h6 class="mb-0 text-muted ">x 6.000.000 đ</h6>
+                                                        <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(bird_nest.price)}</h6>
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="Promotion-received-element d-flex justify-content-between ">
-                                            <h6>Service: Get baby birds</h6>
-
+                                            <h6>Service: Egg incubation is available</h6>
                                         </div>
+
                                         <div class="d-flex justify-content-between align-items-center mb-0">
-                                            <h6 class="mb-0 text-muted ">Qty: 4</h6>
+                                            <h6 class="mb-0 text-muted ">Price of the service</h6>
                                             <a href="#" class="change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted ">x 3.000.000 đ</h6>
+                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(sessionScope.SERVICE_PRICE)}</h6>
                                             </a>
                                         </div>
 
@@ -189,11 +220,16 @@
 
 
                                         <hr class="my-4">
-
+                                        <c:set var="total_order" value="${bird_nest.price * bird_nest.quantityBuy + sessionScope.SERVICE_PRICE}"></c:set>
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>$36.000.000</h6>
+                                            <h6>${utilPrice.FormatPrice(total_order)}</h6>
                                             <input type="hidden" name="txtTotalOrder" value="${total_order}" />
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <h6 class="text-uppercase">Transport Fee</h6>
+                                            <h6 id="Ship">${utilPrice.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
+<!--                                            <input type="hidden" name="txtShippingCash" value="${sessionScope.SHIPPING_CASH}"/>-->
                                         </div>
                                         <div class=" d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
@@ -202,10 +238,11 @@
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="text-uppercase">Total price</h5>
 
-                                            <h5 id="total_order">$36.000.000</h5>
-                                            <input name="total_order_final" type="hidden" value="">
+                                            <h5 id="total_order">${utilPrice.FormatPrice(total_order + total_order * 0 + sessionScope.SHIPPING_CASH)}</h5>
+                                            <input name="total_order_final" type="hidden" value="${total_order + total_order * 0 + sessionScope.SHIPPING_CASH}">
                                         </div>
-
+                                        <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
+                                        <input type="hidden" name="PaymentMethod" value="COD" />
                                         <input name="btAction" value="Order" type="submit"
                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
                                                style="background-color:rgb(13,103,128) ;" />

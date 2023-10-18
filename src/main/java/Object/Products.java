@@ -13,8 +13,11 @@ import Utils.FormatCurrency;
  */
 public class Products {
 
+    private String productID;
     private String name;
     private String cate_name;
+    private String dad_Bird_ID;
+    private String mom_Bird_ID;
     private String age;
     private String color;
     private String gender;
@@ -28,10 +31,23 @@ public class Products {
 
     public Products() {
     }
-    
-    
 
-    public Products(String name, String cate_name, String age, String color, String gender, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
+    public Products(String productID, String name, String cate_name, String dad_Bird_ID, String mom_Bird_ID, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
+        this.productID = productID;
+        this.name = name;
+        this.cate_name = cate_name;
+        this.dad_Bird_ID = dad_Bird_ID;
+        this.mom_Bird_ID = mom_Bird_ID;
+        this.image = image;
+        this.quantityAvailable = quantityAvailable;
+        this.quantityBuy = quantityBuy;
+        this.quantitySold = quantitySold;
+        this.price = price;
+        this.discount = discount;
+    }
+
+    public Products(String productID, String name, String cate_name, String age, String color, String gender, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
+        this.productID = productID;
         this.name = name;
         this.cate_name = cate_name;
         this.age = age;
@@ -66,8 +82,15 @@ public class Products {
         this.quantityBuy = quantityBuy;
         this.price = price;
     }
-    
-    
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
     public String getName() {
         return name;
     }
@@ -82,6 +105,22 @@ public class Products {
 
     public void setCate_name(String cate_name) {
         this.cate_name = cate_name;
+    }
+
+    public String getDad_Bird_ID() {
+        return dad_Bird_ID;
+    }
+
+    public void setDad_Bird_ID(String dad_Bird_ID) {
+        this.dad_Bird_ID = dad_Bird_ID;
+    }
+
+    public String getMom_Bird_ID() {
+        return mom_Bird_ID;
+    }
+
+    public void setMom_Bird_ID(String mom_Bird_ID) {
+        this.mom_Bird_ID = mom_Bird_ID;
     }
 
     public String getAge() {

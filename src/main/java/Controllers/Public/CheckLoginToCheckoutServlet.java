@@ -5,8 +5,25 @@
  */
 package Controllers.Public;
 
+import Cart.CartObj;
+import Daos.CustomerDAO;
+import Daos.ProductDAO;
+import Daos.OrderDAO;
+import Daos.OrderDetailDAO;
+import Models.AccountDTO;
+import Models.ProductDTO;
+import Models.CustomerDTO;
+import Models.OrderDTO;
+import Models.OrderDetailDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,14 +32,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 /**
  *
  * @author hj
  */
-@WebServlet(name = "Checkout", urlPatterns = {"/Checkout"})
-public class CheckoutServlet extends HttpServlet {
+@WebServlet(name = "CheckLoginToCheckoutServlet", urlPatterns = {"/CheckLoginToCheckoutServlet"})
+public class CheckLoginToCheckoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,49 +50,46 @@ public class CheckoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        String button = request.getParameter("btAction");
-        String totalOrder = request.getParameter("txtTotalOrder");
-        String shippingMethod = request.getParameter("shippingMethod");
-        String paymentMethod = request.getParameter("PaymentMethod");
-        String serviceID = request.getParameter("txtServiceID");
-        String productID = request.getParameter("txtproductID");
-        String quantityBuy = request.getParameter("quantity_Buy");
         String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
         HttpSession session = request.getSession();
 
         try {
-            session.setAttribute("TOTAL_ORDER", totalOrder);
-            session.setAttribute("SERVICE_ID", serviceID);
 
-            session.setAttribute("PRODUCT_ID_SERVICE", productID);
-            session.setAttribute("EGG_QUANTITY", quantityBuy);
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            CustomerDAO dao = new CustomerDAO();
+            CustomerDTO customer = null;
+            String serviceID = (String) session.getAttribute("SERVICE_ID");
 
-            if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
-                session.setAttribute("SHIPPING_METHOD", "Fast delivery");
-                session.setAttribute("SHIPPING_CASH", 125000);
-            } else if (shippingMethod.equals("Receive directly at shop")) {
-                session.setAttribute("SHIPPING_METHOD", "Receive directly at shop");
-                session.setAttribute("SHIPPING_CASH", 0);
+            if (account == null && serviceID.equals("1")) {
+                url = "guest?btAction=loginPage";
+                session.setAttribute("HISTORY_URL", "cart");
+
+            } else if (account == null && serviceID.equals("2")) {
+                session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
+                url = "guest?btAction=loginPage";
+
+            } else if (account != null) {
+                customer = dao.getCustomerByAccountID(account.getAccountID());
+
+                if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
+                    request.setAttribute("FULLNAME", customer.getFullName());
+                    url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
+                } else if (serviceID.equals("1")) {
+                    url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                    session.setAttribute("CUSTOMER", customer);
+
+                } else if (serviceID.equals("2")) {
+                    url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
+                    session.setAttribute("CUSTOMER", customer);
+
+                }
             }
 
-            if (button == null) {
-                url = MyAppConstants.PublicFeatures.CHECK_LOGIN_CONTROLLER;
-            } else if (button.equals("Continue")) {
-                url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
-            } else if (button.equals("Order") && paymentMethod.equals("COD")) {
-                session.setAttribute("PAYMENT_METHOD", "COD");
-                url = MyAppConstants.PublicFeatures.CHECKOUT_SUCCESS_CONTROLLER;
-            } else if (button.equals("Order") && paymentMethod.equals("VNPAY")) {
-                session.setAttribute("PAYMENT_METHOD", "VNPAY");
-                url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
-            }
-
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

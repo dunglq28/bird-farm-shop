@@ -171,6 +171,9 @@
                     <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
                 </div>
                     <input type="hidden" name="txtTotalOrder" value="${sessionScope.TOTAL_ORDER}" />
+                    <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
+                    <input type="hidden" name="txtproductID" value="${sessionScope.PRODUCT_ID_SERVICE}" />
+                    <input type="hidden" name="quantity_Buy" value="${sessionScope.EGG_QUANTITY}" />
                 <div class="form-group">
                     <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
                 </div>

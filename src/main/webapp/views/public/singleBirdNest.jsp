@@ -112,8 +112,15 @@
                                             <button id="btn_desc" class="btn btn-link px-2 text-muted">
                                                 <i class="fas fa-minus"></i>
                                             </button>
-                                            <input id="input_quantity" value="1" type="text"
-                                                   class="form-control form-control-sm button-input text-center"/>
+                                            <c:if test="${not empty sessionScope.EGG_QUANTITY}">
+                                                <input id="input_quantity" value="${sessionScope.EGG_QUANTITY}" type="text"
+                                                       class="form-control form-control-sm button-input text-center"/>
+                                            </c:if>
+                                            <c:if test="${empty sessionScope.EGG_QUANTITY}">
+                                                <input id="input_quantity" value="1" type="text"
+                                                       class="form-control form-control-sm button-input text-center"/>
+                                            </c:if>
+
                                             <button id="btn_inc" class="btn btn-link px-2 text-muted">
                                                 <i class="fas fa-plus"></i>
                                             </button>
@@ -129,6 +136,7 @@
                                         <input name="btAction" type="hidden" value="Addtocart"> 
                                         <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
                                         <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
+                                        <input type="hidden" name="txtServiceID" value="1" />
                                         <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
                                         <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
                                         <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
@@ -138,9 +146,12 @@
                                         <input type="hidden" name="image" value="${product_current.image}"/>
                                         <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
                                     </form>
-                                    <form action="Checkout" style="display: inline" method="get">
+
+                                    <form action="Checkout" style="display: inline" method="post">
                                         <input class="btn btn-success  shadow-0" type="submit" value="Order service"> 
-                                        <input type="hidden" name="btAction" value="Egg incubation is available">
+                                        <!--<input type="hidden" name="btAction" value="Egg incubation is available">-->
+                                        <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
+                                        <input type="hidden" id="egg_quantity" name="quantity_Buy" value="" />
                                         <input type="hidden" name="txtServiceID" value="2" />
                                     </form>
                                 </div>
@@ -159,11 +170,13 @@
             var btn_desc = document.querySelector("#btn_desc");
             var input_quantity = document.querySelector("#input_quantity");
             var param_quantity = document.querySelector('#param_quantity')
-            param_quantity.value = input_quantity.value;
+            var egg_quantity = document.querySelector('#egg_quantity')
+            param_quantity.value = egg_quantity.value = input_quantity.value;
             btn_inc.onclick = () => {
                 if (input_quantity.value < ${product_current.quantity_Available}) {
                     input_quantity.value++;
                     param_quantity.value++
+                    egg_quantity.value++
                 }
 
             }
@@ -171,6 +184,7 @@
                 if (input_quantity.value > 1) {
                     input_quantity.value--;
                     param_quantity.value--;
+                    egg_quantity.value--;
                 }
             }
 
