@@ -6,13 +6,16 @@
 package Controllers.Public;
 
 import Cart.CartObj;
+import Daos.Bird_Nest_TrackingDAO;
 import Daos.ProductDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
+import Models.Bird_Nest_TrackingDTO;
 import Models.CustomerDTO;
 import Models.OrderDTO;
 import Models.OrderDetailDTO;
+import Object.Products;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,35 +56,34 @@ public class CheckoutSucessfulServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String paymentMethod = (String) session.getAttribute("PAYMENT_METHOD");
-            int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
 
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
-            if (cart == null) {
-                url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
-            } else {
-                String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
-                AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-                CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
-                int temp = (Integer) session.getAttribute("SHIPPING_CASH");
-                float shippingCash = (float) temp;
-                String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
-                long millis = System.currentTimeMillis();
-                java.sql.Date orderDate = new java.sql.Date(millis);
-                
-                if (paymentMethod.equals("COD") || paymentMethod.equals("VNPAY") && vnPayStatus.equals("00")) {
-                    OrderDAO orderdao = new OrderDAO();
-                    String orderID = orderdao.createOrderID();
-                    OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
-                            orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
-                    orderdao.createOrder(newOrder);
-                    OrderDetailDAO odDao = new OrderDetailDAO();
-                    OrderDetailDTO odDto;
-                    ProductDAO birdDao = new ProductDAO();
+
+            String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
+            int temp = (Integer) session.getAttribute("SHIPPING_CASH");
+            int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
+            float shippingCash = (float) temp;
+            String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
+            long millis = System.currentTimeMillis();
+            java.sql.Date orderDate = new java.sql.Date(millis);
+
+            if (paymentMethod.equals("COD") || paymentMethod.equals("VNPAY") && vnPayStatus.equals("00")) {
+                OrderDAO orderdao = new OrderDAO();
+                String orderID = orderdao.createOrderID();
+                OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
+                        orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
+                orderdao.createOrder(newOrder);
+                ProductDAO birdDao = new ProductDAO();
+                OrderDetailDAO odDao = new OrderDetailDAO();
+                OrderDetailDTO odDto;
+                if (serviceID == 1) {
                     for (String key : cart.getItems().keySet()) {
                         odDto = new OrderDetailDTO(orderID, key,
                                 cart.getItems().get(key).getPrice(),
                                 cart.getItems().get(key).getQuantityBuy(), "Wait for confirmation");
-//                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() + cart.getItems().get(key).getQuantity_Buy();
+//                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() - cart.getItems().get(key).getQuantity_Buy();
 //                    int quantitySold = cart.getItems().get(key).getQuantity_Sold() + cart.getItems().get(key).getQuantity_Buy();
 //                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate,quantitySold, key);
                         odDao.createOrderDetail(odDto);
@@ -89,9 +91,26 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                     cart.removeAllBird();
                     session.removeAttribute("BIRD_CART");
                     session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-                    url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
+                } else if (serviceID == 2) {
+                    Products product = (Products) session.getAttribute("BIRD_NEST_CHOOSE");
+                    odDto = new OrderDetailDTO(orderID, product.getProductID(),
+                            product.getPrice(),
+                            product.getQuantityBuy(), "Wait for confirmation");
+//                    int quantityAvaUpdate = product.getQuantityAvailable() - product.getQuantityBuy();
+//                    int quantitySold = product.getQuantitySold() + product.getQuantityBuy();
+//                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate, quantitySold, product.getProductID());
+                    odDao.createOrderDetail(odDto);
+                    Bird_Nest_TrackingDAO bndao = new Bird_Nest_TrackingDAO();
+                    Bird_Nest_TrackingDTO bndto = new Bird_Nest_TrackingDTO(bndao.createBirdNestID(), orderID, product.getName(),
+                            product.getDad_Bird_ID(), product.getMom_Bird_ID(), product.getQuantityBuy(),
+                            account.getAccountID(), serviceID, null, Float.parseFloat(totalOrder),
+                            null, orderDate, orderDate, null, "Processing");
+                    bndao.createBirdNestTracking(bndto);
                 }
+
+                url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

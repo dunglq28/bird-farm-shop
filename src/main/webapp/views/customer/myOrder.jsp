@@ -156,7 +156,8 @@
                                                                 </div>
                                                                 <div class="col-md-5 col-lg-5 col-xl-5 align-content-center "
                                                                      style="margin-left: 40px; ">
-                                                                    <a href="#" class="text-muted text-decoration-none see_details_tag">See details
+                                                                    <a href="#" class="text-muted text-decoration-none see_details_tag">
+                                                                        See details
                                                                         <i class="fa-solid fa-arrow-right"></i></a>
                                                                     </a>
                                                                 </div>
@@ -165,6 +166,14 @@
                                                                 <div class=" align-content-center">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Receiving method: ${order.form_Receipt} </h6>
+                                                                    </div>
+                                                                </div>
+                                                                <h6 class="mb-0 text-sm-center"
+                                                                    style="margin: 0 10px 0 10px;"> |
+                                                                </h6>
+                                                                <div class=" align-content-center">
+                                                                    <div class="d-flex">
+                                                                        <h6 class="mb-0 text-sm-start">Service: ${order.serviceName} </h6>
                                                                     </div>
                                                                 </div>
                                                                 <h6 class="mb-0 text-sm-center"
@@ -222,11 +231,19 @@
                                                             </div>
                                                         </c:forEach>
                                                     </div>
+
+                                                    <c:if test="${order.serviceID != 1}">
+                                                        <form action="Service_Tracking" class="col-12 mt-3 d-flex justify-content-end">
+                                                            <input type="hidden" name="txtOrderID" value="${order.orderID}">
+                                                            <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">See Bird Nest Tracking</button>
+                                                        </form>
+                                                    </c:if>
                                                     <c:if test="${order.status == 'Wait for confirmation'}">
                                                         <div class="col-12 mt-3 d-flex justify-content-end">
                                                             <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
                                                         </div>
                                                     </c:if>
+
                                                     <c:if test="${order.status == 'Complete'}">
                                                         <div class="col-12 mt-3 d-flex justify-content-end">
                                                             <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Buy again</button>

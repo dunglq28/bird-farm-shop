@@ -8,6 +8,7 @@ package Utils;
 import Daos.Service_Price_ListDAO;
 import Models.Service_Price_ListDTO;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -19,7 +20,8 @@ public class CalculateServicePrice {
         try {
             if (serviceID == 2) {
                 Service_Price_ListDAO dao = new Service_Price_ListDAO();
-                Service_Price_ListDTO servicePrice = dao.getServicePriceByServiceID(serviceID);
+                List<Service_Price_ListDTO> servicePrice = dao.getServicePriceByServiceID(serviceID);
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

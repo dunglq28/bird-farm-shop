@@ -54,6 +54,7 @@ public class InforReceiveServlet extends HttpServlet {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
             CustomerDTO customer = null;
+            String serviceID = (String) session.getAttribute("SERVICE_ID");
 
             if (button == null) {
                 request.setAttribute("TOTAL_ORDER", totalOrder);
@@ -63,12 +64,14 @@ public class InforReceiveServlet extends HttpServlet {
                     request.setAttribute("SHIPPING_METHOD", "Fast delivery");
                     request.setAttribute("SHIPPING_CASH", 125000);
                 }
-
+                
                 customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
                 session.setAttribute("CUSTOMER", customer);
                 request.setAttribute("TOTAL_ORDER", totalOrder);
-                if (customer != null) {
+                if (customer != null && serviceID.equals("1")) {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                } else if (customer != null && serviceID.equals("2")) {
+                    url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
                 }
             }
 

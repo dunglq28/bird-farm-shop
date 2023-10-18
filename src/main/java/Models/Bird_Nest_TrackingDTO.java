@@ -12,163 +12,162 @@ import java.sql.Date;
  * @author hj
  */
 public class Bird_Nest_TrackingDTO {
-    private String Bird_Nest_ID;
-    private String OrderID;
-    private String Bird_Nest_Name;
-    private String Dad_Bird_ID;
-    private String Mom_Bird_ID;
-    private int Eggs_Quantity;
-    private String CustomerID;
-    private int ServiceID;
-    private String SubService;
-    private float Deposit_Price;
-    private String StaffID;
-    private Date OrderDate;
-    private Date LastUpdateDate;
-    private String NOTE;
-    private String Status;
+    private String bird_Nest_ID;
+    private String orderID;
+    private String bird_Nest_Name;
+    private String dad_Bird_ID;
+    private String mom_Bird_ID;
+    private int eggs_Quantity;
+    private String accountID;
+    private int serviceID;
+    private String subService;
+    private float deposit_Price;
+    private String staffID;
+    private Date orderDate;
+    private Date lastUpdateDate;
+    private String note;
+    private String status;
 
     public Bird_Nest_TrackingDTO() {
     }
 
-    public Bird_Nest_TrackingDTO(String Bird_Nest_ID, String OrderID, String Bird_Nest_Name, String Dad_Bird_ID, String Mom_Bird_ID, int Eggs_Quantity, String CustomerID, int ServiceID, String SubService, float Deposit_Price, String StaffID, Date OrderDate, Date LastUpdateDate, String NOTE, String Status) {
-        this.Bird_Nest_ID = Bird_Nest_ID;
-        this.OrderID = OrderID;
-        this.Bird_Nest_Name = Bird_Nest_Name;
-        this.Dad_Bird_ID = Dad_Bird_ID;
-        this.Mom_Bird_ID = Mom_Bird_ID;
-        this.Eggs_Quantity = Eggs_Quantity;
-        this.CustomerID = CustomerID;
-        this.ServiceID = ServiceID;
-        this.SubService = SubService;
-        this.Deposit_Price = Deposit_Price;
-        this.StaffID = StaffID;
-        this.OrderDate = OrderDate;
-        this.LastUpdateDate = LastUpdateDate;
-        this.NOTE = NOTE;
-        this.Status = Status;
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, String dad_Bird_ID, String mom_Bird_ID, int eggs_Quantity, String accountID, int serviceID, String subService, float deposit_Price, String staffID, Date orderDate, Date lastUpdateDate, String note, String status) {
+        this.bird_Nest_ID = bird_Nest_ID;
+        this.orderID = orderID;
+        this.bird_Nest_Name = bird_Nest_Name;
+        this.dad_Bird_ID = dad_Bird_ID;
+        this.mom_Bird_ID = mom_Bird_ID;
+        this.eggs_Quantity = eggs_Quantity;
+        this.accountID = accountID;
+        this.serviceID = serviceID;
+        this.subService = subService;
+        this.deposit_Price = deposit_Price;
+        this.staffID = staffID;
+        this.orderDate = orderDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.note = note;
+        this.status = status;
     }
 
     public String getBird_Nest_ID() {
-        return Bird_Nest_ID;
+        return bird_Nest_ID;
     }
 
-    public void setBird_Nest_ID(String Bird_Nest_ID) {
-        this.Bird_Nest_ID = Bird_Nest_ID;
+    public void setBird_Nest_ID(String bird_Nest_ID) {
+        this.bird_Nest_ID = bird_Nest_ID;
     }
 
     public String getOrderID() {
-        return OrderID;
+        return orderID;
     }
 
-    public void setOrderID(String OrderID) {
-        this.OrderID = OrderID;
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
     }
 
     public String getBird_Nest_Name() {
-        return Bird_Nest_Name;
+        return bird_Nest_Name;
     }
 
-    public void setBird_Nest_Name(String Bird_Nest_Name) {
-        this.Bird_Nest_Name = Bird_Nest_Name;
+    public void setBird_Nest_Name(String bird_Nest_Name) {
+        this.bird_Nest_Name = bird_Nest_Name;
     }
 
     public String getDad_Bird_ID() {
-        return Dad_Bird_ID;
+        return dad_Bird_ID;
     }
 
-    public void setDad_Bird_ID(String Dad_Bird_ID) {
-        this.Dad_Bird_ID = Dad_Bird_ID;
+    public void setDad_Bird_ID(String dad_Bird_ID) {
+        this.dad_Bird_ID = dad_Bird_ID;
     }
 
     public String getMom_Bird_ID() {
-        return Mom_Bird_ID;
+        return mom_Bird_ID;
     }
 
-    public void setMom_Bird_ID(String Mom_Bird_ID) {
-        this.Mom_Bird_ID = Mom_Bird_ID;
+    public void setMom_Bird_ID(String mom_Bird_ID) {
+        this.mom_Bird_ID = mom_Bird_ID;
     }
 
     public int getEggs_Quantity() {
-        return Eggs_Quantity;
+        return eggs_Quantity;
     }
 
-    public void setEggs_Quantity(int Eggs_Quantity) {
-        this.Eggs_Quantity = Eggs_Quantity;
+    public void setEggs_Quantity(int eggs_Quantity) {
+        this.eggs_Quantity = eggs_Quantity;
     }
 
-    public String getCustomerID() {
-        return CustomerID;
+    public String getAccountID() {
+        return accountID;
     }
 
-    public void setCustomerID(String CustomerID) {
-        this.CustomerID = CustomerID;
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
     }
 
     public int getServiceID() {
-        return ServiceID;
+        return serviceID;
     }
 
-    public void setServiceID(int ServiceID) {
-        this.ServiceID = ServiceID;
+    public void setServiceID(int serviceID) {
+        this.serviceID = serviceID;
     }
 
     public String getSubService() {
-        return SubService;
+        return subService;
     }
 
-    public void setSubService(String SubService) {
-        this.SubService = SubService;
+    public void setSubService(String subService) {
+        this.subService = subService;
     }
 
     public float getDeposit_Price() {
-        return Deposit_Price;
+        return deposit_Price;
     }
 
-    public void setDeposit_Price(float Deposit_Price) {
-        this.Deposit_Price = Deposit_Price;
+    public void setDeposit_Price(float deposit_Price) {
+        this.deposit_Price = deposit_Price;
     }
 
     public String getStaffID() {
-        return StaffID;
+        return staffID;
     }
 
-    public void setStaffID(String StaffID) {
-        this.StaffID = StaffID;
+    public void setStaffID(String staffID) {
+        this.staffID = staffID;
     }
 
     public Date getOrderDate() {
-        return OrderDate;
+        return orderDate;
     }
 
-    public void setOrderDate(Date OrderDate) {
-        this.OrderDate = OrderDate;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     public Date getLastUpdateDate() {
-        return LastUpdateDate;
+        return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Date LastUpdateDate) {
-        this.LastUpdateDate = LastUpdateDate;
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 
-    public String getNOTE() {
-        return NOTE;
+    public String getNote() {
+        return note;
     }
 
-    public void setNOTE(String NOTE) {
-        this.NOTE = NOTE;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    public void setStatus(String status) {
+        this.status = status;
     }
-    
-    
+
     
 }

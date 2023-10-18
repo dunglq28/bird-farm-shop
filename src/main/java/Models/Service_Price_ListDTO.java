@@ -10,18 +10,19 @@ package Models;
  * @author hj
  */
 public class Service_Price_ListDTO {
-
+    private int service_Price_List_ID;
     private int serviceID;
     private String serviceName;
-    private float minimum_number_of_eggs;
-    private float maximum_number_of_eggs;
+    private int minimum_number_of_eggs;
+    private int maximum_number_of_eggs;
     private float servicePrice;
     private String unitPrice;
 
     public Service_Price_ListDTO() {
     }
 
-    public Service_Price_ListDTO(int serviceID, String serviceName, float minimum_number_of_eggs, float maximum_number_of_eggs, float servicePrice, String unitPrice) {
+    public Service_Price_ListDTO(int service_Price_List_ID, int serviceID, String serviceName, int minimum_number_of_eggs, int maximum_number_of_eggs, float servicePrice, String unitPrice) {
+        this.service_Price_List_ID = service_Price_List_ID;
         this.serviceID = serviceID;
         this.serviceName = serviceName;
         this.minimum_number_of_eggs = minimum_number_of_eggs;
@@ -29,6 +30,18 @@ public class Service_Price_ListDTO {
         this.servicePrice = servicePrice;
         this.unitPrice = unitPrice;
     }
+
+ 
+
+    public int getService_Price_List_ID() {
+        return service_Price_List_ID;
+    }
+
+    public void setService_Price_List_ID(int service_Price_List_ID) {
+        this.service_Price_List_ID = service_Price_List_ID;
+    }
+    
+    
 
     public int getServiceID() {
         return serviceID;
@@ -46,19 +59,19 @@ public class Service_Price_ListDTO {
         this.serviceName = serviceName;
     }
 
-    public float getMinimum_number_of_eggs() {
+    public int getMinimum_number_of_eggs() {
         return minimum_number_of_eggs;
     }
 
-    public void setMinimum_number_of_eggs(float minimum_number_of_eggs) {
+    public void setMinimum_number_of_eggs(int minimum_number_of_eggs) {
         this.minimum_number_of_eggs = minimum_number_of_eggs;
     }
 
-    public float getMaximum_number_of_eggs() {
+    public int getMaximum_number_of_eggs() {
         return maximum_number_of_eggs;
     }
 
-    public void setMaximum_number_of_eggs(float maximum_number_of_eggs) {
+    public void setMaximum_number_of_eggs(int maximum_number_of_eggs) {
         this.maximum_number_of_eggs = maximum_number_of_eggs;
     }
 

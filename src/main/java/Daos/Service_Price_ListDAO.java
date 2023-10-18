@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,7 +20,13 @@ import java.sql.SQLException;
  */
 public class Service_Price_ListDAO {
 
-    public Service_Price_ListDTO getServicePriceByServiceID(int id)
+    private List<Service_Price_ListDTO> orderServicePirceList;
+
+    public List<Service_Price_ListDTO> getServiceServicePirceList() {
+        return orderServicePirceList;
+    }
+
+    public List<Service_Price_ListDTO> getServicePriceByServiceID(int id)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -34,13 +42,17 @@ public class Service_Price_ListDAO {
                 stm.setInt(1, id);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    result = new Service_Price_ListDTO(rs.getInt("ServiceID"),
+                    result = new Service_Price_ListDTO(rs.getInt("Service_Price_List_ID"),
+                            rs.getInt("ServiceID"),
                             rs.getString("ServiceName"),
-                            rs.getFloat("Minimum_number_of_eggs"),
-                            rs.getFloat("Maximum_number_of_eggs"),
+                            rs.getInt("Minimum_number_of_eggs"),
+                            rs.getInt("Maximum_number_of_eggs"),
                             rs.getFloat("ServicePrice"),
                             rs.getString("UnitPrice"));
-                    return result;
+                    if (this.orderServicePirceList == null) {
+                        this.orderServicePirceList = new ArrayList<Service_Price_ListDTO>();
+                    }
+                    this.orderServicePirceList.add(result);
                 }
             }
         } finally {
@@ -54,6 +66,6 @@ public class Service_Price_ListDAO {
                 con.close();
             }
         }
-        return result;
+        return this.orderServicePirceList;
     }
 }

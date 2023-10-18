@@ -230,6 +230,7 @@
                                                                     </button>
                                                                     <input type="hidden" name="txtproductID" value="${dto.productID}"/>
                                                                     <input type="hidden" name="txtproductName" value="${dto.product_Name}"/>
+                                                                    <input type="hidden" name="txtServiceID" value="1" />
                                                                     <input type="hidden" name="category_Name" value="${dto.category_Name}"/>
                                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
                                                                     <input type="hidden" name="quantity_Sold" value="${dto.quantity_Sold}"/>

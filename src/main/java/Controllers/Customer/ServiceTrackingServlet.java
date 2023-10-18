@@ -35,6 +35,7 @@ public class ServiceTrackingServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.CustomerFeatures.SERVICE_TRACKING_PAGE;
+        String orderID = request.getParameter("txtOrderID");
 
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);

@@ -122,13 +122,15 @@ public class OrderDAO implements Serializable {
             if (con != null) {
                 //2.Create SQL statement string
                 if (status_choose.equals("All")) {
-                    sql = "Select OrderID, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
-                            + "From Orders "
+                    sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
+                            + "From Orders od "
+                            + "inner join Service ser on ser.ServiceID = od.ServiceID "
                             + "where AccountID = ? "
                             + "order by OrderDate desc ";
                 } else {
-                    sql = "Select OrderID, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
-                            + "From Orders "
+                    sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
+                            + "From od "
+                            + "inner join Service ser on ser.ServiceID = od.ServiceID "
                             + "where AccountID = ? and Status = ? "
                             + "order by OrderDate desc ";
                 }
@@ -144,6 +146,8 @@ public class OrderDAO implements Serializable {
                 //5.process
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
+                    int serviceID = rs.getInt("ServiceID");
+                    String serviceName = rs.getString("ServiceName");
                     String form_Receipt = rs.getString("Form_Receipt");
                     Date orderDate = rs.getDate("OrderDate");
                     float discount = rs.getFloat("Discount");
@@ -152,7 +156,7 @@ public class OrderDAO implements Serializable {
                     String pay_with = rs.getString("Pay_with");
                     String status = rs.getString("Status");
 
-                    result = new OrderDTO(orderID, form_Receipt, orderDate, discount, delivery_charges, total_Order, pay_with, status);
+                    result = new OrderDTO(orderID, serviceID, serviceName, form_Receipt, orderDate, discount, delivery_charges, total_Order, pay_with, status);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }
