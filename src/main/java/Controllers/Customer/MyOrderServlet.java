@@ -37,7 +37,7 @@ public class MyOrderServlet extends HttpServlet {
                 status = "All";
             }
             OrderDAO oDao = new OrderDAO();
-            OrderDetailDAO odDao = new OrderDetailDAO();
+//            OrderDetailDAO odDao = new OrderDetailDAO();
             List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status);
             session.setAttribute("ORDER_LIST", order);
             request.setAttribute("STATUS_ORDER", status);

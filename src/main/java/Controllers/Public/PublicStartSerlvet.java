@@ -1,5 +1,6 @@
 package Controllers.Public;
 
+import Models.AccountDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,16 +12,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "home", urlPatterns = {"/home"})
 public class PublicStartSerlvet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
+        response.setContentType("text/html;charset=UTF-8");
 
         String url = MyAppConstants.PublicFeatures.HOME_PAGE;
+        HttpSession session = request.getSession();
+        AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+        if(account != null && account.getRoleName().equals("Customer")){
+            url = MyAppConstants.PublicFeatures.HOME_PAGE;
+        } else if(account != null){
+            url = MyAppConstants.StaffFeatures.MANAGE_PAGE;
+        }
 
         RequestDispatcher dis = request.getRequestDispatcher(url);
         dis.forward(request, response);
