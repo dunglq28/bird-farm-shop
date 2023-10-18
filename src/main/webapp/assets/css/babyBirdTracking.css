@@ -161,8 +161,46 @@ tbody td {
     color: #999999;
 }
 
-.col-12{
+.col-12 {
     padding-top: 60px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.center {
+    text-align: center
+}
+
+.pagination a {
+    color: #111111;
+    font-weight: 600;
+    line-height: 40px;
+    float: left;
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+    font-size: 14px;
+    -webkit-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+    margin-right: 6px;
+}
+
+.pagination a.active {
+    background-color: #0D6780;
+    color: white;
+    border: 1px solid #0D6780;
+}
+
+.pagination a:hover:not(.active) {
+    background: rgb(37, 118, 140);
+    border-color: rgb(37, 118, 140);
+    color: #ffffff;
+
 }
 
 @media screen and (max-width: 992px) {
