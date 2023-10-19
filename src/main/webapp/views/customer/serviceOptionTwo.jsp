@@ -253,9 +253,7 @@
                                     <div class="p-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="fw-bold mb-0 text-black">Order</h4>
-                                            <a href="cart" class="change-icon change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted update_info">Update</h6>
-                                            </a>
+                                           
                                         </div>
                                         <hr class="my-4">
                                         <c:set var="male_bird_choose" value="${requestScope.MALE_BIRD_CHOOSE}"></c:set>

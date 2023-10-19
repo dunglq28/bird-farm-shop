@@ -19,11 +19,13 @@ public class MyAppConstants {
         public static final String ADD_TO_CART_CONTROLLER = "add-bird";
         public static final String CHECKOUT_VNPAY_CONTROLLER = "CheckoutVNPayServlet";
         public static final String CHECK_LOGIN_CONTROLLER = "CheckLoginToCheckoutServlet";
+        public static final String HANDLE_PAYMENT_CONTROLLER = "HandlePaymentServlet";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
         public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
         public static final String SELECT_SAME_PRODUCT_CONTROLLER = "SelectSameProductServlet";
         public static final String BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER = "BirdNestAvailableServlet";
-         public static final String MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER = "MatchBirdAvailable";
+        public static final String MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER = "MatchBirdAvailable";
+        public static final String MATCH_BIRD_CUSTOMER_SERVICE_CONTROLLER = "MatchBirdCustomer";
 
     }
 

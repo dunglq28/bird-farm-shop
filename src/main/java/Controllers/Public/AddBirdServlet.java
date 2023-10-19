@@ -22,7 +22,7 @@ public class AddBirdServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
-        String BirdID = request.getParameter("txtproductID");
+        String birdID = request.getParameter("txtproductID");
         String name = request.getParameter("txtproductName");
         String cate_Name = request.getParameter("category_Name");
         String img = request.getParameter("image");
@@ -46,10 +46,10 @@ public class AddBirdServlet extends HttpServlet {
             if (age == null && color == null && gender == null) {
                 prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
             } else {
-                prodcut = new Products(name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
+                prodcut = new Products(birdID ,name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
             }
 
-            cart.addItemToCart(BirdID, prodcut);
+            cart.addItemToCart(birdID, prodcut);
             session.setAttribute("BIRD_CART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
 
