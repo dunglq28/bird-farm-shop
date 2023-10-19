@@ -13,6 +13,7 @@ public class MyAppConstants {
         public static final String BIRD_NEST_DETAIL_PAGE = "/views/public/singleBirdNest.jsp";
         public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
+        public static final String ERROR_404_PAGE = "/views/errors/errorPage404.jsp";
         public static final String PRODUCT_DETAIL_CONTROLLER = "product";
         public static final String PRODUCT_LIST_CONTROLLER = "product_list";
         public static final String PAGING_PRODUCT_CONTROLLER = "PagingProductServlet";
@@ -57,7 +58,7 @@ public class MyAppConstants {
 
     public class StaffFeatures {
 
-        public static final String MANAGE_PAGE = "/views/public/dashboard.jsp";
+        public static final String MANAGE_PAGE = "/views/staff/dashboard.jsp";
 
     }
 

@@ -23,6 +23,9 @@ public class AuthDispatchServlet extends HttpServlet {
                 case "loginPage":
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
                     break;
+                case "homePage":
+                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                    break;
                 case "logout":
                     url = MyAppConstants.AuthFeatures.LOGOUT_CONTROLLER;
                     break;
