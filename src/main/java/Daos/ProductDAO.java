@@ -195,7 +195,7 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                String sql = "Select * " // phai co cach sau username
+                String sql = "Select * "
                         + "From Birds "
                         + "where Customer_Bird = 'false' ";
                 //3.Create statement object
@@ -298,7 +298,7 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public boolean updateQuantityAfterBuy(int quantity_available, int quantity_sold, String birdID)
+    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_sold, String birdID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -334,4 +334,91 @@ public class ProductDAO implements Serializable {
         }
         return false;
     }
+
+    public boolean updateQuantityMating(int quantity, String birdID)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2. create SQL statement string
+                String sql = "Update Products "
+                        + "Set Quantity_AreMating = ? "
+                        + "Where productID = ? and Customer_Product = 'false' ";
+                //3. Create statement object
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, quantity);
+                stm.setString(3, birdID);
+                //4. Excute query
+                int effectRows = stm.executeUpdate();
+                //5. Process
+                if (effectRows > 0) {
+                    return true;
+                }
+            } // end of connection has opend
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public List<ProductDTO> getBirdByGender(String gender, int cateID)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        this.productList = new ArrayList<ProductDTO>();
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2.Create SQL statement string
+                String sql = "select ProductID , Product_Name, Image, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
+                        + "from Products "
+                        + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= 1 "
+                        + "and CategoryID = ? and Customer_Product = 'false' ";
+                //3.Create statement object
+                stm = con.prepareStatement(sql);
+                //4.execute-query
+                stm.setString(1, gender);
+                stm.setInt(2, cateID);
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    ProductDTO dto = new ProductDTO(rs.getString("ProductID"),
+                            rs.getString("Product_Name"),
+                            rs.getString("Gender"),
+                            rs.getString("Image"),
+                            rs.getInt("Quantity_Available"),
+                            rs.getInt("Quantity_AreMating"),
+                            rs.getInt("Quantity_Sold"),
+                            rs.getFloat("Price"),
+                            rs.getFloat("Discount"));
+                    this.productList.add(dto);
+                }
+            }//end connection has opened
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return this.productList;
+    }
+
 }

@@ -42,7 +42,7 @@ public class BirdNestAvailableServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.SERVICE_OPTION_ONE_PAGE;
+        String url = MyAppConstants.CustomerFeatures.SERVICE_OPTION_ONE_PAGE;
 
         int serviceID = Integer.parseInt(request.getParameter("txtServiceID"));
         String quantityBuy = request.getParameter("quantity_Buy");

@@ -12,7 +12,6 @@ public class MyAppConstants {
         public static final String PRODUCT_DETAIL_PAGE = "/views/public/singleProduct.jsp";
         public static final String BIRD_NEST_DETAIL_PAGE = "/views/public/singleBirdNest.jsp";
         public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
-        public static final String SERVICE_OPTION_ONE_PAGE = "/views/customer/serviceOptionOne.jsp";
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
         public static final String PRODUCT_DETAIL_CONTROLLER = "product";
         public static final String PRODUCT_LIST_CONTROLLER = "product_list";
@@ -21,9 +20,10 @@ public class MyAppConstants {
         public static final String CHECKOUT_VNPAY_CONTROLLER = "CheckoutVNPayServlet";
         public static final String CHECK_LOGIN_CONTROLLER = "CheckLoginToCheckoutServlet";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
-        public static final String BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER = "BirdNestAvailableServlet";
         public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
         public static final String SELECT_SAME_PRODUCT_CONTROLLER = "SelectSameProductServlet";
+        public static final String BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER = "BirdNestAvailableServlet";
+         public static final String MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER = "MatchBirdAvailable";
 
     }
 
@@ -43,6 +43,10 @@ public class MyAppConstants {
         public static final String RECEIVING_INFO_PAGE = "/views/customer/shipping.jsp";
         public static final String MY_ORDER_PAGE = "/views/customer/myOrder.jsp";
         public static final String SERVICE_TRACKING_PAGE = "/views/customer/babyBirdTracking.jsp";
+        public static final String SERVICE_OPTION_ONE_PAGE = "/views/customer/serviceOptionOne.jsp";
+        public static final String SERVICE_OPTION_TWO_PAGE = "/views/customer/serviceOptionTwo.jsp";
+        public static final String SERVICE_OPTION_THREE_PAGE = "/views/customer/serviceOptionThree.jsp";
+
         public static final String MY_ORDER_CONTROLLER = "Order";
         public static final String BIRD_NEST_SERVICE_CONTROLLER = "Bird-Nest-Services";
         public static final String SERVICE_TRACKING_CONTROLLER = "Service_Tracking";

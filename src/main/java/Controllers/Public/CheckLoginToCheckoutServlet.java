@@ -69,6 +69,10 @@ public class CheckLoginToCheckoutServlet extends HttpServlet {
                 session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
                 url = "guest?btAction=loginPage";
 
+            } else if (account == null && serviceID.equals("3")) {
+                session.setAttribute("HISTORY_URL", MyAppConstants.CustomerFeatures.BIRD_NEST_SERVICE_CONTROLLER);
+                url = "guest?btAction=loginPage";
+                
             } else if (account != null) {
                 customer = dao.getCustomerByAccountID(account.getAccountID());
 
@@ -82,7 +86,9 @@ public class CheckLoginToCheckoutServlet extends HttpServlet {
                 } else if (serviceID.equals("2")) {
                     url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
                     session.setAttribute("CUSTOMER", customer);
-
+                } else if (serviceID.equals("3")) {
+                    url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
+                    session.setAttribute("CUSTOMER", customer);
                 }
             }
 

@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
-        <link rel="stylesheet" href="../../assets/css/homePage.css">
-        <link rel="stylesheet" href="../../assets/css/birdNest.css">
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+        <link rel="stylesheet" href="./assets/css/birdNest.css">
     </head>
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
@@ -59,38 +59,47 @@
                                 </div>
                             </div>
                         </form>
+                        <form action="Checkout" method="POST">
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="https://www.thesprucepets.com/thmb/X6Se5sWlNMb0pDUD4vh-jM65NXU=/2121x0/filters:no_upscale():strip_icc()/australian-finch--taeniopygia-guttata--807072894-79e2ba40ea54453fa9c64429d8d234e1.jpg"
+                                         width="400" height="400">
+                                    <p><strong>Based on the bird lists at shop</strong></p>
+                                    <p>
+                                    </p>
+                                    <button class="btn">Order</button>
+                                    <input type="hidden" name="txtServiceID" value="3" />
+                                    <input type="hidden" name="btAction" value="Match Bird Available At Shop">
 
-                        <div class="col-sm-4">
-                            <div class="thumbnail">
-                                <img src="https://www.thesprucepets.com/thmb/X6Se5sWlNMb0pDUD4vh-jM65NXU=/2121x0/filters:no_upscale():strip_icc()/australian-finch--taeniopygia-guttata--807072894-79e2ba40ea54453fa9c64429d8d234e1.jpg"
-                                     width="400" height="400">
-                                <p><strong>Based on the bird lists at shop</strong></p>
-                                <p>
-                                </p>
-                                <button class="btn">Order</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="thumbnail">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQEaIl1E9gv1vDDHVs_DsFy93aXSJxGmu-phrzzwecCC0FySyV36kA2MVAhRi82-INQh8&usqp=CAU"
-                                     width="400" height="400">
-                                <p><strong>Based on customer's birds</strong></p>
-                                <p></p>
-                                <button class="btn">Order</button>
+                        </form>
+                        <form action="Checkout" method="POST">
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQEaIl1E9gv1vDDHVs_DsFy93aXSJxGmu-phrzzwecCC0FySyV36kA2MVAhRi82-INQh8&usqp=CAU"
+                                         width="400" height="400">
+                                    <p><strong>Based on customer's birds</strong></p>
+                                    <p></p>
+                                    <button class="btn">Order</button>
+                                    <input type="hidden" name="txtServiceID" value="3" />
+                                    <input type="hidden" name="btAction" value="Match Bird of customer">
+
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
-               
 
-              
-                </div>
+
+
             </div>
-        <jsp:include page="/components/footer.jsp"></jsp:include>
+        </div>
+    <jsp:include page="/components/footer.jsp"></jsp:include>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <script src="./assets/js/birdNest.js"></script>
-    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="./assets/js/birdNest.js"></script>
+</body>
 </html>
