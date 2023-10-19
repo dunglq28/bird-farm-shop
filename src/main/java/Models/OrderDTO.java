@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
 import java.sql.Date;
@@ -32,6 +27,7 @@ public class OrderDTO {
     private float total_Order;
     private float total_order_final;
     private String payBy;
+    private String CusName;
     private String status;
 
     public OrderDTO() {
@@ -69,6 +65,15 @@ public class OrderDTO {
         this.status = status;
     }
 
+    public OrderDTO(String orderID, String serviceName, Date orderDate, String CusName, String status) {
+        this.orderID = orderID;
+        this.serviceName = serviceName;
+        this.orderDate = orderDate;
+        this.CusName = CusName;
+        this.status = status;
+    }
+
+    
     public String getOrderDateFormat() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         return sdf.format(this.orderDate);
@@ -218,4 +223,13 @@ public class OrderDTO {
         this.status = status;
     }
 
+    public String getCusName() {
+        return CusName;
+    }
+
+    public void setCusName(String CusName) {
+        this.CusName = CusName;
+    }
+
+    
 }

@@ -60,6 +60,14 @@
         <servlet-name>InforReceiveServlet</servlet-name>
         <servlet-class>Controllers.Public.InforReceiveServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>acceptOrder</servlet-name>
+        <servlet-class>Controllers.Staff.AcceptAnOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deniedOrder</servlet-name>
+        <servlet-class>Controllers.Staff.deniedAnOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -139,6 +147,14 @@
     <servlet-mapping>
         <servlet-name>InforReceiveServlet</servlet-name>
         <url-pattern>/InforReceiveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>acceptOrder</servlet-name>
+        <url-pattern>/acceptOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deniedOrder</servlet-name>
+        <url-pattern>/deniedOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
