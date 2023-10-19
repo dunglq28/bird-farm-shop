@@ -28,7 +28,7 @@ body {
 }
 
 .sidebar:hover {
-  width: 240px;
+  width: 280px;
   transition: 0.5s;
 }
 
@@ -100,7 +100,7 @@ body {
 }
 
 .header--title {
-  color: #0D6780;
+  color: #17aaf3;
 }
 
 .user--info {
@@ -135,11 +135,18 @@ body {
 }
 
 /* *** tabular section *** */
+
+.main--title {
+  color: #0D6780;
+  padding-bottom: 1%;
+}
+
 .tabular--wrapper {
   background: #fff;
   margin-top: 1rem;
   border-radius: 10px;
   padding: 2rem;
+  height: 600px;
 }
 
 .table-container {
@@ -161,28 +168,46 @@ th {
   text-align: left;
 }
 
+.order-detail {
+  color: #000;
+  text-decoration: none;
+}
+
+.order-detail:hover {
+  color: #0D6780;
+}
+
+.action {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.action a {
+  padding: 2%;
+  color: #000;
+}
+
+.action a:first-child {
+  color: #3e8e41;
+}
+
+.action a:last-child {
+  color: red;
+}
+
 tbody {
   background: #f2f2f2;
 }
 
 td {
   padding: 15px;
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
 }
 
 tr:nth-child(even) {
   background: #fff;
-}
-
-tfoot {
-  background: rgba(113, 99, 186, 255);
-  font-weight: bold;
-  color: #fff;
-}
-
-tfoot td {
-  padding: 15px;
 }
 
 .table-container button {
@@ -191,3 +216,8 @@ tfoot td {
   cursor: pointer;
 }
 
+.bird-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
