@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout" class="container py-3 h-100 " method="get">
+        <form action="Checkout" class="container py-3 h-100 " method="post">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -103,7 +103,7 @@
                                         <hr class="my-4">
 
                                         <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="fw-bold mb-0 text-black">Shipping method </h4>
+                                            <h4 class="fw-bold mb-0 text-black">Delivery method </h4>
                                         </div>
 
                                         <div class="row mb-4 d-flex justify-content-between align-items-center">

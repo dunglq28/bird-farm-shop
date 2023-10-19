@@ -15,6 +15,7 @@ import Models.Bird_Nest_TrackingDTO;
 import Models.CustomerDTO;
 import Models.OrderDTO;
 import Models.OrderDetailDTO;
+import Models.ProductDTO;
 import Object.Products;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -78,34 +79,68 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 ProductDAO birdDao = new ProductDAO();
                 OrderDetailDAO odDao = new OrderDetailDAO();
                 OrderDetailDTO odDto;
-                if (serviceID == 1) {
-                    for (String key : cart.getItems().keySet()) {
-                        odDto = new OrderDetailDTO(orderID, key,
-                                cart.getItems().get(key).getPrice(),
-                                cart.getItems().get(key).getQuantityBuy(), "Wait for confirmation");
-//                    int quantityAvaUpdate = cart.getItems().get(key).getQuantity_Available() - cart.getItems().get(key).getQuantity_Buy();
-//                    int quantitySold = cart.getItems().get(key).getQuantity_Sold() + cart.getItems().get(key).getQuantity_Buy();
-//                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate,quantitySold, key);
+                int quantityAvaUpdate;
+                int quantitySold;
+                switch (serviceID) {
+                    case 1:
+                        for (String key : cart.getItems().keySet()) {
+                            odDto = new OrderDetailDTO(orderID, key,
+                                    cart.getItems().get(key).getPrice(),
+                                    cart.getItems().get(key).getQuantityBuy(), "Wait for confirmation");
+//                            quantityAvaUpdate = cart.getItems().get(key).getQuantityAvailable()- cart.getItems().get(key).getQuantityBuy();
+//                            quantitySold = cart.getItems().get(key).getQuantitySold()+ cart.getItems().get(key).getQuantityBuy();
+//                            birdDao.updateQuantityAfterOrder(quantityAvaUpdate, quantitySold, key);
+                            odDao.createOrderDetail(odDto);
+                        }
+                        cart.removeAllBird();
+                        session.removeAttribute("BIRD_CART");
+                        session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
+                        break;
+                    case 2:
+                        Products product = (Products) session.getAttribute("BIRD_NEST_CHOOSE");
+                        odDto = new OrderDetailDTO(orderID, product.getProductID(),
+                                product.getPrice(),
+                                product.getQuantityBuy(), "Wait for confirmation");
+//                        quantityAvaUpdate = product.getQuantityAvailable() - product.getQuantityBuy();
+//                        quantitySold = product.getQuantitySold() + product.getQuantityBuy();
+//                        birdDao.updateQuantityAfterOrder(quantityAvaUpdate, quantitySold, product.getProductID());
                         odDao.createOrderDetail(odDto);
-                    }
-                    cart.removeAllBird();
-                    session.removeAttribute("BIRD_CART");
-                    session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-                } else if (serviceID == 2) {
-                    Products product = (Products) session.getAttribute("BIRD_NEST_CHOOSE");
-                    odDto = new OrderDetailDTO(orderID, product.getProductID(),
-                            product.getPrice(),
-                            product.getQuantityBuy(), "Wait for confirmation");
-//                    int quantityAvaUpdate = product.getQuantityAvailable() - product.getQuantityBuy();
-//                    int quantitySold = product.getQuantitySold() + product.getQuantityBuy();
-//                    birdDao.updateQuantityAfterBuy(quantityAvaUpdate, quantitySold, product.getProductID());
-                    odDao.createOrderDetail(odDto);
-                    Bird_Nest_TrackingDAO bndao = new Bird_Nest_TrackingDAO();
-                    Bird_Nest_TrackingDTO bndto = new Bird_Nest_TrackingDTO(bndao.createBirdNestID(), orderID, product.getName(),
-                            product.getDad_Bird_ID(), product.getMom_Bird_ID(), product.getQuantityBuy(),
-                            account.getAccountID(), serviceID, null, Float.parseFloat(totalOrder),
-                            null, orderDate, orderDate, null, "Processing");
-                    bndao.createBirdNestTracking(bndto);
+                        Bird_Nest_TrackingDAO bndao = new Bird_Nest_TrackingDAO();
+                        Bird_Nest_TrackingDTO bndto = new Bird_Nest_TrackingDTO(bndao.createBirdNestID(), orderID, product.getName(),
+                                product.getDad_Bird_ID(), product.getMom_Bird_ID(), product.getQuantityBuy(),
+                                account.getAccountID(), serviceID, null, Float.parseFloat(totalOrder),
+                                null, orderDate, orderDate, null, "Processing");
+                        bndao.createBirdNestTracking(bndto);
+                        break;
+                    case 3:
+                        String optionChoose = (String) session.getAttribute("OPTION_CHOOSE");
+                        ProductDTO maleBird = (ProductDTO) session.getAttribute("MALE_BIRD_CHOOSE");
+                        odDto = new OrderDetailDTO(orderID, maleBird.getProductID(),
+                                maleBird.getPrice(), 1, "Wait for confirmation");
+                        odDao.createOrderDetail(odDto);
+                        ProductDTO femaleBird = (ProductDTO) session.getAttribute("FEMALE_BIRD_CHOOSE");
+                        odDto = new OrderDetailDTO(orderID, femaleBird.getProductID(),
+                                femaleBird.getPrice(), 1, "Wait for confirmation");
+                        odDao.createOrderDetail(odDto);
+
+                        if (optionChoose.contains("without parent")) {
+                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold(), maleBird.getProductID());
+                            birdDao.updateQuantityMating(maleBird.getQuantity_AreMating() + 1, maleBird.getProductID());
+
+                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold(), femaleBird.getProductID());
+                            birdDao.updateQuantityMating(femaleBird.getQuantity_AreMating() + 1, femaleBird.getProductID());
+                        } else {
+                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold() + 1, maleBird.getProductID());
+
+                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold() + 1, femaleBird.getProductID());
+                        }
+                        bndao = new Bird_Nest_TrackingDAO();
+                        bndto = new Bird_Nest_TrackingDTO(bndao.createBirdNestID(), orderID, null,
+                                maleBird.getProductID(), femaleBird.getProductID(), 0,
+                                account.getAccountID(), serviceID, optionChoose, Float.parseFloat(totalOrder),
+                                null, orderDate, orderDate, null, "Processing");
+                        bndao.createBirdNestTracking(bndto);
+                        break;
                 }
 
                 url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;

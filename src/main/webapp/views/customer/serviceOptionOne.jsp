@@ -1,8 +1,4 @@
-<%-- 
-    Document   : serviceOptionOne
-    Created on : Oct 17, 2023, 10:50:56 AM
-    Author     : tt
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -71,7 +67,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout" class="container py-3 h-100 " method="get">
+        <form action="Checkout" class="container py-3 h-100 " method="post">
             <jsp:useBean id="utilPrice" class="Utils.FormatCurrency"></jsp:useBean>
 
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -81,48 +77,7 @@
                                 <div class="row g-0">
                                     <div class="col-lg-8">
                                         <div class="p-5">
-                                            <div>
-                                            <c:set var="customer" value="${sessionScope.CUSTOMER}"></c:set>
-                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                    <a href="shipping?txtServiceID=${sessionScope.SERVICE_ID}" class="change-icon text-decoration-none">
-                                                    <h6 class="mb-0 text-muted change_info">Change information</h6>
-                                                </a>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1">
-
-                                                <h6 class="mb-0 text-muted ">${customer.fullName} - ${customer.phone_Number}
-                                                </h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-
-                                                <h6 class="mb-0 text-muted ">${customer.address}, ${customer.city}</h6>
-                                            </div>
-                                        </div>
-
-                                        <hr class="my-4">
-
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="fw-bold mb-0 text-black">Shipping method </h4>
-                                        </div>
-
-                                        <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input onchange="submit()" class="form-check-input-2" type="radio" 
-                                                       name="shippingMethod" id="exampleRadios1" value="Fast delivery" ${sessionScope.SHIPPING_METHOD == 'Fast delivery' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="exampleRadios1">
-                                                    Fast delivery
-                                                </label>
-                                            </div>
-                                            <div class="form-check fisrt-element">
-                                                <input onchange="submit()" class="form-check-input-1" type="radio" 
-                                                       name="shippingMethod" id="exampleRadios2" value="Receive directly at shop" ${sessionScope.SHIPPING_METHOD == 'Receive directly at shop' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="exampleRadios2">
-                                                    Receive directly at shop
-                                                </label>
-
-                                            </div>
-                                        </div>
+                                        <jsp:include page="/components/infoPayment.jsp"></jsp:include>
 
                                         <hr class="my-4">
 
@@ -221,9 +176,9 @@
 
                                         <hr class="my-4">
                                         <c:set var="total_order" value="${bird_nest.price * bird_nest.quantityBuy + sessionScope.SERVICE_PRICE}"></c:set>
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>${utilPrice.FormatPrice(total_order)}</h6>
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <h6 class="text-uppercase">Temporary</h6>
+                                                <h6>${utilPrice.FormatPrice(total_order)}</h6>
                                             <input type="hidden" name="txtTotalOrder" value="${total_order}" />
                                         </div>
                                         <div class="d-flex justify-content-between mb-1">

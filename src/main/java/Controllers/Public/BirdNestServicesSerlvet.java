@@ -32,8 +32,6 @@ public class BirdNestServicesSerlvet extends HttpServlet {
                         + "?productType=birdNest";
                 response.sendRedirect(url);
                 return;
-            } else if (button.equals("Addtocart")) {
-                url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
             } 
             
             RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -35,7 +35,7 @@ public class Bird_Nest_TrackingDAO {
                     if (BirdNestIDMax == null) {
                         return "BN1";
                     } else {
-                        int num = Integer.parseInt(BirdNestIDMax.substring(0,2)) + 1;
+                        int num = Integer.parseInt(BirdNestIDMax.substring(2)) + 1;
                         String newBirdNestID = "BN";
                         return newBirdNestID.concat(String.valueOf(num));
                     }

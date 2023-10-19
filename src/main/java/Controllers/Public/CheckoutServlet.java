@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 /**
  *
  * @author hj
@@ -48,8 +46,10 @@ public class CheckoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            session.setAttribute("TOTAL_ORDER", totalOrder);
-            session.setAttribute("SERVICE_ID", serviceID);
+            if (serviceID != null) {
+                session.setAttribute("TOTAL_ORDER", totalOrder);
+                session.setAttribute("SERVICE_ID", serviceID);
+            }
 
             session.setAttribute("PRODUCT_ID_SERVICE", productID);
             session.setAttribute("EGG_QUANTITY", quantityBuy);
@@ -72,6 +72,8 @@ public class CheckoutServlet extends HttpServlet {
             } else if (button.equals("Order") && paymentMethod.equals("VNPAY")) {
                 session.setAttribute("PAYMENT_METHOD", "VNPAY");
                 url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
+            } else if (button.equals("Match Bird Available At Shop")) {
+                url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
             }
 
 //        } catch (SQLException ex) {

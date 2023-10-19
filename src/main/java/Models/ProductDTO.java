@@ -17,6 +17,7 @@ public class ProductDTO {
     private String gender;
     private String image;
     private int quantity_Available;
+    private int quantity_AreMating;
     private int quantity_Sold;
     private float price;
     private String characteristics;
@@ -28,6 +29,13 @@ public class ProductDTO {
 
     public ProductDTO() {
     }
+
+    public ProductDTO(int categoryID, String category_Name) {
+        this.categoryID = categoryID;
+        this.category_Name = category_Name;
+    }
+    
+    
 
     public ProductDTO(String productID, String product_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.productID = productID;
@@ -45,6 +53,19 @@ public class ProductDTO {
         this.discount = discount;
         this.status = status;
     }
+
+    public ProductDTO(String productID, String product_Name, String gender, String image, int quantity_Available, int quantity_AreMating, int quantity_Sold, float price, float discount) {
+        this.productID = productID;
+        this.product_Name = product_Name;
+        this.gender = gender;
+        this.image = image;
+        this.quantity_Available = quantity_Available;
+        this.quantity_AreMating = quantity_AreMating;
+        this.quantity_Sold = quantity_Sold;
+        this.price = price;
+        this.discount = discount;
+    }
+    
 
 
     public ProductDTO(String productID, String product_Name, String category_Name, int product_TypeID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, float discount, String status) {
@@ -193,6 +214,15 @@ public class ProductDTO {
     public void setQuantity_Available(int quantity_Available) {
         this.quantity_Available = quantity_Available;
     }
+
+    public int getQuantity_AreMating() {
+        return quantity_AreMating;
+    }
+
+    public void setQuantity_AreMating(int quantity_AreMating) {
+        this.quantity_AreMating = quantity_AreMating;
+    }
+    
 
     public int getQuantity_Sold() {
         return quantity_Sold;

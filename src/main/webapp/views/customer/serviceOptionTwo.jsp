@@ -17,8 +17,8 @@
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="../../assets/css/homePage.css">
-        <link rel="stylesheet" href="../../assets/css/payment.css">
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+        <link rel="stylesheet" href="./assets/css/payment.css">
     </head>
     <body>
         <!-- option2 -->
@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout" class="container py-3 h-100 " method="post">
+        <form  class="container py-3 h-100 ">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -78,43 +78,28 @@
                             <div class="row g-0">
                                 <div class="col-lg-8">
                                     <div class="p-5">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                <a href="" class="change-icon text-decoration-none">
-                                                    <h6 class="mb-0 text-muted change_info">Change information</h6>
-                                                </a>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <jsp:include page="/components/infoPayment.jsp"></jsp:include>
+                                        <jsp:useBean id="utilPrice" class="Utils.FormatCurrency"></jsp:useBean>
 
-                                                <h6 class="mb-0 text-muted ">Truong Tuyet Ngan (K17 HCM) - 012345
-                                                </h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
 
-                                                <h6 class="mb-0 text-muted ">Vinhome, HCM</h6>
-                                            </div>
-                                        </div>
+                                            <hr class="my-4">
 
-                                        <hr class="my-4">
-
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <label class="pay">Species*:</label>
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
                                                 </div>
-                                                <div class="col-7">
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
-                                                        <option selected>Species</option>
-                                                        <option>Parrot</option>
-                                                        <option>Dove</option>
-                                                        <option>Owl</option>
-                                                        <option>Eagle</option>
-                                                        <option>Crow</option>
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <label class="pay">Species*:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <select name="txtCateID" onchange="submit()" class="list-dt" required=""
+                                                                style="border: 1px solid #a89a9a; color: #6c757d; text-align: center">
+                                                            <option>Species</option>
+                                                        <c:forEach var="cate" items="${sessionScope.ALL_CATE}">
+                                                            <option ${requestScope.CATE_CHOOSE == cate.categoryID ? 'selected' : ''}
+                                                                value="${cate.categoryID}">${cate.category_Name}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
@@ -123,42 +108,41 @@
                                                     <label class="pay">Parent bird*:</label>
                                                 </div>
                                                 <div class="col-7">
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
+                                                    <select name="txtMaleBirdID"  onchange="submit()" class="list-dt" required=""
+                                                            style="border: 1px solid #a89a9a; color: #6c757d; width: 40%; text-align: center">
                                                         <option selected>Male</option>
-                                                        <option>Parrot</option>
-                                                        <option>Dove</option>
-                                                        <option>Owl</option>
-                                                        <option>Eagle</option>
-                                                        <option>Crow</option>
+                                                        <c:forEach var="male_bird" items="${requestScope.MALE_BIRD}">
+                                                            <option ${requestScope.MALE_BIRD_CHOOSE.productID == male_bird.productID ? 'selected' : ''}
+                                                                value="${male_bird.productID}">${male_bird.product_Name}</option>
+                                                        </c:forEach>
                                                     </select>
-                                                    <img style="width: 10%; height: 50px; padding: auto;"
-                                                         src="https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_1280.jpg" />
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d; margin-left: 30px;">
+
+                                                    <select name="txtFemaleBirdID"  onchange="submit()"  class="list-dt"
+                                                            style="border: 1px solid #a89a9a; color: #6c757d; margin-left: 30px; width: 40%; text-align: center">
                                                         <option selected>Female</option>
-                                                        <option>Parrot</option>
-                                                        <option>Dove</option>
-                                                        <option>Owl</option>
-                                                        <option>Eagle</option>
-                                                        <option>Crow</option>
+                                                        <c:forEach var="female_bird" items="${requestScope.FEMALE_BIRD}">
+                                                            <option ${requestScope.FEMALE_BIRD_CHOOSE.productID == female_bird.productID ? 'selected' : ''}
+                                                                value="${female_bird.productID}">${female_bird.product_Name}</option>
+                                                        </c:forEach>
                                                     </select>
-                                                    <img style="width: 10%; height: 50px; padding: auto;"
-                                                         src="https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_1280.jpg" />
+
                                                 </div>
                                             </div>
                                             <div class="row" class="row" style="margin-top:10px">
                                                 <div class="col-5">
-                                                    <label class="pay">Service you want to choose*:</label>
+                                                    <label class="pay">Option you want to choose*:</label>
                                                 </div>
                                                 <div class="col-7">
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
-                                                        <option selected>Service</option>
-                                                        <option selected>Get bird eggs</option>
-                                                        <option>Get baby birds</option>
-                                                        <option>Get bird eggs with parent</option>
-                                                        <option>Get baby birds with parent</option>
+                                                    <select name="txtOptionChoose"  onchange="submit()" class="list-dt"
+                                                            style="border: 1px solid #a89a9a; color: #6c757d; text-align: center">
+                                                        <option ${requestScope.OPTION_CHOOSE == 'Get bird eggs with parent' ? 'selected' : ''}>
+                                                            Get bird eggs with parent</option>
+                                                        <option ${requestScope.OPTION_CHOOSE == 'Get baby birds with parent' ? 'selected' : ''}>
+                                                            Get baby birds with parent</option>
+                                                        <option ${requestScope.OPTION_CHOOSE == 'Get bird eggs without parent' ? 'selected' : ''}>
+                                                            Get bird eggs without parent</option>
+                                                        <option ${requestScope.OPTION_CHOOSE == 'Get baby birds without parent' ? 'selected' : ''}>
+                                                            Get baby birds without parent</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -249,7 +233,7 @@
                                                 fee, father bird fee, and mother bird fee.</h7>
                                             <label class="container"
                                                    style="text-align:right; font-weight: bold; font-style: italic;">
-                                                <input type="checkbox">
+                                                <input type="checkbox" required="">
                                                 <span class="checkmark"></span>
                                                 Agree to private and policy
                                             </label>
@@ -274,37 +258,59 @@
                                             </a>
                                         </div>
                                         <hr class="my-4">
-                                        <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
-                                            <div class="col-md-4">
-                                                <img src="https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_1280.jpg"
-                                                     class="img-fluid rounded-3" alt="Bird Image">
-                                            </div>
-                                            <div class="col-md-8 justify-content-center">
-                                                <h5 class="text-black mb-0">Blue parrot</h5>
-                                                <div class="d-flex justify-content-between align-items-center mb-0">
-                                                    <h6 class="mb-0 text-muted ">Male</h6>
-                                                    <h6 class="mb-0 text-muted ">Price: $6000</h6>
+                                        <c:set var="male_bird_choose" value="${requestScope.MALE_BIRD_CHOOSE}"></c:set>
+                                        <c:if test="${not empty male_bird_choose}">
+                                            <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-4">
+                                                    <img src="${male_bird_choose.image}"
+                                                         class="img-fluid rounded-3" alt="Bird Image">
+                                                </div>
+                                                <div class="col-md-8 justify-content-center">
+                                                    <h5 class="text-black mb-0">${male_bird_choose.product_Name}</h5>
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">${male_bird_choose.gender}</h6>
+                                                        <c:if test="${requestScope.OPTION_CHOOSE == 'Get bird eggs without parent'}">
+                                                            <h6 class="mb-0 text-muted ">Price: 0 đ</h6>
+                                                        </c:if>
+                                                        <c:if test="${requestScope.OPTION_CHOOSE != 'Get bird eggs without parent'}">
+                                                            <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.price)}</h6>
+                                                        </c:if>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
-                                            <div class="col-md-4">
-                                                <img src="https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_1280.jpg"
-                                                     class="img-fluid rounded-3" alt="Bird Image">
-                                            </div>
-                                            <div class="col-md-8 justify-content-center">
-                                                <h5 class="text-black mb-0">Blue parrot</h5>
-                                                <div class="d-flex justify-content-between align-items-center mb-0">
-                                                    <h6 class="mb-0 text-muted ">Female</h6>
-                                                    <h6 class="mb-0 text-muted ">Price: $6000</h6>
+                                        </c:if>
+
+
+                                        <c:set var="female_bird_choose" value="${requestScope.FEMALE_BIRD_CHOOSE}"></c:set>
+                                        <c:if test="${not empty female_bird_choose}">
+                                            <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-4">
+                                                    <img src="${female_bird_choose.image}"
+                                                         class="img-fluid rounded-3" alt="Bird Image">
+                                                </div>
+                                                <div class="col-md-8 justify-content-center">
+                                                    <h5 class="text-black mb-0">${female_bird_choose.product_Name}</h5>
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">${female_bird_choose.gender}</h6>
+                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(female_bird_choose.price)}</h6>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </c:if>
+
                                         <div class="Promotion-received-element d-flex justify-content-between ">
-                                            <h6>Service: Get baby birds with bird parent</h6>
+                                            <c:if test="${not empty requestScope.OPTION_CHOOSE}">
+                                                <h6>Service: ${requestScope.OPTION_CHOOSE}</h6>
+                                            </c:if>
+                                            <c:if test="${empty requestScope.OPTION_CHOOSE}">
+                                                <h6>Service: Get bird eggs with parent</h6>
+                                            </c:if>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-0">
-                                            <h6 class="mb-0 text-muted ">Hybrid bird: 4.000.000 đ</h6>
+                                            <h6 class="mb-0 text-muted ">Price of the service</h6>
+                                            <a href="#" class="change-infor-link text-decoration-none">
+                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(sessionScope.SERVICE_PRICE)}</h6>
+                                            </a>
                                         </div>
 
                                         <hr class="my-4">
@@ -324,21 +330,27 @@
 
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>16.000.000 đ</h6>
-                                            <input type="hidden" name="txtTotalOrder" value="${total_order}" />
+                                            <h6>${utilPrice.FormatPrice(sessionScope.SERVICE_PRICE + female_bird_choose.price + male_bird_choose.price)}</h6>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <h6 class="text-uppercase">Transport Fee</h6>
+                                            <h6 id="Ship">${utilPrice.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
+<!--                                            <input type="hidden" name="txtShippingCash" value="${sessionScope.SHIPPING_CASH}"/>-->
                                         </div>
                                         <div class=" d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
                                             <h6>0</h6>
                                         </div>
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <h5 class="text-uppercase">Total price</h5>
-
-                                            <h5 id="total_order">16.000.000 đ</h5>
-                                            <input name="total_order_final" type="hidden" value="">
+                                        <c:set var="total_order" value="${sessionScope.SHIPPING_CASH + sessionScope.SERVICE_PRICE + female_bird_choose.price + male_bird_choose.price}"></c:set>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <h5 class="text-uppercase">Total price</h5>
+                                                <h5 id="total_order">${utilPrice.FormatPrice(total_order)}</h5>
                                         </div>
-
-                                        <input name="btAction" value="Order" type="submit"
+                                        <input type="hidden" name="txtTotalOrder" value="${total_order}" />
+                                        <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
+                                        <input type="hidden" name="PaymentMethod" value="COD" />
+                                        <input name="btAction" value="Order" type="submit" 
+                                               ${not empty male_bird_choose && not empty female_bird_choose ? '' : 'disabled'}
                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
                                                style="background-color:rgb(13,103,128) ;" />
                                     </div>
