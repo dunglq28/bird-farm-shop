@@ -69,8 +69,6 @@
                                     </p>
                                     <button class="btn">Order</button>
                                     <input type="hidden" name="txtServiceID" value="3" />
-                                    <input type="hidden" name="btAction" value="Match Bird Available At Shop">
-
                                 </div>
                             </div>
                         </form>
@@ -82,9 +80,7 @@
                                     <p><strong>Based on customer's birds</strong></p>
                                     <p></p>
                                     <button class="btn">Order</button>
-                                    <input type="hidden" name="txtServiceID" value="3" />
-                                    <input type="hidden" name="btAction" value="Match Bird of customer">
-
+                                    <input type="hidden" name="txtServiceID" value="4" />
                                 </div>
                             </div>
                         </form>

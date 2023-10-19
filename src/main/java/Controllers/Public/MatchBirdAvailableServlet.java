@@ -52,12 +52,8 @@ public class MatchBirdAvailableServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
             int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
-            if (account == null || customer == null) {
-                url = MyAppConstants.PublicFeatures.CHECK_LOGIN_CONTROLLER;
-            }
+           
             request.setAttribute("OPTION_CHOOSE", optionChoose);
             session.setAttribute("OPTION_CHOOSE", optionChoose);
 

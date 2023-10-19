@@ -53,52 +53,29 @@ public class CheckLoginToCheckoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
         HttpSession session = request.getSession();
-
+        
         try {
-
+            
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            CustomerDAO dao = new CustomerDAO();
-            CustomerDTO customer = null;
             String serviceID = (String) session.getAttribute("SERVICE_ID");
-
+            
             if (account == null && serviceID.equals("1")) {
                 url = "guest?btAction=loginPage";
                 session.setAttribute("HISTORY_URL", "cart");
-
+                
             } else if (account == null && serviceID.equals("2")) {
                 session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
                 url = "guest?btAction=loginPage";
-
+                
             } else if (account == null && serviceID.equals("3")) {
                 session.setAttribute("HISTORY_URL", MyAppConstants.CustomerFeatures.BIRD_NEST_SERVICE_CONTROLLER);
                 url = "guest?btAction=loginPage";
-                
-            } else if (account != null) {
-                customer = dao.getCustomerByAccountID(account.getAccountID());
-
-                if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {
-                    request.setAttribute("FULLNAME", customer.getFullName());
-                    url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
-                } else if (serviceID.equals("1")) {
-                    url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
-                    session.setAttribute("CUSTOMER", customer);
-
-                } else if (serviceID.equals("2")) {
-                    url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
-                    session.setAttribute("CUSTOMER", customer);
-                } else if (serviceID.equals("3")) {
-                    url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
-                    session.setAttribute("CUSTOMER", customer);
-                }
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+//            RequestDispatcher rd = request.getRequestDispatcher(url);
+//            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
