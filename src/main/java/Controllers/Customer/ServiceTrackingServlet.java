@@ -54,7 +54,11 @@ public class ServiceTrackingServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
+            if (orderID != null) {
+                request.setAttribute("ORDER_ID", orderID);
+            }
             Bird_Nest_TrackingDAO bntdao = new Bird_Nest_TrackingDAO();
+         
             Bird_Nest_TrackingDTO bntdto = bntdao.getBNTrackingByOrderID(orderID);
             session.setAttribute("BIRD_NEST_TRACKING", bntdto);
             if (session.getAttribute("CUSTOMER") == null) {

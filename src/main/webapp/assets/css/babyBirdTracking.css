@@ -203,6 +203,16 @@ tbody td {
 
 }
 
+table {
+    width: 100%;
+    /* Đảm bảo bảng lấp đầy chiều rộng của container */
+}
+
+th,
+td.long-content {
+    white-space: normal;
+}
+
 @media screen and (max-width: 992px) {
     .icon-content {
         width: 50%;

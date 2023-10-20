@@ -87,10 +87,16 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                 stm.setInt(2, (index - 1) * 4);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    String note;
+                    if (rs.getString("NOTE") == null) {
+                        note = "Not Have";
+                    } else {
+                        note = rs.getString("NOTE");
+                    }
                     BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Product_Type_Name"),
                             rs.getString("Gender"),
                             rs.getDate("LastUpdateDate"),
-                            rs.getString("NOTE"),
+                            note,
                             rs.getString("Status"));
                     if (this.bndetalList == null) {
                         this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();

@@ -25,7 +25,7 @@
                                 <table class="table mb-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">BIRD TYPE</th>
+                                            <th scope="col">PRODUCT</th>
                                             <th scope="col">GENDER</th>
                                             <th scope="col">STATUS</th>
                                             <th scope="col">NOTE</th>
@@ -33,42 +33,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="" items="">
-                                        
-                                    </c:forEach>
-                                        <tr>
-                                            <td>Male</td>
-                                            <td>...type.....</td>
-                                            <td>....status....</td>
-                                            <td>The total invoice amount will be multiplied by the number of months the
-                                                bird breeding service is used, with a cost of 4 million VND for each month
-                                                (if a customer cancels the bird breeding service during the month of
-                                                service, the shop will still charge for one month, which is 4 million VND).</td>
-                                            <td>2023-10-13 23:59:59</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Female</td>
-                                            <td>...type.....</td>
-                                            <td>....status....</td>
-                                            <td>....note....</td>
-                                            <td>2023-10-13 23:59:59</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="center">
-                                    <div class="pagination">
+                                    <c:set var="bndetailList" value="${sessionScope.BN_DETAIL_TRACKING_LIST}"></c:set>
+                                    <c:if test="${not empty bndetailList}">
+                                        <c:forEach items="${bndetailList}" var="dto" varStatus="counter">
+                                            <tr>
+                                                <td>${dto.product_TypeName}</td>
+                                                <td>${dto.gender}</td>
+                                                <td>${dto.status}</td>
+                                                <td class="long-content">${dto.note}</td>
+                                                <td>${util.FormatDate(dto.lastUpdateDate)}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:if>
+                                </tbody>
+                            </table>
+                            <div class="center">
+                                <div class="pagination">
                                     <c:if test="${requestScope.pageCurrent > 1}">
-                                        <a href="Service_Tracking?page=1"><i class="fa fa-angle-double-left"></i></a>
-                                        <a href="Service_Tracking?page=${requestScope.pageCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.pageCurrent-1}"><i class="fa fa-angle-left"></i></a>
                                         </c:if>
 
                                     <c:forEach begin="${requestScope.BEGIN}" end="${requestScope.FINISH}" var="i">
-                                        <a class="${requestScope.pageCurrent==i ? "active" : ""}" href="Service_Tracking?page=${i}">${i}</a>
+                                        <a class="${requestScope.pageCurrent==i ? "active" : ""}" href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${i}">${i}</a>
                                     </c:forEach>
 
                                     <c:if test="${requestScope.pageCurrent < requestScope.endPage}">
-                                        <a href="Service_Tracking?page=${requestScope.pageCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                                        <a href="Service_Tracking?page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.pageCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
                                         </c:if>
                                 </div>
                             </div>
