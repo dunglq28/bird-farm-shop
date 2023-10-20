@@ -124,7 +124,7 @@ public class OrderDAO implements Serializable {
                             + "order by OrderDate desc ";
                 } else {
                     sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
-                            + "From od "
+                            + "From Orders od "
                             + "inner join Service ser on ser.ServiceID = od.ServiceID "
                             + "where AccountID = ? and Status = ? "
                             + "order by OrderDate desc ";
