@@ -45,7 +45,8 @@ public class Bird_Nest_TrackingDTO {
         this.status = status;
     }
 
-    public Bird_Nest_TrackingDTO(String orderID, int eggs_Quantity, String accountID, int serviceID, String subService, String staffID, Date lastUpdateDate, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, String accountID, int serviceID, String subService, String staffID, Date lastUpdateDate, String status) {
+        this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.eggs_Quantity = eggs_Quantity;
         this.accountID = accountID;

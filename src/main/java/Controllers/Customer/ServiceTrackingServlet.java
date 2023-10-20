@@ -5,13 +5,17 @@
  */
 package Controllers.Customer;
 
+import Daos.BirdNestDetail_TrackingDAO;
 import Daos.Bird_Nest_TrackingDAO;
 import Daos.CustomerDAO;
 import Models.AccountDTO;
+import Models.BirdNestDetail_TrackingDTO;
+import Models.Bird_Nest_TrackingDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,44 +55,45 @@ public class ServiceTrackingServlet extends HttpServlet {
                 return;
             }
             Bird_Nest_TrackingDAO bntdao = new Bird_Nest_TrackingDAO();
-            session.setAttribute("BIRD_NEST_TRACKING", bntdao.getBNTrackingByOrderID(orderID));
+            Bird_Nest_TrackingDTO bntdto = bntdao.getBNTrackingByOrderID(orderID);
+            session.setAttribute("BIRD_NEST_TRACKING", bntdto);
             if (session.getAttribute("CUSTOMER") == null) {
                 CustomerDAO cusdao = new CustomerDAO();
                 session.setAttribute("CUSTOMER", cusdao.getCustomerByAccountID(account.getAccountID()));
             }
-            
-             if (page == null) {
+
+            if (page == null) {
                 page = "1";
             }
             int indexPage = Integer.parseInt(page);
 
-//            ProductDAO dao = new ProductDAO();
-//            int endPage = dao.getNumberPage(product_typeID);
-//            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID);
-//            session.setAttribute("PRODUCT_LIST", result);
-//            int start = 1;
-//            int distance = 4;
-//
-//            int end;
-//            if (endPage < distance) {
-//                end = endPage;
-//            } else {
-//                end = start + distance;
-//            }
-//
-//            if (indexPage >= 4) {
-//                start = indexPage - 2;
-//                end = indexPage + 2;
-//                if (indexPage + distance >= endPage) {
-//                    start = endPage - distance;
-//                    end = endPage;
-//                }
-//            }
-//            session.setAttribute("START", start);
-//            session.setAttribute("END", end);
-//            session.setAttribute("indexCurrent", indexPage);
-//            session.setAttribute("endPage", endPage);
+            BirdNestDetail_TrackingDAO bndetaildao = new BirdNestDetail_TrackingDAO();
+            int endPage = bndetaildao.getNumberPage(bntdto.getBird_Nest_ID());
+            List<BirdNestDetail_TrackingDTO> result = bndetaildao.getPagingByUpdateDateDesc(indexPage, bntdto.getBird_Nest_ID());
+            session.setAttribute("BN_DETAIL_TRACKING_LIST", result);
+            int start = 1;
+            int distance = 3;
+
+            int end;
+            if (endPage < distance) {
+                end = endPage;
+            } else {
+                end = start + distance;
+            }
             
+            if (indexPage >= 3) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
+                }
+            }
+            request.setAttribute("BEGIN", start);
+            request.setAttribute("FINISH", end);
+            request.setAttribute("pageCurrent", indexPage);
+            request.setAttribute("endPage", endPage);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

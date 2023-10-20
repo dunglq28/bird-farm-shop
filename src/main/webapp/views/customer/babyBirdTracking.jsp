@@ -33,6 +33,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="" items="">
+                                        
+                                    </c:forEach>
                                         <tr>
                                             <td>Male</td>
                                             <td>...type.....</td>
@@ -54,23 +57,25 @@
                                 </table>
                                 <div class="center">
                                     <div class="pagination">
-                                        <a href="#"><i class="fa fa-angle-double-left"></i></a>
-                                        <a href="#"><i class="fa fa-angle-left"></i></a>
-                                        <a href="#" class="active">1</a>
-                                        <a href="#">2</a>
-                                        <a href="#">3</a>
-                                        <a href="#">4</a>
-                                        <a href="#">5</a>
-                                        <a href="#">6</a>
-                                        <a href="#"><i class="fa fa-angle-right"></i></a>
-                                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                                    <c:if test="${requestScope.pageCurrent > 1}">
+                                        <a href="Service_Tracking?page=1"><i class="fa fa-angle-double-left"></i></a>
+                                        <a href="Service_Tracking?page=${requestScope.pageCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                                        </c:if>
 
-                                    </div>
+                                    <c:forEach begin="${requestScope.BEGIN}" end="${requestScope.FINISH}" var="i">
+                                        <a class="${requestScope.pageCurrent==i ? "active" : ""}" href="Service_Tracking?page=${i}">${i}</a>
+                                    </c:forEach>
+
+                                    <c:if test="${requestScope.pageCurrent < requestScope.endPage}">
+                                        <a href="Service_Tracking?page=${requestScope.pageCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                                        <a href="Service_Tracking?page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                                        </c:if>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             <c:set var="bird_nest_tracking" value="${sessionScope.BIRD_NEST_TRACKING}"></c:set>
                 <div class="time-line">
                     <div class="card">

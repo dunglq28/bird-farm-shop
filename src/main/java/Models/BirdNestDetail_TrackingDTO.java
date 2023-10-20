@@ -33,14 +33,10 @@ public class BirdNestDetail_TrackingDTO {
         this.note = note;
         this.status = status;
     }
-    
-    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String bird_ID, int product_TypeID, String product_TypeName, String gender, boolean customer_Product, Date lastUpdateDate, String note, String status) {
-        this.bird_Nest_ID = bird_Nest_ID;
-        this.bird_ID = bird_ID;
-        this.product_TypeID = product_TypeID;
+
+    public BirdNestDetail_TrackingDTO(String product_TypeName, String gender, Date lastUpdateDate, String note, String status) {
         this.product_TypeName = product_TypeName;
         this.gender = gender;
-        this.customer_Product = customer_Product;
         this.lastUpdateDate = lastUpdateDate;
         this.note = note;
         this.status = status;
