@@ -53,15 +53,14 @@ public class MatchBirdAvailableServlet extends HttpServlet {
 
         try {
             int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
-           
+
             request.setAttribute("OPTION_CHOOSE", optionChoose);
             session.setAttribute("OPTION_CHOOSE", optionChoose);
 
             Service_Price_ListDAO dao = new Service_Price_ListDAO();
-            if (session.getAttribute("SERVICE_PRICE") == null) {
-                List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
-                session.setAttribute("SERVICE_PRICE", dto.get(0).getServicePrice());
-            }
+            List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
+            request.setAttribute("SERVICE_PRICE", dto.get(0).getServicePrice());
+            request.setAttribute("SERVICE_NAME", dto.get(0).getServiceName());
 
             ProductDAO proDao = new ProductDAO();
             CategoryDAO cateDao = new CategoryDAO();

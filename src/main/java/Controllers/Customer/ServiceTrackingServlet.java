@@ -5,6 +5,7 @@
  */
 package Controllers.Customer;
 
+import Models.AccountDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,9 +38,22 @@ public class ServiceTrackingServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.CustomerFeatures.SERVICE_TRACKING_PAGE;
         String orderID = request.getParameter("txtOrderID");
-
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        HttpSession session = request.getSession();
+        try {
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                response.sendRedirect(url);
+                return;
+            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
+//            ex.printStackTrace();
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

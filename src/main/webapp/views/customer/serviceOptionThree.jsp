@@ -1,8 +1,4 @@
-<%-- 
-    Document   : serviceOption3
-    Created on : Oct 17, 2023, 11:37:07 AM
-    Author     : tt
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -78,145 +74,120 @@
                             <div class="row g-0">
                                 <div class="col-lg-8">
                                     <div class="p-5">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                <a href="" class="change-icon text-decoration-none">
-                                                    <h6 class="mb-0 text-muted change_info">Change information</h6>
-                                                </a>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <jsp:include page="/components/infoPayment.jsp"></jsp:include>
+                                        <jsp:useBean id="utilPrice" class="Utils.FormatCurrency"></jsp:useBean>
 
-                                                <h6 class="mb-0 text-muted ">Truong Tuyet Ngan (K17 HCM) - 012345
+                                            <hr class="my-4">
+
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
+                                                </div>
+                                                
+                                                <div class="row" class="row" style="margin-top:10px">
+                                                    <div class="col-5">
+                                                        <label class="pay">Option you want to choose*:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <select class="list-dt"
+                                                                style="border: 1px solid #a89a9a; color: #6c757d;">
+                                                            <option selected>Service</option>
+                                                            <option selected>Get bird eggs</option>
+                                                            <option>Get baby birds</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-4">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
+                                            </div>
+                                            <div class="">
+                                                <h7>- Only accept breeding pairs of the same species.</h7><br>
+                                                <h7>- Do not accept breeding of birds that the shop does not have.</h7>
+                                                <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">1. Get bird eggs
+                                                </h6>
+                                                </hr>
+                                                <h7>- The upfront payment for the selected service is 4 million VND per month.
+                                                </h7>
+                                                <br>
+                                                <h7>- The total invoice amount will be multiplied by the number of months the
+                                                    bird breeding service is used, with a cost of 4 million VND for each month
+                                                    (if a customer cancels the bird breeding service during the month of
+                                                    service, the shop will still charge for one month, which is 4 million VND).
+                                                </h7>
+                                                <br>
+                                                <h7>- The total amount after completing the bird breeding service will be equal
+                                                    to the bird breeding service cost of 4 million VND multiplied by the number
+                                                    of months the service is used.</h7></br>
+
+                                                <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">2. Get baby birds
+                                                </h6>
+                                                </hr>
+                                                <h7>- Inherits the terms of 1</h7>
+                                                <br>
+                                                <h7>- Egg incubation fees:</h7>
+
+                                                <ul>
+                                                    <li>
+                                                        For 0 - 3 eggs: The price for incubating each egg is 2 million
+                                                        Vietnamese
+                                                        dong per month.
+                                                    </li>
+                                                    <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
+                                                        Vietnamese
+                                                        dong per month.</li>
+                                                    <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
+                                                    </li>
+                                                </ul>
+                                                <h7>- Total cost: Service cost multiplied by the number
+                                                    of months the bird breeding service is used and egg incubation fee.</h7>
+
+                                                <label class="container"
+                                                       style="text-align:right; font-weight: bold; font-style: italic;">
+                                                    <input type="checkbox" required="">
+                                                    <span class="checkmark"></span>
+                                                    Agree to private and policy
+                                                </label>
+
+                                            </div>
+
+                                            <hr class="my-4">
+
+                                            <div class="pt-5">
+                                                <h6 class="mb-0"><a href="Bird-Nest-Services" class="text-body"><i
+                                                            class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
                                                 </h6>
                                             </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-
-                                                <h6 class="mb-0 text-muted ">Vinhome, HCM</h6>
-                                            </div>
-                                        </div>
-
-                                        <hr class="my-4">
-
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <label class="pay">Your bird species*:</label>
-                                                </div>
-                                                <div class="col-7">
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
-                                                        <option selected>Species</option>
-                                                        <option>Parrot</option>
-                                                        <option>Dove</option>
-                                                        <option>Owl</option>
-                                                        <option>Eagle</option>
-                                                        <option>Crow</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row" class="row" style="margin-top:10px">
-                                                <div class="col-5">
-                                                    <label class="pay">Service you want to choose*:</label>
-                                                </div>
-                                                <div class="col-7">
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
-                                                        <option selected>Service</option>
-                                                        <option selected>Get bird eggs</option>
-                                                        <option>Get baby birds</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <hr class="my-4">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
-                                        </div>
-                                        <div class="">
-                                            <h7>- Only accept breeding pairs of the same species.
-                                            </h7>
-                                            <h7>- Do not accept breeding of birds that the shop does not have.
-                                            </h7>
-                                            <h7>- The advance payment will be deducted from the total amount after
-                                                completing the service.
-                                            </h7>
-                                            <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">1. Get bird eggs
-                                            </h6>
-                                            </hr>
-                                            <h7>- The upfront payment for the selected service is 4 million VND per month.
-                                            </h7>
-                                            <br>
-                                            <h7>- The total invoice amount will be multiplied by the number of months the
-                                                bird breeding service is used, with a cost of 4 million VND for each month
-                                                (if a customer cancels the bird breeding service during the month of
-                                                service, the shop will still charge for one month, which is 4 million VND).
-                                                The deposit will be refunded if the customer pays within one week.
-                                            </h7>
-                                            <br>
-                                            <h7>- The total amount after completing the bird breeding service will be equal
-                                                to the bird breeding service cost of 4 million VND multiplied by the number
-                                                of months the service is used.</h7></br>
-
-                                            <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">2. Get baby birds
-                                            </h6>
-                                            </hr>
-                                            <h7>- Inherits the terms of 1</h7>
-                                            <br>
-                                            <h7>- Egg incubation fees:</h7>
-
-                                            <ul>
-                                                <li>
-                                                    For 0 - 3 eggs: The price for incubating each egg is 2 million
-                                                    Vietnamese
-                                                    dong per month.
-                                                </li>
-                                                <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
-                                                    Vietnamese
-                                                    dong per month.</li>
-                                                <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
-                                                </li>
-                                            </ul>
-                                            <h7>- Total cost: Upfront payment + bird breeding cost multiplied by the number
-                                                of months the bird breeding service is used and egg incubation fee.</h7>
-
-                                            <label class="container"
-                                                   style="text-align:right; font-weight: bold; font-style: italic;">
-                                                <input type="checkbox" required="">
-                                                <span class="checkmark"></span>
-                                                Agree to private and policy
-                                            </label>
-
-                                        </div>
-
-                                        <hr class="my-4">
-
-                                        <div class="pt-5">
-                                            <h6 class="mb-0"><a href="#!" class="text-body"><i
-                                                        class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
-                                            </h6>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4 bg-grey">
-                                    <div class="p-5">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="fw-bold mb-0 text-black">Order</h4>
-                                            <a href="cart" class="change-icon change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted update_info">Update</h6>
-                                            </a>
-                                        </div>
-                                        <hr class="my-4">
+                                    <div class="col-lg-4 bg-grey">
+                                        <div class="p-5">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="fw-bold mb-0 text-black">Order</h4>
+                                                <a href="cart" class="change-icon change-infor-link text-decoration-none">
+                                                    <h6 class="mb-0 text-muted update_info">Update</h6>
+                                                </a>
+                                            </div>
+                                            <hr class="my-4">
 
+                                            <div class="Promotion-received-element d-flex justify-content-between ">
+                                                <h6>Service: ${requestScope.SERVICE_NAME}</h6>
+                                        </div>
                                         <div class="Promotion-received-element d-flex justify-content-between ">
-                                            <h6>Service: Get baby birds</h6>
+                                            <c:if test="${not empty requestScope.OPTION_CHOOSE}">
+                                                <h6>Option: ${requestScope.OPTION_CHOOSE}</h6>
+                                            </c:if>
+                                            <c:if test="${empty requestScope.OPTION_CHOOSE}">
+                                                <h6>Option: Get bird eggs</h6>
+                                            </c:if>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-0">
-                                            <h6 class="mb-0 text-muted ">Hybrid bird: 4.000.000 đ</h6>
+                                            <h6 class="mb-0 text-muted ">Price of the service: </h6>
+                                            <a href="#" class="change-infor-link text-decoration-none">
+                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
+                                            </a>
                                         </div>
 
                                         <hr class="my-4">
@@ -249,10 +220,10 @@
                                             <h5 id="total_order">4.000.000 đ</h5>
                                             <input name="total_order_final" type="hidden" value="">
                                         </div>
-
-                                        <input name="btAction" value="Order" type="submit"
-                                               class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
+                                        <input value="Book Now" type="submit" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
                                                style="background-color:rgb(13,103,128) ;" />
+                                        <input name="btAction" value="Order" type="hidden">
+                                              
                                     </div>
                                 </div>
                             </div>

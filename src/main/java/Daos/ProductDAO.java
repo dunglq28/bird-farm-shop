@@ -42,7 +42,7 @@ public class ProductDAO implements Serializable {
                 String sql = "Select ProductID, Product_Name, cate.Category_Name, Product_TypeID, Image, Age, Color, Gender, Quantity_Available, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "where Customer_Product = 'false' and Product_TypeID = ? "
+                        + "where Product_TypeID = ? "
                         + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
@@ -96,7 +96,7 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 String sql = "Select count(*) "
                         + "From Products "
-                        + "where Customer_Product = 'false' and Product_TypeID = ? ";
+                        + "where Product_TypeID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, product_typeID);
                 rs = stm.executeQuery();
@@ -135,7 +135,7 @@ public class ProductDAO implements Serializable {
                 //2.Create SQL statement string
                 String sql = "Select * "
                         + "From Products "
-                        + "Where Product_Name like ? and Customer_Product = 'false' and Product_TypeID = 1 ";
+                        + "Where Product_Name like ? and Product_TypeID = 1 ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + product_name + "%");
@@ -196,8 +196,7 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 //2.Create SQL statement string
                 String sql = "Select * "
-                        + "From Birds "
-                        + "where Customer_Bird = 'false' ";
+                        + "From Birds ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 //4.execute-query
@@ -255,7 +254,7 @@ public class ProductDAO implements Serializable {
                 String sql = "Select * "
                         + "From Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "Where ProductID = ? and Customer_Product = 'false' ";
+                        + "Where ProductID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -277,7 +276,6 @@ public class ProductDAO implements Serializable {
                             rs.getFloat("Price"),
                             rs.getString("Characteristics"),
                             rs.getString("Detail"),
-                            rs.getBoolean("Customer_Product"),
                             rs.getDate("Date_created"),
                             rs.getFloat("Discount"),
                             rs.getString("Status"));
@@ -310,7 +308,7 @@ public class ProductDAO implements Serializable {
                 //2. create SQL statement string
                 String sql = "Update Products "
                         + "Set Quantity_Available = ?, Quantity_Sold = ? "
-                        + "Where productID = ? and Customer_Product = 'false' ";
+                        + "Where productID = ? ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, quantity_available);
@@ -347,7 +345,7 @@ public class ProductDAO implements Serializable {
                 //2. create SQL statement string
                 String sql = "Update Products "
                         + "Set Quantity_AreMating = ? "
-                        + "Where productID = ? and Customer_Product = 'false' ";
+                        + "Where productID = ? ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, quantity);
@@ -385,7 +383,7 @@ public class ProductDAO implements Serializable {
                 String sql = "select ProductID , Product_Name, Image, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
                         + "from Products "
                         + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= 1 "
-                        + "and CategoryID = ? and Customer_Product = 'false' ";
+                        + "and CategoryID = ? ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 //4.execute-query

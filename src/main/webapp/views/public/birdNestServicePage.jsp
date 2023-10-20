@@ -54,7 +54,7 @@
                                     <p><strong>Available at shop</strong></p>
                                     <p>
                                     </p>
-                                    <button class="btn">Order</button>
+                                    <button class="btn">Book Now</button>
                                     <input type="hidden" name="btAction" value="OrderAvailableBirdNest">
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                     <p><strong>Based on the bird lists at shop</strong></p>
                                     <p>
                                     </p>
-                                    <button class="btn">Order</button>
+                                    <button class="btn">Book Now</button>
                                     <input type="hidden" name="txtServiceID" value="3" />
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                          width="400" height="400">
                                     <p><strong>Based on customer's birds</strong></p>
                                     <p></p>
-                                    <button class="btn">Order</button>
+                                    <button class="btn">Book Now</button>
                                     <input type="hidden" name="txtServiceID" value="4" />
                                 </div>
                             </div>
