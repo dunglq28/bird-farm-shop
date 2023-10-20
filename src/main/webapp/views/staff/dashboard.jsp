@@ -24,7 +24,7 @@
             <div class="logo">Bird Farm Shop</div>
             <c:set var="admin" value="Admin" />
             <c:set var="staff" value="Staff" />
-            <c:set var="manager" value="Manager" />
+            <c:set var="manager" value="Manager"/>
             <ul class="menu">
                 <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
                     <li class="active">
@@ -35,47 +35,53 @@
                     </li>
                 </c:if>
 
+                <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span>Orders in queue</span>
+                        </a>
+                    </li>
+                </c:if>
 
-                <li>
-                    <a href="#">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span>Orders in queue</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Orders has been taken</span>
-                    </a>
-                </li>
+                <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Orders has been taken</span>
+                        </a>
+                    </li>
+                </c:if>
+
+
                 <li>
                     <a href="#">
                         <i class="fas fa-briefcase"></i>
                         <span>Account manager</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="#">
                         <i class="fas fa-question-circle"></i>
                         <span>Products</span>
                     </a>
                 </li>
-                
-<!--                <li>
-                    <a href="#">
-                        <i class="fas fa-star"></i>
-                        <span>Testimonials</span>
-                    </a>
-                </li>-->
-                
+
+                <!--                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <span>Testimonials</span>
+                                    </a>
+                                </li>-->
+
                 <li>
                     <a href="#">
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
                     </a>
                 </li>
-                
+
                 <li class="logout">
                     <a href="guest?btAction=logout">
                         <i class="fas fa-sign-out-alt"></i>

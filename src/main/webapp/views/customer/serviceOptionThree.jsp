@@ -79,9 +79,52 @@
 
                                             <hr class="my-4">
 
+
                                             <div>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
+                                      <div>
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <label class="pay">Your bird species*:</label>
+                                                </div>
+                                                <div class="col-7">
+                                                    <select class="list-dt"
+                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
+                                                        <option selected>Species</option>
+                                                        <option>Parrot</option>
+                                                        <option>Dove</option>
+                                                        <option>Owl</option>
+                                                        <option>Eagle</option>
+                                                        <option>Crow</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top:10px">
+                                            <div class="col-5">
+                                                <label for="fname">Male bird:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text"
+                                                    style="border: 1px solid #a89a9a; color: #6c757d;"><br>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:10px">
+                                            <div class="col-5">
+                                                <label for="fname">Female bird:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text"
+                                                    style="border: 1px solid #a89a9a; color: #6c757d;"><br>
+                                            </div>
+                                        </div>
+                                            <div class="row" class="row" style="margin-top:10px">
+                                                <div class="col-5">
+                                                    <label class="pay">Service you want to choose*:</label>
+
                                                 </div>
                                                 
                                                 <div class="row" class="row" style="margin-top:10px">

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Daos;
 
 import Models.OrderDTO;
@@ -178,5 +173,62 @@ public class OrderDAO implements Serializable {
             }
         }
         return null;
+    }
+
+    public boolean takeActionOrder(String StaffID, String OrderID, String status) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Orders "
+                        + "set Status = ?, StaffID = ? "
+                        + "where OrderID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, status);
+                stm.setString(2, StaffID);
+                stm.setString(2, OrderID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean takeActionOrder_DT (String OrderID, String Status) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Order_Details "
+                        + "set Status = ? "
+                        + "where OrderID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, Status);
+                stm.setString(2, OrderID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 }
