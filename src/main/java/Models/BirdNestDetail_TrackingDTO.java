@@ -16,6 +16,7 @@ public class BirdNestDetail_TrackingDTO {
     private String bird_Nest_ID;
     private String bird_ID;
     private int product_TypeID;
+    private String product_TypeName;
     private String gender;
     private boolean customer_Product;
     private Date lastUpdateDate;
@@ -26,6 +27,18 @@ public class BirdNestDetail_TrackingDTO {
         this.bird_Nest_ID = bird_Nest_ID;
         this.bird_ID = bird_ID;
         this.product_TypeID = product_TypeID;
+        this.gender = gender;
+        this.customer_Product = customer_Product;
+        this.lastUpdateDate = lastUpdateDate;
+        this.note = note;
+        this.status = status;
+    }
+    
+    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String bird_ID, int product_TypeID, String product_TypeName, String gender, boolean customer_Product, Date lastUpdateDate, String note, String status) {
+        this.bird_Nest_ID = bird_Nest_ID;
+        this.bird_ID = bird_ID;
+        this.product_TypeID = product_TypeID;
+        this.product_TypeName = product_TypeName;
         this.gender = gender;
         this.customer_Product = customer_Product;
         this.lastUpdateDate = lastUpdateDate;
@@ -55,6 +68,14 @@ public class BirdNestDetail_TrackingDTO {
 
     public void setProduct_TypeID(int product_TypeID) {
         this.product_TypeID = product_TypeID;
+    }
+
+    public String getProduct_TypeName() {
+        return product_TypeName;
+    }
+
+    public void setProduct_TypeName(String product_TypeName) {
+        this.product_TypeName = product_TypeName;
     }
 
     public String getGender() {
@@ -97,6 +118,7 @@ public class BirdNestDetail_TrackingDTO {
         this.status = status;
     }
 
+    
     
 
 }

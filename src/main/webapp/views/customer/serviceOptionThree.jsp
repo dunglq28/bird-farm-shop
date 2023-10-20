@@ -41,7 +41,6 @@
                                 style="color: #ffc107 ; margin: auto 0; display: flex;">
                                 arrow_forward
                             </li>
-
                             <li class="nav-item active align-content-lg-end" style="display: flex; max-width: auto;">
                                 <a class="nav-link" style="color: #ffc107 ;margin: auto;" href="#">Receiving information</a>
                             </li>
@@ -76,60 +75,48 @@
                                     <div class="p-5">
                                         <jsp:include page="/components/infoPayment.jsp"></jsp:include>
                                         <jsp:useBean id="utilPrice" class="Utils.FormatCurrency"></jsp:useBean>
-
                                             <hr class="my-4">
-
-
                                             <div>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
-                                      <div>
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="fw-bold mb-0 text-black">Bird nest service</h4>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <label class="pay">Your bird species*:</label>
                                                 </div>
-                                                <div class="col-7">
-                                                    <select class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d;">
-                                                        <option selected>Species</option>
-                                                        <option>Parrot</option>
-                                                        <option>Dove</option>
-                                                        <option>Owl</option>
-                                                        <option>Eagle</option>
-                                                        <option>Crow</option>
-                                                    </select>
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <label class="pay">Your bird species*:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <select class="list-dt"
+                                                                style="border: 1px solid #a89a9a; color: #6c757d;">
+                                                            <option selected>Species</option>
+                                                            <option>Parrot</option>
+                                                            <option>Dove</option>
+                                                            <option>Owl</option>
+                                                            <option>Eagle</option>
+                                                            <option>Crow</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row" style="margin-top:10px">
-                                            <div class="col-5">
-                                                <label for="fname">Male bird:</label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text"
-                                                    style="border: 1px solid #a89a9a; color: #6c757d;"><br>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="margin-top:10px">
-                                            <div class="col-5">
-                                                <label for="fname">Female bird:</label>
-                                            </div>
-                                            <div class="col-7">
-                                                <input type="text"
-                                                    style="border: 1px solid #a89a9a; color: #6c757d;"><br>
-                                            </div>
-                                        </div>
-                                            <div class="row" class="row" style="margin-top:10px">
-                                                <div class="col-5">
-                                                    <label class="pay">Service you want to choose*:</label>
-
+                                                <div class="row" style="margin-top:10px">
+                                                    <div class="col-5">
+                                                        <label for="fname">Male bird:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input type="text"
+                                                               style="border: 1px solid #a89a9a; color: #6c757d;"><br>
+                                                    </div>
                                                 </div>
-                                                
+                                                <div class="row" style="margin-top:10px">
+                                                    <div class="col-5">
+                                                        <label for="fname">Female bird:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input type="text"
+                                                               style="border: 1px solid #a89a9a; color: #6c757d;"><br>
+                                                    </div>
+                                                </div>
                                                 <div class="row" class="row" style="margin-top:10px">
                                                     <div class="col-5">
-                                                        <label class="pay">Option you want to choose*:</label>
+                                                        <label class="pay">Service you want to choose*:</label>
                                                     </div>
                                                     <div class="col-7">
                                                         <select class="list-dt"
@@ -141,14 +128,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <hr class="my-4">
-                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
                                             </div>
                                             <div class="">
-                                                <h7>- Only accept breeding pairs of the same species.</h7><br>
-                                                <h7>- Do not accept breeding of birds that the shop does not have.</h7>
+                                                <h7>- Only accept breeding pairs of the same species.
+                                                </h7>
+                                                <h7>- Do not accept breeding of birds that the shop does not have.
+                                                </h7>
+                                                <h7>- The advance payment will be deducted from the total amount after
+                                                    completing the service.
+                                                </h7>
                                                 <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">1. Get bird eggs
                                                 </h6>
                                                 </hr>
@@ -159,19 +150,18 @@
                                                     bird breeding service is used, with a cost of 4 million VND for each month
                                                     (if a customer cancels the bird breeding service during the month of
                                                     service, the shop will still charge for one month, which is 4 million VND).
+                                                    The deposit will be refunded if the customer pays within one week.
                                                 </h7>
                                                 <br>
                                                 <h7>- The total amount after completing the bird breeding service will be equal
                                                     to the bird breeding service cost of 4 million VND multiplied by the number
                                                     of months the service is used.</h7></br>
-
                                                 <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">2. Get baby birds
                                                 </h6>
                                                 </hr>
                                                 <h7>- Inherits the terms of 1</h7>
                                                 <br>
                                                 <h7>- Egg incubation fees:</h7>
-
                                                 <ul>
                                                     <li>
                                                         For 0 - 3 eggs: The price for incubating each egg is 2 million
@@ -184,22 +174,18 @@
                                                     <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
                                                     </li>
                                                 </ul>
-                                                <h7>- Total cost: Service cost multiplied by the number
+                                                <h7>- Total cost: Upfront payment + bird breeding cost multiplied by the number
                                                     of months the bird breeding service is used and egg incubation fee.</h7>
-
                                                 <label class="container"
                                                        style="text-align:right; font-weight: bold; font-style: italic;">
                                                     <input type="checkbox" required="">
                                                     <span class="checkmark"></span>
                                                     Agree to private and policy
                                                 </label>
-
                                             </div>
-
                                             <hr class="my-4">
-
                                             <div class="pt-5">
-                                                <h6 class="mb-0"><a href="Bird-Nest-Services" class="text-body"><i
+                                                <h6 class="mb-0"><a href="#!" class="text-body"><i
                                                             class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
                                                 </h6>
                                             </div>
@@ -266,7 +252,6 @@
                                         <input value="Book Now" type="submit" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
                                                style="background-color:rgb(13,103,128) ;" />
                                         <input name="btAction" value="Order" type="hidden">
-                                              
                                     </div>
                                 </div>
                             </div>
@@ -274,9 +259,7 @@
                     </div>
                 </div>
             </div>
-
         </form>
-
         <!-- footer -->
         <jsp:include page="/components/footer.jsp"></jsp:include>
         <!-- close footer -->
@@ -286,4 +269,5 @@
             }
         </script>
     </body>
+</html>
 </html>
