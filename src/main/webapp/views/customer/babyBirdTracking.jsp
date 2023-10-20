@@ -40,7 +40,7 @@
                                             <td>Male</td>
                                             <td>...type.....</td>
                                             <td>....status....</td>
-                                            <td>The total invoice amount will be multiplied by the number of months the
+                                            <td class="long-content">The total invoice amount will be multiplied by the number of months the
                                                 bird breeding service is used, with a cost of 4 million VND for each month
                                                 (if a customer cancels the bird breeding service during the month of
                                                 service, the shop will still charge for one month, which is 4 million VND).</td>
