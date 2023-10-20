@@ -22,7 +22,7 @@
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
             <div class="container px-1 px-md-4 py-5 mx-auto">
-                <div class="birdchild-info">
+<!--                <div class="birdchild-info">
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="table-responsive bg-white">
@@ -76,59 +76,58 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
+  <div class="birdparent-info" style="padding-top:20px">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="table-responsive bg-white">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">BIRD GENDER</th>
+                                    <th scope="col">BIRD TYPE</th>
+                                    <th scope="col">STATUS</th>
+                                    <th scope="col">NOTE</th>
+                                    <th scope="col">UPDATE TIME</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Male</td>
+                                    <td>...type.....</td>
+                                    <td>....status....</td>
+                                    <td>....note....</td>
+                                    <td>2023-10-13 23:59:59</td>
+                                </tr>
+                                <tr>
+                                    <td>Female</td>
+                                    <td>...type.....</td>
+                                    <td>....status....</td>
+                                    <td>....note....</td>
+                                    <td>2023-10-13 23:59:59</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="center">
+                            <div class="pagination">
+                                <a href="#"><i class="fa fa-angle-double-left"></i></a>
+                                <a href="#"><i class="fa fa-angle-left"></i></a>
+                                <a href="#" class="active">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#">4</a>
+                                <a href="#">5</a>
+                                <a href="#">6</a>
+                                <a href="#"><i class="fa fa-angle-right"></i></a>
+                                <a href="#"><i class="fa fa-angle-double-right"></i></a>
 
-                <div class="birdparent-info" style="padding-top:20px">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="table-responsive bg-white">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">PARENT BIRD ID</th>
-                                            <th scope="col">PARENT BIRD NAME</th>
-                                            <th scope="col">PARENT BIRD GENDER</th>
-                                            <th scope="col">STATUS</th>
-                                            <th scope="col">UPDATE TIME</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" style="color: #666666;">PB-0221</th>
-                                            <td>Congo African parrot</td>
-                                            <td>Male</td>
-                                            <td>........</td>
-                                            <td>2023-10-13 23:59:59</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" style="color: #666666;">PB-0222</th>
-                                            <td>Turquoise parrot</td>
-                                            <td>Female</td>
-                                            <td>.........</td>
-                                            <td>2023-10-13 23:59:59</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="center">
-                                    <div class="pagination">
-                                        <a href="#"><i class="fa fa-angle-double-left"></i></a>
-                                        <a href="#"><i class="fa fa-angle-left"></i></a>
-                                        <a href="#" class="active">1</a>
-                                        <a href="#">2</a>
-                                        <a href="#">3</a>
-                                        <a href="#">4</a>
-                                        <a href="#">5</a>
-                                        <a href="#">6</a>
-                                        <a href="#"><i class="fa fa-angle-right"></i></a>
-                                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
                 <div class="time-line">
                     <div class="card">
