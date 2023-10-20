@@ -6,12 +6,14 @@
 package Daos;
 
 import Models.BirdNestDetail_TrackingDTO;
+import Models.Bird_Nest_TrackingDTO;
 import Utils.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,7 +66,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         return bndetalList;
     }
 
-    public List<BirdNestDetail_TrackingDTO> getPagingByCreateDateDesc(int index, int product_typeID)
+    public List<BirdNestDetail_TrackingDTO> getPagingByUpdateDateDesc(int index, String bnID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -76,32 +78,24 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                 String sql = "Select type.Product_Type_Name, Gender, Status, NOTE, LastUpdateDate "
                         + "from BirdNestDetail_Tracking "
                         + "inner join Product_Type type on BirdNestDetail_Tracking.Product_TypeID = type.Product_TypeID  "
+                        + "where Bird_Nest_ID = ? "
                         + "Order by LastUpdateDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 9 ROWS ONLY";
+                        + "FETCH FIRST 4 ROWS ONLY";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, product_typeID);
-                stm.setInt(2, (index - 1) * 9);
+                stm.setString(1, bnID);
+                stm.setInt(2, (index - 1) * 4);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String productID = rs.getString("ProductID");
-                    String product_Name = rs.getString("Product_Name");
-                    String cate_Name = rs.getString("Category_Name");
-                    String image = rs.getString("Image");
-                    int product_TypeID = rs.getInt("Product_TypeID");
-                    String age = rs.getString("Age");
-                    String color = rs.getString("Color");
-                    String gender = rs.getString("Gender");
-                    int quantity_Available = rs.getInt("Quantity_Available");
-                    float price = rs.getFloat("Price");
-                    float discount = rs.getFloat("Discount");
-                    int quantity_Sold = rs.getInt("Quantity_Sold");
-                    String status = rs.getString("Status");
-//                    Bird_Nest_TrackingDTO result = new Bird_Nest_TrackingDTO
-//                    if (this.bndetalList == null) {
-//                        this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();
-//                    }
-//                    this.bndetalList.add(result);
+                    BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Product_Type_Name"),
+                            rs.getString("Gender"),
+                            rs.getDate("LastUpdateDate"),
+                            rs.getString("NOTE"),
+                            rs.getString("Status"));
+                    if (this.bndetalList == null) {
+                        this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();
+                    }
+                    this.bndetalList.add(result);
                 }
                 return this.bndetalList;
             }
@@ -117,5 +111,47 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             }
         }
         return null;
+    }
+
+    public int getNumberPage(String bnID)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From BirdNestDetail_Tracking "
+                        + "where Bird_Nest_ID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, bnID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage;
+                    if (total < 4) {
+                        countPage = 1;
+                    } else {
+                        countPage = total / 4;
+                        if (countPage % 4 != 0 && countPage % 2 != 0) {
+                            countPage++;
+                        }
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
     }
 }

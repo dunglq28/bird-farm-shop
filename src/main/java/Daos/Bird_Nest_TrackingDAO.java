@@ -109,7 +109,7 @@ public class Bird_Nest_TrackingDAO implements Serializable{
             if (con != null) {
                 String sql = null;
                 //2.Create SQL statement string
-                sql = "select OrderID, Eggs_Quantity, AccountID, ServiceID, SubService, StaffID, LastUpdateDate, Status "
+                sql = "select Bird_Nest_ID, OrderID, Eggs_Quantity, AccountID, ServiceID, SubService, StaffID, LastUpdateDate, Status "
                         + "from Bird_Nest_Tracking "
                         + "where OrderID = ? ";
                 stm = con.prepareStatement(sql);
@@ -118,7 +118,8 @@ public class Bird_Nest_TrackingDAO implements Serializable{
                 rs = stm.executeQuery();
                 //5.process
                 while (rs.next()) {
-                    result = new Bird_Nest_TrackingDTO(rs.getString("OrderID"),
+                    result = new Bird_Nest_TrackingDTO(rs.getString("Bird_Nest_ID"),
+                            rs.getString("OrderID"),
                             rs.getInt("Eggs_Quantity"),
                             rs.getString("AccountID"),
                             rs.getInt("ServiceID"),
