@@ -129,37 +129,38 @@
                                                     <div class="product-element">
                                                         <div class="row d-flex justify-content-between align-items-center bg-grey"
                                                              style="margin-bottom: 15px; padding: 10px; border-radius: 10px;">
-                                                            <div class="col-md-7 col-lg-7 col-xl-7 d-flex align-content-center">
-                                                                <div class=" d-flex align-items-center" style="margin-right: 20px">
+                                                            <div class="d-flex align-content-center">
+                                                                <div class="col-10 col-lg-10 col-xl-10 d-flex align-items-center"
+                                                                     style="">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Order code: #${order.orderID}</h6>
                                                                         <h6 class="mb-0 text-sm-center"
                                                                             style="margin: 0 10px 0 10px;"> |
                                                                         </h6>
                                                                         <h6 class="mb-0 text-sm-end">Order date: ${order.orderDateFormat}</h6>
-
+                                                                    </div>
+                                                                    <div class=" align-content-center">
+                                                                        <div class="justify-content-center align-content-center mb-0"
+                                                                             style="background-color: rgb(13,103,128); width: fit-content; padding: 5px 10px 5px 10px; border-radius: 5px; color: azure; margin:0 10px 0 10px;">
+                                                                            <h6 class="mb-0">${order.status}
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" justify-content-center align-content-center">
+                                                                        <div class="d-flex"
+                                                                             style="margin:0 10px 0  0;">
+                                                                            <h6 class="mb-0 text-sm-start">Payment: ${order.payBy}</h6>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class=" align-content-center"
-                                                                     style="margin: auto">
-                                                                    <div class="justify-content-center align-content-center mb-0"
-                                                                         style="background-color: rgb(13,103,128); width: fit-content; padding: 5px 20px 5px 20px; border-radius: 5px; color: azure;">
-                                                                        <h6 class="mb-0">${order.status}</h6>
+                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
+                                                                     style="">
+                                                                    <div class=" align-content-center justify-content-end">
+                                                                        <a href="#"class="text-muted text-decoration-none see_details_tag">
+                                                                            See details
+                                                                            <i class="fa-solid fa-arrow-right"></i></a>
+                                                                        </a>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-lg-5 col-xl-5 d-flex">
-                                                                <div class="col-md-7 col-lg-7 col-xl-7 align-content-center">
-                                                                    <div class="d-flex">
-                                                                        <h6 class="mb-0 text-sm-start">Payment: ${order.payBy} </h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-5 col-lg-5 col-xl-5 align-content-center "
-                                                                     style="margin-left: 40px; ">
-                                                                    <a href="#" class="text-muted text-decoration-none see_details_tag">
-                                                                        See details
-                                                                        <i class="fa-solid fa-arrow-right"></i></a>
-                                                                    </a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-xl-12 d-flex"style=" margin-top: 8px;">
