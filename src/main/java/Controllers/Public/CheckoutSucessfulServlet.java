@@ -115,7 +115,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                         bnId = bndao.createBirdNestID();
                         bndto = new Bird_Nest_TrackingDTO(bnId, orderID, product.getName(),
                                 product.getQuantityBuy(), account.getAccountID(), serviceID, null, Float.parseFloat(totalOrder),
-                                null, orderDate, orderDate, null, "Processing");
+                                null, orderDate, orderDate, null, "Wait for confirmation");
                         bndao.createBirdNestTracking(bndto);
                         BirdNestDetail_TrackingDTO dndedto = new BirdNestDetail_TrackingDTO(bnId, null, 2, "Unknown", true, orderDate, null, "Processing");
                         for (int i = 0; i < product.getQuantityBuy(); i++) {
@@ -150,7 +150,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                         bnId = bndao.createBirdNestID();
                         bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0,
                                 account.getAccountID(), serviceID, optionChoose, Float.parseFloat(totalOrder),
-                                null, orderDate, orderDate, null, "Processing");
+                                null, orderDate, orderDate, null, "Wait for confirmation");
                         bndao.createBirdNestTracking(bndto);
                         dndedto = new BirdNestDetail_TrackingDTO(bnId, maleBird.getProductID(),
                                 1, maleBird.getGender(), Customer_Product, orderDate, null, "Processing");

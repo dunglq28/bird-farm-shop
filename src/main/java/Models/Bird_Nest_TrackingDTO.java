@@ -45,6 +45,19 @@ public class Bird_Nest_TrackingDTO {
         this.status = status;
     }
 
+    public Bird_Nest_TrackingDTO(String orderID, int eggs_Quantity, String accountID, int serviceID, String subService, String staffID, Date lastUpdateDate, String status) {
+        this.orderID = orderID;
+        this.eggs_Quantity = eggs_Quantity;
+        this.accountID = accountID;
+        this.serviceID = serviceID;
+        this.subService = subService;
+        this.staffID = staffID;
+        this.lastUpdateDate = lastUpdateDate;
+        this.status = status;
+    }
+    
+    
+
     public String getBird_Nest_ID() {
         return bird_Nest_ID;
     }

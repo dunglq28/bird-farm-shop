@@ -132,7 +132,7 @@
                                                             <div class="col-md-7 col-lg-7 col-xl-7 d-flex align-content-center">
                                                                 <div class=" d-flex align-items-center" style="margin-right: 20px">
                                                                     <div class="d-flex">
-                                                                        <h6 class="mb-0 text-sm-start">Order code: ${order.orderID}</h6>
+                                                                        <h6 class="mb-0 text-sm-start">Order code: #${order.orderID}</h6>
                                                                         <h6 class="mb-0 text-sm-center"
                                                                             style="margin: 0 10px 0 10px;"> |
                                                                         </h6>

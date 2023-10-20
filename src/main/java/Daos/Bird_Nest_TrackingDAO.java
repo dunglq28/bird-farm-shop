@@ -7,6 +7,7 @@ package Daos;
 
 import Models.Bird_Nest_TrackingDTO;
 import Utils.DBHelper;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,8 @@ import java.sql.SQLException;
  *
  * @author hj
  */
-public class Bird_Nest_TrackingDAO {
+public class Bird_Nest_TrackingDAO implements Serializable{
+
     public String createBirdNestID() throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -51,7 +53,7 @@ public class Bird_Nest_TrackingDAO {
         }
         return null;
     }
-    
+
     public boolean createBirdNestTracking(Bird_Nest_TrackingDTO newBirdNest) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -59,7 +61,7 @@ public class Bird_Nest_TrackingDAO {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Bird_Nest_Tracking ( "
-                        + "Bird_Nest_ID, OrderID, Bird_Nest_Name, Eggs_Quantity, AccountID, ServiceID, " 
+                        + "Bird_Nest_ID, OrderID, Bird_Nest_Name, Eggs_Quantity, AccountID, ServiceID, "
                         + "SubService, Deposit_Price, StaffID, OrderDate, LastUpdateDate, NOTE, Status "
                         + ") values ( "
                         + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
@@ -78,7 +80,7 @@ public class Bird_Nest_TrackingDAO {
                 stm.setDate(11, newBirdNest.getLastUpdateDate());
                 stm.setString(12, newBirdNest.getNote());
                 stm.setString(13, newBirdNest.getStatus());
-                
+
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -93,5 +95,50 @@ public class Bird_Nest_TrackingDAO {
             }
         }
         return false;
+    }
+
+    public Bird_Nest_TrackingDTO getBNTrackingByOrderID(String orderId)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Bird_Nest_TrackingDTO result = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = null;
+                //2.Create SQL statement string
+                sql = "select OrderID, Eggs_Quantity, AccountID, ServiceID, SubService, StaffID, LastUpdateDate, Status "
+                        + "from Bird_Nest_Tracking "
+                        + "where OrderID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    result = new Bird_Nest_TrackingDTO(rs.getString("OrderID"),
+                            rs.getInt("Eggs_Quantity"),
+                            rs.getString("AccountID"),
+                            rs.getInt("ServiceID"),
+                            rs.getString("SubService"),
+                            rs.getString("StaffID"),
+                            rs.getDate("LastUpdateDate"),
+                            rs.getString("Status"));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 }
