@@ -17,8 +17,8 @@
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="./assets/css/homePage.css">
-        <link rel="stylesheet" href="./assets/css/payment.css">
+        <link rel="stylesheet" href="../../assets/css/homePage.css">
+        <link rel="stylesheet" href="../../assets/css/payment.css">
     </head>
     <body>
         <!-- option3 -->
@@ -118,6 +118,24 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="row" style="margin-top:10px">
+                                            <div class="col-5">
+                                                <label for="fname">Male bird:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text"
+                                                    style="border: 1px solid #a89a9a; color: #6c757d;"><br>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:10px">
+                                            <div class="col-5">
+                                                <label for="fname">Female bird:</label>
+                                            </div>
+                                            <div class="col-7">
+                                                <input type="text"
+                                                    style="border: 1px solid #a89a9a; color: #6c757d;"><br>
+                                            </div>
+                                        </div>
                                             <div class="row" class="row" style="margin-top:10px">
                                                 <div class="col-5">
                                                     <label class="pay">Service you want to choose*:</label>
