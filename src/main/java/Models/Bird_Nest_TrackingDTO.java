@@ -15,8 +15,6 @@ public class Bird_Nest_TrackingDTO {
     private String bird_Nest_ID;
     private String orderID;
     private String bird_Nest_Name;
-    private String dad_Bird_ID;
-    private String mom_Bird_ID;
     private int eggs_Quantity;
     private String accountID;
     private int serviceID;
@@ -31,12 +29,10 @@ public class Bird_Nest_TrackingDTO {
     public Bird_Nest_TrackingDTO() {
     }
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, String dad_Bird_ID, String mom_Bird_ID, int eggs_Quantity, String accountID, int serviceID, String subService, float deposit_Price, String staffID, Date orderDate, Date lastUpdateDate, String note, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, String accountID, int serviceID, String subService, float deposit_Price, String staffID, Date orderDate, Date lastUpdateDate, String note, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.bird_Nest_Name = bird_Nest_Name;
-        this.dad_Bird_ID = dad_Bird_ID;
-        this.mom_Bird_ID = mom_Bird_ID;
         this.eggs_Quantity = eggs_Quantity;
         this.accountID = accountID;
         this.serviceID = serviceID;
@@ -71,22 +67,6 @@ public class Bird_Nest_TrackingDTO {
 
     public void setBird_Nest_Name(String bird_Nest_Name) {
         this.bird_Nest_Name = bird_Nest_Name;
-    }
-
-    public String getDad_Bird_ID() {
-        return dad_Bird_ID;
-    }
-
-    public void setDad_Bird_ID(String dad_Bird_ID) {
-        this.dad_Bird_ID = dad_Bird_ID;
-    }
-
-    public String getMom_Bird_ID() {
-        return mom_Bird_ID;
-    }
-
-    public void setMom_Bird_ID(String mom_Bird_ID) {
-        this.mom_Bird_ID = mom_Bird_ID;
     }
 
     public int getEggs_Quantity() {

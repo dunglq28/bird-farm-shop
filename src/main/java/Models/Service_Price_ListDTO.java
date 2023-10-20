@@ -41,8 +41,6 @@ public class Service_Price_ListDTO {
         this.service_Price_List_ID = service_Price_List_ID;
     }
     
-    
-
     public int getServiceID() {
         return serviceID;
     }

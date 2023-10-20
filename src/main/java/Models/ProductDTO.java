@@ -22,7 +22,6 @@ public class ProductDTO {
     private float price;
     private String characteristics;
     private String detail;
-    private boolean customer_Product;
     private Date date_created;
     private float discount;
     private String status;
@@ -86,7 +85,7 @@ public class ProductDTO {
     
     
 
-    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, boolean customer_Product, Date date_created, float discount, String status) {
+    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.productID = productID;
         this.product_Name = product_Name;
         this.categoryID = categoryID;
@@ -103,7 +102,6 @@ public class ProductDTO {
         this.price = price;
         this.characteristics = characteristics;
         this.detail = detail;
-        this.customer_Product = customer_Product;
         this.date_created = date_created;
         this.discount = discount;
         this.status = status;
@@ -254,14 +252,6 @@ public class ProductDTO {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    public boolean getCustomer_Product() {
-        return customer_Product;
-    }
-
-    public void setCustomer_Product(boolean customer_Product) {
-        this.customer_Product = customer_Product;
     }
 
     public Date getDate_created() {

@@ -74,6 +74,8 @@ public class InforReceiveServlet extends HttpServlet {
                     url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
                 } else if (customer != null && serviceID.equals("3")) {
                     url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
+                }  else if (customer != null && serviceID.equals("4")) {
+                    url = MyAppConstants.PublicFeatures.MATCH_BIRD_CUSTOMER_SERVICE_CONTROLLER;
                 }
             }
 

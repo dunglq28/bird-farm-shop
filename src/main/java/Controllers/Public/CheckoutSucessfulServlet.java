@@ -6,11 +6,13 @@
 package Controllers.Public;
 
 import Cart.CartObj;
+import Daos.BirdNestDetail_TrackingDAO;
 import Daos.Bird_Nest_TrackingDAO;
 import Daos.ProductDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
+import Models.BirdNestDetail_TrackingDTO;
 import Models.Bird_Nest_TrackingDTO;
 import Models.CustomerDTO;
 import Models.OrderDTO;
@@ -78,9 +80,14 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 orderdao.createOrder(newOrder);
                 ProductDAO birdDao = new ProductDAO();
                 OrderDetailDAO odDao = new OrderDetailDAO();
+                BirdNestDetail_TrackingDAO bndedao = new BirdNestDetail_TrackingDAO();
+                Bird_Nest_TrackingDAO bndao = new Bird_Nest_TrackingDAO();
                 OrderDetailDTO odDto;
+                Bird_Nest_TrackingDTO bndto;
                 int quantityAvaUpdate;
                 int quantitySold;
+                String bnId;
+                boolean Customer_Product;
                 switch (serviceID) {
                     case 1:
                         for (String key : cart.getItems().keySet()) {
@@ -105,12 +112,15 @@ public class CheckoutSucessfulServlet extends HttpServlet {
 //                        quantitySold = product.getQuantitySold() + product.getQuantityBuy();
 //                        birdDao.updateQuantityAfterOrder(quantityAvaUpdate, quantitySold, product.getProductID());
                         odDao.createOrderDetail(odDto);
-                        Bird_Nest_TrackingDAO bndao = new Bird_Nest_TrackingDAO();
-                        Bird_Nest_TrackingDTO bndto = new Bird_Nest_TrackingDTO(bndao.createBirdNestID(), orderID, product.getName(),
-                                product.getDad_Bird_ID(), product.getMom_Bird_ID(), product.getQuantityBuy(),
-                                account.getAccountID(), serviceID, null, Float.parseFloat(totalOrder),
+                        bnId = bndao.createBirdNestID();
+                        bndto = new Bird_Nest_TrackingDTO(bnId, orderID, product.getName(),
+                                product.getQuantityBuy(), account.getAccountID(), serviceID, null, Float.parseFloat(totalOrder),
                                 null, orderDate, orderDate, null, "Processing");
                         bndao.createBirdNestTracking(bndto);
+                        BirdNestDetail_TrackingDTO dndedto = new BirdNestDetail_TrackingDTO(bnId, null, 2, "Unknown", true, orderDate, null, "Processing");
+                        for (int i = 0; i < product.getQuantityBuy(); i++) {
+                            bndedao.createBirdNestDetailTracking(dndedto);
+                        }
                         break;
                     case 3:
                         String optionChoose = (String) session.getAttribute("OPTION_CHOOSE");
@@ -124,22 +134,30 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                         odDao.createOrderDetail(odDto);
 
                         if (optionChoose.contains("without parent")) {
-                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold(), maleBird.getProductID());
-                            birdDao.updateQuantityMating(maleBird.getQuantity_AreMating() + 1, maleBird.getProductID());
-
-                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold(), femaleBird.getProductID());
-                            birdDao.updateQuantityMating(femaleBird.getQuantity_AreMating() + 1, femaleBird.getProductID());
+                            Customer_Product = false;
+//                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold(), maleBird.getProductID());
+//                            birdDao.updateQuantityMating(maleBird.getQuantity_AreMating() + 1, maleBird.getProductID());
+//
+//                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold(), femaleBird.getProductID());
+//                            birdDao.updateQuantityMating(femaleBird.getQuantity_AreMating() + 1, femaleBird.getProductID());
                         } else {
-                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold() + 1, maleBird.getProductID());
-
-                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold() + 1, femaleBird.getProductID());
+                            Customer_Product = true;
+//                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold() + 1, maleBird.getProductID());
+//
+//                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold() + 1, femaleBird.getProductID());
                         }
                         bndao = new Bird_Nest_TrackingDAO();
-                        bndto = new Bird_Nest_TrackingDTO(bndao.createBirdNestID(), orderID, null,
-                                maleBird.getProductID(), femaleBird.getProductID(), 0,
+                        bnId = bndao.createBirdNestID();
+                        bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0,
                                 account.getAccountID(), serviceID, optionChoose, Float.parseFloat(totalOrder),
                                 null, orderDate, orderDate, null, "Processing");
                         bndao.createBirdNestTracking(bndto);
+                        dndedto = new BirdNestDetail_TrackingDTO(bnId, maleBird.getProductID(),
+                                1, maleBird.getGender(), Customer_Product, orderDate, null, "Processing");
+                        bndedao.createBirdNestDetailTracking(dndedto);
+                        dndedto = new BirdNestDetail_TrackingDTO(bnId, femaleBird.getProductID(),
+                                1, femaleBird.getGender(), Customer_Product, orderDate, null, "Processing");
+                        bndedao.createBirdNestDetailTracking(dndedto);
                         break;
                 }
 

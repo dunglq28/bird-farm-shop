@@ -59,27 +59,25 @@ public class Bird_Nest_TrackingDAO {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Bird_Nest_Tracking ( "
-                        + "Bird_Nest_ID, OrderID, Bird_Nest_Name, Dad_Bird_ID, Mom_Bird_ID, Eggs_Quantity, AccountID, ServiceID, " 
+                        + "Bird_Nest_ID, OrderID, Bird_Nest_Name, Eggs_Quantity, AccountID, ServiceID, " 
                         + "SubService, Deposit_Price, StaffID, OrderDate, LastUpdateDate, NOTE, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newBirdNest.getBird_Nest_ID());
                 stm.setString(2, newBirdNest.getOrderID());
                 stm.setString(3, newBirdNest.getBird_Nest_Name());
-                stm.setString(4, newBirdNest.getDad_Bird_ID());
-                stm.setString(5, newBirdNest.getMom_Bird_ID());
-                stm.setInt(6, newBirdNest.getEggs_Quantity());
-                stm.setString(7, newBirdNest.getAccountID());
-                stm.setInt(8, newBirdNest.getServiceID());
-                stm.setString(9, newBirdNest.getSubService());
-                stm.setFloat(10, newBirdNest.getDeposit_Price());
-                stm.setString(11, newBirdNest.getStaffID());
-                stm.setDate(12, newBirdNest.getOrderDate());
-                stm.setDate(13, newBirdNest.getLastUpdateDate());
-                stm.setString(14, newBirdNest.getNote());
-                stm.setString(15, newBirdNest.getStatus());
+                stm.setInt(4, newBirdNest.getEggs_Quantity());
+                stm.setString(5, newBirdNest.getAccountID());
+                stm.setInt(6, newBirdNest.getServiceID());
+                stm.setString(7, newBirdNest.getSubService());
+                stm.setFloat(8, newBirdNest.getDeposit_Price());
+                stm.setString(9, newBirdNest.getStaffID());
+                stm.setDate(10, newBirdNest.getOrderDate());
+                stm.setDate(11, newBirdNest.getLastUpdateDate());
+                stm.setString(12, newBirdNest.getNote());
+                stm.setString(13, newBirdNest.getStatus());
                 
                 int row = stm.executeUpdate();
                 if (row > 0) {

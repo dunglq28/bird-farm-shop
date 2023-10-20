@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form  class="container py-3 h-100 ">
+        <form action="Checkout"  class="container py-3 h-100 " method="POST">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -169,8 +169,7 @@
                                             </h7>
                                             <br>
                                             <h7>- Even if the customer cancels the service within the month, the store will
-                                                still charge for the entire month (4 million Vietnamese dong). The deposit
-                                                will be refunded if the customer pays within 1 week</h7></br>
+                                                still charge for the entire month (4 million Vietnamese dong).</h7></br>
 
                                             <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">2. Get baby birds
                                             </h6>
@@ -178,7 +177,6 @@
                                             <h7>- Inherits the terms of 1</h7>
                                             <br>
                                             <h7>- Egg incubation fees:</h7>
-
                                             <ul>
                                                 <li>
                                                     For 0 - 3 eggs: The price for incubating each egg is 2 million
@@ -188,8 +186,7 @@
                                                 <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
                                                     Vietnamese
                                                     dong per month.</li>
-                                                <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
-                                                </li>
+                                                <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.</li>
                                             </ul>
                                             <h7>- The total amount will be the egg incubation fee plus the hybrid bird
                                                 service
@@ -243,7 +240,7 @@
                                         <hr class="my-4">
 
                                         <div class="pt-5">
-                                            <h6 class="mb-0"><a href="#!" class="text-body"><i
+                                            <h6 class="mb-0"><a href="Bird-Nest-Services" class="text-body"><i
                                                         class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
                                             </h6>
                                         </div>
@@ -253,7 +250,7 @@
                                     <div class="p-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="fw-bold mb-0 text-black">Order</h4>
-                                           
+
                                         </div>
                                         <hr class="my-4">
                                         <c:set var="male_bird_choose" value="${requestScope.MALE_BIRD_CHOOSE}"></c:set>
@@ -297,17 +294,20 @@
                                         </c:if>
 
                                         <div class="Promotion-received-element d-flex justify-content-between ">
+                                            <h6>Service: ${requestScope.SERVICE_NAME}</h6>
+                                        </div>
+                                        <div class="Promotion-received-element d-flex justify-content-between ">
                                             <c:if test="${not empty requestScope.OPTION_CHOOSE}">
-                                                <h6>Service: ${requestScope.OPTION_CHOOSE}</h6>
+                                                <h6>Option: ${requestScope.OPTION_CHOOSE}</h6>
                                             </c:if>
                                             <c:if test="${empty requestScope.OPTION_CHOOSE}">
-                                                <h6>Service: Get bird eggs with parent</h6>
+                                                <h6>Option: Get bird eggs with parent</h6>
                                             </c:if>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-0">
-                                            <h6 class="mb-0 text-muted ">Price of the service</h6>
+                                            <h6 class="mb-0 text-muted ">Price of the service: </h6>
                                             <a href="#" class="change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(sessionScope.SERVICE_PRICE)}</h6>
+                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
                                             </a>
                                         </div>
 
@@ -328,7 +328,7 @@
 
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>${utilPrice.FormatPrice(sessionScope.SERVICE_PRICE + female_bird_choose.price + male_bird_choose.price)}</h6>
+                                            <h6>${utilPrice.FormatPrice(requestScope.SERVICE_PRICE + female_bird_choose.price + male_bird_choose.price)}</h6>
                                         </div>
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Transport Fee</h6>
