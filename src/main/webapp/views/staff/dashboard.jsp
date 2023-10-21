@@ -15,7 +15,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
             />
-        <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+        <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <title>Dash Board</title>
     </head>
     <body>

@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout"  class="container py-3 h-100 " method="POST">
+        <form action="Checkout"  class="container py-3 h-100 " method="post">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -344,9 +344,8 @@
                                                 <h5 class="text-uppercase">Total price</h5>
                                                 <h5 id="total_order">${utilPrice.FormatPrice(total_order)}</h5>
                                         </div>
-                                        <input type="hidden" name="txtTotalOrder" value="${total_order}" />
+                                        <input type="hidden" name="total_order_final" value="${total_order}" />
                                         <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
-                                        <input type="hidden" name="PaymentMethod" value="COD" />
                                         <input name="btAction" value="Order" type="submit" 
                                                ${not empty male_bird_choose && not empty female_bird_choose ? '' : 'disabled'}
                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"

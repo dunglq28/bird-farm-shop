@@ -79,60 +79,60 @@
                                         <div class="p-5">
                                         <jsp:include page="/components/infoPayment.jsp"></jsp:include>
 
-                                        <hr class="my-4">
+                                            <hr class="my-4">
 
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
-                                        </div>
-                                        <div class="">
-                                            <h7>- Advance payment for each egg multiplied by the number of customers buying.
-                                            </h7>
-                                            <br>
-                                            <h7>- Egg incubation fees:</h7>
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
+                                            </div>
+                                            <div class="">
+                                                <h7>- Advance payment for each egg multiplied by the number of customers buying.
+                                                </h7>
+                                                <br>
+                                                <h7>- Egg incubation fees:</h7>
 
-                                            <ul>
-                                                <li>
-                                                    For 0 - 3 eggs: The price for incubating each egg is 2 million
-                                                    Vietnamese
-                                                    dong per month.
-                                                </li>
-                                                <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
-                                                    Vietnamese
-                                                    dong per month.</li>
-                                                <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
-                                                </li>
-                                            </ul>
-                                            <h7>- The total amount will be equal to the sum of the egg cost and the
-                                                incubation fee.</h7>
-                                            <label class="container"
-                                                   style="text-align:right; font-weight: bold; font-style: italic;">
-                                                <input type="checkbox" required="">
-                                                <span class="checkmark"></span>
-                                                Agree to private and policy
-                                            </label>
+                                                <ul>
+                                                    <li>
+                                                        For 0 - 3 eggs: The price for incubating each egg is 2 million
+                                                        Vietnamese
+                                                        dong per month.
+                                                    </li>
+                                                    <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
+                                                        Vietnamese
+                                                        dong per month.</li>
+                                                    <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
+                                                    </li>
+                                                </ul>
+                                                <h7>- The total amount will be equal to the sum of the egg cost and the
+                                                    incubation fee.</h7>
+                                                <label class="container"
+                                                       style="text-align:right; font-weight: bold; font-style: italic;">
+                                                    <input type="checkbox" required="">
+                                                    <span class="checkmark"></span>
+                                                    Agree to private and policy
+                                                </label>
 
-                                        </div>
+                                            </div>
 
-                                        <hr class="my-4">
+                                            <hr class="my-4">
 
 
 
-                                        <div class="pt-5">
-                                            <h6 class="mb-0"><a href="#!" class="text-body"><i
-                                                        class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
-                                            </h6>
+                                            <div class="pt-5">
+                                                <h6 class="mb-0"><a href="#!" class="text-body"><i
+                                                            class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4 bg-grey">
-                                    <div class="p-5">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="fw-bold mb-0 text-black">Order</h4>
-                                            <a href="product" class="change-icon change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted update_info">Update</h6>
-                                            </a>
-                                        </div>
-                                        <hr class="my-4">
+                                    <div class="col-lg-4 bg-grey">
+                                        <div class="p-5">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="fw-bold mb-0 text-black">Order</h4>
+                                                <a href="product" class="change-icon change-infor-link text-decoration-none">
+                                                    <h6 class="mb-0 text-muted update_info">Update</h6>
+                                                </a>
+                                            </div>
+                                            <hr class="my-4">
                                         <c:set var="bird_nest" value="${sessionScope.BIRD_NEST_CHOOSE}"></c:set>
 
                                             <div class="row mb-12 my-3 d-flex justify-content-between align-items-center">
@@ -197,7 +197,6 @@
                                             <input name="total_order_final" type="hidden" value="${total_order + total_order * 0 + sessionScope.SHIPPING_CASH}">
                                         </div>
                                         <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
-                                        <input type="hidden" name="PaymentMethod" value="COD" />
                                         <input name="btAction" value="Order" type="submit"
                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
                                                style="background-color:rgb(13,103,128) ;" />

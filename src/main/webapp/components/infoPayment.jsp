@@ -43,3 +43,21 @@
         </div>
     </div>
 </c:if>
+<c:if test="${sessionScope.SERVICE_ID != 1}">
+    <hr class="my-4">
+    <div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0 text-black">Payment method </h4>
+        </div>
+        <div class="row mb-4 d-flex justify-content-between align-items-center">    
+            <div class="form-check">
+                <input name="PaymentMethod" class="form-check-input-2" type="radio" checked
+                       id="VNPAY" value="VNPAY">
+                <label class="form-check-label" for="VNPAY">
+                    VNPAY online payment
+                    (<a href="#" class="text-decoration-none text-muted">Link VNPAY</a>)
+                </label>
+            </div>
+        </div>
+    </div>
+</c:if>
