@@ -47,7 +47,7 @@ public class CheckoutVNPayServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        ;
+        
         try (PrintWriter out = response.getWriter()) {
             String method = request.getParameter("PaymentMethod");
 
