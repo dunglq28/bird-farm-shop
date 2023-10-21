@@ -102,7 +102,233 @@
                         <input type="text" placeholder="search" />
                     </div>
                     ${sessionScope.ACCOUNT.fullName}
-
                 </div>
-                </body>
-                </html>
+            </div>
+            <div class="tabular--wrapper">
+                <h3 class="main--title">Finance data</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>OrderID</th>
+                                <th>Customer</th>
+                                <th>Service</th>
+                                <th>Order Date</th>
+                                <th>Total</th>
+                                <th>Delivery method</th>
+                                <th>Payment method</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <div class="tbody-wrapper">
+                            <!-- -------------------------- -->
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <!-- ------------------------------------------  -->
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                        </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </body>
+</html>
