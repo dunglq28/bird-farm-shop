@@ -77,8 +77,10 @@ public class StaffDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "select ord.OrderID, ser.ServiceName, acc.FullName, "
-                        + "ord.OrderDate, ord.Status "
+                String sql = "select ord.OrderID, ser.ServiceName, "
+                        + "ord.OrderDate, ord.Status, ord.Pay_with, "
+                        + "ord.Form_Receipt, ord.Total_Order, "
+                        + "ord.Discount, ord.Delivery_charges "
                         + "from Orders ord inner join Service ser on "
                         + "ord.ServiceID = ser.ServiceID inner join Account acc on "
                         + "acc.AccountID = ord.AccountID inner join Staffs sta on "
@@ -91,9 +93,14 @@ public class StaffDAO {
                     String orderID = rs.getString("OrderID");
                     String serviceName = rs.getString("ServiceName");
                     Date orderDate = rs.getDate("OrderDate");
-                    String FullName = rs.getString("FullName");
                     String status = rs.getString("Status");
-                    result = new OrderDTO(orderID, serviceName, orderDate, FullName, status);
+                    String Form_Receipt = rs.getString("Form_Receipt");
+                    float Total_Order = rs.getFloat("Total_Order");
+                    float discount = rs.getFloat("Discount");
+                    float delivery_charges = rs.getFloat("Delivery_charges");
+                    String Pay_with = rs.getString("Pay_with");
+                    result = new OrderDTO(orderID, serviceName, Form_Receipt,
+                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }
@@ -126,8 +133,10 @@ public class StaffDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "select ord.OrderID, ser.ServiceName, acc.FullName, "
-                        + "ord.OrderDate, ord.Status "
+                String sql = "select ord.OrderID, ser.ServiceName, "
+                        + "ord.OrderDate, ord.Status, ord.Pay_with, "
+                        + "ord.Form_Receipt, ord.Total_Order, "
+                        + "ord.Delivery_charges, ord.Discount "
                         + "from Orders ord inner join Service ser on "
                         + "ord.ServiceID = ser.ServiceID inner join Account acc on "
                         + "acc.AccountID = ord.AccountID "
@@ -138,9 +147,14 @@ public class StaffDAO {
                     String orderID = rs.getString("OrderID");
                     String serviceName = rs.getString("ServiceName");
                     Date orderDate = rs.getDate("OrderDate");
-                    String FullName = rs.getString("FullName");
+                    String Form_Receipt = rs.getString("Form_Receipt");
+                    float Total_Order = rs.getFloat("Total_Order");
+                    String Pay_with = rs.getString("Pay_with");
                     String status = rs.getString("Status");
-                    result = new OrderDTO(orderID, serviceName, orderDate, FullName, status);
+                    float discount = rs.getFloat("Discount");
+                    float delivery_charges = rs.getFloat("Delivery_charges");
+                    result = new OrderDTO(orderID, serviceName, Form_Receipt,
+                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }

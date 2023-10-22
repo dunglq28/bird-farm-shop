@@ -22,6 +22,7 @@
 
         <div class="sidebar">
             <div class="logo">Bird Farm Shop</div>
+            <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
             <c:set var="admin" value="Admin" />
             <c:set var="staff" value="Staff" />
             <c:set var="manager" value="Manager"/>
@@ -37,7 +38,7 @@
 
                 <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
                     <li>
-                        <a href="#">
+                        <a href="viewAllStaffOrders-staff">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <span>Orders in queue</span>
                         </a>
@@ -111,7 +112,6 @@
                         <thead>
                             <tr>
                                 <th>OrderID</th>
-                                <th>Customer</th>
                                 <th>Service</th>
                                 <th>Order Date</th>
                                 <th>Total</th>
@@ -124,33 +124,87 @@
                         <tbody>
                         <div class="tbody-wrapper">
                             <!-- -------------------------- -->
-                            <div>
-                                <form action="">
-                                    <tr>
-                                        <td><a href="" class="order-detail">01</a></td>
-                                        <td>Expenses</td>
-                                        <td>Office supplies</td>
-                                        <td>$250</td>
-                                        <td>$250</td>
-                                        <td>Office Expenses</td>
-                                        <td>Pending</td>
-                                        <td>confirmed</td>
-                                        <td>
-                                            <div class="action">
-                                                <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                        </td>
-                                    </tr>
-                                </form>
-                            </div>
+                            <c:set var="order" value="${requestScope.STAFF_ALL_ORDERS}"></c:set>
+                            <c:if test="${not empty order}">
+                                <c:forEach items="${order}" var="dto">
+                                    <div>
+                                        <form action="">
+                                            <tr>
+                                                <td><a href="" class="order-detail">${dto.orderID}</a></td>
+                                                <td>${dto.serviceName}</td>
+                                                <td>${util.FormatDate(dto.orderDate)}</td>
+                                                <td>${util.FormatPrice(dto.total_Order)}</td>
+                                                <td>${dto.form_Receipt}</td>
+                                                <td>${dto.payBy}</td>
+                                                <td>${dto.status}</td>
+                                                <td>
+                                                    <div class="action">
+                                                        <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                        <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                                    </div>
+                                                    <input type="hidden" name="" value="" />
+                                                    <input type="hidden" name="" value="" />
+                                                    <input type="hidden" name="" value="" />
+                                                    <input type="hidden" name="" value="" />
+                                                    <input type="hidden" name="" value="" />
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
                             <!-- ------------------------------------------  -->
                             <div>
+<!--                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>-->
+                            </div>
+<!--                            <div>
+                                <form action="">
+                                    <tr>
+                                        <td><a href="" class="order-detail">01</a></td>
+                                        <td>Expenses</td>
+                                        <td>Office supplies</td>
+                                        <td>$250</td>
+                                        <td>$250</td>
+                                        <td>Office Expenses</td>
+                                        <td>Pending</td>
+                                        <td>confirmed</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
+                                </form>-->
+<!--                            </div>-->
+<!--                            <div>
                                 <form action="">
                                     <tr>
                                         <td><a href="" class="order-detail">01</a></td>
@@ -273,58 +327,8 @@
                                             <input type="hidden" name="" value="" />
                                         </td>
                                     </tr>
-                                </form>
-                            </div>
-                            <div>
-                                <form action="">
-                                    <tr>
-                                        <td><a href="" class="order-detail">01</a></td>
-                                        <td>Expenses</td>
-                                        <td>Office supplies</td>
-                                        <td>$250</td>
-                                        <td>$250</td>
-                                        <td>Office Expenses</td>
-                                        <td>Pending</td>
-                                        <td>confirmed</td>
-                                        <td>
-                                            <div class="action">
-                                                <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                        </td>
-                                    </tr>
-                                </form>
-                            </div>
-                            <div>
-                                <form action="">
-                                    <tr>
-                                        <td><a href="" class="order-detail">01</a></td>
-                                        <td>Expenses</td>
-                                        <td>Office supplies</td>
-                                        <td>$250</td>
-                                        <td>$250</td>
-                                        <td>Office Expenses</td>
-                                        <td>Pending</td>
-                                        <td>confirmed</td>
-                                        <td>
-                                            <div class="action">
-                                                <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                        </td>
-                                    </tr>
-                                </form>
-                            </div>
+                                </form>-->
+                            <!--</div>-->
                         </div>
                         </tbody>
                     </table>

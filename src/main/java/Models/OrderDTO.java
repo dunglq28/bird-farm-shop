@@ -27,7 +27,6 @@ public class OrderDTO {
     private float total_Order;
     private float total_order_final;
     private String payBy;
-    private String CusName;
     private String status;
 
     public OrderDTO() {
@@ -65,14 +64,20 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public OrderDTO(String orderID, String serviceName, Date orderDate, String CusName, String status) {
+    public OrderDTO(String orderID, String serviceName, String form_Receipt, Date orderDate, float total_Order, 
+            String payBy, String status, float discount, float delivery_charges) {
         this.orderID = orderID;
         this.serviceName = serviceName;
+        this.form_Receipt = form_Receipt;
         this.orderDate = orderDate;
-        this.CusName = CusName;
+        this.total_Order = total_Order;
+        this.payBy = payBy;
         this.status = status;
+        this.discount = discount;
+        this.delivery_charges = delivery_charges;
     }
 
+    
     
     public String getOrderDateFormat() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
@@ -222,14 +227,5 @@ public class OrderDTO {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public String getCusName() {
-        return CusName;
-    }
-
-    public void setCusName(String CusName) {
-        this.CusName = CusName;
-    }
-
     
 }

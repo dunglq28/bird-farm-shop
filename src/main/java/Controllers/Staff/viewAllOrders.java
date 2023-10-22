@@ -1,14 +1,15 @@
 package Controllers.Staff;
 
-import Daos.OrderDAO;
 import Daos.StaffDAO;
-import Models.AccountDTO;
-import Models.StaffDTO;
+import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,33 +17,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "acceptOrder-staff", urlPatterns = {"/acceptOrder-staff"})
-public class AcceptAnOrders extends HttpServlet {
+@WebServlet(name = "viewAllStaffOrders-staff", urlPatterns = {"/viewAllStaffOrders-staff"})
+public class viewAllOrders extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-        String orderID = request.getParameter("orderID");
-        String serviceName = request.getParameter("service");
-//        String accountID = request.getParameter("staffID");
-//        String acceptOrder = request.getParameter("acceptOrder");
+        String url = "";
         try {
-            HttpSession session = request.getSession();
-            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            OrderDAO oddao = new OrderDAO();
-            StaffDAO staDAO = new StaffDAO();
-            StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
-            boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
-            boolean odDTSuccess = oddao.takeActionOrder_DT(orderID, "Processing");
-            if(serviceName == "Egg incubation is available"){
-                
+//            HttpSession session = request.getSession();
+            StaffDAO dao = new StaffDAO();
+            dao.ViewAllStaffOrders();
+            List<OrderDTO> result = dao.getOrderList();
+            request.setAttribute("STAFF_ALL_ORDERS", result);
+            if (result == null) {
+                url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
             }
-            if(odSuccess == true && odDTSuccess == true){
-                url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+            else{
+            url = MyAppConstants.StaffFeatures.MANAGE_PAGE;
             }
         } finally {
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 
@@ -61,9 +57,9 @@ public class AcceptAnOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -81,9 +77,9 @@ public class AcceptAnOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

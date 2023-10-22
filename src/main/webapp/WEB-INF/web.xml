@@ -68,6 +68,18 @@
         <servlet-name>deniedOrder</servlet-name>
         <servlet-class>Controllers.Staff.deniedAnOrder</servlet-class>
     </servlet>
+<!--    <servlet>
+        <servlet-name>viewAllStaffOrders</servlet-name>
+        <servlet-class>Controllers.Staff.viewAllOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewMyOrder-staff</servlet-name>
+        <servlet-class>Controllers.Staff.viewMyOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updatedOrders-staff</servlet-name>
+        <servlet-class>Controllers.Staff.updatedOrders</servlet-class>
+    </servlet>-->
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -136,10 +148,10 @@
         <error-code>404</error-code>
         <location>/views/errors/errorPage404.jsp</location>
     </error-page>
-    <error-page>
+<!--    <error-page>
         <error-code>500</error-code>
         <location>/views/errors/errorPage500.jsp</location>
-    </error-page>
+    </error-page>-->
     <servlet-mapping>
         <servlet-name>PaymentServlet</servlet-name>
         <url-pattern>/PaymentServlet</url-pattern>
@@ -149,12 +161,24 @@
         <url-pattern>/InforReceiveServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>acceptOrder</servlet-name>
-        <url-pattern>/acceptOrder</url-pattern>
+        <servlet-name>acceptOrder-staff</servlet-name>
+        <url-pattern>/acceptOrder-staff</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>deniedOrder</servlet-name>
-        <url-pattern>/deniedOrder</url-pattern>
+        <servlet-name>deniedOrder-staff</servlet-name>
+        <url-pattern>/deniedOrder-staff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAllStaffOrders-staff</servlet-name>
+        <url-pattern>/viewAllStaffOrders-staff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewMyOrder-staff</servlet-name>
+        <url-pattern>/viewMyOrder-staff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatedOrders-staff</servlet-name>
+        <url-pattern>/updatedOrders-staff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
