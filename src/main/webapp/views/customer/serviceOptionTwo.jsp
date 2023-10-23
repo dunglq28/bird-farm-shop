@@ -128,24 +128,6 @@
 
                                                 </div>
                                             </div>
-                                            <div class="row" class="row" style="margin-top:10px">
-                                                <div class="col-5">
-                                                    <label class="pay">Option you want to choose*:</label>
-                                                </div>
-                                                <div class="col-7">
-                                                    <select name="txtOptionChoose"  onchange="submit()" class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d; text-align: center">
-                                                        <option ${requestScope.OPTION_CHOOSE == 'Get bird eggs with parent' ? 'selected' : ''}>
-                                                            Get bird eggs with parent</option>
-                                                        <option ${requestScope.OPTION_CHOOSE == 'Get baby birds with parent' ? 'selected' : ''}>
-                                                            Get baby birds with parent</option>
-                                                        <option ${requestScope.OPTION_CHOOSE == 'Get bird eggs without parent' ? 'selected' : ''}>
-                                                            Get bird eggs without parent</option>
-                                                        <option ${requestScope.OPTION_CHOOSE == 'Get baby birds without parent' ? 'selected' : ''}>
-                                                            Get baby birds without parent</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <hr class="my-4">
@@ -263,13 +245,16 @@
                                                 <div class="col-md-8 justify-content-center">
                                                     <h5 class="text-black mb-0">${male_bird_choose.product_Name}</h5>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Color: ${male_bird_choose.color}</h6>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                                         <h6 class="mb-0 text-muted ">Age: ${male_bird_choose.age}</h6>
+                                                    </div>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">${male_bird_choose.gender}</h6>
-                                                        <c:if test="${requestScope.OPTION_CHOOSE == 'Get bird eggs without parent'}">
-                                                            <h6 class="mb-0 text-muted ">Price: 0 đ</h6>
-                                                        </c:if>
-                                                        <c:if test="${requestScope.OPTION_CHOOSE != 'Get bird eggs without parent'}">
-                                                            <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.price)}</h6>
-                                                        </c:if>
+                                                    </div>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.price)}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -286,7 +271,15 @@
                                                 <div class="col-md-8 justify-content-center">
                                                     <h5 class="text-black mb-0">${female_bird_choose.product_Name}</h5>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Color: ${female_bird_choose.color}</h6>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                                         <h6 class="mb-0 text-muted ">Age: ${female_bird_choose.age}</h6>
+                                                    </div>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">${female_bird_choose.gender}</h6>
+                                                    </div>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(female_bird_choose.price)}</h6>
                                                     </div>
                                                 </div>
@@ -295,14 +288,6 @@
 
                                         <div class="Promotion-received-element d-flex justify-content-between ">
                                             <h6>Service: ${requestScope.SERVICE_NAME}</h6>
-                                        </div>
-                                        <div class="Promotion-received-element d-flex justify-content-between ">
-                                            <c:if test="${not empty requestScope.OPTION_CHOOSE}">
-                                                <h6>Option: ${requestScope.OPTION_CHOOSE}</h6>
-                                            </c:if>
-                                            <c:if test="${empty requestScope.OPTION_CHOOSE}">
-                                                <h6>Option: Get bird eggs with parent</h6>
-                                            </c:if>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-0">
                                             <h6 class="mb-0 text-muted ">Price of the service: </h6>
