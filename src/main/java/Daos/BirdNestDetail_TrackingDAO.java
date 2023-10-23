@@ -29,20 +29,18 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into BirdNestDetail_Tracking ( "
-                        + "Bird_Nest_ID, Bird_ID, Product_TypeID, Gender, Customer_Product, "
-                        + "LastUpdateDate, NOTE, Status "
+                        + "Bird_Nest_ID, Egg_ID, Product_Name, Gender, LastUpdateDate, NOTE, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ?, ?"
+                        + "?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newBirdNest.getBird_Nest_ID());
-                stm.setString(2, newBirdNest.getBird_ID());
-                stm.setInt(3, newBirdNest.getProduct_TypeID());
+                stm.setString(2, newBirdNest.getEgg_ID());
+                stm.setString(3, newBirdNest.getProduct_Name());
                 stm.setString(4, newBirdNest.getGender());
-                stm.setBoolean(5, newBirdNest.isCustomer_Product());
-                stm.setDate(6, newBirdNest.getLastUpdateDate());
-                stm.setString(7, newBirdNest.getNote());
-                stm.setString(8, newBirdNest.getStatus());
+                stm.setDate(5, newBirdNest.getLastUpdateDate());
+                stm.setString(6, newBirdNest.getNote());
+                stm.setString(7, newBirdNest.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -75,9 +73,8 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select type.Product_Type_Name, Gender, Status, NOTE, LastUpdateDate "
+                String sql = "Select Bird_Nest_ID, Egg_ID, Product_Name, Gender, Status, NOTE, LastUpdateDate "
                         + "from BirdNestDetail_Tracking "
-                        + "inner join Product_Type type on BirdNestDetail_Tracking.Product_TypeID = type.Product_TypeID  "
                         + "where Bird_Nest_ID = ? "
                         + "Order by LastUpdateDate desc "
                         + "OFFSET ? ROWS "
@@ -93,10 +90,12 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                     } else {
                         note = rs.getString("NOTE");
                     }
-                    BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Product_Type_Name"),
+                    BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"),
+                            rs.getString("Egg_ID"),
+                            rs.getString("Product_Name"),
                             rs.getString("Gender"),
                             rs.getDate("LastUpdateDate"),
-                            note,
+                            rs.getString("NOTE"),
                             rs.getString("Status"));
                     if (this.bndetalList == null) {
                         this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();

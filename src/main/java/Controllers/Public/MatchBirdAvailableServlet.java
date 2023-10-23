@@ -7,11 +7,10 @@ package Controllers.Public;
 
 import Daos.CategoryDAO;
 import Daos.ProductDAO;
-import Daos.Service_Price_ListDAO;
+import Daos.ServiceDAO;
 import Models.AccountDTO;
 import Models.CustomerDTO;
 import Models.ProductDTO;
-import Models.Service_Price_ListDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,13 +52,8 @@ public class MatchBirdAvailableServlet extends HttpServlet {
 
         try {
             int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
-
-//            request.setAttribute("OPTION_CHOOSE", optionChoose);
-//            session.setAttribute("OPTION_CHOOSE", optionChoose);
-            Service_Price_ListDAO dao = new Service_Price_ListDAO();
-            List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
-            request.setAttribute("SERVICE_PRICE", dto.get(0).getServicePrice());
-            request.setAttribute("SERVICE_NAME", dto.get(0).getServiceName());
+            ServiceDAO serdao = new ServiceDAO();
+            request.setAttribute("SERVICE_NAME", serdao.getServiceNameByID(serviceID));
 
             ProductDAO proDao = new ProductDAO();
             CategoryDAO cateDao = new CategoryDAO();

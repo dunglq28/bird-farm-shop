@@ -62,12 +62,7 @@ public class CheckLoginToCheckoutServlet extends HttpServlet {
             if (account == null && serviceID.equals("1")) {
                 url = "guest?btAction=loginPage";
                 session.setAttribute("HISTORY_URL", "cart");
-                
             } else if (account == null && serviceID.equals("2")) {
-                session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
-                url = "guest?btAction=loginPage";
-                
-            } else if (account == null && serviceID.equals("3") || account == null && serviceID.equals("4")) {
                 session.setAttribute("HISTORY_URL", MyAppConstants.CustomerFeatures.BIRD_NEST_SERVICE_CONTROLLER);
                 url = "guest?btAction=loginPage";
             }

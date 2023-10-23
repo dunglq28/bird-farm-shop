@@ -57,17 +57,10 @@ public class HandlePaymentServlet extends HttpServlet {
             } else if (serviceID.equals("1")) {
                 url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
                 session.setAttribute("CUSTOMER", customer);
-
-            } else if (serviceID.equals("2")) {
-                url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
-                session.setAttribute("CUSTOMER", customer);
-            } else if (serviceID.equals("3") ) {
+            } else if (serviceID.equals("2") ) {
                 url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
                 session.setAttribute("CUSTOMER", customer);
-            } else if (serviceID.equals("4") ) {
-                url = MyAppConstants.PublicFeatures.MATCH_BIRD_CUSTOMER_SERVICE_CONTROLLER;
-                session.setAttribute("CUSTOMER", customer);
-            }
+            } 
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
