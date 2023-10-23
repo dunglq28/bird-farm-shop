@@ -18,7 +18,6 @@ public class Bird_Nest_TrackingDTO {
     private int eggs_Quantity;
     private String accountID;
     private int serviceID;
-    private String subService;
     private float deposit_Price;
     private String staffID;
     private Date orderDate;
@@ -29,14 +28,13 @@ public class Bird_Nest_TrackingDTO {
     public Bird_Nest_TrackingDTO() {
     }
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, String accountID, int serviceID, String subService, float deposit_Price, String staffID, Date orderDate, Date lastUpdateDate, String note, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, String accountID, int serviceID, float deposit_Price, String staffID, Date orderDate, Date lastUpdateDate, String note, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.bird_Nest_Name = bird_Nest_Name;
         this.eggs_Quantity = eggs_Quantity;
         this.accountID = accountID;
         this.serviceID = serviceID;
-        this.subService = subService;
         this.deposit_Price = deposit_Price;
         this.staffID = staffID;
         this.orderDate = orderDate;
@@ -45,13 +43,12 @@ public class Bird_Nest_TrackingDTO {
         this.status = status;
     }
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, String accountID, int serviceID, String subService, String staffID, Date lastUpdateDate, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, String accountID, int serviceID, String staffID, Date lastUpdateDate, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.eggs_Quantity = eggs_Quantity;
         this.accountID = accountID;
         this.serviceID = serviceID;
-        this.subService = subService;
         this.staffID = staffID;
         this.lastUpdateDate = lastUpdateDate;
         this.status = status;
@@ -107,13 +104,6 @@ public class Bird_Nest_TrackingDTO {
         this.serviceID = serviceID;
     }
 
-    public String getSubService() {
-        return subService;
-    }
-
-    public void setSubService(String subService) {
-        this.subService = subService;
-    }
 
     public float getDeposit_Price() {
         return deposit_Price;

@@ -292,7 +292,7 @@
                                         <div class="d-flex justify-content-between align-items-center mb-0">
                                             <h6 class="mb-0 text-muted ">Price of the service: </h6>
                                             <a href="#" class="change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
+                                                <h6 class="mb-0 text-muted ">x 1.000.000 đ</h6>
                                             </a>
                                         </div>
 
@@ -329,6 +329,7 @@
                                                 <h5 class="text-uppercase">Total price</h5>
                                                 <h5 id="total_order">${utilPrice.FormatPrice(total_order)}</h5>
                                         </div>
+                                        <input type="hidden" name="txtTotalOrder" value="${total_order}" />
                                         <input type="hidden" name="total_order_final" value="${total_order}" />
                                         <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
                                         <input name="btAction" value="Order" type="submit" 

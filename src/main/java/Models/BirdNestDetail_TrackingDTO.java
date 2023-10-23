@@ -14,28 +14,17 @@ import java.sql.Date;
 public class BirdNestDetail_TrackingDTO {
 
     private String bird_Nest_ID;
-    private String bird_ID;
-    private int product_TypeID;
-    private String product_TypeName;
+    private String egg_ID;
+    private String Product_Name;
     private String gender;
-    private boolean customer_Product;
     private Date lastUpdateDate;
     private String note;
     private String status;
 
-    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String bird_ID, int product_TypeID, String gender, boolean customer_Product, Date lastUpdateDate, String note, String status) {
+    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String egg_ID, String Product_Name, String gender, Date lastUpdateDate, String note, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
-        this.bird_ID = bird_ID;
-        this.product_TypeID = product_TypeID;
-        this.gender = gender;
-        this.customer_Product = customer_Product;
-        this.lastUpdateDate = lastUpdateDate;
-        this.note = note;
-        this.status = status;
-    }
-
-    public BirdNestDetail_TrackingDTO(String product_TypeName, String gender, Date lastUpdateDate, String note, String status) {
-        this.product_TypeName = product_TypeName;
+        this.egg_ID = egg_ID;
+        this.Product_Name = Product_Name;
         this.gender = gender;
         this.lastUpdateDate = lastUpdateDate;
         this.note = note;
@@ -50,28 +39,20 @@ public class BirdNestDetail_TrackingDTO {
         this.bird_Nest_ID = bird_Nest_ID;
     }
 
-    public String getBird_ID() {
-        return bird_ID;
+    public String getEgg_ID() {
+        return egg_ID;
     }
 
-    public void setBird_ID(String bird_ID) {
-        this.bird_ID = bird_ID;
+    public void setEgg_ID(String egg_ID) {
+        this.egg_ID = egg_ID;
     }
 
-    public int getProduct_TypeID() {
-        return product_TypeID;
+    public String getProduct_Name() {
+        return Product_Name;
     }
 
-    public void setProduct_TypeID(int product_TypeID) {
-        this.product_TypeID = product_TypeID;
-    }
-
-    public String getProduct_TypeName() {
-        return product_TypeName;
-    }
-
-    public void setProduct_TypeName(String product_TypeName) {
-        this.product_TypeName = product_TypeName;
+    public void setProduct_Name(String Product_Name) {
+        this.Product_Name = Product_Name;
     }
 
     public String getGender() {
@@ -80,14 +61,6 @@ public class BirdNestDetail_TrackingDTO {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public boolean isCustomer_Product() {
-        return customer_Product;
-    }
-
-    public void setCustomer_Product(boolean customer_Product) {
-        this.customer_Product = customer_Product;
     }
 
     public Date getLastUpdateDate() {
@@ -113,8 +86,6 @@ public class BirdNestDetail_TrackingDTO {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    
     
 
 }
