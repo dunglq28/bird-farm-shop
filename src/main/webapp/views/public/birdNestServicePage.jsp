@@ -24,13 +24,6 @@
                         with clear origins and certified documents. Order a bird now, our birds will be an exciting part of
                         your
                         life - we guarantee it! "</p>
-                    <p class="">
-                        1. All orders must be prepaid 50% to follow the status of the bird nests.<br>
-                        2. If a customer want shop to combine customer birds with shop birds. Customers must bring customer birds after finishing orders. Shop will not keep those birds.<br>
-                        3. Shop cannot sure all eggs in a bird nest could be hatch if there are some eggs in birds nest cannot be hatch shop will not take responsibilities.<br>
-                        4.Bird nest price will base on the numbers of eggs and the rarity of eggs plus applicable sales tax, delivery charge if shop delivers it to customer.<br>
-                        5. All birds or eggs in a single order must be paid for by using the same payment method.<br>
-                    </p>
                 </div>
 
             </div>
@@ -47,10 +40,10 @@
 
                     <div class="row text-center">
                         <form action="Bird-Nest-Services" method="POST">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="thumbnail">
                                     <img src="https://cdn.pixabay.com/photo/2018/05/24/02/07/bird-eggs-3425657_1280.jpg"
-                                         width="400" height="400">
+                                         width="600" height="400">
                                     <p><strong>Available at shop</strong></p>
                                     <p>
                                     </p>
@@ -60,10 +53,10 @@
                             </div>
                         </form>
                         <form action="Checkout" method="POST">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="thumbnail">
                                     <img src="https://www.thesprucepets.com/thmb/X6Se5sWlNMb0pDUD4vh-jM65NXU=/2121x0/filters:no_upscale():strip_icc()/australian-finch--taeniopygia-guttata--807072894-79e2ba40ea54453fa9c64429d8d234e1.jpg"
-                                         width="400" height="400">
+                                         width="600" height="400">
                                     <p><strong>Based on the bird lists at shop</strong></p>
                                     <p>
                                     </p>
@@ -72,24 +65,8 @@
                                 </div>
                             </div>
                         </form>
-                        <form action="Checkout" method="POST">
-                            <div class="col-sm-4">
-                                <div class="thumbnail">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQEaIl1E9gv1vDDHVs_DsFy93aXSJxGmu-phrzzwecCC0FySyV36kA2MVAhRi82-INQh8&usqp=CAU"
-                                         width="400" height="400">
-                                    <p><strong>Based on customer's birds</strong></p>
-                                    <p></p>
-                                    <button class="btn">Book Now</button>
-                                    <input type="hidden" name="txtServiceID" value="4" />
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     <jsp:include page="/components/footer.jsp"></jsp:include>
