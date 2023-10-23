@@ -47,7 +47,7 @@
                                     <p><strong>Available at shop</strong></p>
                                     <p>
                                     </p>
-                                    <button class="btn">Book Now</button>
+                                    <button class="btn">Order</button>
                                     <input type="hidden" name="btAction" value="OrderAvailableBirdNest">
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                     <p>
                                     </p>
                                     <button class="btn">Book Now</button>
-                                    <input type="hidden" name="txtServiceID" value="3" />
+                                    <input type="hidden" name="txtServiceID" value="2" />
                                 </div>
                             </div>
                         </form>

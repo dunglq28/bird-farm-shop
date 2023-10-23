@@ -6,9 +6,7 @@
 package Controllers.Public;
 
 import Daos.ProductDAO;
-import Daos.Service_Price_ListDAO;
 import Models.ProductDTO;
-import Models.Service_Price_ListDTO;
 import Object.Products;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -51,28 +49,28 @@ public class BirdNestAvailableServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            ProductDAO Prodao = new ProductDAO();
-            
-            ProductDTO Prodto = Prodao.getProductByID((String) session.getAttribute("PRODUCT_ID_SERVICE"));
-            Products product = new Products(Prodto.getProductID(), Prodto.getProduct_Name(), Prodto.getCategory_Name(),
-                    Prodto.getDad_Bird_ID(), Prodto.getMom_Bird_ID(), Prodto.getImage(), 
-                    Prodto.getQuantity_Available(), Integer.parseInt(quantityBuy),Prodto.getQuantity_Sold(), Prodto.getPrice(), Prodto.getDiscount());
-            if (quantityBuy != null && product != null) {
-                product.setQuantityBuy(Integer.parseInt(quantityBuy));   
-            }
-            session.setAttribute("BIRD_NEST_CHOOSE", product);
-            Service_Price_ListDAO dao = new Service_Price_ListDAO();
-            List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
-            for (Service_Price_ListDTO option : dto) {
-                if (option.getMinimum_number_of_eggs() <= product.getQuantityBuy() && option.getMaximum_number_of_eggs() >= product.getQuantityBuy()) {
-                    session.setAttribute("SERVICE_PRICE", option.getServicePrice());
-                }
-            }
+//            ProductDAO Prodao = new ProductDAO();
+//            
+//            ProductDTO Prodto = Prodao.getProductByID((String) session.getAttribute("PRODUCT_ID_SERVICE"));
+//            Products product = new Products(Prodto.getProductID(), Prodto.getProduct_Name(), Prodto.getCategory_Name(),
+//                    Prodto.getDad_Bird_ID(), Prodto.getMom_Bird_ID(), Prodto.getImage(), 
+//                    Prodto.getQuantity_Available(), Integer.parseInt(quantityBuy),Prodto.getQuantity_Sold(), Prodto.getPrice(), Prodto.getDiscount());
+//            if (quantityBuy != null && product != null) {
+//                product.setQuantityBuy(Integer.parseInt(quantityBuy));   
+//            }
+//            session.setAttribute("BIRD_NEST_CHOOSE", product);
+//            Service_Price_ListDAO dao = new Service_Price_ListDAO();
+//            List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
+//            for (Service_Price_ListDTO option : dto) {
+//                if (option.getMinimum_number_of_eggs() <= product.getQuantityBuy() && option.getMaximum_number_of_eggs() >= product.getQuantityBuy()) {
+//                    session.setAttribute("SERVICE_PRICE", option.getServicePrice());
+//                }
+//            }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
+//            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

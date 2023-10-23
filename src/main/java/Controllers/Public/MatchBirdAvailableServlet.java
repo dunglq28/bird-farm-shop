@@ -7,11 +7,10 @@ package Controllers.Public;
 
 import Daos.CategoryDAO;
 import Daos.ProductDAO;
-import Daos.Service_Price_ListDAO;
+import Daos.ServiceDAO;
 import Models.AccountDTO;
 import Models.CustomerDTO;
 import Models.ProductDTO;
-import Models.Service_Price_ListDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,19 +47,13 @@ public class MatchBirdAvailableServlet extends HttpServlet {
         String cateChoose = request.getParameter("txtCateID");
         String maleBirdIDChoose = request.getParameter("txtMaleBirdID");
         String femaleBirdIDChoose = request.getParameter("txtFemaleBirdID");
-        String optionChoose = request.getParameter("txtOptionChoose");
+//        String optionChoose = request.getParameter("txtOptionChoose");
         HttpSession session = request.getSession();
 
         try {
             int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
-
-            request.setAttribute("OPTION_CHOOSE", optionChoose);
-            session.setAttribute("OPTION_CHOOSE", optionChoose);
-
-            Service_Price_ListDAO dao = new Service_Price_ListDAO();
-            List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
-            request.setAttribute("SERVICE_PRICE", dto.get(0).getServicePrice());
-            request.setAttribute("SERVICE_NAME", dto.get(0).getServiceName());
+            ServiceDAO serdao = new ServiceDAO();
+            request.setAttribute("SERVICE_NAME", serdao.getServiceNameByID(serviceID));
 
             ProductDAO proDao = new ProductDAO();
             CategoryDAO cateDao = new CategoryDAO();
@@ -86,12 +79,7 @@ public class MatchBirdAvailableServlet extends HttpServlet {
 
             if (maleBirdIDChoose != null) {
                 for (ProductDTO birdMaleChoose : maleBirdList) {
-                    if (birdMaleChoose.getProductID().equals(maleBirdIDChoose) && optionChoose.contains("without parent")) {
-                        birdMaleChoose.setPrice(0);
-                        session.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
-                        request.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
-
-                    } else if (birdMaleChoose.getProductID().equals(maleBirdIDChoose) && optionChoose.contains("with parent")) {
+                    if (birdMaleChoose.getProductID().equals(maleBirdIDChoose)) {
                         session.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
                         request.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
                     }
@@ -100,12 +88,7 @@ public class MatchBirdAvailableServlet extends HttpServlet {
 
             if (femaleBirdIDChoose != null) {
                 for (ProductDTO birdFemaleChoose : femaleBirdList) {
-                    if (birdFemaleChoose.getProductID().equals(femaleBirdIDChoose) && optionChoose.contains("without parent")) {
-                        birdFemaleChoose.setPrice(0);
-                        session.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
-                        request.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
-
-                    } else if (birdFemaleChoose.getProductID().equals(femaleBirdIDChoose) && optionChoose.contains("with parent")) {
+                    if (birdFemaleChoose.getProductID().equals(femaleBirdIDChoose)) {
                         session.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
                         request.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
                     }
