@@ -39,9 +39,9 @@ public class AcceptAnOrders extends HttpServlet {
 //            if(serviceName == "Egg incubation is available"){
 //                
 //            }
-//            if(odSuccess == true && odDTSuccess == true){
+            if(odSuccess == true && odDTSuccess == true){
                 url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
-//            }
+            }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
