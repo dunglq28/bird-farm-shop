@@ -47,7 +47,7 @@
 
                 <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
                     <li>
-                        <a href="#">
+                        <a href="viewMyOrder-staff">
                             <i class="fas fa-chart-bar"></i>
                             <span>Orders has been taken</span>
                         </a>
@@ -128,7 +128,7 @@
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
                                     <div>
-                                        <form action="">
+                                        <div>
                                             <tr>
                                                 <td><a href="" class="order-detail">${dto.orderID}</a></td>
                                                 <td>${dto.serviceName}</td>
@@ -139,17 +139,17 @@
                                                 <td>${dto.status}</td>
                                                 <td>
                                                     <div class="action">
-                                                        <a href="#"><i class="fa-solid fa-check"></i></a>
+                                                        <a href="acceptOrder-staff?orderID=${dto.orderID}"><i class="fa-solid fa-check"></i></a>
                                                         <a href="#"><i class="fa-solid fa-xmark"></i></a>
                                                     </div>
-                                                    <input type="hidden" name="" value="" />
+                                                    <input type="hidden" name="orderID" value="" />
                                                     <input type="hidden" name="" value="" />
                                                     <input type="hidden" name="" value="" />
                                                     <input type="hidden" name="" value="" />
                                                     <input type="hidden" name="" value="" />
                                                 </td>
                                             </tr>
-                                        </form>
+                                        </div>
                                     </div>
                                 </c:forEach>
                             </c:if>

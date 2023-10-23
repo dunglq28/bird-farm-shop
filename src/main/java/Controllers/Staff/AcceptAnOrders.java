@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +25,7 @@ public class AcceptAnOrders extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("orderID");
-        String serviceName = request.getParameter("service");
+//        String serviceName = request.getParameter("service");
 //        String accountID = request.getParameter("staffID");
 //        String acceptOrder = request.getParameter("acceptOrder");
         try {
@@ -35,14 +36,15 @@ public class AcceptAnOrders extends HttpServlet {
             StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
             boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
             boolean odDTSuccess = oddao.takeActionOrder_DT(orderID, "Processing");
-            if(serviceName == "Egg incubation is available"){
-                
-            }
-            if(odSuccess == true && odDTSuccess == true){
-                url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
-            }
+//            if(serviceName == "Egg incubation is available"){
+//                
+//            }
+//            if(odSuccess == true && odDTSuccess == true){
+                url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+//            }
         } finally {
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

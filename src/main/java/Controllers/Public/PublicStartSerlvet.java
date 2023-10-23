@@ -27,7 +27,7 @@ public class PublicStartSerlvet extends HttpServlet {
         if(account != null && account.getRoleName().equals("Customer")){
             url = MyAppConstants.PublicFeatures.HOME_PAGE;
         } else if(account != null){
-            url = MyAppConstants.StaffFeatures.MANAGE_PAGE;
+            url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
         }
         else{
             url = MyAppConstants.PublicFeatures.HOME_PAGE;

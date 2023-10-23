@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +30,17 @@ public class viewMyOrder extends HttpServlet {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             StaffDAO dao = new StaffDAO();
             StaffDTO staDTO = dao.getStaffByAccountID(account.getAccountID());
-            dao.MyOrders(staDTO.getStaffID());
-            List<OrderDTO> result = dao.getOrderList();
-            session.setAttribute("MY_ORDERS_STAFF", result);
-            url = MyAppConstants.StaffFeatures.MANAGE_PAGE;
+//            dao.MyOrders(staDTO.getStaffID());
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID());
+            request.setAttribute("MY_ORDERS_STAFF", result);
+            if (result == null) {
+                url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+            } else {
+                url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
+            }
         } finally {
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

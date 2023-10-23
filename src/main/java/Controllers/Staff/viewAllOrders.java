@@ -34,7 +34,7 @@ public class viewAllOrders extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
             }
             else{
-            url = MyAppConstants.StaffFeatures.MANAGE_PAGE;
+            url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

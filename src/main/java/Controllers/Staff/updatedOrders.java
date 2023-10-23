@@ -16,6 +16,10 @@ public class updatedOrders extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String status = request.getParameter("Status_updated");
         String Note = request.getParameter("note_updated");
+        String gender = request.getParameter("gender_updated");
+        String product = request.getParameter("product_updated");
+        long millis = System.currentTimeMillis();
+        java.sql.Date orderDate = new java.sql.Date(millis);
         try {
 
         } finally {
