@@ -17,8 +17,8 @@
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="../../assets/css/homePage.css">
-        <link rel="stylesheet" href="../../assets/css/serviceOption.css">
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+        <link rel="stylesheet" href="./assets/css/payment.css">
     </head>
     <body>
         <!-- option2 -->
@@ -243,19 +243,18 @@
                                                          class="img-fluid rounded-3" alt="Bird Image">
                                                 </div>
                                                 <div class="col-md-8 justify-content-center">
-                                                     <h5 class="text-black mb-0">${male_bird_choose.product_Name}</h5>
+                                                    <h5 class="text-black mb-0">${male_bird_choose.product_Name}</h5>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                      <h6 class="mb-0 text-muted ">Gender: ${male_bird_choose.gender}</h6>
-
+                                                        <h6 class="mb-0 text-muted ">Color: ${male_bird_choose.color}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Age: Young</h6>
+                                                         <h6 class="mb-0 text-muted ">Age: ${male_bird_choose.age}</h6>
                                                     </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Color: White</h6>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">${male_bird_choose.gender}</h6>
                                                     </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Price: 4.000.000 đ</h6>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.price)}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,19 +269,18 @@
                                                          class="img-fluid rounded-3" alt="Bird Image">
                                                 </div>
                                                 <div class="col-md-8 justify-content-center">
-                                                     <h5 class="text-black mb-0">${male_bird_choose.product_Name}</h5>
+                                                    <h5 class="text-black mb-0">${female_bird_choose.product_Name}</h5>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                      <h6 class="mb-0 text-muted ">Gender: ${female_bird_choose.gender}</h6>
-
+                                                        <h6 class="mb-0 text-muted ">Color: ${female_bird_choose.color}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Age: Young</h6>
+                                                         <h6 class="mb-0 text-muted ">Age: ${female_bird_choose.age}</h6>
                                                     </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Color: White</h6>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">${female_bird_choose.gender}</h6>
                                                     </div>
-                                                    <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Price: 4.000.000 đ</h6>
+                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(female_bird_choose.price)}</h6>
                                                     </div>
                                                 </div>
                                             </div>

@@ -380,7 +380,7 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                String sql = "select ProductID , Product_Name, Image, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
+                String sql = "select ProductID , Product_Name, Image, Age, Color, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
                         + "from Products "
                         + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= 1 "
                         + "and CategoryID = ? ";
@@ -395,6 +395,8 @@ public class ProductDAO implements Serializable {
                     ProductDTO dto = new ProductDTO(rs.getString("ProductID"),
                             rs.getString("Product_Name"),
                             rs.getString("Gender"),
+                            rs.getString("Age"),
+                            rs.getString("Color"),
                             rs.getString("Image"),
                             rs.getInt("Quantity_Available"),
                             rs.getInt("Quantity_AreMating"),
