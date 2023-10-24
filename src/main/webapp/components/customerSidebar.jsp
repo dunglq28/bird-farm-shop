@@ -24,31 +24,31 @@
                     <h5>Account management</h5>
                 </a>
             </div>
-            <hr>
+            <hr class="my-4">
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
                     <h5>Accumulates points</h5>
                 </a>
             </div>
-            <hr>
+            <hr class="my-4">
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
                     <h5>Account information</h5>
                 </a>
             </div>
-            <hr>
+            <hr class="my-4">
             <div class="Promotion-received-element mb-3">
                 <a href="Order?txtServiceID=1" class="text-muted text-decoration-none" ${requestScope.SERVICE_ID == 1 ? 'style="color: rgb(0, 155, 198) !important;"' : ''} >
                     <h5 >My order</h5>
                 </a>
             </div>
-            <hr>
+            <hr class="my-4">
             <div class="Promotion-received-element mb-3">
                 <a href="Order?txtServiceID=2" class="text-muted text-decoration-none" ${requestScope.SERVICE_ID == 2 ? 'style="color: rgb(0, 155, 198) !important;"' : ''}>
                     <h5>My booking</h5>
                 </a>
             </div>
-            <hr>
+<!--            <hr>
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
                     <h5>Delivery address book</h5>
@@ -65,7 +65,7 @@
                 <a href="#" class="text-muted text-decoration-none">
                     <h5>Q&A</h5>
                 </a>
-            </div>
+            </div>-->
 
         </div>
 

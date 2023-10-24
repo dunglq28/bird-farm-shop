@@ -62,13 +62,13 @@ public class CheckoutSucessfulServlet extends HttpServlet {
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
 
             String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
-            
+
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
             int temp = (Integer) session.getAttribute("SHIPPING_CASH");
-            
+
             int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
-            
+
             float shippingCash = (float) temp;
             String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
             long millis = System.currentTimeMillis();
@@ -80,7 +80,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
                         orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                 orderdao.createOrder(newOrder);
-                
+
                 ProductDAO birdDao = new ProductDAO();
                 OrderDetailDAO odDao = new OrderDetailDAO();
                 BirdNestDetail_TrackingDAO bndedao = new BirdNestDetail_TrackingDAO();
@@ -95,7 +95,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                         for (String key : cart.getItems().keySet()) {
                             odDto = new OrderDetailDTO(orderID, key,
                                     cart.getItems().get(key).getPrice(),
-                                    cart.getItems().get(key).getQuantityBuy(), "Wait for confirmation");
+                                    cart.getItems().get(key).getQuantityBuy());
 //                            quantityAvaUpdate = cart.getItems().get(key).getQuantityAvailable()- cart.getItems().get(key).getQuantityBuy();
 //                            quantitySold = cart.getItems().get(key).getQuantitySold()+ cart.getItems().get(key).getQuantityBuy();
 //                            birdDao.updateQuantityAfterOrder(quantityAvaUpdate, quantitySold, key);
@@ -106,13 +106,17 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                         session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
                         break;
                     case 2:
-//                        ProductDTO maleBird = (ProductDTO) session.getAttribute("MALE_BIRD_CHOOSE");
-//                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold(), maleBird.getProductID());
-//                            birdDao.updateQuantityMating(maleBird.getQuantity_AreMating() + 1, maleBird.getProductID());
-//
-//                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold(), femaleBird.getProductID());
-//                            birdDao.updateQuantityMating(femaleBird.getQuantity_AreMating() + 1, femaleBird.getProductID());
-
+                        ProductDTO maleBird = (ProductDTO) session.getAttribute("MALE_BIRD_CHOOSE");
+                        odDto = new OrderDetailDTO(orderID, maleBird.getProductID(), maleBird.getPrice(), 0);
+                        odDao.createOrderDetail(odDto);
+                        ProductDTO femaleBird = (ProductDTO) session.getAttribute("FEMALE_BIRD_CHOOSE");
+                         odDto = new OrderDetailDTO(orderID, femaleBird.getProductID(), femaleBird.getPrice(), 0);
+                        odDao.createOrderDetail(odDto);
+                        //                            birdDao.updateQuantityAfterOrder(maleBird.getQuantity_Available() - 1, maleBird.getQuantity_Sold(), maleBird.getProductID());
+                        //                            birdDao.updateQuantityMating(maleBird.getQuantity_AreMating() + 1, maleBird.getProductID());
+                        //
+                        //                            birdDao.updateQuantityAfterOrder(femaleBird.getQuantity_Available() - 1, femaleBird.getQuantity_Sold(), femaleBird.getProductID());
+                        //                            birdDao.updateQuantityMating(femaleBird.getQuantity_AreMating() + 1, femaleBird.getProductID());
                         bndao = new Bird_Nest_TrackingDAO();
                         bnId = bndao.createBirdNestID();
                         bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0,
@@ -121,8 +125,8 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                         bndao.createBirdNestTracking(bndto);
                         break;
                 }
-
-                url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
+                session.setAttribute("ORDER_ID", orderID);
+                url = MyAppConstants.PublicFeatures.SUCCESS_ORDER_CONTROLLER;
             }
 
         } catch (SQLException ex) {

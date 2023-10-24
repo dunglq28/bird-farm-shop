@@ -5,26 +5,22 @@
  */
 package Controllers.Public;
 
-
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hj
  */
-@WebServlet(name = "MatchBirdCustomer", urlPatterns = {"/MatchBirdCustomer"})
-public class MatchBirdCustomerSerlvet extends HttpServlet {
+@WebServlet(name = "Success-Order", urlPatterns = {"/Success-Order"})
+public class SuccessOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,25 +34,13 @@ public class MatchBirdCustomerSerlvet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.CustomerFeatures.SERVICE_OPTION_THREE_PAGE;
+        String url = MyAppConstants.PublicFeatures.SUCCESS_ORDER_PAGE;
+        try {
 
-        HttpSession session = request.getSession();
-
-//        try {
-//            int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
-//            Service_Price_ListDAO dao = new Service_Price_ListDAO();
-//            List<Service_Price_ListDTO> dto = dao.getServicePriceByServiceID(serviceID);
-//            request.setAttribute("SERVICE_PRICE", dto.get(0).getServicePrice());
-//            request.setAttribute("SERVICE_NAME", dto.get(0).getServiceName());
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
-//        } finally {
-//            RequestDispatcher rd = request.getRequestDispatcher(url);
-//            rd.forward(request, response);
-//        }
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

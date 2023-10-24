@@ -25,19 +25,20 @@ public class viewMyOrder extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String serviceID = request.getParameter("txtServiceID");
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (serviceID == null) {
+                serviceID = "1";
+            }
             StaffDAO dao = new StaffDAO();
             StaffDTO staDTO = dao.getStaffByAccountID(account.getAccountID());
-//            dao.MyOrders(staDTO.getStaffID());
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID());
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID));
             request.setAttribute("MY_ORDERS_STAFF", result);
-            if (result == null) {
-                url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-            } else {
-                url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
-            }
+            request.setAttribute("SERVICE_ID", serviceID);
+            url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

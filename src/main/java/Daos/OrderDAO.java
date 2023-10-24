@@ -205,17 +205,17 @@ public class OrderDAO implements Serializable {
         return false;
     }
     
-    public boolean takeActionOrder_DT (String OrderID, String Status) throws SQLException, ClassNotFoundException {
+    public boolean UpdateStatusOrder(String OrderID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Update Order_Details "
+                String sql = "Update Orders "
                         + "set Status = ? "
                         + "where OrderID = ?";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, Status);
+                stm.setString(1, status);
                 stm.setString(2, OrderID);
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -232,4 +232,6 @@ public class OrderDAO implements Serializable {
         }
         return false;
     }
+    
+    
 }

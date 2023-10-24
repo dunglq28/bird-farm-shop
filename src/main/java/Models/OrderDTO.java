@@ -14,6 +14,7 @@ public class OrderDTO {
     private int serviceID;
     private String serviceName;
     private String accountID;
+    private String accountName;
     private String staffID;
     private String form_Receipt;
     private String shipperID;
@@ -64,10 +65,11 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public OrderDTO(String orderID, String serviceName, String form_Receipt, Date orderDate, float total_Order, 
+    public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float total_Order, 
             String payBy, String status, float discount, float delivery_charges) {
         this.orderID = orderID;
         this.serviceName = serviceName;
+        this.accountName = accountName;
         this.form_Receipt = form_Receipt;
         this.orderDate = orderDate;
         this.total_Order = total_Order;
@@ -137,6 +139,16 @@ public class OrderDTO {
     public void setAccountID(String accountID) {
         this.accountID = accountID;
     }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+    
+    
 
     public String getStaffID() {
         return staffID;

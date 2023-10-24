@@ -25,9 +25,7 @@ public class AcceptAnOrders extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("orderID");
-//        String serviceName = request.getParameter("service");
-//        String accountID = request.getParameter("staffID");
-//        String acceptOrder = request.getParameter("acceptOrder");
+
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -35,16 +33,12 @@ public class AcceptAnOrders extends HttpServlet {
             StaffDAO staDAO = new StaffDAO();
             StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
             boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
-            boolean odDTSuccess = oddao.takeActionOrder_DT(orderID, "Processing");
-//            if(serviceName == "Egg incubation is available"){
-//                
-//            }
-            if(odSuccess == true && odDTSuccess == true){
-                url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+
+            if(odSuccess == true){
+                url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
             }
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

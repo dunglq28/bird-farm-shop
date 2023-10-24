@@ -16,95 +16,58 @@
             referrerpolicy="no-referrer"
             />
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
-        <title>Dash Board</title>
+        <title>My Order</title>
+        <style>
+            .rounded-td {
+                border-radius: 7px;
+                border: 2px solid rgb(13, 103, 128);
+                overflow: hidden;
+            }
+
+            .rounded-select {
+                border-radius: 7px;
+                border: 2px solid rgb(13, 103, 128);
+                text-align: center;
+                padding: 0 10px 0 10px;
+                text-align: center;
+                justify-content: center;
+            }
+        </style>
     </head>
     <body>
-
-        <div class="sidebar">
-            <div class="logo">Bird Farm Shop</div>
-            <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-            <c:set var="admin" value="Admin" />
-            <c:set var="staff" value="Staff" />
-            <c:set var="manager" value="Manager"/>
-            <ul class="menu">
-                <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
-                    <li class="active">
-                        <a href="#">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                </c:if>
-
-                <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
-                    <li>
-                        <a href="viewAllStaffOrders-staff">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <span>Orders in queue</span>
-                        </a>
-                    </li>
-                </c:if>
-
-                <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
-                    <li>
-                        <a href="viewMyOrder-staff">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Orders has been taken</span>
-                        </a>
-                    </li>
-                </c:if>
+        <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
+        <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
 
-                <li>
-                    <a href="#">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Account manager</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Products</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-
-                <li class="logout">
-                    <a href="guest?btAction=logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main--content">
-            <div class="header-wrapper">
-                <div class="header--title">
-                    <span>Primary</span>
-                    <h2>Dashboard</h2>
-                </div>
-                <div class="user--info">
-                    <div class="search--box">
-                        <i class="fa-solid fa-search"></i>
-                        <input type="text" placeholder="search" />
+            <div class="main--content">
+                <div class="header-wrapper">
+                    <div class="header--title">
+                        <span>Primary</span>
+                        <h2>Order Management</h2>
                     </div>
+                    <div class="user--info">
+                        <div class="search--box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" placeholder="search" />
+                        </div>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
             <div class="tabular--wrapper">
-                <h3 class="main--title">Finance data</h3>
+                <c:if test="${requestScope.SERVICE_ID == 1}">
+                    <h3 class="main--title">My Order</h3>
+                </c:if>
+                <c:if test="${requestScope.SERVICE_ID != 1}">
+                    <h3 class="main--title">My Booking</h3>
+                </c:if>
+
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
                                 <th>OrderID</th>
                                 <th>Service</th>
+                                <th>Customer Name</th>
                                 <th>Order Date</th>
                                 <th>Total</th>
                                 <th>Delivery method</th>
@@ -118,38 +81,49 @@
                             <c:set var="order" value="${requestScope.MY_ORDERS_STAFF}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
-                                    <div>
-                                        <form action="">
-                                            <tr>
-                                                <td><a href="" class="order-detail">${dto.orderID}</a></td>
-                                                <td>${dto.serviceName}</td>
-                                                <td>${util.FormatDate(dto.orderDate)}</td>
-                                                <td>${util.FormatPrice(dto.total_Order)}</td>
-                                                <td>${dto.form_Receipt}</td>
-                                                <td>${dto.payBy}</td>
-                                                <td>${dto.status}</td>
-                                                <td>
-                                                    <div class="action">
-                                                        <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                        <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                                    </div>
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                </td>
-                                            </tr>
-                                        </form>
-                                    </div>
+                                    <tr>
+                                        <td><a href="" class="order-detail">${dto.orderID}</a></td>
+                                        <td>${dto.serviceName}</td>
+                                        <td>${dto.accountName}</td>
+                                        <td>${util.FormatDate(dto.orderDate)}</td>
+                                        <td>${util.FormatPrice(dto.total_Order)}</td>
+                                        <td>${dto.form_Receipt}</td>
+                                        <td>${dto.payBy}</td>
+                                        <td>
+                                            <form action="updatedOrders-staff">
+                                                <select name="txtNewStatus" onchange="submit()" class="rounded-select" >
+                                                    <option ${dto.status == 'Processing' ? 'selected' : '' }>Processing</option>
+                                                    <option ${dto.status == 'Delivering' ? 'selected' : '' }>Delivering</option>
+                                                    <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
+                                                </select>
+                                                <input type="hidden" name="txtOrderID" value="${dto.orderID}">
+                                            </form>
+                                        </td>
+
+                                        <td>
+                                            <div class="action">
+                                                <!--<a href="#"><i class="fa-solid fa-check"></i></a>-->
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                             </c:if>
-                            <div>
-                            </div>
+
                         </div>
                         </tbody>
                     </table>
                 </div>
             </div>
+            <script>
+                function submit() {
+                    document.querySelector(".myForm").onsubmit();
+                }
+            </script>
     </body>
 </html>
