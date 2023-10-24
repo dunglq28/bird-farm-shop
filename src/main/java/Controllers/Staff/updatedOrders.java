@@ -1,41 +1,30 @@
-package Controllers.Public;
+package Controllers.Staff;
 
-import Models.AccountDTO;
-import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Properties;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "home", urlPatterns = {"/home"})
-public class PublicStartSerlvet extends HttpServlet {
+@WebServlet(name = "updatedOrders-staff", urlPatterns = {"/updatedOrders-staff"})
+public class updatedOrders extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String status = request.getParameter("Status_updated");
+        String Note = request.getParameter("note_updated");
+        String gender = request.getParameter("gender_updated");
+        String product = request.getParameter("product_updated");
+        long millis = System.currentTimeMillis();
+        java.sql.Date orderDate = new java.sql.Date(millis);
+        try {
 
-        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        HttpSession session = request.getSession();
-        AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-        if(account != null && account.getRoleName().equals("Customer")){
-            url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        } else if(account != null){
-            url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
+        } finally {
+
         }
-        else{
-            url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        }
-
-        RequestDispatcher dis = request.getRequestDispatcher(url);
-        dis.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

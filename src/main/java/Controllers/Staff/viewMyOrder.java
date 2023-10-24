@@ -1,12 +1,13 @@
 package Controllers.Staff;
 
-import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.AccountDTO;
+import Models.OrderDTO;
 import Models.StaffDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -17,30 +18,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "acceptOrder-staff", urlPatterns = {"/acceptOrder-staff"})
-public class AcceptAnOrders extends HttpServlet {
+@WebServlet(name = "viewMyOrder-staff", urlPatterns = {"/viewMyOrder-staff"})
+public class viewMyOrder extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-        String orderID = request.getParameter("orderID");
-//        String serviceName = request.getParameter("service");
-//        String accountID = request.getParameter("staffID");
-//        String acceptOrder = request.getParameter("acceptOrder");
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            OrderDAO oddao = new OrderDAO();
-            StaffDAO staDAO = new StaffDAO();
-            StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
-            boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
-            boolean odDTSuccess = oddao.takeActionOrder_DT(orderID, "Processing");
-//            if(serviceName == "Egg incubation is available"){
-//                
-//            }
-            if(odSuccess == true && odDTSuccess == true){
-                url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+            StaffDAO dao = new StaffDAO();
+            StaffDTO staDTO = dao.getStaffByAccountID(account.getAccountID());
+//            dao.MyOrders(staDTO.getStaffID());
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID());
+            request.setAttribute("MY_ORDERS_STAFF", result);
+            if (result == null) {
+                url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+            } else {
+                url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -63,9 +59,9 @@ public class AcceptAnOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewMyOrder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewMyOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,9 +79,9 @@ public class AcceptAnOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewMyOrder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AcceptAnOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewMyOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

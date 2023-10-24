@@ -58,7 +58,10 @@ public class MyAppConstants {
 
     public class StaffFeatures {
 
-        public static final String MANAGE_PAGE = "/views/staff/dashboard.jsp";
+        public static final String ALL_STAFF_ORDER_PAGE = "/views/staff/dashboard.jsp";
+        public static final String STAFF_ORDER_PAGE = "/views/staff/myOrderStaff.jsp";
+        public static final String VIEW_ALL_ORDER_CONTROLLER = "viewAllStaffOrders-staff";
+        public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
 
     }
 

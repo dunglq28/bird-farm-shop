@@ -1,12 +1,15 @@
-package Controllers.Public;
+package Controllers.Staff;
 
-import Models.AccountDTO;
+import Daos.StaffDAO;
+import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Properties;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,28 +17,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "home", urlPatterns = {"/home"})
-public class PublicStartSerlvet extends HttpServlet {
+@WebServlet(name = "viewAllStaffOrders-staff", urlPatterns = {"/viewAllStaffOrders-staff"})
+public class viewAllOrders extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        HttpSession session = request.getSession();
-        AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-        if(account != null && account.getRoleName().equals("Customer")){
-            url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        } else if(account != null){
+        String url = "";
+        try {
+//            HttpSession session = request.getSession();
+            StaffDAO dao = new StaffDAO();
+            dao.ViewAllStaffOrders();
+            List<OrderDTO> result = dao.getOrderList();
+            request.setAttribute("STAFF_ALL_ORDERS", result);
+            if (result == null) {
+                url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+            }
+            else{
             url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
+            }
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
-        else{
-            url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        }
-
-        RequestDispatcher dis = request.getRequestDispatcher(url);
-        dis.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,7 +54,13 @@ public class PublicStartSerlvet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,7 +74,13 @@ public class PublicStartSerlvet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
