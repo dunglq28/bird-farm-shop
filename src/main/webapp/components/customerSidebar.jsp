@@ -21,49 +21,49 @@
 
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
-                    <h5>Account management</h6>
+                    <h5>Account management</h5>
                 </a>
             </div>
             <hr>
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
-                    <h5>Accumulates points</h6>
+                    <h5>Accumulates points</h5>
                 </a>
             </div>
             <hr>
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
-                    <h5>Account information</h6>
+                    <h5>Account information</h5>
                 </a>
             </div>
             <hr>
             <div class="Promotion-received-element mb-3">
-                <a href="#" class="text-muted text-decoration-none" style="color: rgb(0, 155, 198) !important;">
-                    <h5 >My order</h6>
+                <a href="Order?txtServiceID=1" class="text-muted text-decoration-none" ${requestScope.SERVICE_ID == 1 ? 'style="color: rgb(0, 155, 198) !important;"' : ''} >
+                    <h5 >My order</h5>
                 </a>
             </div>
             <hr>
             <div class="Promotion-received-element mb-3">
-                <a href="#" class="text-muted text-decoration-none">
-                    <h5>My booking</h6>
-                </a>
-            </div>
-            <hr>
-            <div class="Promotion-received-element mb-3">
-                <a href="#" class="text-muted text-decoration-none">
-                    <h5>Delivery address book</h6>
+                <a href="Order?txtServiceID=2" class="text-muted text-decoration-none" ${requestScope.SERVICE_ID == 2 ? 'style="color: rgb(0, 155, 198) !important;"' : ''}>
+                    <h5>My booking</h5>
                 </a>
             </div>
             <hr>
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
-                    <h5>Repurchase</h6>
+                    <h5>Delivery address book</h5>
                 </a>
             </div>
             <hr>
             <div class="Promotion-received-element mb-3">
                 <a href="#" class="text-muted text-decoration-none">
-                    <h5>Q&A</h6>
+                    <h5>Repurchase</h5>
+                </a>
+            </div>
+            <hr>
+            <div class="Promotion-received-element mb-3">
+                <a href="#" class="text-muted text-decoration-none">
+                    <h5>Q&A</h5>
                 </a>
             </div>
 

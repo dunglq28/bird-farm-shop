@@ -54,19 +54,21 @@ public class CheckoutSucessfulServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String vnPayStatus = request.getParameter("vnp_TransactionStatus");
-        String url = "";
+        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         try {
             String paymentMethod = (String) session.getAttribute("PAYMENT_METHOD");
-
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
 
             String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
+            
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
             int temp = (Integer) session.getAttribute("SHIPPING_CASH");
+            
             int serviceID = Integer.parseInt((String) session.getAttribute("SERVICE_ID"));
+            
             float shippingCash = (float) temp;
             String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
             long millis = System.currentTimeMillis();
@@ -78,6 +80,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
                         orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                 orderdao.createOrder(newOrder);
+                
                 ProductDAO birdDao = new ProductDAO();
                 OrderDetailDAO odDao = new OrderDetailDAO();
                 BirdNestDetail_TrackingDAO bndedao = new BirdNestDetail_TrackingDAO();
@@ -87,7 +90,6 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                 int quantityAvaUpdate;
                 int quantitySold;
                 String bnId;
-                boolean Customer_Product;
                 switch (serviceID) {
                     case 1:
                         for (String key : cart.getItems().keySet()) {

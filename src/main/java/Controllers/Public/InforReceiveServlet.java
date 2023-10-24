@@ -71,12 +71,8 @@ public class InforReceiveServlet extends HttpServlet {
                 if (customer != null && serviceID.equals("1")) {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
                 } else if (customer != null && serviceID.equals("2")) {
-                    url = MyAppConstants.PublicFeatures.BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER;
-                } else if (customer != null && serviceID.equals("3")) {
                     url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
-                }  else if (customer != null && serviceID.equals("4")) {
-                    url = MyAppConstants.PublicFeatures.MATCH_BIRD_CUSTOMER_SERVICE_CONTROLLER;
-                }
+                }  
             }
 
         } catch (SQLException ex) {

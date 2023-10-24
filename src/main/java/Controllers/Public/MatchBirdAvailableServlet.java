@@ -77,11 +77,14 @@ public class MatchBirdAvailableServlet extends HttpServlet {
                 femaleBirdList = (List<ProductDTO>) session.getAttribute("FEMALE_BIRD_HISTORY");
             }
 
+
+            float servicePrice = 0;
             if (maleBirdIDChoose != null) {
                 for (ProductDTO birdMaleChoose : maleBirdList) {
                     if (birdMaleChoose.getProductID().equals(maleBirdIDChoose)) {
                         session.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
                         request.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
+                        servicePrice += birdMaleChoose.getPrice()/2;
                     }
                 }
             }
@@ -91,10 +94,12 @@ public class MatchBirdAvailableServlet extends HttpServlet {
                     if (birdFemaleChoose.getProductID().equals(femaleBirdIDChoose)) {
                         session.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
                         request.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
+                        servicePrice += birdFemaleChoose.getPrice()/2;
                     }
                 }
             }
-
+            
+            request.setAttribute("SERVICE_PRICE", servicePrice);
             request.setAttribute("CATE_CHOOSE", cateChoose);
             request.setAttribute("MALE_BIRD", maleBirdList);
             request.setAttribute("FEMALE_BIRD", femaleBirdList);

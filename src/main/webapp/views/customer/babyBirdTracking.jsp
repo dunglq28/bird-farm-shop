@@ -47,23 +47,25 @@
                                     </c:if>
                                 </tbody>
                             </table>
-                            <div class="center">
-                                <div class="pagination">
-                                    <c:if test="${requestScope.pageCurrent > 1}">
-                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=1"><i class="fa fa-angle-double-left"></i></a>
-                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.pageCurrent-1}"><i class="fa fa-angle-left"></i></a>
-                                        </c:if>
+                            <c:if test="${not empty bndetailList}">
+                                <div class="center">
+                                    <div class="pagination">
+                                        <c:if test="${requestScope.pageCurrent > 1}">
+                                            <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                                            <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.pageCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                                            </c:if>
 
-                                    <c:forEach begin="${requestScope.BEGIN}" end="${requestScope.FINISH}" var="i">
-                                        <a class="${requestScope.pageCurrent==i ? "active" : ""}" href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${i}">${i}</a>
-                                    </c:forEach>
+                                        <c:forEach begin="${requestScope.BEGIN}" end="${requestScope.FINISH}" var="i">
+                                            <a class="${requestScope.pageCurrent==i ? "active" : ""}" href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${i}">${i}</a>
+                                        </c:forEach>
 
-                                    <c:if test="${requestScope.pageCurrent < requestScope.endPage}">
-                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.pageCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                                        <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
-                                        </c:if>
+                                        <c:if test="${requestScope.pageCurrent < requestScope.endPage}">
+                                            <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.pageCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                                            <a href="Service_Tracking?txtOrderID=${requestScope.ORDER_ID}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                                            </c:if>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -75,7 +77,6 @@
                             <div class="d-flex flex-column text-sm-left">
                                 <h5>ORDER ID: <span class="text-secondary font-weight-bold order">#${bird_nest_tracking.orderID}</span></h5>
                             <h6>SERVICE: <span class="text-secondary  order">Pair birds of customers upon request</span></h6>
-                            <h6>OPTION: <span class="text-secondary order">${bird_nest_tracking.subService}</span></h6>
                             <h6>EGG QUANTITY: <span class="text-secondary order">${bird_nest_tracking.eggs_Quantity}</span></h6>
                         </div>
                         <div class="d-flex flex-column text-sm-left">
