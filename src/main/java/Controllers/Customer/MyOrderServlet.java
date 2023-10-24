@@ -1,4 +1,3 @@
-
 package Controllers.Customer;
 
 import Daos.OrderDAO;
@@ -37,10 +36,11 @@ public class MyOrderServlet extends HttpServlet {
             if (status == null) {
                 status = "All";
             }
-            if (serviceID == null) {
+
+            if (serviceID == null ) {
                 serviceID = "1";
             }
-                
+
             OrderDAO oDao = new OrderDAO();
             OrderDetailDAO odDao = new OrderDetailDAO();
             List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status, Integer.parseInt(serviceID));

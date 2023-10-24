@@ -46,8 +46,8 @@
         crossorigin="anonymous"></script>
     <!-- Service Start -->
 
-    <div class="container-fluid bg-light my-5 py-6 vh-100 mt-5" id="service">
-        <div class="container">
+    <div class="container-fluid bg-light my-5 py-6" id="service">
+        <div class="container" style="padding-top: 8rem">
             <div>
                 <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="col-lg-12">
@@ -66,12 +66,12 @@
                             </div>
                             <div class="ms-sm-4">
                                 <h4 class="mb-3" style="font-family: 'Playpen Sans', cursive;">Your order number <span
-                                        style="color: red;font-family: 'Playpen Sans', cursive;">O1235</span></h4>
+                                        style="color: red;font-family: 'Playpen Sans', cursive;">#${sessionScope.ORDER_ID}</span></h4>
                                 <h6 class="mb-3" style="font-family: 'Playpen Sans', cursive;">
                                     We are preparing your birds    
                                 </h6>
                                 <span style="font-weight: 450;font-family: 'Playpen Sans', cursive;">You can view order
-                                    details <a class="text-decoration-none" href="#"
+                                    details <a class="text-decoration-none" href="Order?txtServiceID=${sessionScope.SERVICE_ID}"
                                         style="color: rgb(13,103,128);font-family: 'Playpen Sans', cursive;">HERE</a></span>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="row g-3 mt-3">
-                    <a href="#" class="btn btn-primary btn-lg " style="background-color:rgb(13,103,128) ;font-family: 'Playpen Sans', cursive;" role="button" >Buy another product now</a>
+                    <a href="product_list?productType=${sessionScope.PRODUCT_TYPE}" class="btn btn-primary btn-lg " style="background-color:rgb(13,103,128) ;font-family: 'Playpen Sans', cursive;" role="button" >Buy another product now</a>
                 </div>
                 
             </div>
@@ -96,5 +96,4 @@
 
 
 
-<jsp:include page="/components/footer.jsp"></jsp:include>
 </html>

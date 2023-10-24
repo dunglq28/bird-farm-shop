@@ -1,7 +1,10 @@
 package Controllers.Staff;
 
+import Daos.OrderDAO;
+import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +17,21 @@ public class updatedOrders extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String status = request.getParameter("Status_updated");
-        String Note = request.getParameter("note_updated");
-        String gender = request.getParameter("gender_updated");
-        String product = request.getParameter("product_updated");
-        long millis = System.currentTimeMillis();
-        java.sql.Date orderDate = new java.sql.Date(millis);
+        String newStatus = request.getParameter("txtNewStatus");
+        String orderID = request.getParameter("txtOrderID");
+        String url = "";
         try {
-
+            OrderDAO dao = new OrderDAO();
+            boolean result = dao.UpdateStatusOrder(orderID, newStatus);
+            if (result == true) {
+                url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
-
+            response.sendRedirect(url);
         }
     }
 

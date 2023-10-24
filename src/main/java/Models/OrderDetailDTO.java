@@ -24,14 +24,12 @@ public class OrderDetailDTO {
     private float price;
     private String priceFormat;
     private int quantity_Buy;
-    private String status;
 
-    public OrderDetailDTO(String orderID, String productID, float price, int quantity_Buy, String status) {
+    public OrderDetailDTO(String orderID, String productID, float price, int quantity_Buy) {
         this.orderID = orderID;
         this.productID = productID;
         this.price = price;
         this.quantity_Buy = quantity_Buy;
-        this.status = status;
     }
 
     public OrderDetailDTO(String bird_name, String cate_name, String bird_gender, String bird_image, String bird_color, String bird_age, float price, int quantity_Buy) {
@@ -134,12 +132,6 @@ public class OrderDetailDTO {
         this.quantity_Buy = quantity_Buy;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  
 
 }

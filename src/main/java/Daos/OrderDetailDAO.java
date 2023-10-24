@@ -29,16 +29,15 @@ public class OrderDetailDAO {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Order_Details ( "
-                        + "OrderID, ProductID, Price, Quantity_Buy, Status "
+                        + "OrderID, ProductID, Price, Quantity_Buy "
                         + ") values ( "
-                        + "?, ?, ?, ?, ? "
+                        + "?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, orderDetail.getOrderID());
                 stm.setString(2, orderDetail.getProductID());
                 stm.setFloat(3, orderDetail.getPrice());
                 stm.setInt(4, orderDetail.getQuantity_Buy());
-                stm.setString(5, orderDetail.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {

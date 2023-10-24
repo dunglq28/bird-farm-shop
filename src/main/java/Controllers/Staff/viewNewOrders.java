@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "viewAllStaffOrders-staff", urlPatterns = {"/viewAllStaffOrders-staff"})
-public class viewAllOrders extends HttpServlet {
+@WebServlet(name = "viewNewOrder", urlPatterns = {"/viewNewOrder"})
+public class viewNewOrders extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
@@ -27,15 +27,11 @@ public class viewAllOrders extends HttpServlet {
         try {
 //            HttpSession session = request.getSession();
             StaffDAO dao = new StaffDAO();
-            dao.ViewAllStaffOrders();
-            List<OrderDTO> result = dao.getOrderList();
+            List<OrderDTO> result = dao.ViewNewStaffOrders();
             request.setAttribute("STAFF_ALL_ORDERS", result);
-            if (result == null) {
-                url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-            }
-            else{
+
             url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
-            }
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
@@ -57,9 +53,9 @@ public class viewAllOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,9 +73,9 @@ public class viewAllOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(viewAllOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

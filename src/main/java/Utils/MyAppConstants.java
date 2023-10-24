@@ -14,6 +14,7 @@ public class MyAppConstants {
         public static final String BIRD_NEST_SERVICE_PAGE = "/views/public/birdNestServicePage.jsp";
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
         public static final String ERROR_404_PAGE = "/views/errors/errorPage404.jsp";
+        public static final String SUCCESS_ORDER_PAGE = "/views/public/successOrder.jsp";
         public static final String PRODUCT_DETAIL_CONTROLLER = "product";
         public static final String PRODUCT_LIST_CONTROLLER = "product_list";
         public static final String PAGING_PRODUCT_CONTROLLER = "PagingProductServlet";
@@ -23,6 +24,7 @@ public class MyAppConstants {
         public static final String HANDLE_PAYMENT_CONTROLLER = "HandlePaymentServlet";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
         public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
+        public static final String SUCCESS_ORDER_CONTROLLER = "Success-Order";
         public static final String SELECT_SAME_PRODUCT_CONTROLLER = "SelectSameProductServlet";
         public static final String BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER = "BirdNestAvailableServlet";
         public static final String MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER = "MatchBirdAvailable";
@@ -58,10 +60,11 @@ public class MyAppConstants {
 
     public class StaffFeatures {
 
-        public static final String ALL_STAFF_ORDER_PAGE = "/views/staff/dashboard.jsp";
+        public static final String ALL_STAFF_ORDER_PAGE = "/views/staff/newOrderStaff.jsp";
         public static final String STAFF_ORDER_PAGE = "/views/staff/myOrderStaff.jsp";
-        public static final String VIEW_ALL_ORDER_CONTROLLER = "viewAllStaffOrders-staff";
+        public static final String VIEW_ALL_ORDER_CONTROLLER = "viewNewOrder";
         public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
+        public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
 
     }
 

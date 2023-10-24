@@ -41,6 +41,7 @@
                                                     <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Succeed" class="btn btn-secondary ${STATUS_ORDER == 'Succeed' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Canceled" class="btn btn-secondary ${STATUS_ORDER == 'Canceled' ? 'active' : ''}">
+                                                    <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
                                                 </div>
                                             </div>
                                         </form>
