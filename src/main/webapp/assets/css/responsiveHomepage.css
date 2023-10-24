@@ -1,0 +1,296 @@
+/* Mobile & Tablet */
+@media (max-width: 1023px) {  
+    .hide-on-mobile-tablet{
+        display: none;
+    }
+
+    
+    .content-intro{
+        margin-top: 20rem;
+    }
+
+    .content-intro__main-img{
+        padding: 0;
+        margin-top: 10rem;
+    }
+
+    .mobile-tablet-flex-reverse{
+        flex-wrap: wrap-reverse;
+    }
+
+    .content-intro__group{
+        padding: 0;
+    }
+
+    .content-section__heading{
+        font-size: 4rem;
+    }
+
+    .content-section__disc{
+        font-size: 1.6rem;
+    }
+
+    .content-exp-container{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .content-exp__group{
+        padding: 0;
+        margin-bottom: 6rem;
+    }
+
+    .content-exp__heading{
+        margin-bottom: 4.6rem;
+    }
+
+    .content-exp-slide__control{
+        position: unset;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        margin-left: 5rem;
+        margin-top: 2rem;
+    }
+
+    .content-exp-slide__btn{
+        height: 5rem;
+        width: 5rem;
+        margin: 0 1rem;
+    }
+
+    .content-exp-slide__group{
+        height: 41rem;
+        margin-left: 0;
+    }
+
+    .content-exp-slide__item{
+        width: 30rem;
+    }
+
+    .content-destination__heading{
+        text-align: start;
+    }
+
+    .content-destination__disc{
+        width: 100%;
+        text-align: start;
+    }
+
+    .content-about,
+    .content-news,
+    .content-says{
+        margin-top: 10rem;
+    }
+
+    .content-news__item{
+        margin: 1.4rem 0;
+    }
+
+    .content-about__right{
+        margin-left: 0;
+        margin-top: 4rem;
+    }
+
+    .content-about__sub-heading,
+    .content-about__heading{
+        text-align: center;
+    }
+
+    .content-about__right{
+        text-align: center;
+    }
+
+    .content-says{
+        height: 50rem;
+    }
+
+    .content-says-slide{
+        height: 18rem;
+    }
+
+    .content-says-group{
+        width: 100%;
+    }
+
+    .content-signup,
+    .content-signup__content{
+        height: 8rem;
+    }
+
+    .content-signup__content{
+    font-size: 2rem;
+    }
+
+   
+
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+    
+
+    .content-section__disc{
+        padding: 0 2rem;
+    }
+
+    .link-to{
+        margin: 0 2rem;
+    }
+
+    .content-exp-slide__group{
+        margin-left: 2rem;
+    }
+
+    .content-exp-slide__slider{
+        width: 91.2rem;
+    }
+
+    .content-intro{
+        margin-top: 26rem;
+    }
+
+    .content-destination__card{
+        height: 18.6rem;
+    }
+
+    .content-news__item{
+        margin-left: 2rem;
+        margin-right: 2rem;
+        width: calc(100% - 4rem);
+    }
+
+    .content-news__container .link-to.hide{
+        display: block;
+        margin: auto;
+        padding-top: 3.4rem;
+    }
+
+    .content-says{
+        height: auto;
+        margin-bottom: 2rem;
+    }
+
+    .content-says-container{
+        height: 56rem;
+    }
+
+    .content-signup__content{
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+   
+
+    .mobile-menu-social{
+        margin-top: 1.4rem;
+    }
+
+   
+}
+
+@media (max-width:1025px) and (min-width:1024px){
+    
+
+    .content-intro__secondary{
+        display: none;
+    }
+
+    
+
+   
+
+    .content-intro{
+        margin-bottom: 6rem;
+    }
+
+    .content-exp__group{
+        padding-left: 0;
+    }
+
+    .content-exp__heading{
+        padding-left: 4rem;
+    }
+
+    .content-intro__main-img{
+        padding-right: 3rem;
+    }
+
+    .content-intro__group{
+        padding-left: 3rem;
+    }
+
+    .content-exp-slide__control{
+        left: 6rem;
+    }
+
+    .content-exp-slide__group{
+        height: 41rem;
+        margin-left: 13rem;
+    }
+
+    .content-exp-slide__slider{
+        width: 82.2rem;
+    }
+
+    .content-exp-slide__item{
+        width: 27.4rem;
+    }
+
+    .content-destination__card{
+        height: 20rem;
+    }
+
+    .content-about,
+    .content-news{
+        margin-top: 16rem;
+    }
+
+    .content-section__heading{
+        font-size: 4.2rem;
+    }
+
+    .content-section__disc{
+        font-size: 1.6rem;
+    }
+
+    
+}
+
+@media (max-height:598px) and (max-width: 739px){
+   
+
+    .content-intro{
+        margin-top: 6rem;
+    }
+
+    .content-exp-slide__slider{
+        width: 67.8rem;
+    }
+
+    .content-exp-slide__text{
+        font-size: 2.2rem;
+    }
+
+    .content-says,
+    .content-says-container{
+        height: 56rem;
+    }
+
+    .content-signup{
+        margin-top: 2rem;
+    }
+
+    .content-signup__content{
+        font-size: 1.6rem;
+    }
+
+    .mobile-menu-list{
+        padding-bottom: 0.4rem;
+    }
+
+    .mobile-menu-social{
+        margin-top: 1.2rem;
+    }
+
+}
