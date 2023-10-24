@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout"  class="container py-3 h-100 " method="post">
+        <form action="Checkout"  class="container py-3 h-100 " method="get">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -290,9 +290,9 @@
                                             <h6>Service: ${requestScope.SERVICE_NAME}</h6>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-0">
-                                            <h6 class="mb-0 text-muted ">Price of the service: </h6>
+                                            <h6 class="mb-0 text-muted ">Deposit Price of the service: </h6>
                                             <a href="#" class="change-infor-link text-decoration-none">
-                                                <h6 class="mb-0 text-muted ">x 1.000.000 đ</h6>
+                                                <h6 class="mb-0 text-muted ">x ${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
                                             </a>
                                         </div>
 
@@ -313,23 +313,22 @@
 
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>${utilPrice.FormatPrice(requestScope.SERVICE_PRICE + female_bird_choose.price + male_bird_choose.price)}</h6>
+                                            <h6>${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
                                         </div>
                                         <div class="d-flex justify-content-between mb-1">
                                             <h6 class="text-uppercase">Transport Fee</h6>
                                             <h6 id="Ship">${utilPrice.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
-<!--                                            <input type="hidden" name="txtShippingCash" value="${sessionScope.SHIPPING_CASH}"/>-->
                                         </div>
                                         <div class=" d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
                                             <h6>0</h6>
                                         </div>
-                                        <c:set var="total_order" value="${sessionScope.SHIPPING_CASH + sessionScope.SERVICE_PRICE + female_bird_choose.price + male_bird_choose.price}"></c:set>
+                                        <c:set var="total_order" value="${sessionScope.SHIPPING_CASH + requestScope.SERVICE_PRICE}"></c:set>
                                             <div class="d-flex justify-content-between mb-2">
                                                 <h5 class="text-uppercase">Total price</h5>
                                                 <h5 id="total_order">${utilPrice.FormatPrice(total_order)}</h5>
                                         </div>
-                                        <input type="hidden" name="txtTotalOrder" value="${total_order}" />
+                                        <input type="hidden" name="txtTotalOrder" value="${requestScope.SERVICE_PRICE}" />
                                         <input type="hidden" name="total_order_final" value="${total_order}" />
                                         <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
                                         <input name="btAction" value="Order" type="submit" 

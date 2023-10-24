@@ -29,18 +29,15 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into BirdNestDetail_Tracking ( "
-                        + "Bird_Nest_ID, Egg_ID, Product_Name, Gender, LastUpdateDate, NOTE, Status "
+                        + "Bird_Nest_ID, LastUpdateDate, NOTE, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, newBirdNest.getBird_Nest_ID());
-                stm.setString(2, newBirdNest.getEgg_ID());
-                stm.setString(3, newBirdNest.getProduct_Name());
-                stm.setString(4, newBirdNest.getGender());
-                stm.setDate(5, newBirdNest.getLastUpdateDate());
-                stm.setString(6, newBirdNest.getNote());
-                stm.setString(7, newBirdNest.getStatus());
+                stm.setString(1, newBirdNest.getBird_Nest_ID());;
+                stm.setDate(2, newBirdNest.getLastUpdateDate());
+                stm.setString(3, newBirdNest.getNote());
+                stm.setString(4, newBirdNest.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -73,7 +70,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select Bird_Nest_ID, Egg_ID, Product_Name, Gender, Status, NOTE, LastUpdateDate "
+                String sql = "Select Bird_Nest_ID, Status, NOTE, LastUpdateDate "
                         + "from BirdNestDetail_Tracking "
                         + "where Bird_Nest_ID = ? "
                         + "Order by LastUpdateDate desc "
@@ -91,11 +88,8 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                         note = rs.getString("NOTE");
                     }
                     BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"),
-                            rs.getString("Egg_ID"),
-                            rs.getString("Product_Name"),
-                            rs.getString("Gender"),
-                            rs.getDate("LastUpdateDate"),
                             rs.getString("NOTE"),
+                            rs.getDate("LastUpdateDate"),
                             rs.getString("Status"));
                     if (this.bndetalList == null) {
                         this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();

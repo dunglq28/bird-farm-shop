@@ -25,6 +25,7 @@ public class MyOrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.CustomerFeatures.MY_ORDER_PAGE;
         String status = request.getParameter("Status");
+        String serviceID = request.getParameter("txtServiceID");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -36,11 +37,16 @@ public class MyOrderServlet extends HttpServlet {
             if (status == null) {
                 status = "All";
             }
+            if (serviceID == null) {
+                serviceID = "1";
+            }
+                
             OrderDAO oDao = new OrderDAO();
-//            OrderDetailDAO odDao = new OrderDetailDAO();
-            List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status);
+            OrderDetailDAO odDao = new OrderDetailDAO();
+            List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status, Integer.parseInt(serviceID));
             session.setAttribute("ORDER_LIST", order);
             request.setAttribute("STATUS_ORDER", status);
+            request.setAttribute("SERVICE_ID", serviceID);
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -103,7 +103,7 @@ public class OrderDAO implements Serializable {
         return orderList;
     }
 
-    public List<OrderDTO> getOrderByAccountID(String accountId, String status_choose)
+    public List<OrderDTO> getOrderByAccountID(String accountId, String status_choose, int serID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -120,21 +120,22 @@ public class OrderDAO implements Serializable {
                     sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
                             + "From Orders od "
                             + "inner join Service ser on ser.ServiceID = od.ServiceID "
-                            + "where AccountID = ? "
+                            + "where AccountID = ? and od.ServiceID = ? "
                             + "order by OrderDate desc ";
                 } else {
                     sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
                             + "From Orders od "
                             + "inner join Service ser on ser.ServiceID = od.ServiceID "
-                            + "where AccountID = ? and Status = ? "
+                            + "where AccountID = ? and od.ServiceID = ? and Status = ? "
                             + "order by OrderDate desc ";
                 }
 
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, accountId);
+                stm.setInt(2, serID);
                 if (!status_choose.equals("All")) {
-                    stm.setString(2, status_choose);
+                    stm.setString(3, status_choose);
                 }
                 //4.execute-query
                 rs = stm.executeQuery();
