@@ -61,10 +61,10 @@
         </div>
     </div>-->
             <div class="tabular--wrapper">
-                <c:if test="${session.SERVICE_ID == 1}">
+                <c:if test="${sessionScope.SERVICE_ID == 1}">
                     <h3 class="main--title">My Order</h3>
                 </c:if>
-                <c:if test="${session.SERVICE_ID != 1}">
+                <c:if test="${sessionScope.SERVICE_ID != 1}">
                     <h3 class="main--title">My Booking</h3>
                 </c:if>
 
