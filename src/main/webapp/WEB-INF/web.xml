@@ -68,6 +68,10 @@
         <servlet-name>deniedOrder</servlet-name>
         <servlet-class>Controllers.Staff.deniedAnOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>changePassword</servlet-name>
+        <servlet-class>Controllers.Auth.authChangePasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -136,7 +140,7 @@
         <error-code>404</error-code>
         <location>/views/errors/errorPage404.jsp</location>
     </error-page>
-<!--    <error-page>
+    <!--    <error-page>
         <error-code>500</error-code>
         <location>/views/errors/errorPage500.jsp</location>
     </error-page>-->
@@ -155,6 +159,10 @@
     <servlet-mapping>
         <servlet-name>deniedOrder</servlet-name>
         <url-pattern>/deniedOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

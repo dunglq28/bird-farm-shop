@@ -36,6 +36,7 @@ public class MyAppConstants {
 
         public static final String LOGIN_PAGE = "/views/auth/login.jsp";
         public static final String REGISTER_PAGE = "/views/auth/register.jsp";
+        public static final String CHANGE_PASS_PAGE = "/views/customer/changePass.jsp";
         public static final String FORGET_PASS_PAGE = "/views/auth/forgetpass.jsp";
         public static final String RESET_PASS_PAGE = "/views/auth/resetPass.jsp";
         public static final String FORGET_PASS_CONTROLLER = "forgetPass";
