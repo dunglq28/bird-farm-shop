@@ -38,6 +38,7 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
+<<<<<<< HEAD
 
             <header class="" style="opacity: unset !important">
                 <a href="home" class="brand">Bird Farm Shop</a>
@@ -98,16 +99,41 @@
 
 
 
+=======
+        <jsp:include page="/components/header.jsp"></jsp:include>
+>>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
+
+            <div>
+
+            </div>
 
 
             <div class="main--content">
+<<<<<<< HEAD
 
                 <div class="tabular--wrapper" style="margin-top: 3.5%">
                 <c:if test="${requestScope.SERVICE_ID == 1}">
+=======
+                <!--                <div class="header-wrapper">
+                                    <div class="header--title">
+                                        <span>Primary</span>
+                                        <h2>Order Management</h2>
+                                    </div>
+                                    <div class="user--info">
+                                        <div class="search--box">
+                                            <i class="fa-solid fa-search"></i>
+                                            <input type="text" placeholder="search" />
+                                        </div>
+            ${sessionScope.ACCOUNT.fullName}
+        </div>
+    </div>-->
+            <div class="tabular--wrapper">
+                <c:if test="${session.SERVICE_ID == 1}">
+>>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
                     <h3 class="main--title">My Order</h3>
                 </c:if>
-                <c:if test="${requestScope.SERVICE_ID != 1}">
+                <c:if test="${session.SERVICE_ID != 1}">
                     <h3 class="main--title">My Booking</h3>
                 </c:if>
 
@@ -147,6 +173,7 @@
                                                     <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
                                                 </select>
                                                 <input type="hidden" name="txtOrderID" value="${dto.orderID}">
+                                                <input type="hidden" name="txtServiceID" value="${session.SERVICE_ID}" >
                                             </form>
                                         </td>
 
@@ -172,10 +199,18 @@
             </div>
         </div>
 
+<<<<<<< HEAD
             <script>
                 function submit() {
                     document.querySelector(".myForm").onsubmit();
                 }
             </script>
+=======
+        <script>
+            function submit() {
+                document.querySelector(".myForm").onsubmit();
+            }
+        </script>
+>>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
     </body>
 </html>

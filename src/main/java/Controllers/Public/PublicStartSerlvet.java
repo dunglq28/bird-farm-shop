@@ -24,12 +24,9 @@ public class PublicStartSerlvet extends HttpServlet {
         String url = MyAppConstants.PublicFeatures.HOME_PAGE;
         HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-        if(account != null && account.getRoleName().equals("Customer")){
+        if (account != null && account.getRoleName().equals("Customer")) {
             url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        } else if(account != null){
-            url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
-            response.sendRedirect(url);
-            return;
+
         }
 
         RequestDispatcher dis = request.getRequestDispatcher(url);

@@ -31,12 +31,12 @@ public class viewMyOrder extends HttpServlet {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             if (serviceID == null) {
                 serviceID = "1";
-            }
+            } 
             StaffDAO dao = new StaffDAO();
             StaffDTO staDTO = dao.getStaffByAccountID(account.getAccountID());
             List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID));
             request.setAttribute("MY_ORDERS_STAFF", result);
-            request.setAttribute("SERVICE_ID", serviceID);
+            session.setAttribute("SERVICE_ID", serviceID);
             url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
 
         } finally {

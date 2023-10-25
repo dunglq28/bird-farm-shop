@@ -53,7 +53,7 @@
                                             4.5
                                         </span>
                                     </div>
-                                    <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i>154 orders</span>
+                                    <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i> ${product_current.quantity_Available} orders</span>
                                     <span class="text-success ms-2">Available</span>
                                 </div>
 

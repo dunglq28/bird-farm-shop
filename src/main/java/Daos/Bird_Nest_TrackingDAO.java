@@ -17,7 +17,7 @@ import java.sql.SQLException;
  *
  * @author hj
  */
-public class Bird_Nest_TrackingDAO implements Serializable{
+public class Bird_Nest_TrackingDAO implements Serializable {
 
     public String createBirdNestID() throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -35,11 +35,17 @@ public class Bird_Nest_TrackingDAO implements Serializable{
                 while (rs.next()) {
                     String BirdNestIDMax = rs.getString("Bird_Nest_ID");
                     if (BirdNestIDMax == null) {
-                        return "BN1";
+                        return "BN01";
                     } else {
                         int num = Integer.parseInt(BirdNestIDMax.substring(2)) + 1;
-                        String newBirdNestID = "BN";
-                        return newBirdNestID.concat(String.valueOf(num));
+                        String newOrderID;
+                        if (num <= 9) {
+                            newOrderID = "BN0";
+                        } else {
+                            newOrderID = "BN";
+                        }
+
+                        return newOrderID.concat(String.valueOf(num));
                     }
                 }
             }

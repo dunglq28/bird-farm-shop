@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "remove-bird", urlPatterns = {"/remove-bird"})
 public class RemoveBirdServlet extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -33,11 +33,12 @@ public class RemoveBirdServlet extends HttpServlet {
             cart.removeBirdFromCart(BirdID);
             session.setAttribute("BIRDCART", cart);
             session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
-
+            
             url = "cart";
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+//            RequestDispatcher rd = request.getRequestDispatcher(url);
+//            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
