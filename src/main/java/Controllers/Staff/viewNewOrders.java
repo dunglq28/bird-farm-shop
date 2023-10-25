@@ -1,5 +1,6 @@
 package Controllers.Staff;
 
+import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.OrderDTO;
 import Utils.MyAppConstants;
@@ -26,7 +27,7 @@ public class viewNewOrders extends HttpServlet {
         String url = "";
         try {
 //            HttpSession session = request.getSession();
-            StaffDAO dao = new StaffDAO();
+            OrderDAO dao = new OrderDAO();
             List<OrderDTO> result = dao.ViewNewStaffOrders();
             request.setAttribute("STAFF_ALL_ORDERS", result);
 
