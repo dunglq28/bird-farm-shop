@@ -20,12 +20,8 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-<<<<<<< HEAD
 
 
-
-=======
->>>>>>> 6ffef84dac49557b20ac76567381b3be78e82301
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
@@ -42,11 +38,8 @@
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
-<<<<<<< HEAD
-            <div class="tabular--wrapper" >
-=======
+         
             <div class="tabular--wrapper">
->>>>>>> 6ffef84dac49557b20ac76567381b3be78e82301
                 <h3 class="main--title">New Order</h3>
                 <form action="Order">
                     <div class="mb-4 justify-content-between align-items-sm-start">
