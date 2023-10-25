@@ -16,13 +16,11 @@ public class BirdNestDetail_TrackingDTO {
     private String bird_Nest_ID;
     private String note;
     private Date lastUpdateDate;
-    private String status;
 
-    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String note, Date lastUpdateDate, String status) {
+    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String note, Date lastUpdateDate) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.note = note;
         this.lastUpdateDate = lastUpdateDate;
-        this.status = status;
     }
 
     public String getBird_Nest_ID() {
@@ -48,15 +46,5 @@ public class BirdNestDetail_TrackingDTO {
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    
-
+   
 }

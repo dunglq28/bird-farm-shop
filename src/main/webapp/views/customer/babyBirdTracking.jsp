@@ -25,9 +25,7 @@
                                 <table class="table mb-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">PRODUCT</th>
-                                            <th scope="col">GENDER</th>
-                                            <th scope="col">STATUS</th>
+                                            <th scope="col">Bird_Nest_ID</th>
                                             <th scope="col">NOTE</th>
                                             <th scope="col">UPDATE TIME</th>
                                         </tr>
@@ -37,9 +35,7 @@
                                     <c:if test="${not empty bndetailList}">
                                         <c:forEach items="${bndetailList}" var="dto" varStatus="counter">
                                             <tr>
-                                                <td>${dto.product_TypeName}</td>
-                                                <td>${dto.gender}</td>
-                                                <td>${dto.status}</td>
+                                                <td>${dto.bird_Nest_ID}</td>
                                                 <td class="long-content">${dto.note}</td>
                                                 <td>${util.FormatDate(dto.lastUpdateDate)}</td>
                                             </tr>
@@ -81,7 +77,6 @@
                         </div>
                         <div class="d-flex flex-column text-sm-left">
                             <p class="mb-0">Update <span>${util.FormatDate(bird_nest_tracking.lastUpdateDate)}</span></p>
-                            <p style="margin-bottom: 0;">Staff <span class="font-weight-bold">Herry Tran</span></p>
                             <p>Customer <span class="font-weight-bold">${sessionScope.CUSTOMER.fullName}</span></p>
                         </div>
                     </div>

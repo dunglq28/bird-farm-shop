@@ -19,7 +19,6 @@ public class Bird_Nest_TrackingDTO {
     private String accountID;
     private int serviceID;
     private float deposit_Price;
-    private String staffID;
     private Date orderDate;
     private Date lastUpdateDate;
     private String note;
@@ -28,7 +27,7 @@ public class Bird_Nest_TrackingDTO {
     public Bird_Nest_TrackingDTO() {
     }
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, String accountID, int serviceID, float deposit_Price, String staffID, Date orderDate, Date lastUpdateDate, String note, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, String accountID, int serviceID, float deposit_Price, Date orderDate, Date lastUpdateDate, String note, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.bird_Nest_Name = bird_Nest_Name;
@@ -36,20 +35,18 @@ public class Bird_Nest_TrackingDTO {
         this.accountID = accountID;
         this.serviceID = serviceID;
         this.deposit_Price = deposit_Price;
-        this.staffID = staffID;
         this.orderDate = orderDate;
         this.lastUpdateDate = lastUpdateDate;
         this.note = note;
         this.status = status;
     }
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, String accountID, int serviceID, String staffID, Date lastUpdateDate, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, String accountID, int serviceID, Date lastUpdateDate, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.eggs_Quantity = eggs_Quantity;
         this.accountID = accountID;
         this.serviceID = serviceID;
-        this.staffID = staffID;
         this.lastUpdateDate = lastUpdateDate;
         this.status = status;
     }
@@ -111,14 +108,6 @@ public class Bird_Nest_TrackingDTO {
 
     public void setDeposit_Price(float deposit_Price) {
         this.deposit_Price = deposit_Price;
-    }
-
-    public String getStaffID() {
-        return staffID;
-    }
-
-    public void setStaffID(String staffID) {
-        this.staffID = staffID;
     }
 
     public Date getOrderDate() {
