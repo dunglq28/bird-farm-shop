@@ -199,8 +199,12 @@
                                             <div class="product__item__pic set-bg"
                                                  data-setbg="${dto.image}"
                                                  style="background-image: url(&quot;${dto.image}&quot;);">
-                                                <!--<div class="label stockout stockblue">Out Of Stock</div>-->
-                                                <!--<div class="label stockout" style="background: rgb(202,21,21);">Sale</div>-->
+                                                <c:if test="${dto.quantity_Available == 0}">
+                                                    <div class="label stockout stockblue">Out Of Stock</div>
+                                                </c:if>
+                                                <c:if test="${dto.discount != 0 && dto.quantity_Available != 0}">
+                                                    <div class="label stockout" style="background: rgb(202,21,21);">Sale ${util.FormatDiscount(dto.discount)}%</div>
+                                                </c:if>
                                                 <ul class="product__hover">
                                                     <div class="">
                                                         <div>
@@ -225,9 +229,11 @@
                                                             </li>
                                                             <li>
                                                                 <form action="product_list" method="POST">
-                                                                    <button name="btAction" value="Addtocart" type="submit">
-                                                                        <i class="fa-solid fa-cart-plus"></i>
-                                                                    </button>
+                                                                    <c:if test="${dto.quantity_Available != 0}">
+                                                                        <button name="btAction" value="Addtocart" type="submit">
+                                                                            <i class="fa-solid fa-cart-plus"></i>
+                                                                        </button>
+                                                                    </c:if>
                                                                     <input type="hidden" name="txtproductID" value="${dto.productID}"/>
                                                                     <input type="hidden" name="txtproductName" value="${dto.product_Name}"/>
                                                                     <input type="hidden" name="txtServiceID" value="1" />
@@ -235,6 +241,7 @@
                                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
                                                                     <input type="hidden" name="quantity_Sold" value="${dto.quantity_Sold}"/>
                                                                     <input type="hidden" name="price" value="${dto.price}"/>
+                                                                    <input type="hidden" name="txtDiscount" value="${dto.discount}"/>
                                                                     <input type="hidden" name="image" value="${dto.image}"/>
                                                                     <input type="hidden" name="txtAge" value="${dto.age}"/>
                                                                     <input type="hidden" name="color" value="${dto.color}"/>
@@ -256,8 +263,14 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                                <div class="product__price">${util.FormatPrice(dto.price)}
-                                                    <!--<span>$ 59.0</span>-->
+                                                <div class="product__price">
+                                                    <c:if test="${dto.discount == 0}">
+                                                        ${util.FormatPrice(dto.price)}
+                                                    </c:if>
+                                                    <c:if test="${dto.discount != 0}">
+                                                        ${util.FormatPrice(dto.price - dto.price * dto.discount)}
+                                                        <span>${util.FormatPrice(dto.price)}</span>
+                                                    </c:if>
                                                 </div>
                                             </div>
                                         </div>

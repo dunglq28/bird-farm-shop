@@ -218,7 +218,7 @@
                                                             <div class="d-flex justify-content-between align-items-center mb-0">
                                                                 <h6 class="mb-0 text-muted ">Qty: ${items.get(key).quantityBuy}</h6>
                                                                 <a href="#" class="change-infor-link text-decoration-none">
-                                                                    <h6 class="mb-0 text-muted ">x${items.get(key).priceFormat}</h6>
+                                                                    <h6 class="mb-0 text-muted ">x${util.FormatPrice(items.get(key).priceDiscount)}</h6>
                                                                 </a>
                                                             </div>
                                                         </div>
