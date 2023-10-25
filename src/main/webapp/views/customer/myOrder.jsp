@@ -39,6 +39,7 @@
                                                 <div class="col-md-4 col-lg-6 col-xl-6">
                                                     <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == 'All' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}">
+                                                    <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Canceled" class="btn btn-secondary ${STATUS_ORDER == 'Canceled' ? 'active' : ''}">
                                                     <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
