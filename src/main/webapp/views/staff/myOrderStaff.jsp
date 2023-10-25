@@ -38,70 +38,7 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-<<<<<<< HEAD
-
-            <header class="" style="opacity: unset !important">
-                <a href="home" class="brand">Bird Farm Shop</a>
-                <div class="menu-btn"></div>
-                <div class="search-container">
-                    <form action="search-product" class="search-bar">
-                        <input type="text" placeholder="Search anything" name="lastSearch" value="${param.lastSearch}">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ddd7d7;"></i></button>
-                </form>
-            </div>
-            <div class="navigation">
-                <div class="navigation-items">
-                    <div class="dropdown">
-                        <button class="dropbtn" style="margin-left: 15px;">
-                            <i class="fa-solid fa-shop fa-lg"></i>
-                            Shop
-                            <i class="fa-solid fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content-wrapper">
-                            <div class="dropdown-content">
-                                <a href="product_list?productType=bird">Buying birds</a>
-                                <a href="Bird-Nest-Services">Ordering bird nests</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <a href="#"><i class="fa-solid fa-phone"></i>Contact</a>
-                        <jsp:useBean id="cart" class="Cart.CartObj"></jsp:useBean>
-                            <a href="cart" class="list-cart-icon">
-                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                                <span class="cart-number">${empty sessionScope.CART_QUANTITY_PRODUCT ? 0 : sessionScope.CART_QUANTITY_PRODUCT}</span>
-                            Cart
-                        </a>
-                        <c:if test="${empty sessionScope.ACCOUNT}">
-                            <a href="guest?btAction=loginPage">Login </a>
-                            <div class="separator"></div>
-                            <a href="guest?btAction=registerPage">Register </a> 
-                        </c:if>
-                    </div>
-                    <c:if test="${not empty sessionScope.ACCOUNT}">
-                        <div class="dropdown">
-                            <button class="dropbtn"><i class="fa-regular fa-circle-user "></i>${sessionScope.ACCOUNT.fullName}</button>
-                            <div class="dropdown-content-wrapper">
-                                <div class="dropdown-content">
-                                    <a href="">My account</a>
-                                    <a href="Order">Order management</a>
-                                    <a href="Service_Tracking">Tracking</a>
-                                    <a href="guest?btAction=logout">Logout</a>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
-            </div>
-        </header>
-        <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
-        <script src="./assets/js/headerControl.js"></script>
-
-
-
-=======
         <jsp:include page="/components/header.jsp"></jsp:include>
->>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div>
@@ -110,11 +47,6 @@
 
 
             <div class="main--content">
-<<<<<<< HEAD
-
-                <div class="tabular--wrapper" style="margin-top: 3.5%">
-                <c:if test="${requestScope.SERVICE_ID == 1}">
-=======
                 <!--                <div class="header-wrapper">
                                     <div class="header--title">
                                         <span>Primary</span>
@@ -130,7 +62,6 @@
     </div>-->
             <div class="tabular--wrapper">
                 <c:if test="${session.SERVICE_ID == 1}">
->>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
                     <h3 class="main--title">My Order</h3>
                 </c:if>
                 <c:if test="${session.SERVICE_ID != 1}">
@@ -199,18 +130,10 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-            <script>
-                function submit() {
-                    document.querySelector(".myForm").onsubmit();
-                }
-            </script>
-=======
         <script>
             function submit() {
                 document.querySelector(".myForm").onsubmit();
             }
         </script>
->>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
     </body>
 </html>
