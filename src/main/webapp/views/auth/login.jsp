@@ -14,15 +14,15 @@
             <div class="container-form">
                 <div class="box">
                     <div class="header-form">
-                        <div header-form-title>Sign In</div>
-                        <p>We are happy to have you back!</p>
-                    </div>
-
-
-                    <form action="log-in" method="POST">
-
                     <c:set var="err" value="${requestScope.CREATE_ERROR}" />
                     <c:set var="notification" value="${requestScope.NOTIFICATION}" />
+                    <div header-form-title>Sign In</div>
+                    <p>We are happy to have you back!</p>
+                    <c:if test="${not empty err.disableAccount}">
+                        <p class="input-error">${err.disableAccount}</p>
+                    </c:if>
+                </div>
+                <form action="log-in" method="POST">
 
                     <div class="input-box">
                         <input name="txtEmailLogin" value="${param.txtEmailLogin}" type="text" class="input-field" id="email" autocomplete="off">
