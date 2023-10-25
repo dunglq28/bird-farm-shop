@@ -28,16 +28,16 @@
                             <div class="card-body p-0">
                                 <div class="row g-0">
                                 <jsp:include page="/components/customerSidebar.jsp"></jsp:include>
-                                <div class="col-lg-9">
-                                    <div class="p-5">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">My order</h1>
+                                    <div class="col-lg-9">
+                                        <div class="p-5">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">My order</h1>
 
-                                        </div>
-                                        <form action="Order">
-                                            <div class="mb-4 justify-content-between align-items-sm-start">
-                                                <div class="col-md-4 col-lg-6 col-xl-6">
-                                                    <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == 'All' ? 'active' : ''}">
+                                            </div>
+                                            <form action="Order">
+                                                <div class="mb-4 justify-content-between align-items-sm-start">
+                                                    <div class="col-md-4 col-lg-6 col-xl-6">
+                                                        <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == 'All' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}">
@@ -139,7 +139,7 @@
                                                                             <h6 class="mb-0 text-sm-center"> x </h6>
                                                                         </div>
                                                                         <div class="">
-                                                                            <h6 class="mb-0">${od.priceFormat}</h6>
+                                                                            <h6 class="mb-0">${util.FormatPrice(od.price)}</h6>
                                                                         </div>
                                                                     </div>
 

@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout"  class="container py-3 h-100 " method="POST">
+        <form action="Checkout"  class="container py-3 h-100 " method="get">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -248,13 +248,13 @@
                                                         <h6 class="mb-0 text-muted ">Color: ${male_bird_choose.color}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                         <h6 class="mb-0 text-muted ">Age: ${male_bird_choose.age}</h6>
+                                                        <h6 class="mb-0 text-muted ">Age: ${male_bird_choose.age}</h6>
                                                     </div>
-                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">${male_bird_choose.gender}</h6>
                                                     </div>
-                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.price)}</h6>
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.priceDiscount)}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,13 +274,13 @@
                                                         <h6 class="mb-0 text-muted ">Color: ${female_bird_choose.color}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                         <h6 class="mb-0 text-muted ">Age: ${female_bird_choose.age}</h6>
+                                                        <h6 class="mb-0 text-muted ">Age: ${female_bird_choose.age}</h6>
                                                     </div>
-                                                     <div class="d-flex justify-content-between align-items-center mb-0">
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">${female_bird_choose.gender}</h6>
                                                     </div>
-                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(female_bird_choose.price)}</h6>
+                                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                                        <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(female_bird_choose.priceDiscount)}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,10 +331,9 @@
                                         <input type="hidden" name="txtTotalOrder" value="${requestScope.SERVICE_PRICE}" />
                                         <input type="hidden" name="total_order_final" value="${total_order}" />
                                         <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
-                                        <input name="btAction" value="Order" type="submit" 
-                                               ${not empty male_bird_choose && not empty female_bird_choose ? '' : 'disabled'}
+                                        <input name="btAction" value="Booking" type="submit" ${not empty male_bird_choose && not empty female_bird_choose ? '' : 'disabled'}
                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
-                                               style="background-color:rgb(13,103,128) ;" />
+                                               style="background-color:rgb(13,103,128) ;">
                                     </div>
                                 </div>
                             </div>

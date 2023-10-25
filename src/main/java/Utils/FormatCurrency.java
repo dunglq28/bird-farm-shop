@@ -27,4 +27,9 @@ public class FormatCurrency {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         return sdf.format(date);
     }
+    
+     public static int FormatDiscount(float discount) {
+        int value = (int) (discount * 100);
+        return value;
+    }
 }

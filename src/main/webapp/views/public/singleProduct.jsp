@@ -54,11 +54,13 @@
                                         </span>
                                     </div>
                                     <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i> ${product_current.quantity_Available} orders</span>
-                                    <span class="text-success ms-2">Available</span>
+                                    <span class="text-success ms-2"${product_current.status == 'Sold out' ? 'style="color: red!important"' : ''}>
+                                        ${product_current.status}
+                                    </span>
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.price)}</span>
+                                    <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.priceDiscount)}</span>
                                     <span class="text-muted">/for a bird</span>
                                 </div>
 
@@ -126,26 +128,29 @@
 
                                 </div>
                                 <!-- Buying -->
-                                <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
-                                <form action="product" class="Addtocart" method="post">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <input type="submit" value="Add to cart"> 
-                                    <input name="btAction" type="hidden" value="Addtocart"> 
-                                    <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
-                                    <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
-                                    <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
-                                    <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
-                                    <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
-                                    <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
-                                    <input type="hidden" name="price" value="${product_current.price}"/>
-                                    <input type="hidden" name="image" value="${product_current.image}"/>
-                                    <input type="hidden" name="txtAge" value="${product_current.age}"/>
-                                    <input type="hidden" name="color" value="${product_current.color}"/>
-                                    <input type="hidden" name="txtGender" value="${product_current.gender}"/>
-                                    <input type="hidden" id="param_quantity" name="quantity_Buy" value="" />
-                                </form>
-                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
-                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                                <!--<a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>-->
+                                <c:if test="${product_current.quantity_Available != 0}">
+                                    <form action="product" class="Addtocart" method="post">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        <input type="submit" value="Add to cart"> 
+                                        <input name="btAction" type="hidden" value="Addtocart"> 
+                                        <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
+                                        <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
+                                        <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
+                                        <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
+                                        <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
+                                        <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
+                                        <input type="hidden" name="price" value="${product_current.price}"/>
+                                        <input type="hidden" name="txtDiscount" value="${product_current.discount}"/>
+                                        <input type="hidden" name="image" value="${product_current.image}"/>
+                                        <input type="hidden" name="txtAge" value="${product_current.age}"/>
+                                        <input type="hidden" name="color" value="${product_current.color}"/>
+                                        <input type="hidden" name="txtGender" value="${product_current.gender}"/>
+                                        <input type="hidden" id="param_quantity" name="quantity_Buy" value="" />
+                                    </form>
+                                </c:if>
+                                <!--                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
+                                                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>-->
                             </div>
                         </main>
                     </div>
