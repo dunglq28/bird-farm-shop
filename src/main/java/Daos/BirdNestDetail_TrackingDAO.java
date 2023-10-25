@@ -29,15 +29,14 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into BirdNestDetail_Tracking ( "
-                        + "Bird_Nest_ID, LastUpdateDate, NOTE, Status "
+                        + "Bird_Nest_ID, LastUpdateDate, NOTE "
                         + ") values ( "
-                        + "?, ?, ?, ? "
+                        + "?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newBirdNest.getBird_Nest_ID());;
                 stm.setDate(2, newBirdNest.getLastUpdateDate());
                 stm.setString(3, newBirdNest.getNote());
-                stm.setString(4, newBirdNest.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -70,7 +69,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select Bird_Nest_ID, Status, NOTE, LastUpdateDate "
+                String sql = "Select Bird_Nest_ID, NOTE, LastUpdateDate "
                         + "from BirdNestDetail_Tracking "
                         + "where Bird_Nest_ID = ? "
                         + "Order by LastUpdateDate desc "
@@ -89,8 +88,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                     }
                     BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"),
                             rs.getString("NOTE"),
-                            rs.getDate("LastUpdateDate"),
-                            rs.getString("Status"));
+                            rs.getDate("LastUpdateDate"));
                     if (this.bndetalList == null) {
                         this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();
                     }
