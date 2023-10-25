@@ -44,8 +44,12 @@
                     <div class="dropdown-content-wrapper">
                         <div class="dropdown-content">
                             <a href="">My account</a>
-                            <a href="Order">Order management</a>
-                            <a href="Service_Tracking">Tracking</a>
+                            <c:if test="${sessionScope.ACCOUNT.roleName == 'Customer'}">
+                                <a href="Order">Order management</a>
+                            </c:if>
+                            <c:if test="${sessionScope.ACCOUNT.roleName == 'Staff'}">
+                                <a href="viewNewOrder">Order management</a>
+                            </c:if>
                             <a href="guest?btAction=logout">Logout</a>
                         </div>
                     </div>

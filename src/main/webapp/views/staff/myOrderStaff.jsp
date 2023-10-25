@@ -16,6 +16,8 @@
             referrerpolicy="no-referrer"
             />
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+
         <title>My Order</title>
         <style>
             .rounded-td {
@@ -36,28 +38,33 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
+        <jsp:include page="/components/header.jsp"></jsp:include>
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
+
+            <div>
+
+            </div>
 
 
             <div class="main--content">
-                <div class="header-wrapper">
-                    <div class="header--title">
-                        <span>Primary</span>
-                        <h2>Order Management</h2>
-                    </div>
-                    <div class="user--info">
-                        <div class="search--box">
-                            <i class="fa-solid fa-search"></i>
-                            <input type="text" placeholder="search" />
-                        </div>
-                    ${sessionScope.ACCOUNT.fullName}
-                </div>
-            </div>
+                <!--                <div class="header-wrapper">
+                                    <div class="header--title">
+                                        <span>Primary</span>
+                                        <h2>Order Management</h2>
+                                    </div>
+                                    <div class="user--info">
+                                        <div class="search--box">
+                                            <i class="fa-solid fa-search"></i>
+                                            <input type="text" placeholder="search" />
+                                        </div>
+            ${sessionScope.ACCOUNT.fullName}
+        </div>
+    </div>-->
             <div class="tabular--wrapper">
-                <c:if test="${requestScope.SERVICE_ID == 1}">
+                <c:if test="${session.SERVICE_ID == 1}">
                     <h3 class="main--title">My Order</h3>
                 </c:if>
-                <c:if test="${requestScope.SERVICE_ID != 1}">
+                <c:if test="${session.SERVICE_ID != 1}">
                     <h3 class="main--title">My Booking</h3>
                 </c:if>
 
@@ -97,6 +104,7 @@
                                                     <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
                                                 </select>
                                                 <input type="hidden" name="txtOrderID" value="${dto.orderID}">
+                                                <input type="hidden" name="txtServiceID" value="${session.SERVICE_ID}" >
                                             </form>
                                         </td>
 
@@ -120,10 +128,12 @@
                     </table>
                 </div>
             </div>
-            <script>
-                function submit() {
-                    document.querySelector(".myForm").onsubmit();
-                }
-            </script>
+        </div>
+
+        <script>
+            function submit() {
+                document.querySelector(".myForm").onsubmit();
+            }
+        </script>
     </body>
 </html>

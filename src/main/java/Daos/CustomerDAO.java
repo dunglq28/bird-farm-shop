@@ -26,11 +26,17 @@ public class CustomerDAO implements Serializable {
                 while (rs.next()) {
                     String CustomerIDMax = rs.getString("CustomerID");
                     if (CustomerIDMax == null) {
-                        return "C1";
+                        return "C01";
                     } else {
                         int num = Integer.parseInt(CustomerIDMax.substring(1)) + 1;
-                        String newCustomerID = "C";
-                        return newCustomerID.concat(String.valueOf(num));
+                        String newOrderID;
+                        if (num <= 9) {
+                            newOrderID = "C0";
+                        } else {
+                            newOrderID = "C";
+                        }
+
+                        return newOrderID.concat(String.valueOf(num));
                     }
                 }
             }
