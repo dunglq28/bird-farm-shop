@@ -17,8 +17,6 @@ public class CartObj {
         return items.size();
     }
 
-
-
     public void addItemToCart(String sku, Products product) { // (String sku, int quantity)
         if (sku == null) {
             return;
@@ -29,15 +27,21 @@ public class CartObj {
         if (this.items == null) {
             this.items = new HashMap<>();
         }
-         if (this.items.containsKey(sku)) {
-            int quantityBuy = this.items.get(sku).getQuantityBuy() + product.getQuantityBuy();
+        int quantityBuy;
+        if (this.items.containsKey(sku)) {
+            if (this.items.get(sku).getQuantityBuy() + product.getQuantityBuy() > this.items.get(sku).getQuantityAvailable()) {
+                quantityBuy = this.items.get(sku).getQuantityAvailable();
+            } else {
+                quantityBuy = this.items.get(sku).getQuantityBuy() + product.getQuantityBuy();
+
+            }
             product.setQuantityBuy(quantityBuy);
         }
         // 3. Update items
         this.items.put(sku, product);
     }
-    
-    public void updateQuantityBuy(String sku, int quantityBuy) { 
+
+    public void updateQuantityBuy(String sku, int quantityBuy) {
         if (sku == null) {
             return;
         }
@@ -68,15 +72,15 @@ public class CartObj {
             }
         }
     }
-    
+
     public void removeAllBird() { // remove All -> ass: bỏ based on quantity (String sku, int quantity)
         // 1. Check existed items - ngăn chứa đồ
         if (this.items == null) {
             return;
         }
-        
+
         this.items.clear();
-        
+
     }
 
 }

@@ -20,6 +20,7 @@ public class ProductDTO {
     private int quantity_AreMating;
     private int quantity_Sold;
     private float price;
+    private String priceDiscount;
     private String characteristics;
     private String detail;
     private Date date_created;
@@ -33,8 +34,6 @@ public class ProductDTO {
         this.categoryID = categoryID;
         this.category_Name = category_Name;
     }
-    
-    
 
     public ProductDTO(String productID, String product_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.productID = productID;
@@ -66,8 +65,6 @@ public class ProductDTO {
         this.price = price;
         this.discount = discount;
     }
-    
-
 
     public ProductDTO(String productID, String product_Name, String category_Name, int product_TypeID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, float discount, String status) {
         this.productID = productID;
@@ -84,8 +81,6 @@ public class ProductDTO {
         this.discount = discount;
         this.status = status;
     }
-    
-    
 
     public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.productID = productID;
@@ -108,8 +103,6 @@ public class ProductDTO {
         this.discount = discount;
         this.status = status;
     }
-    
-    
 
     public ProductDTO(String product_Name, String category_Name, String age, String color, String gender) {
         this.product_Name = product_Name;
@@ -222,7 +215,6 @@ public class ProductDTO {
     public void setQuantity_AreMating(int quantity_AreMating) {
         this.quantity_AreMating = quantity_AreMating;
     }
-    
 
     public int getQuantity_Sold() {
         return quantity_Sold;
@@ -280,6 +272,12 @@ public class ProductDTO {
         this.status = status;
     }
 
-    
+    public float getPriceDiscount() {
+        return this.price - this.price * this.discount;
+    }
+
+    public void setPriceDiscount(String priceDiscount) {
+        this.priceDiscount = priceDiscount;
+    }
 
 }

@@ -30,6 +30,7 @@ public class AddBirdServlet extends HttpServlet {
         String color = request.getParameter("color");
         String gender = request.getParameter("txtGender");
         float price = Float.parseFloat(request.getParameter("price"));
+        float discount = Float.parseFloat(request.getParameter("txtDiscount"));
         int quantityBuy = Integer.parseInt(request.getParameter("quantity_Buy"));
         int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
         int quantitySold = Integer.parseInt(request.getParameter("quantity_Sold"));
@@ -44,9 +45,9 @@ public class AddBirdServlet extends HttpServlet {
             }
             Products prodcut = null;
             if (age == null && color == null && gender == null) {
-                prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
+                prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityBuy, quantitySold, price, discount);
             } else {
-                prodcut = new Products(birdID ,name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, 0);
+                prodcut = new Products(birdID ,name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, discount);
             }
 
             cart.addItemToCart(birdID, prodcut);
