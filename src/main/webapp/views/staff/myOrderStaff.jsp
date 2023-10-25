@@ -38,9 +38,13 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
+<<<<<<< HEAD
         <%--<jsp:include page="/components/header.jsp"></jsp:include>--%>
 
 
+=======
+        <jsp:include page="/components/header.jsp"></jsp:include>
+>>>>>>> 6ffef84dac49557b20ac76567381b3be78e82301
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div>
@@ -49,7 +53,11 @@
 
 
             <div class="main--content">
+<<<<<<< HEAD
                                 <div class="header-wrapper">
+=======
+                <!--                <div class="header-wrapper">
+>>>>>>> 6ffef84dac49557b20ac76567381b3be78e82301
                                     <div class="header--title">
                                         <span>Primary</span>
                                         <h2>Order Management</h2>
@@ -61,8 +69,13 @@
                                         </div>
             ${sessionScope.ACCOUNT.fullName}
         </div>
+<<<<<<< HEAD
     </div>
             <div class="tabular--wrapper" >
+=======
+    </div>-->
+            <div class="tabular--wrapper">
+>>>>>>> 6ffef84dac49557b20ac76567381b3be78e82301
                 <c:if test="${sessionScope.SERVICE_ID == 1}">
                     <h3 class="main--title">My Order</h3>
                     <form action="Order">
