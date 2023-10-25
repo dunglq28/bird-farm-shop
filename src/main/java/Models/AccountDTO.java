@@ -25,21 +25,29 @@ public class AccountDTO {
         this.roleName = roleName;
         this.status = status;
     }
- 
 
     public AccountDTO(String accountID, String fullName, String roleName) {
         this.accountID = accountID;
         this.fullName = fullName;
         this.roleName = roleName;
     }
-    
-     public AccountDTO(String accountID, String fullName, String roleName, String passWord) {
+
+    public AccountDTO(String accountID, String fullName, String roleName, String passWord) {
         this.accountID = accountID;
         this.fullName = fullName;
         this.roleName = roleName;
         this.password = passWord;
     }
 
+    public AccountDTO(String accountID, String fullName, String email, Date date_created, String createBy, String roleName, boolean status) {
+        this.accountID = accountID;
+        this.fullName = fullName;
+        this.email = email;
+        this.date_created = date_created;
+        this.createBy = createBy;
+        this.roleName = roleName;
+        this.status = status;
+    }
 
     public int getRoleID() {
         return roleID;
@@ -48,7 +56,6 @@ public class AccountDTO {
     public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
-    
 
     public String getAccountID() {
         return accountID;
@@ -113,7 +120,5 @@ public class AccountDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    
 
 }

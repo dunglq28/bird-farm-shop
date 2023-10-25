@@ -1,12 +1,15 @@
-
-package Controllers.Auth;
+package Controllers.Admin;
 
 import Daos.AccountDAO;
-import Models.RegisterError;
-import Utils.EncryptPassword;
+import Daos.AdminDAO;
+import Models.AccountDTO;
+import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,50 +17,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AuthResetPassServlet", urlPatterns = {"/AuthResetPassServlet"})
-public class AuthResetPassServlet extends HttpServlet {
+@WebServlet(name = "viewAllAccount", urlPatterns = {"/viewAllAccount"})
+public class viewAllAccount extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
-
-        String password = request.getParameter("txtPassword");
-        String confirm = request.getParameter("txtConfirm");
-        String email = request.getParameter("txtContact");
-        RegisterError error = new RegisterError();
-        boolean foundErr = false;
-
+        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         try {
-            if (password.trim().isEmpty()) {
-                foundErr = true;
-                error.setEmptyPassword("Please enter your Password!");
-            } else if (password.trim().length() < 6 || password.trim().length() > 20) {
-                foundErr = true;
-                error.setWrongPassword("Password must be 6 to 20 characters");
+            AdminDAO dao = new AdminDAO();
+            List<AccountDTO> result = dao.ViewAllAccount();
+            if (result != null) {
+                request.setAttribute("ACCOUNT_LIST", result);
+                url = MyAppConstants.AdminFeatures.ALL_ACCOUNT_PAGE;
             }
-
-            if (!confirm.trim().equals(password.trim())) {
-                foundErr = true;
-                error.setConfirmError("Password does not match Confirm");
-            }
-
-            if (foundErr) {
-                request.setAttribute("CREATE_ERROR", error);
-                url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
-            } else {
-                AccountDAO dao = new AccountDAO();
-                EncryptPassword encrypt = new EncryptPassword();
-                String pass = encrypt.toSHA1(password);
-                boolean result = dao.updatePasswordByEmail(email, pass);
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
@@ -76,7 +49,13 @@ public class AuthResetPassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(viewAllAccount.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewAllAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -90,7 +69,13 @@ public class AuthResetPassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(viewAllAccount.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewAllAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

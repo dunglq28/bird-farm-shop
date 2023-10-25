@@ -3,7 +3,6 @@ package Utils;
 public class MyAppConstants {
 
     public class PublicFeatures {
-
         public static final String HOME_CONTROLLER = "home";
         public static final String HOME_PAGE = "/views/public/home.jsp";
         public static final String ERROR_PAGE = "/views/errors/error.html";
@@ -36,6 +35,7 @@ public class MyAppConstants {
 
         public static final String LOGIN_PAGE = "/views/auth/login.jsp";
         public static final String REGISTER_PAGE = "/views/auth/register.jsp";
+        public static final String CHANGE_PASS_PAGE = "/views/customer/changePass.jsp";
         public static final String FORGET_PASS_PAGE = "/views/auth/forgetpass.jsp";
         public static final String RESET_PASS_PAGE = "/views/auth/resetPass.jsp";
         public static final String FORGET_PASS_CONTROLLER = "forgetPass";
@@ -65,6 +65,16 @@ public class MyAppConstants {
         public static final String VIEW_ALL_ORDER_CONTROLLER = "viewNewOrder";
         public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
         public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
+
+    }
+    
+    public class AdminFeatures {
+
+        public static final String ALL_ACCOUNT_PAGE = "/views/staff/newOrderStaff.jsp";
+//        public static final String STAFF_ORDER_PAGE = "/views/staff/myOrderStaff.jsp";
+        public static final String VIEW_ALL_ACCOUNT_CONTROLLER = "viewAllAccount";
+//        public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
+//        public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
 
     }
 

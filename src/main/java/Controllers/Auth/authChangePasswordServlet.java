@@ -1,66 +1,63 @@
-
 package Controllers.Auth;
 
 import Daos.AccountDAO;
+import Models.AccountDTO;
 import Models.RegisterError;
 import Utils.EncryptPassword;
 import Utils.MyAppConstants;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "AuthResetPassServlet", urlPatterns = {"/AuthResetPassServlet"})
-public class AuthResetPassServlet extends HttpServlet {
+@WebServlet(name = "changePassword", urlPatterns = {"/changePassword"})
+public class authChangePasswordServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-
+        String password = request.getParameter("password");
+        String confirm_password = request.getParameter("confirm_password");
         String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
-
-        String password = request.getParameter("txtPassword");
-        String confirm = request.getParameter("txtConfirm");
-        String email = request.getParameter("txtContact");
-        RegisterError error = new RegisterError();
-        boolean foundErr = false;
-
         try {
+            HttpSession session = request.getSession();
+            AccountDTO dto = (AccountDTO) session.getAttribute("ACCOUNT");
+            AccountDAO dao = new AccountDAO();
+            EncryptPassword encrypt = new EncryptPassword();
+            RegisterError error = new RegisterError();
+            boolean foundErr = false;
             if (password.trim().isEmpty()) {
                 foundErr = true;
                 error.setEmptyPassword("Please enter your Password!");
-            } else if (password.trim().length() < 6 || password.trim().length() > 20) {
+            } else if (password.trim().length() < 6
+                    || password.trim().length() > 20) {
                 foundErr = true;
                 error.setWrongPassword("Password must be 6 to 20 characters");
             }
-
-            if (!confirm.trim().equals(password.trim())) {
+            if (!confirm_password.equals(password)) {
                 foundErr = true;
-                error.setConfirmError("Password does not match Confirm");
+                error.setConfirmError("Confrim password does not match!");
             }
-
             if (foundErr) {
-                request.setAttribute("CREATE_ERROR", error);
-                url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
+                request.setAttribute("CHANGE_ERROR", error);
+                url = MyAppConstants.AuthFeatures.CHANGE_PASS_PAGE;
             } else {
-                AccountDAO dao = new AccountDAO();
-                EncryptPassword encrypt = new EncryptPassword();
                 String pass = encrypt.toSHA1(password);
-                boolean result = dao.updatePasswordByEmail(email, pass);
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                boolean result = dao.updatePasswordByAccountID(dto.getAccountID(), pass);
+                if(result){
+                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                }
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
@@ -76,7 +73,13 @@ public class AuthResetPassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(authChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(authChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -90,7 +93,13 @@ public class AuthResetPassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(authChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(authChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

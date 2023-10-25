@@ -228,5 +228,36 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
+    
+     public boolean updatePasswordByAccountID(String id, String password)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Account "
+                        + "Set Password = ? "
+                        + "Where AccountID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setString(2, id);
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    return true;
+                }
+            } // end of connection has opend
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 
 }
