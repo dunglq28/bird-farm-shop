@@ -15,15 +15,17 @@ public class LoginError {
     private String emptyPassword;
     private String wrongEmail;
     private String wrongPassword;
+    private String disableAccount;
 
     public LoginError() {
     }
 
-    public LoginError(String emptyEmail, String emptyPassword, String wrongEmail, String wrongPassword) {
+    public LoginError(String emptyEmail, String emptyPassword, String wrongEmail, String wrongPassword, String disableAccount) {
         this.emptyEmail = emptyEmail;
         this.emptyPassword = emptyPassword;
         this.wrongEmail = wrongEmail;
         this.wrongPassword = wrongPassword;
+        this.disableAccount = disableAccount;
     }
 
     public String getEmptyEmail() {
@@ -56,6 +58,14 @@ public class LoginError {
 
     public void setWrongPassword(String wrongPassword) {
         this.wrongPassword = wrongPassword;
+    }
+
+    public String getDisableAccount() {
+        return disableAccount;
+    }
+
+    public void setDisableAccount(String disableAccount) {
+        this.disableAccount = disableAccount;
     }
 
 }
