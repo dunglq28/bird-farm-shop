@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AccountDAO implements Serializable{
+public class AccountDAO implements Serializable {
 
     public AccountDTO checkExistEmail(String email) throws ClassNotFoundException, SQLException {
         Connection con = null;
@@ -99,11 +99,17 @@ public class AccountDAO implements Serializable{
                 while (rs.next()) {
                     String AccountIDMax = rs.getString("AccountID");
                     if (AccountIDMax == null) {
-                        return "A1";
+                        return "A01";
                     } else {
                         int num = Integer.parseInt(AccountIDMax.substring(1)) + 1;
-                        String newAccountID = "A";
-                        return newAccountID.concat(String.valueOf(num));
+                        String newOrderID;
+                        if (num <= 9) {
+                            newOrderID = "A0";
+                        } else {
+                            newOrderID = "A";
+                        }
+
+                        return newOrderID.concat(String.valueOf(num));
                     }
                 }
             }

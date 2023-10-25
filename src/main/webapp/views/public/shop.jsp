@@ -265,9 +265,6 @@
                                 </c:forEach>
                             </c:if>
 
-
-
-
                             <div class="col-lg-12 text-center">
                                 <div class="pagination__option">
                                     <c:set var="productType" value="${sessionScope.PRODUCT_TYPE}"></c:set>

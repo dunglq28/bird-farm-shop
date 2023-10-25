@@ -33,10 +33,16 @@ public class OrderDAO implements Serializable {
                 while (rs.next()) {
                     String OrderIDMax = rs.getString("OrderID");
                     if (OrderIDMax == null) {
-                        return "O1";
+                        return "O01";
                     } else {
                         int num = Integer.parseInt(OrderIDMax.substring(1)) + 1;
-                        String newOrderID = "O";
+                        String newOrderID;
+                        if (num <= 9) {
+                            newOrderID = "O0";
+                        } else {
+                            newOrderID = "O";
+                        }
+
                         return newOrderID.concat(String.valueOf(num));
                     }
                 }
@@ -204,7 +210,7 @@ public class OrderDAO implements Serializable {
         }
         return false;
     }
-    
+
     public boolean UpdateStatusOrder(String OrderID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -232,6 +238,5 @@ public class OrderDAO implements Serializable {
         }
         return false;
     }
-    
-    
+
 }
