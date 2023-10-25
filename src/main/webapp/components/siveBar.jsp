@@ -1,12 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<<<<<<< HEAD
-<div class="sidebar pt-5">
-<!--    <div class="logo">Bird Farm Shop</div>-->
-=======
 <div class="sidebar">
-    <div class="logo"></div>
->>>>>>> 2d01fb401664a71eef252a2594520272b8fd0b40
+    <div class="logo">Bird Farm Shop</div>    
     <c:set var="admin" value="Admin" />
     <c:set var="staff" value="Staff" />
     <c:set var="manager" value="Manager"/>

@@ -22,68 +22,40 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-            <header class="" style="opacity: unset !important">
-                <a href="home" class="brand">Bird Farm Shop</a>
-                <div class="menu-btn"></div>
-                <div class="search-container">
-                    <form action="search-product" class="search-bar">
-                        <input type="text" placeholder="Search anything" name="lastSearch" value="${param.lastSearch}">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ddd7d7;"></i></button>
-                </form>
-            </div>
-            <div class="navigation">
-                <div class="navigation-items">
-                    <div class="dropdown">
-                        <button class="dropbtn" style="margin-left: 15px;">
-                            <i class="fa-solid fa-shop fa-lg"></i>
-                            Shop
-                            <i class="fa-solid fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content-wrapper">
-                            <div class="dropdown-content">
-                                <a href="product_list?productType=bird">Buying birds</a>
-                                <a href="Bird-Nest-Services">Ordering bird nests</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <a href="#"><i class="fa-solid fa-phone"></i>Contact</a>
-                        <jsp:useBean id="cart" class="Cart.CartObj"></jsp:useBean>
-                            <a href="cart" class="list-cart-icon">
-                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                                <span class="cart-number">${empty sessionScope.CART_QUANTITY_PRODUCT ? 0 : sessionScope.CART_QUANTITY_PRODUCT}</span>
-                            Cart
-                        </a>
-                        <c:if test="${empty sessionScope.ACCOUNT}">
-                            <a href="guest?btAction=loginPage">Login </a>
-                            <div class="separator"></div>
-                            <a href="guest?btAction=registerPage">Register </a> 
-                        </c:if>
-                    </div>
-                    <c:if test="${not empty sessionScope.ACCOUNT}">
-                        <div class="dropdown">
-                            <button class="dropbtn"><i class="fa-regular fa-circle-user "></i>${sessionScope.ACCOUNT.fullName}</button>
-                            <div class="dropdown-content-wrapper">
-                                <div class="dropdown-content">
-                                    <a href="">My account</a>
-                                    <a href="Order">Order management</a>
-                                    <a href="Service_Tracking">Tracking</a>
-                                    <a href="guest?btAction=logout">Logout</a>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
-            </div>
-        </header>
-        <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
-        <script src="./assets/js/headerControl.js"></script>
+
+
+
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
-                
-            <div class="tabular--wrapper" style="margin-top: 3.5%">
+                <div class="header-wrapper">
+                    <div class="header--title">
+                        <span>Primary</span>
+                        <h2>Order Management</h2>
+                    </div>
+                    <div class="user--info">
+                        <div class="search--box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" placeholder="search" />
+                        </div>
+                    ${sessionScope.ACCOUNT.fullName}
+                </div>
+            </div>
+            <div class="tabular--wrapper" >
                 <h3 class="main--title">New Order</h3>
+                <form action="Order">
+                    <div class="mb-4 justify-content-between align-items-sm-start">
+                        <div class="col-md-4 col-lg-6 col-xl-6">
+                            <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == 'All' ? 'active' : ''}" style="background: rgb(13,103,128);">
+                            <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}" style="background: rgb(13,103,128);">
+                            <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}" style="background: rgb(13,103,128);">
+                            <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}" style="background: rgb(13,103,128);">
+                            <input type="submit" name="Status" value="Wait fot comfirmation" class="btn btn-secondary ${STATUS_ORDER == 'Wait fot comfirmation' ? 'active' : ''}" style="background: rgb(13,103,128);">
+
+                            <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
+                        </div>
+                    </div>
+                </form>
                 <div class="table-container">
                     <table>
                         <thead>

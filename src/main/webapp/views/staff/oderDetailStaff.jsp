@@ -139,7 +139,7 @@
                                                     <h2 class="fw-bold mb-0 text-black" style=" color: rgb(13, 103, 128);">Order details</h1>
                                                         <h2 class="mb-0 text-muted">Order ID: O01</h6>
 
-                                                            </div>
+                                                              </div>
                                                             <hr class="mt-0 mb-4">
                                                             <div class="row pt-1">
                                                                 <div class="col-6 mb-3">
