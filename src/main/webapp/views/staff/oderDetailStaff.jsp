@@ -35,7 +35,7 @@
                         <div class="card-body p-0">
                             <div class="row g-0">
                                 <div class="col-lg-12">
-                                    <div class="p-5">
+                                    <div class="p-5" style="background: rgb(235 246 249);">
 
                                         <div class="mb-4 d-flex justify-content-between align-items-center">
                                             <h6 class="fw-bold col-md-6  text-muted">Product</h6>
