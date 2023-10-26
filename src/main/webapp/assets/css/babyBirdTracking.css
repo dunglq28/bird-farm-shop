@@ -222,6 +222,33 @@ td.long-content {
     white-space: normal;
 }
 
+.pay {
+    margin-left: 80%;
+    width: 16%;
+    margin-bottom: 10px;
+    display: right;
+    border: none;
+    background-color: #0D6780;
+    height: 30px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    color: rgb(255, 255, 255);
+    ;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.pay:hover {
+    background-color: rgb(70, 136, 155);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    color: rgb(255, 255, 255);
+    ;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 992px) {
     .icon-content {
         width: 50%;
