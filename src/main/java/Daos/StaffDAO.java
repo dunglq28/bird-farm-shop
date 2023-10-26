@@ -61,66 +61,8 @@ public class StaffDAO {
         return result;
     }
 
-    private List<OrderDTO> orderList;
+  
 
-    public List<OrderDTO> getOrderList() {
-        return orderList;
-    }
+    
 
-    public List<OrderDTO> MyOrders(String StaffID, int serviceID)
-            throws SQLException, ClassNotFoundException {
-
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        OrderDTO result = null;
-        try {
-            con = DBHelper.makeConnection();
-            if (con != null) {
-                String sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                        + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
-                        + "from Orders ord "
-                        + "inner join Service ser on ord.ServiceID = ser.ServiceID "
-                        + "inner join Account acc on acc.AccountID = ord.AccountID "
-                        + "where ord.StaffID = ? and ord.ServiceID = ? ";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, StaffID);
-                stm.setInt(2, serviceID);
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    String orderID = rs.getString("OrderID");
-                    String serviceName = rs.getString("ServiceName");
-                    String fullname = rs.getString("FullName");
-                    Date orderDate = rs.getDate("OrderDate");
-                    String status = rs.getString("Status");
-                    String Form_Receipt = rs.getString("Form_Receipt");
-                    float Total_Order = rs.getFloat("Total_Order");
-                    float discount = rs.getFloat("Discount");
-                    float delivery_charges = rs.getFloat("Delivery_charges");
-                    String Pay_with = rs.getString("Pay_with");
-                    result = new OrderDTO(orderID, serviceName, fullname, Form_Receipt,
-                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges);
-                    if (this.orderList == null) {
-                        this.orderList = new ArrayList<OrderDTO>();
-                    }
-                    this.orderList.add(result);
-                }
-                return this.orderList;
-            }
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return null;
-    }
-
-   
 }

@@ -22,6 +22,8 @@ public class Products {
     private String color;
     private String gender;
     private String image;
+    private int quantity_MaleBird;
+    private int quantity_FemaleBird;
     private int quantityAvailable;
     private int quantityBuy;
     private int quantitySold;
@@ -155,6 +157,24 @@ public class Products {
         this.image = image;
     }
 
+    public int getQuantity_MaleBird() {
+        return quantity_MaleBird;
+    }
+
+    public void setQuantity_MaleBird(int quantity_MaleBird) {
+        this.quantity_MaleBird = quantity_MaleBird;
+    }
+
+    public int getQuantity_FemaleBird() {
+        return quantity_FemaleBird;
+    }
+
+    public void setQuantity_FemaleBird(int quantity_FemaleBird) {
+        this.quantity_FemaleBird = quantity_FemaleBird;
+    }
+    
+    
+
     public int getQuantityAvailable() {
         return quantityAvailable;
     }
@@ -188,7 +208,7 @@ public class Products {
     }
 
     public String getPriceDiscount() {
-        return String.valueOf(this.price - this.price*this.discount);
+        return String.valueOf(this.price - this.price * this.discount);
     }
 
     public void setPriceDiscount(String priceDiscount) {

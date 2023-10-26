@@ -1,5 +1,6 @@
 package Controllers.Staff;
 
+import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
@@ -26,15 +27,20 @@ public class viewMyOrder extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String serviceID = request.getParameter("txtServiceID");
+        String status = request.getParameter("Status");
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             if (serviceID == null) {
                 serviceID = "1";
             } 
-            StaffDAO dao = new StaffDAO();
-            StaffDTO staDTO = dao.getStaffByAccountID(account.getAccountID());
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID));
+            if (status == null) {
+                status = "All";
+            }
+            OrderDAO dao = new OrderDAO();
+            StaffDAO staffdao = new StaffDAO();
+            StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status);
             request.setAttribute("MY_ORDERS_STAFF", result);
             session.setAttribute("SERVICE_ID", serviceID);
             url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
