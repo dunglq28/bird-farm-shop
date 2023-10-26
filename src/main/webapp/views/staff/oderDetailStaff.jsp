@@ -25,7 +25,8 @@
 
 
 
-        <jsp:include page="/components/header.jsp"></jsp:include>
+        <%--<jsp:include page="/components/header.jsp"></jsp:include>--%>
+        <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
         <div class="container py-5 h-100 ">
             <div class="row d-flex justify-content-center align-items-center h-100">
