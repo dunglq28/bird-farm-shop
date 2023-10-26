@@ -135,81 +135,20 @@
                                             <h4 class="fw-bold mb-0 text-black">Private and policy</h4>
                                         </div>
                                         <div class="">
-
-                                            <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">1. Get bird eggs
-                                            </h6>
-                                            </hr>
-                                            <h7>- Only take the eggs; no father or mother birds are taken.
-                                            </h7>
-                                            <br>
-                                            <h7>- Payment must be made in advance for the service at 4 million Vietnamese
-                                                dong
-                                                per month.</h7>
-                                            <br>
-                                            <h7>- The final total amount will be calculated by multiplying the number of
-                                                months using the hybrid bird service by 4 million Vietnamese dong per month.
-                                            </h7>
-                                            <br>
-                                            <h7>- Even if the customer cancels the service within the month, the store will
-                                                still charge for the entire month (4 million Vietnamese dong).</h7></br>
-
-                                            <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">2. Get baby birds
-                                            </h6>
-                                            </hr>
-                                            <h7>- Inherits the terms of 1</h7>
-                                            <br>
-                                            <h7>- Egg incubation fees:</h7>
                                             <ul>
                                                 <li>
-                                                    For 0 - 3 eggs: The price for incubating each egg is 2 million
-                                                    Vietnamese
-                                                    dong per month.
+                                                    The price of a baby male bird is equal to half the price of the male
+                                                    bird.
                                                 </li>
-                                                <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
-                                                    Vietnamese
-                                                    dong per month.</li>
-                                                <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.</li>
+                                                <li>The price of a baby female bird is equal to half the price of the female
+                                                    bird.</li>
+                                                <li>Prepayment is equal to the price of one baby bird plus the
+                                                    shipping fee. </li>
+                                                <li>Total cost is equal to the price of one baby bird multiplied by the
+                                                    number of baby male/female birds in the nest plus the shipping fee minus the
+                                                    prepayment.</li>
                                             </ul>
-                                            <h7>- The total amount will be the egg incubation fee plus the hybrid bird
-                                                service
-                                                fee multiplied by the number of months using the service.</h7>
-                                            <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">3. Get bird eggs
-                                                with parent</h6>
-                                            </hr>
-                                            <h7>- Inherits the terms of 1</h7>
-                                            <br>
-                                            <h7>- Upfront payment: Includes payment for father birds, mother birds, and one
-                                                month of egg incubation (4 million Vietnamese dong).</h7>
-                                            <br>
-                                            <h7>- The total amount will be the upfront payment plus the hybrid bird service
-                                                fee multiplied by the number of months using the hybrid bird service. If the
-                                                customer cancels the service, the store will still retain the father and
-                                                mother birds.</h7>
 
-                                            <h6 class="mb-0" style="color: #0D6780; font-weight: bold;">4. Get baby birds
-                                                with parent</h6>
-                                            </hr>
-                                            <h7>Inherits the terms of 1</h7>
-                                            <br>
-                                            <h7>Upfront payment: Includes payment for father birds, mother birds, and one
-                                                month of egg incubation (4 million Vietnamese dong)</h7>
-                                            <h7>- Egg incubation fees:</h7>
-
-                                            <ul>
-                                                <li>
-                                                    For 0 - 3 eggs: The price for incubating each egg is 2 million
-                                                    Vietnamese
-                                                    dong per month.
-                                                </li>
-                                                <li>For 4 - 7 eggs: The price for incubating each egg is 3 million
-                                                    Vietnamese
-                                                    dong per month.</li>
-                                                <li>For 8 eggs and above: The price is 4 million Vietnamese dong per month.
-                                                </li>
-                                            </ul>
-                                            <h7>The total amount will be the upfront payment plus the hybrid bird service
-                                                fee multiplied by the number of months using the service, egg incubation
-                                                fee, father bird fee, and mother bird fee.</h7>
                                             <label class="container"
                                                    style="text-align:right; font-weight: bold; font-style: italic;">
                                                 <input type="checkbox" required="">
