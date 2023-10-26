@@ -251,7 +251,7 @@
                                                         <h6 class="mb-0 text-muted ">Age: ${male_bird_choose.age}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">${male_bird_choose.gender}</h6>
+                                                        <h6 class="mb-0 text-muted ">Gender: ${male_bird_choose.gender}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(male_bird_choose.priceDiscount)}</h6>
@@ -277,7 +277,7 @@
                                                         <h6 class="mb-0 text-muted ">Age: ${female_bird_choose.age}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
-                                                        <h6 class="mb-0 text-muted ">${female_bird_choose.gender}</h6>
+                                                        <h6 class="mb-0 text-muted ">Gender: ${female_bird_choose.gender}</h6>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center mb-0">
                                                         <h6 class="mb-0 text-muted ">Price: ${utilPrice.FormatPrice(female_bird_choose.priceDiscount)}</h6>
