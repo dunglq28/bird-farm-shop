@@ -56,10 +56,6 @@ public class AuthLoginServlet extends HttpServlet {
                     error.setWrongPassword("Password does not match!");
                     request.setAttribute("CREATE_ERROR", error);
                     url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
-                } else if (!account.isStatus()) {
-                    error.setDisableAccount("Your account has been disable please try another account");
-                    request.setAttribute("CREATE_ERROR", error);
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
                 } else {
                     session.setAttribute("ACCOUNT", account);
                     if (account.getRoleName().equals("Customer")) {
