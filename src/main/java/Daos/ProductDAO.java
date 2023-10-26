@@ -271,6 +271,8 @@ public class ProductDAO implements Serializable {
                             rs.getString("Color"),
                             rs.getString("Gender"),
                             rs.getString("Image"),
+                            rs.getInt("Quantity_MaleBird"),
+                            rs.getInt("Quantity_FemaleBird"),
                             rs.getInt("Quantity_Available"),
                             rs.getInt("Quantity_Sold"),
                             rs.getFloat("Price"),

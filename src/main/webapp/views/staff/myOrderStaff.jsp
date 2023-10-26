@@ -19,31 +19,11 @@
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
         <title>My Order</title>
-        <style>
-            .rounded-td {
-                border-radius: 7px;
-                border: 2px solid rgb(13, 103, 128);
-                overflow: hidden;
-            }
 
-            .rounded-select {
-                border-radius: 7px;
-                border: 2px solid rgb(13, 103, 128);
-                text-align: center;
-                padding: 0 10px 0 10px;
-                text-align: center;
-                justify-content: center;
-            }
-        </style>
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
-
-            <div>
-
-            </div>
-
 
             <div class="main--content">
                 <div class="header-wrapper">
@@ -62,23 +42,11 @@
             <div class="tabular--wrapper">
                 <c:if test="${sessionScope.SERVICE_ID == 1}">
                     <h3 class="main--title">My Order</h3>
-                    <form action="Order">
-                    <div class="mb-4 justify-content-between align-items-sm-start">
-                        <div class="col-md-4 col-lg-6 col-xl-6">
-                            <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == 'All' ? 'active' : ''}" style="background: rgb(13,103,128);">
-                            <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}" style="background: rgb(13,103,128);">
-                            <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}" style="background: rgb(13,103,128);">
-                            <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}" style="background: rgb(13,103,128);">
-                            <input type="submit" name="Status" value="Wait fot comfirmation" class="btn btn-secondary ${STATUS_ORDER == 'Wait fot comfirmation' ? 'active' : ''}" style="background: rgb(13,103,128);">
-
-                            <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
-                        </div>
-                    </div>
-                </form>
                 </c:if>
                 <c:if test="${sessionScope.SERVICE_ID != 1}">
                     <h3 class="main--title">My Booking</h3>
-                    <form action="Order">
+                </c:if>
+                <form action="viewMyOrder-staff">
                     <div class="mb-4 justify-content-between align-items-sm-start">
                         <div class="col-md-4 col-lg-6 col-xl-6">
                             <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == 'All' ? 'active' : ''}" style="background: rgb(13,103,128);">
@@ -87,11 +55,10 @@
                             <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}" style="background: rgb(13,103,128);">
                             <input type="submit" name="Status" value="Wait fot comfirmation" class="btn btn-secondary ${STATUS_ORDER == 'Wait fot comfirmation' ? 'active' : ''}" style="background: rgb(13,103,128);">
 
-                            <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
+                            <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
                         </div>
                     </div>
                 </form>
-                </c:if>
 
                 <div class="table-container">
                     <table>
@@ -129,7 +96,7 @@
                                                     <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
                                                 </select>
                                                 <input type="hidden" name="txtOrderID" value="${dto.orderID}">
-                                                <input type="hidden" name="txtServiceID" value="${session.SERVICE_ID}" >
+                                                <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
                                             </form>
                                         </td>
 
@@ -147,7 +114,6 @@
                                     </tr>
                                 </c:forEach>
                             </c:if>
-
                         </div>
                         </tbody>
                     </table>

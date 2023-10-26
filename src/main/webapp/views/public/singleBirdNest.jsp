@@ -77,12 +77,14 @@
                                             4.5
                                         </span>
                                     </div>
-                                    <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i>10 orders</span>
-                                    <span class="text-success ms-2">Available</span>
+                                    <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i> ${product_current.quantity_Available} orders</span>
+                                    <span class="text-success ms-2"${product_current.status == 'Sold out' ? 'style="color: red!important"' : ''}>
+                                        ${product_current.status}
+                                    </span>
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.price)}</span>
+                                    <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.priceDiscount)}</span>
                                     <span class="text-muted">/for a nest</span>
                                 </div>
 
@@ -92,7 +94,7 @@
 
                                 <div class="row">
                                     <dt class="col-7">Parent's species</dt>
-                                    <dd class="col-5">Parrot</dd>
+                                    <dd class="col-5">${product_current.category_Name}</dd>
 
                                     <dt class="col-7">Father bird</dt>
                                     <dd class="col-5">${bird_dad.product_Name}</dd>
@@ -102,10 +104,10 @@
 
 
                                     <dt class="col-8">Quantity of baby male bird </dt>
-                                    <dd class="col-4">2</dd>
+                                    <dd class="col-4">${product_current.quantity_MaleBird}</dd>
 
                                     <dt class="col-8">Quantity of baby female bird </dt>
-                                    <dd class="col-4">4</dd>
+                                    <dd class="col-4">${product_current.quantity_FemaleBird}</dd>
 
                                     <!--                                    <dt class="col-4">Quantity of egg</dt>
                                                                         <dd class="col-8">4 - 5 eggs</dd>-->
@@ -139,23 +141,27 @@
                     </div>-->
                                 <!-- Buying -->
                                 <div style="display: block">
-                                    <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
-                                    <form action="product" class="Addtocart" method="post">
-                                        <i class="fa-solid fa-cart-shopping "></i>
-                                        <input type="submit" value="Add to cart"> 
-                                        <input name="btAction" type="hidden" value="Addtocart"> 
-                                        <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
-                                        <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
-                                        <input type="hidden" name="txtServiceID" value="1" />
-                                        <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
-                                        <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
-                                        <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
-                                        <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
-                                        <input type="hidden" id="param_quantity" name="quantity_Buy" value="" />
-                                        <input type="hidden" name="price" value="${product_current.price}"/>
-                                        <input type="hidden" name="image" value="${product_current.image}"/>
-                                        <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
-                                    </form>
+                                    <!--<a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>-->
+                                    <c:if test="${product_current.quantity_Available != 0}">
+                                        <form action="product" class="Addtocart" method="post">
+                                            <i class="fa-solid fa-cart-shopping "></i>
+                                            <input type="submit" value="Add to cart"> 
+                                            <input name="btAction" type="hidden" value="Addtocart"> 
+                                            <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
+                                            <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
+                                            <input type="hidden" name="txtServiceID" value="1" />
+                                            <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
+                                            <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
+                                            <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
+                                            <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
+                                            <input type="hidden" id="param_quantity" name="quantity_Buy" value="1" />
+                                            <input type="hidden" name="price" value="${product_current.price}"/>
+                                            <input type="hidden" name="txtDiscount" value="${product_current.discount}"/>
+                                            <input type="hidden" name="image" value="${product_current.image}"/>
+                                            <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
+                                        </form>
+                                    </c:if>
+
 
                                     <!--                                    <form action="Checkout" style="display: inline" method="post">
                                                                             <input class="btn btn-success  shadow-0" type="submit" value="Order service"> 
