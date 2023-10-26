@@ -83,7 +83,7 @@
 
                                 <div class="mb-3">
                                     <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.price)}</span>
-                                    <span class="text-muted">/for the egg</span>
+                                    <span class="text-muted">/for a nest</span>
                                 </div>
 
                                 <p>
@@ -91,11 +91,21 @@
                                 </p>
 
                                 <div class="row">
-                                    <dt class="col-4">Father bird</dt>
-                                    <dd class="col-8">${bird_dad.product_Name}</dd>
+                                    <dt class="col-7">Parent's species</dt>
+                                    <dd class="col-5">Parrot</dd>
 
-                                    <dt class="col-4">Mother bird </dt>
-                                    <dd class="col-8">${bird_mom.product_Name}</dd>
+                                    <dt class="col-7">Father bird</dt>
+                                    <dd class="col-5">${bird_dad.product_Name}</dd>
+
+                                    <dt class="col-7">Mother bird </dt>
+                                    <dd class="col-5">${bird_mom.product_Name}</dd>
+
+
+                                    <dt class="col-8">Quantity of baby male bird </dt>
+                                    <dd class="col-4">2</dd>
+
+                                    <dt class="col-8">Quantity of baby female bird </dt>
+                                    <dd class="col-4">4</dd>
 
                                     <!--                                    <dt class="col-4">Quantity of egg</dt>
                                                                         <dd class="col-8">4 - 5 eggs</dd>-->
@@ -105,28 +115,28 @@
                                 <hr />
 
 
-                                <div class="row mb-4">
-                                    <div class="col-md-5 col-6 mb-3 text-center">
-                                        <label class="mb-2 d-block">Quantity of egg</label>
-                                        <div class="input-group mb-3" style="width: 170px;">
-                                            <button id="btn_desc" class="btn btn-link px-2 text-muted">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                            <c:if test="${not empty sessionScope.EGG_QUANTITY}">
-                                                <input id="input_quantity" value="${sessionScope.EGG_QUANTITY}" type="text"
-                                                       class="form-control form-control-sm button-input text-center"/>
-                                            </c:if>
-                                            <c:if test="${empty sessionScope.EGG_QUANTITY}">
-                                                <input id="input_quantity" value="1" type="text"
-                                                       class="form-control form-control-sm button-input text-center"/>
-                                            </c:if>
+                                <!--                                <div class="row mb-4">
+                                                                    <div class="col-md-5 col-6 mb-3 text-center">
+                                                                        <label class="mb-2 d-block">Quantity of egg</label>
+                                                                        <div class="input-group mb-3" style="width: 170px;">
+                                                                            <button id="btn_desc" class="btn btn-link px-2 text-muted">
+                                                                                <i class="fas fa-minus"></i>
+                                                                            </button>
+                                <c:if test="${not empty sessionScope.EGG_QUANTITY}">
+                                    <input id="input_quantity" value="${sessionScope.EGG_QUANTITY}" type="text"
+                                           class="form-control form-control-sm button-input text-center"/>
+                                </c:if>
+                                <c:if test="${empty sessionScope.EGG_QUANTITY}">
+                                    <input id="input_quantity" value="1" type="text"
+                                           class="form-control form-control-sm button-input text-center"/>
+                                </c:if>
 
-                                            <button id="btn_inc" class="btn btn-link px-2 text-muted">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button id="btn_inc" class="btn btn-link px-2 text-muted">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>-->
                                 <!-- Buying -->
                                 <div style="display: block">
                                     <a href="#" class="btn btn-danger shadow-0 text-white"> Buy now </a>
@@ -147,17 +157,14 @@
                                         <input type="hidden" name="lastSearch" value="${param.lastSearch}"/>
                                     </form>
 
-                                    <form action="Checkout" style="display: inline" method="post">
-                                        <input class="btn btn-success  shadow-0" type="submit" value="Order service"> 
-                                        <!--<input type="hidden" name="btAction" value="Egg incubation is available">-->
-                                        <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
-                                        <input type="hidden" id="egg_quantity" name="quantity_Buy" value="" />
-                                        <input type="hidden" name="txtServiceID" value="2" />
-                                    </form>
+                                    <!--                                    <form action="Checkout" style="display: inline" method="post">
+                                                                            <input class="btn btn-success  shadow-0" type="submit" value="Order service"> 
+                                                                            <input type="hidden" name="btAction" value="Egg incubation is available">
+                                                                            <input type="hidden" name="txtproductID" value="${product_current.productID}"/>
+                                                                            <input type="hidden" id="egg_quantity" name="quantity_Buy" value="" />
+                                                                            <input type="hidden" name="txtServiceID" value="2" />
+                                                                        </form>-->
                                 </div>
-
-                                <!--                                <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
-                                                                        class="me-1 fa fa-heart fa-lg"></i> Save </a>-->
                             </div>
                         </main>
                     </div>
@@ -216,12 +223,6 @@
                                         <div class="ProductTitleInformation">
                                             <div class="ProductTitleInformationFormore"
                                                  style="display: grid; grid-template-columns: 55% 45%; gap: 4px;">
-                                                <span style="max-width: 300px; color: rgb(128,128,137);">
-                                                    Parent's species
-                                                </span>
-                                                <span class="ProductAtribute">
-                                                    <p>Parrot</p>
-                                                </span>
                                                 <span style="max-width: 300px; color: rgb(128,128,137);">
                                                     Parent's origin
                                                 </span>
