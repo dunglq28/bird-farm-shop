@@ -395,9 +395,9 @@ public class ProductDAO implements Serializable {
                 while (rs.next()) {
                     ProductDTO dto = new ProductDTO(rs.getString("ProductID"),
                             rs.getString("Product_Name"),
-                            rs.getString("Gender"),
                             rs.getString("Age"),
                             rs.getString("Color"),
+                            rs.getString("Gender"),
                             rs.getString("Image"),
                             rs.getInt("Quantity_Available"),
                             rs.getInt("Quantity_AreMating"),

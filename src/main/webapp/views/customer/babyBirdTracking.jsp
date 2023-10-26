@@ -122,8 +122,10 @@
                             </div>
                         </div>
                     </div>
+                    <button class="pay">Complete payment</button>    
                 </div>
             </div>
+
         </div>
         <jsp:include page="/components/footer.jsp"></jsp:include>
     </body>
