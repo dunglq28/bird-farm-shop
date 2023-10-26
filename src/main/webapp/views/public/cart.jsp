@@ -73,8 +73,8 @@
 
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 ">
-                                                                <h6 class="mb-0 text-sm-center">${items.get(key).priceFormat}</h6>
-                                                                <!--<h6 class="mb-0 text-sm-center text-muted origin-price">${items.get(key).priceFormat}</h6>-->
+                                                                <h6 class="mb-0 text-sm-center">${util.FormatPrice(items.get(key).priceDiscount)}</h6>
+                                                                <h6 class="mb-0 text-sm-center text-muted origin-price">${util.FormatPrice(items.get(key).price)}</h6>
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center quantity-form">
                                                                 <form action="cart" method="POST" style="display: flex">
@@ -96,8 +96,8 @@
 
                                                             <div
                                                                 class="col-md-2 col-lg-2 col-xl-2 text-md-end text-lg-start text-xl-start">
-                                                                <h6 class="mb-0">${util.FormatPrice(items.get(key).price * items.get(key).quantityBuy)}</h6>
-                                                                <c:set var="total_field" value="${items.get(key).price * items.get(key).quantityBuy}" ></c:set>
+                                                                <h6 class="mb-0">${util.FormatPrice(items.get(key).priceDiscount * items.get(key).quantityBuy)}</h6>
+                                                                <c:set var="total_field" value="${items.get(key).priceDiscount * items.get(key).quantityBuy}" ></c:set>
 
                                                                 </div>
                                                             </div>

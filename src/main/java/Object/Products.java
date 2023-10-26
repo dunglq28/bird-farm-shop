@@ -26,7 +26,7 @@ public class Products {
     private int quantityBuy;
     private int quantitySold;
     private float price;
-    private String priceFormat;
+    private String priceDiscount;
     private float discount;
 
     public Products() {
@@ -187,12 +187,12 @@ public class Products {
         this.price = price;
     }
 
-    public String getPriceFormat() {
-        return FormatCurrency.FormatPrice(this.price);
+    public String getPriceDiscount() {
+        return String.valueOf(this.price - this.price*this.discount);
     }
 
-    public void setPriceFormat(String priceFormat) {
-        this.priceFormat = priceFormat;
+    public void setPriceDiscount(String priceDiscount) {
+        this.priceDiscount = priceDiscount;
     }
 
     public float getDiscount() {

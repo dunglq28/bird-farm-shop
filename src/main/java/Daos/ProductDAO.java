@@ -296,7 +296,7 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_sold, String birdID)
+    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_sold, String status, String birdID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -307,13 +307,14 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 //2. create SQL statement string
                 String sql = "Update Products "
-                        + "Set Quantity_Available = ?, Quantity_Sold = ? "
+                        + "Set Quantity_Available = ?, Quantity_Sold = ?, Status = ? "
                         + "Where productID = ? ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, quantity_available);
                 stm.setInt(2, quantity_sold);
-                stm.setString(3, birdID);
+                stm.setString(3, status);
+                stm.setString(4, birdID);
                 //4. Excute query
                 int effectRows = stm.executeUpdate();
                 //5. Process
@@ -349,7 +350,7 @@ public class ProductDAO implements Serializable {
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, quantity);
-                stm.setString(3, birdID);
+                stm.setString(2, birdID);
                 //4. Excute query
                 int effectRows = stm.executeUpdate();
                 //5. Process
