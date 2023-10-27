@@ -122,5 +122,76 @@ public class StaffDAO {
         return null;
     }
 
-   
+    public boolean UpdateStaff(String accountID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "update Staffs "
+                        + "set Status = ? "
+                        + "where StaffID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setBoolean(1, false);
+                stm.setString(2, accountID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public List<OrderDTO> GetDestroyListStaffOrders(String StaffID)
+            throws SQLException, ClassNotFoundException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        OrderDTO result = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select ord.OrderID, ord.StaffID, ord.Status "
+                        + "from Staffs sta inner join Orders ord "
+                        + "on sta.StaffID = ord.StaffID "
+                        + "where ord.StaffID = ? and ord.Status = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, StaffID);
+                stm.setString(2, "Processing");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String orderID = rs.getString("OrderID");
+                    String Staffid = rs.getString("StaffID");
+                    String Status = rs.getString("Status");
+                    result = new OrderDTO(orderID, Staffid, Status);
+                    if (this.orderList == null) {
+                        this.orderList = new ArrayList<OrderDTO>();
+                    }
+                    this.orderList.add(result);
+                }
+                return this.orderList;
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 }

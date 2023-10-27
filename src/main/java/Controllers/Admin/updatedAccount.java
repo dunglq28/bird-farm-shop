@@ -1,9 +1,14 @@
 package Controllers.Admin;
 
 import Daos.AdminDAO;
+import Daos.OrderDAO;
+import Daos.StaffDAO;
+import Models.OrderDTO;
+import Models.StaffDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,10 +31,27 @@ public class updatedAccount extends HttpServlet {
             boolean status_update;
             status_update = status.equals("Enable");
             AdminDAO dao = new AdminDAO();
+            OrderDAO ord = new OrderDAO();
+            StaffDAO staff = new StaffDAO();
             boolean result = dao.UpdatedStatus(accountID, status_update);
-            if (result) {
+            if (result && status_update == true) {
                 url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+            } else if (status_update == false) {
+                StaffDTO staffDTO = staff.getStaffByAccountID(accountID);
+                if (staffDTO.getStaffID() != null) {
+                    boolean staff_result = staff.UpdateStaff(staffDTO.getAccountID());
+                    if (staff_result) {
+                        List<OrderDTO> orderList = staff.GetDestroyListStaffOrders(staffDTO.getStaffID());
+                        while (orderList != null) {
+                            ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
+                        }
+                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                    } else {
+                        url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+                    }
+                }
             }
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

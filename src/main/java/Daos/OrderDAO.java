@@ -265,18 +265,19 @@ public class OrderDAO implements Serializable {
         return false;
     }
 
-    public boolean UpdateStatusOrder(String OrderID, String status) throws SQLException, ClassNotFoundException {
+    public boolean UpdateStatusOrder(String StaffID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Update Orders "
-                        + "set Status = ? "
-                        + "where OrderID = ?";
+                        + "set Status = ? , StaffID = ? "
+                        + "where StaffID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, status);
-                stm.setString(2, OrderID);
+                stm.setString(2, null);
+                stm.setString(2, StaffID);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -292,5 +293,6 @@ public class OrderDAO implements Serializable {
         }
         return false;
     }
+    
 
 }
