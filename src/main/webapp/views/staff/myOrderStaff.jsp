@@ -19,78 +19,11 @@
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
         <title>My Order</title>
-        <style>
-            .rounded-td {
-                border-radius: 7px;
-                border: 2px solid rgb(13, 103, 128);
-                overflow: hidden;
-            }
 
-            .rounded-select {
-                border-radius: 7px;
-                border: 2px solid rgb(13, 103, 128);
-                text-align: center;
-                padding: 0 10px 0 10px;
-                text-align: center;
-                justify-content: center;
-
-            }
-
-            .pagination__option a {
-                display: inline-block;
-                height: 40px;
-                width: 40px;
-                border: 1px solid #f2f2f2;
-                border-radius: 50%;
-                font-size: 14px;
-                color: #111111;
-                font-weight: 600;
-                line-height: 40px;
-                text-align: center;
-                -webkit-transition: all, 0.3s;
-                -o-transition: all, 0.3s;
-                transition: all, 0.3s;
-                margin-right: 6px;
-                text-decoration: none;
-            }
-            .pagination__option a.active{
-                background-color: #0D6780;
-                color: white;
-                border: 1px solid #0D6780;
-            }
-
-            .pagination__option a:last-child {
-                margin-right: 0;
-            }
-
-            .pagination__option a i {
-                font-weight: 600;
-            }
-
-            .pagination__option a:hover {
-                background: rgb(37,118,140);
-                border-color: rgb(37,118,140);
-                color: #ffffff;
-            }
-
-            .btn.btn-secondary.active {
-                 background-color: rgb(13,103,128);
-            }
-            
-            .btn-secondary:hover {
-                background-color: rgb(13,103,128);
-                
-            }
-        </style>
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
-
-            <div>
-
-            </div>
-
 
             <div class="main--content">
                 <div class="header-wrapper">
@@ -107,38 +40,23 @@
                 </div>
             </div>
             <div class="tabular--wrapper">
-                <c:if test="${sessionScope.SERVICE_ID == 1}">
+                <c:if test="${requestScope.SERVICE_ID == 1}">
                     <h3 class="main--title">My Order</h3>
-                    <form action="Order">
-                        <div class="mb-4 justify-content-between align-items-sm-start">
-                            <div class="col-md-4 col-lg-6 col-xl-6">
-                                <input type="submit" name="Status" value="All" class="btn btn-secondary active" >
-                                <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}"  >
-                                <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}"  >
-                                <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}"  >
-                                <input type="submit" name="Status" value="Wait fot comfirmation" class="btn btn-secondary ${STATUS_ORDER == 'Wait fot comfirmation' ? 'active' : ''}"  >
-
-                                <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
-                            </div>
-                        </div>
-                    </form>
                 </c:if>
-                <c:if test="${sessionScope.SERVICE_ID != 1}">
+                <c:if test="${requestScope.SERVICE_ID != 1}">
                     <h3 class="main--title">My Booking</h3>
-                     <form action="Order">
-                        <div class="mb-4 justify-content-between align-items-sm-start">
-                            <div class="col-md-4 col-lg-6 col-xl-6">
-                                <input type="submit" name="Status" value="All" class="btn btn-secondary active" >
-                                <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}"  >
-                                <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}"  >
-                                <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}"  >
-                                <input type="submit" name="Status" value="Wait fot comfirmation" class="btn btn-secondary ${STATUS_ORDER == 'Wait fot comfirmation' ? 'active' : ''}"  >
-
-                                <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
-                            </div>
-                        </div>
-                    </form>
                 </c:if>
+                <form action="viewMyOrder-staff">
+                    <div class="mb-4 justify-content-between align-items-sm-start">
+                        <div class="col-md-4 col-lg-6 col-xl-6">
+                            <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == '' ? 'active' : ''}" >
+                            <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}"  >
+                            <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}"  >
+                            <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}"  >
+                            <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
+                        </div>
+                    </div>
+                </form>
 
                 <div class="table-container">
                     <table>
@@ -161,7 +79,7 @@
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
                                     <tr>
-                                        <td><a href="" class="order-detail">${dto.orderID}</a></td>
+                                        <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
                                         <td>${util.FormatDate(dto.orderDate)}</td>
@@ -176,7 +94,7 @@
                                                     <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
                                                 </select>
                                                 <input type="hidden" name="txtOrderID" value="${dto.orderID}">
-                                                <input type="hidden" name="txtServiceID" value="${session.SERVICE_ID}" >
+                                                <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
                                             </form>
                                         </td>
 
@@ -194,7 +112,6 @@
                                     </tr>
                                 </c:forEach>
                             </c:if>
-
                         </div>
                         </tbody>
                     </table>
@@ -202,23 +119,28 @@
             </div>
             <div class="col-lg-12 text-center mt-2">
                 <div class="pagination__option" style="text-align: end">
-                    <a href="#"><i class="fa fa-angle-double-left"></i></a>
-                    <a href="#"><i class="fa fa-angle-left"></i></a>
-                    <a class="active" href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                    <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                    <c:if test="${requestScope.indexCurrent > 1}">
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        </c:if>
+
+                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${i}">${i}</a>
+                    </c:forEach>
+
+                    <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        </c:if>
                 </div>
-            </div>           
+            </div>  
         </div>
 
         <script>
             function submit() {
                 document.querySelector(".myForm").onsubmit();
+                document.querySelector(".myOrder").onsubmit();
             }
         </script>
-        <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
-
     </body>
 </html>

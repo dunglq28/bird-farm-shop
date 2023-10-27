@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Public;
+package Controllers.Staff;
 
-import Models.ProductDTO;
-import Daos.ProductDAO;
+import Daos.OrderDAO;
+import Daos.OrderDetailDAO;
+import Models.AccountDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "product_list", urlPatterns = {"/product_list"})
-public class PublicShopServlet extends HttpServlet {
+@WebServlet(name = "viewDetailOrderServlet", urlPatterns = {"/viewDetailOrderServlet"})
+public class viewDetailOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,36 +39,25 @@ public class PublicShopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
-        String button = request.getParameter("btAction");
-        String productType = request.getParameter("productType");
+        String url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
+        String orderID = request.getParameter("OrderID");
         HttpSession session = request.getSession();
 
         try {
-            if (button == null) {
-                button = "null";
-                if (productType.equals("bird")) {
-                    session.setAttribute("PRODUCT_TYPE", "bird");
-                    session.setAttribute("PRODUCT_TYPE_ID", "1");
-                } else if (productType.equals("birdNest")) {
-                    session.setAttribute("PRODUCT_TYPE", "birdNest");
-                    session.setAttribute("PRODUCT_TYPE_ID", "2");
-                } else if (productType.equals("All")) {
-                    session.setAttribute("PRODUCT_TYPE", "All");
-                    session.setAttribute("PRODUCT_TYPE_ID", "");
-                }
-
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null || !account.getRoleName().equals("Staff")) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                return;
             }
+            OrderDAO dao = new OrderDAO();
+            request.setAttribute("ORDER", dao.getOrderByOrderID(orderID));
+            OrderDetailDAO oddao = new OrderDetailDAO();
+            request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
 
-            switch (button) {
-                case "null":
-                    url = MyAppConstants.PublicFeatures.PAGING_PRODUCT_CONTROLLER;
-                    break;
-                case "Addtocart":
-                    url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
-                    break;
-            }
-
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
