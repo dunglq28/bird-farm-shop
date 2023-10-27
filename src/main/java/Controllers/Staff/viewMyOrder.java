@@ -39,8 +39,8 @@ public class viewMyOrder extends HttpServlet {
             if (serviceID == null) {
                 serviceID = "1";
             }
-            if (status == null) {
-                status = "All";
+            if (status == null || status.equals("All")) {
+                status = "";
             }
             if (page == null) {
                 page = "1";

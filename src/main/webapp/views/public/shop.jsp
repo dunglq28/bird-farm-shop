@@ -280,19 +280,24 @@
 
                             <div class="col-lg-12 text-center">
                                 <div class="pagination__option">
-                                    <c:set var="productType" value="${sessionScope.PRODUCT_TYPE}"></c:set>
-                                    <c:if test="${indexCurrent > 1}">
-                                        <a href="product_list?productType=${productType}&page=1"><i class="fa fa-angle-double-left"></i></a>
-                                        <a href="product_list?productType=${productType}&page=${indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                                    
+                                    <c:set var="pt" value="productType=${sessionScope.PRODUCT_TYPE}"></c:set>
+                                    <c:if test="${not empty requestScope.SEARCH_VALUE}">
+                                        <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>
+                                    </c:if>
+
+                                    <c:if test="${requestScope.indexCurrent > 1}">
+                                        <a href="product_list?${pt}&${search}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                                        <a href="product_list?${pt}&${search}&page=${indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
                                         </c:if>
 
-                                    <c:forEach begin="${sessionScope.START}" end="${sessionScope.END}" var="i">
-                                        <a class="${indexCurrent==i ? "active" : ""}" href="product_list?productType=${productType}&page=${i}">${i}</a>
+                                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="product_list?${pt}&${search}&page=${i}">${i}</a>
                                     </c:forEach>
 
-                                    <c:if test="${indexCurrent<sessionScope.endPage}">
-                                        <a href="product_list?productType=${productType}&page=${indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                                        <a href="product_list?productType=${productType}&page=${sessionScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                                    <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                                        <a href="product_list?${pt}&${search}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                                        <a href="product_list?${pt}&${search}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
                                         </c:if>
                                 </div>
                             </div>
@@ -301,7 +306,7 @@
                 </div>
             </div>
         </section>
-        
+
 
         <!--</footer> -->
         <footer>

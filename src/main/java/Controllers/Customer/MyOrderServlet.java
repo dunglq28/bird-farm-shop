@@ -33,8 +33,8 @@ public class MyOrderServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
-            if (status == null) {
-                status = "All";
+            if (status == null || status.equals("All") ) {
+                status = "";
             }
 
             if (serviceID == null ) {

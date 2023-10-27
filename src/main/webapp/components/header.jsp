@@ -4,8 +4,9 @@
     <a href="home" class="brand">Bird Farm Shop</a>
     <div class="menu-btn"></div>
     <div class="search-container">
-        <form action="search-product" class="search-bar">
-            <input type="text" placeholder="Search anything" name="lastSearch" value="${param.lastSearch}">
+        <form action="product_list" class="search-bar">
+            <input type="hidden"  name="productType" value="All">
+            <input type="text" placeholder="Search anything" name="lastSearch" value="${requestScope.SEARCH_VALUE}">
             <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ddd7d7;"></i></button>
         </form>
     </div>
