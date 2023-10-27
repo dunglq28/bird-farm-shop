@@ -3,6 +3,7 @@ package Utils;
 public class MyAppConstants {
 
     public class PublicFeatures {
+
         public static final String HOME_CONTROLLER = "home";
         public static final String HOME_PAGE = "/views/public/home.jsp";
         public static final String ERROR_PAGE = "/views/errors/error.html";
@@ -62,12 +63,13 @@ public class MyAppConstants {
 
         public static final String ALL_STAFF_ORDER_PAGE = "/views/staff/newOrderStaff.jsp";
         public static final String STAFF_ORDER_PAGE = "/views/staff/myOrderStaff.jsp";
+        public static final String ORDER_DETAIL_STAFF_PAGE = "/views/staff/orderDetailStaff.jsp";
         public static final String VIEW_ALL_ORDER_CONTROLLER = "viewNewOrder";
         public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
         public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
 
     }
-    
+
     public class AdminFeatures {
 
         public static final String ALL_ACCOUNT_PAGE = "/views/staff/newOrderStaff.jsp";

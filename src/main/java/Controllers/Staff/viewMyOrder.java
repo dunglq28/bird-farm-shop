@@ -28,21 +28,55 @@ public class viewMyOrder extends HttpServlet {
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String serviceID = request.getParameter("txtServiceID");
         String status = request.getParameter("Status");
+        String page = request.getParameter("page");
+        HttpSession session = request.getSession();
         try {
-            HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null || !account.getRoleName().equals("Staff")) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                return;
+            }
             if (serviceID == null) {
                 serviceID = "1";
-            } 
+            }
             if (status == null) {
                 status = "All";
             }
+            if (page == null) {
+                page = "1";
+            }
+            int indexPage = Integer.parseInt(page);
             OrderDAO dao = new OrderDAO();
             StaffDAO staffdao = new StaffDAO();
             StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status);
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage);
+
+            int start = 1;
+            int distance = 4;
+
+            int end;
+            if (endPage < distance) {
+                end = endPage;
+            } else {
+                end = start + distance;
+            }
+
+            if (indexPage >= 4) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
+                }
+            }
             request.setAttribute("MY_ORDERS_STAFF", result);
-            session.setAttribute("SERVICE_ID", serviceID);
+            request.setAttribute("SERVICE_ID", serviceID);
+            request.setAttribute("STATUS_ORDER", status);
+            request.setAttribute("START", start);
+            request.setAttribute("END", end);
+            request.setAttribute("indexCurrent", indexPage);
+            request.setAttribute("endPage", endPage);
             url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
 
         } finally {
