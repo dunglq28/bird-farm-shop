@@ -26,10 +26,7 @@ public class PublicStartSerlvet extends HttpServlet {
         AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
         if (account != null && account.getRoleName().equals("Customer")) {
             url = MyAppConstants.PublicFeatures.HOME_PAGE;
-        } else if (account != null && account.getRoleName().equals("Staff")) {
-            url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
-        }
-
+        } 
         RequestDispatcher dis = request.getRequestDispatcher(url);
         dis.forward(request, response);
 

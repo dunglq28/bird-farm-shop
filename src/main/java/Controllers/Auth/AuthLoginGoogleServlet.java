@@ -51,7 +51,11 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
                     }
                 }
+                if (account != null && account.getRoleName().equals("Staff")) {
+                    url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

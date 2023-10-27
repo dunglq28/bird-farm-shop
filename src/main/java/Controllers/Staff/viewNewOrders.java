@@ -26,6 +26,7 @@ public class viewNewOrders extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
+        String searchValue = request.getParameter("txtSearch");
         String url = "";
         try {
             HttpSession session = request.getSession();
@@ -34,13 +35,16 @@ public class viewNewOrders extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
+            if (searchValue == null) {
+                searchValue = "";
+            }
             if (page == null) {
                 page = "1";
             }
             int indexPage = Integer.parseInt(page);
             OrderDAO dao = new OrderDAO();
-            int endPage = dao.getNewOrderPage();
-            List<OrderDTO> result = dao.ViewNewStaffOrders(indexPage);
+            int endPage = dao.getNewOrderPage(searchValue);
+            List<OrderDTO> result = dao.ViewNewStaffOrders(indexPage, searchValue);
             request.setAttribute("STAFF_ALL_ORDERS", result);
             int start = 1;
             int distance = 4;

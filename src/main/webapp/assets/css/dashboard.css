@@ -112,6 +112,7 @@ body {
     align-items: center;
     gap: 5px;
     padding: 4px 12px;
+    width: 400px;
 }
 
 .search--box input {
