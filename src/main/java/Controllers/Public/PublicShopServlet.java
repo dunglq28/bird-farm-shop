@@ -49,14 +49,17 @@ public class PublicShopServlet extends HttpServlet {
                 button = "null";
                 if (productType.equals("bird")) {
                     session.setAttribute("PRODUCT_TYPE", "bird");
-                    session.setAttribute("PRODUCT_TYPE_ID", 1);
+                    session.setAttribute("PRODUCT_TYPE_ID", "1");
                 } else if (productType.equals("birdNest")) {
                     session.setAttribute("PRODUCT_TYPE", "birdNest");
-                    session.setAttribute("PRODUCT_TYPE_ID", 2);
+                    session.setAttribute("PRODUCT_TYPE_ID", "2");
+                } else if (productType.equals("All")) {
+                    session.setAttribute("PRODUCT_TYPE", "All");
+                    session.setAttribute("PRODUCT_TYPE_ID", "");
                 }
-            }             
-          
-            
+
+            }
+
             switch (button) {
                 case "null":
                     url = MyAppConstants.PublicFeatures.PAGING_PRODUCT_CONTROLLER;

@@ -30,7 +30,7 @@ public class ProductDAO implements Serializable {
         return productList;
     }
 
-    public List<ProductDTO> getPagingByCreateDateDesc(int index, int product_typeID)
+    public List<ProductDTO> getPagingByCreateDateDesc(int index, String product_typeID, String searchValue)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -42,13 +42,14 @@ public class ProductDAO implements Serializable {
                 String sql = "Select ProductID, Product_Name, cate.Category_Name, Product_TypeID, Image, Age, Color, Gender, Quantity_Available, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "where Product_TypeID = ? "
+                        + "where Product_TypeID like ? and Product_Name like ? "
                         + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, product_typeID);
-                stm.setInt(2, (index - 1) * 9);
+                stm.setString(1, "%"+product_typeID+"%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setInt(3, (index - 1) * 9);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String productID = rs.getString("ProductID");
@@ -86,7 +87,7 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public int getNumberPage(int product_typeID)
+    public int getNumberPage(String product_typeID, String searchValue)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -96,9 +97,10 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 String sql = "Select count(*) "
                         + "From Products "
-                        + "where Product_TypeID = ? ";
+                        + "where Product_TypeID like ? and  Product_Name like ? ";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, product_typeID);
+                stm.setString(1, "%" + product_typeID + "%");
+                stm.setString(2, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);

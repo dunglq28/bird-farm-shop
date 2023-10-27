@@ -41,9 +41,23 @@ public class PagingProductServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
         String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
+        String searchVaule = request.getParameter("lastSearch");
+        String productType = request.getParameter("productType");
         HttpSession session = request.getSession();
 
         try {
+            String product_typeID;
+            if (searchVaule == null && request.getAttribute("SEARCH_VALUE") == null) {
+                searchVaule = "";
+            } else if (session.getAttribute("SEARCH_VALUE") != null && searchVaule == null) {
+                searchVaule = (String) request.getAttribute("SEARCH_VALUE");
+            }
+            
+            if (productType == null) {
+                product_typeID = "";
+            } else {
+                product_typeID = (String) session.getAttribute("PRODUCT_TYPE_ID");
+            }
 
             if (page == null) {
                 page = "1";
@@ -51,9 +65,9 @@ public class PagingProductServlet extends HttpServlet {
             int indexPage = Integer.parseInt(page);
 
             ProductDAO dao = new ProductDAO();
-            int product_typeID = (int) session.getAttribute("PRODUCT_TYPE_ID");
-            int endPage = dao.getNumberPage(product_typeID);
-            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID);
+
+            int endPage = dao.getNumberPage(product_typeID.trim(), searchVaule.trim());
+            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID.trim(), searchVaule.trim());
             session.setAttribute("PRODUCT_LIST", result);
             int start = 1;
             int distance = 4;
@@ -73,15 +87,15 @@ public class PagingProductServlet extends HttpServlet {
                     end = endPage;
                 }
             }
-            session.setAttribute("START", start);
-            session.setAttribute("END", end);
-            session.setAttribute("indexCurrent", indexPage);
-            session.setAttribute("endPage", endPage);
+            request.setAttribute("SEARCH_VALUE", searchVaule);
+            request.setAttribute("START", start);
+            request.setAttribute("END", end);
+            request.setAttribute("indexCurrent", indexPage);
+            request.setAttribute("endPage", endPage);
 
             if (page == null) {
-                url ="";
-            }
-            else if (page.equals("1")) {
+                url = "";
+            } else if (page.equals("1")) {
                 url = "product_list"
                         + "?productType=" + session.getAttribute("PRODUCT_TYPE");
                 session.setAttribute("HISTORY_URL", url);
@@ -91,7 +105,7 @@ public class PagingProductServlet extends HttpServlet {
                         + "&page=" + indexPage;
                 session.setAttribute("HISTORY_URL", url);
             }
-            
+
             url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
 
         } catch (SQLException ex) {

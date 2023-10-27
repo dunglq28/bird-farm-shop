@@ -116,34 +116,22 @@ public class OrderDAO implements Serializable {
         PreparedStatement stm = null;
         ResultSet rs = null;
         OrderDTO result = null;
-        String sql = null;
-
         try {
             //1.Make connection
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                if (status_choose.equals("All")) {
-                    sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
-                            + "From Orders od "
-                            + "inner join Service ser on ser.ServiceID = od.ServiceID "
-                            + "where AccountID = ? and od.ServiceID = ? "
-                            + "order by OrderDate desc ";
-                } else {
-                    sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
-                            + "From Orders od "
-                            + "inner join Service ser on ser.ServiceID = od.ServiceID "
-                            + "where AccountID = ? and od.ServiceID = ? and Status = ? "
-                            + "order by OrderDate desc ";
-                }
+                String sql = "Select OrderID, od.ServiceID, ser.ServiceName, Form_Receipt, OrderDate, Discount, Delivery_charges, Total_Order, Pay_with, Status "
+                        + "From Orders od "
+                        + "inner join Service ser on ser.ServiceID = od.ServiceID "
+                        + "where AccountID = ? and od.ServiceID = ? and Status like ? "
+                        + "order by OrderDate desc ";
 
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, accountId);
                 stm.setInt(2, serID);
-                if (!status_choose.equals("All")) {
-                    stm.setString(3, status_choose);
-                }
+                stm.setString(3, "%" + status_choose + "%");
                 //4.execute-query
                 rs = stm.executeQuery();
                 //5.process
@@ -316,36 +304,22 @@ public class OrderDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                if (status_choose.equals("All")) {
-                    sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                            + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
-                            + "from Orders ord "
-                            + "inner join Service ser on ord.ServiceID = ser.ServiceID "
-                            + "inner join Account acc on acc.AccountID = ord.AccountID "
-                            + "where ord.StaffID = ? and ord.ServiceID = ? "
-                            + "Order by ord.OrderDate desc "
-                            + "OFFSET ? ROWS "
-                            + "FETCH FIRST 5 ROWS ONLY ";
-                } else {
-                    sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                            + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
-                            + "from Orders ord "
-                            + "inner join Service ser on ord.ServiceID = ser.ServiceID "
-                            + "inner join Account acc on acc.AccountID = ord.AccountID "
-                            + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status = ? "
-                            + "Order by ord.OrderDate desc "
-                            + "OFFSET ? ROWS "
-                            + "FETCH FIRST 5 ROWS ONLY ";
-                }
+
+                sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
+                        + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
+                        + "from Orders ord "
+                        + "inner join Service ser on ord.ServiceID = ser.ServiceID "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID "
+                        + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? "
+                        + "Order by ord.OrderDate desc "
+                        + "OFFSET ? ROWS "
+                        + "FETCH FIRST 5 ROWS ONLY ";
+
                 stm = con.prepareStatement(sql);
                 stm.setString(1, StaffID);
                 stm.setInt(2, serviceID);
-                if (status_choose.equals("All")) {
-                    stm.setInt(3, (page - 1) * 5);
-                } else {
-                    stm.setString(3, status_choose);
-                    stm.setInt(4, (page - 1) * 5);
-                }
+                stm.setString(3, "%" + status_choose + "%");
+                stm.setInt(4, (page - 1) * 5);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -387,26 +361,18 @@ public class OrderDAO implements Serializable {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        String sql = null;
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                if (status_choose.equals("All")) {
-                    sql = "Select count(*) "
-                            + "From Orders "
-                            + "where StaffID = ? and ServiceID = ? ";
-                } else {
-                    sql = "Select count(*) "
-                            + "From Orders "
-                            + "where StaffID = ? and ServiceID = ? and Status = ? ";
-                }
+                String sql = "Select count(*) "
+                        + "From Orders "
+                        + "where StaffID = ? and ServiceID = ? and Status like ? ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, StaffID);
                 stm.setInt(2, serviceID);
-                if (!status_choose.equals("All")) {
-                    stm.setString(3, status_choose);
-                }
+                stm.setString(3, "%" + status_choose + "%");
+
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
