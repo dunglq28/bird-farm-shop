@@ -1,91 +1,97 @@
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bird Farm Shop</title>
-
-        <link rel="stylesheet" href="./asset/css/swiper-bundle.min.css">
-        <link rel="stylesheet" href="./asset/css/resetcss.css">
-        <link rel="stylesheet" href="./asset/css/grid.css">
-        <link rel="stylesheet" href="./asset/css/base.css">
-        <link rel="stylesheet" href="./asset/css/newhome.css">
-        <link rel="stylesheet" href="./asset/css/header.css">
-        <link rel="stylesheet" href="./asset/css/responsiveHomepage.css">
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="./assets/css/homePage.css">
+        <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
+        <link rel="stylesheet" href="./assets/css/resetcss.css">
+        <link rel="stylesheet" href="./assets/css/grid.css">
+        <link rel="stylesheet" href="./assets/css/base.css">
+        <link rel="stylesheet" href="./assets/css/newhome.css">
+        <link rel="stylesheet" href="./assets/css/header.css">
+        <link rel="stylesheet" href="./assets/css/responsiveHomepage.css">
     </head>
     <body>
-        <main class="main">
+        <jsp:include page="/components/header.jsp"></jsp:include>
+            <div class="intro">
+                <section class="home">
 
-            <div class="content">
-                <jsp:include page="/components/header.jsp"></jsp:include>
-                <div class="intro">
-                    <section class="home">
+                    <video class="video-slide active" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/1.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/2.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/3.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/4.mp4" autoplay muted loop></video>
+                    <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/5.mp4" autoplay muted loop></video>
 
-                        <video class="video-slide active" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/1.mp4" autoplay muted loop></video>
-                        <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/2.mp4" autoplay muted loop></video>
-                        <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/3.mp4" autoplay muted loop></video>
-                        <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/4.mp4" autoplay muted loop></video>
-                        <video class="video-slide" src="https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/5.mp4" autoplay muted loop></video>
+                    <div class="content active">
+                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
+                        <p>
+                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
+                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
+                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
+                        </p>
+                        <a href="product_list?productType=bird">Shop now</a>
+                    </div>
+                    <div class="content">
+                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
+                        <p>
+                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
+                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
+                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
+                        </p>
+                        <a href="product_list?productType=bird">Shop now</a>
+                    </div>
+                    <div class="content">
+                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
+                        <p>
+                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
+                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
+                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
+                        </p>
+                        <a href="product_list?productType=bird">Shop now</a>
+                    </div>
+                    <div class="content">
+                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
+                        <p>
+                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
+                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
+                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
+                        </p>
+                        <a href="product_list?productType=bird">Shop now</a>
+                    </div>
+                    <div class="content">
+                        <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
+                        <p>
+                            We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
+                            We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
+                            We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
+                        </p>
+                        <a href="product_list?productType=bird">Shop now</a>
+                    </div>
 
-                        <div class="content active">
-                            <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                            <p>
-                                We believe in simplicity and integrity, ensuring a life that?s honest, down to earth and true to self. 
-                                We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
-                                We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
-                            </p>
-                            <a href="product_list?productType=bird">Shop now</a>
-                        </div>
-                        <div class="content">
-                            <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                            <p>
-                                We believe in simplicity and integrity, ensuring a life that?s honest, down to earth and true to self. 
-                                We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
-                                We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
-                            </p>
-                            <a href="product_list?productType=bird">Shop now</a>
-                        </div>
-                        <div class="content">
-                            <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                            <p>
-                                We believe in simplicity and integrity, ensuring a life that?s honest, down to earth and true to self. 
-                                We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
-                                We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
-                            </p>
-                            <a href="product_list?productType=bird">Shop now</a>
-                        </div>
-                        <div class="content">
-                            <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                            <p>
-                                We believe in simplicity and integrity, ensuring a life that?s honest, down to earth and true to self. 
-                                We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
-                                We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
-                            </p>
-                            <a href="product_list?productType=bird">Shop now</a>
-                        </div>
-                        <div class="content">
-                            <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                            <p>
-                                We believe in simplicity and integrity, ensuring a life that?s honest, down to earth and true to self. 
-                                We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
-                                We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
-                            </p>
-                            <a href="product_list?productType=bird">Shop now</a>
-                        </div>
+                    <div class="slider-navigation">
+                        <div class="nav-btn active"></div>
+                        <div class="nav-btn"></div>
+                        <div class="nav-btn"></div>
+                        <div class="nav-btn"></div>
+                        <div class="nav-btn"></div>
+                    </div>
+                </section>
 
-                        <div class="slider-navigation">
-                            <div class="nav-btn active"></div>
-                            <div class="nav-btn"></div>
-                            <div class="nav-btn"></div>
-                            <div class="nav-btn"></div>
-                            <div class="nav-btn"></div>
-                        </div>
-                    </section>
+            </div>
 
+            <div class="food">
+                <div>
+                    <h3>"Healthy environment - Healthy birds"</h3>
                 </div>
-                <!-- clip -->
+                <div>
+                    <P>“Bird Farm” is our step towards sustainable development. With the goal of building an environmentally 
+                        friendly farm, our farm has a diverse ecological habitat: cool air with many trees, carefully selected 
+                        and rich natural food sources for birds. Fiber and minerals for healthy birds.</P>
+                </div>
+            </div>
                 <section class="content-intro">
                     <div class="grid wide">
                         <div class="row mobile-tablet-flex-reverse">
@@ -444,14 +450,14 @@
                                                     <div class="content-section__disc content-says-slide__item-text">
                                                         <span class="content-says-slide__item-quote">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="89" viewBox="0 0 35 89" class="">
-                                                            <text id="_" data-name="?" transform="translate(0 69)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"><tspan x="0" y="0">?</tspan></text>
+                                                            <text id="_" data-name="?" transform="translate(0 69)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"></text>
                                                             </svg>
                                                         </span>
                                                         <p class="content-says-slide__item-disc">                      
                                                             I purchased birds from this website and I'm extremely satisfied. The products were beautiful, matched the descriptions, and the customer service was very responsive. I will definitely come back to shop here again.                                                    </p>
                                                         <span class="content-says-slide__item-quote">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="89" viewBox="0 0 35 89" class="">
-                                                            <text id="_" data-name="?" transform="translate(35 20) rotate(180)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"><tspan x="0" y="0">?</tspan></text>
+                                                            <text id="_" data-name="?" transform="translate(35 20) rotate(180)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"></text>
                                                             </svg>
                                                         </span>
                                                     </div>
@@ -461,14 +467,14 @@
                                                     <div class="content-section__disc content-says-slide__item-text">
                                                         <span class="content-says-slide__item-quote">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="89" viewBox="0 0 35 89" class="">
-                                                            <text id="_" data-name="?" transform="translate(0 69)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"><tspan x="0" y="0">?</tspan></text>
+                                                            <text id="_" data-name="?" transform="translate(0 69)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"></text>
                                                             </svg>
                                                         </span>
                                                         <p class="content-says-slide__item-disc">
                                                             This website offers a wide variety of attractive bird species. I found a bird I really liked and the delivery to my home was swift. I'm very pleased with my shopping experience here.                                                    </p>
                                                         <span class="content-says-slide__item-quote">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="89" viewBox="0 0 35 89" class="">
-                                                            <text id="_" data-name="?" transform="translate(35 20) rotate(180)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"><tspan x="0" y="0">?</tspan></text>
+                                                            <text id="_" data-name="?" transform="translate(35 20) rotate(180)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"></text>
                                                             </svg>
                                                         </span>
                                                     </div>
@@ -478,7 +484,7 @@
                                                     <div class="content-section__disc content-says-slide__item-text">
                                                         <span class="content-says-slide__item-quote">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="89" viewBox="0 0 35 89" class="">
-                                                            <text id="_" data-name="?" transform="translate(0 69)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"><tspan x="0" y="0">?</tspan></text>
+                                                            <text id="_" data-name="?" transform="translate(0 69)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"></text>
                                                             </svg>
                                                         </span>
                                                         <p class="content-says-slide__item-disc">
@@ -486,7 +492,7 @@
                                                         </p>
                                                         <span class="content-says-slide__item-quote">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="89" viewBox="0 0 35 89" class="">
-                                                            <text id="_" data-name="?" transform="translate(35 20) rotate(180)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"><tspan x="0" y="0">?</tspan></text>
+                                                            <text id="_" data-name="?" transform="translate(35 20) rotate(180)" fill="#613842" font-size="89" font-family="Helvetica-Light, Helvetica" font-weight="300"></text>
                                                             </svg>
                                                         </span>
                                                     </div>
@@ -513,7 +519,7 @@
                 </section>
 
             </div>
-           <jsp:include page="/components/footer.jsp"></jsp:include>
+          
 
         </main>
 
@@ -563,6 +569,10 @@
             },
             });
         </script>
+        <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/navigation.js"></script>
+
+        <jsp:include page="/components/footer.jsp"></jsp:include>
         <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
         <script src="./assets/js/navigation.js"></script>
     </body>
