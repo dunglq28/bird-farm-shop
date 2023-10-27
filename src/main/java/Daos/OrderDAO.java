@@ -65,10 +65,10 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Orders ( "
-                        + "OrderID, ServiceID, AccountID, StaffID, Form_Receipt, ShipperID, ShipAddress, ShipCity, OrderDate, ReceiptDate, Discount, Delivery_charges, "
-                        + "Total_Order, Pay_with, Status "
+                        + "OrderID, ServiceID, AccountID, StaffID, Form_Receipt, ShipperID, ShipAddress, ShipCity,PhoneNumber, OrderDate, ReceiptDate, "
+                        + "Discount, Delivery_charges, Total_Order, Pay_with, Status "
                         + ") values ( "
-                        + "?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, order.getOrderID());
@@ -79,13 +79,14 @@ public class OrderDAO implements Serializable {
                 stm.setString(6, order.getShipperID());
                 stm.setString(7, order.getShipAddress());
                 stm.setString(8, order.getShipCity());
-                stm.setDate(9, order.getOrderDate());
-                stm.setDate(10, order.getReceiptDate());
-                stm.setFloat(11, order.getDiscount());
-                stm.setFloat(12, order.getDelivery_charges());
-                stm.setFloat(13, order.getTotal_Order());
-                stm.setString(14, order.getPayBy());
-                stm.setString(15, order.getStatus());
+                stm.setString(9, order.getPhoneNumber());
+                stm.setDate(10, order.getOrderDate());
+                stm.setDate(11, order.getReceiptDate());
+                stm.setFloat(12, order.getDiscount());
+                stm.setFloat(13, order.getDelivery_charges());
+                stm.setFloat(14, order.getTotal_Order());
+                stm.setString(15, order.getPayBy());
+                stm.setString(16, order.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -182,7 +183,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public List<OrderDTO> ViewNewStaffOrders()
+    public List<OrderDTO> ViewNewStaffOrders(int page)
             throws SQLException, ClassNotFoundException {
 
         Connection con = null;
@@ -197,9 +198,13 @@ public class OrderDAO implements Serializable {
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
-                        + "where ord.Status = 'Wait for confirmation' ";
+                        + "where ord.Status = 'Wait for confirmation' "
+                        + "Order by ord.OrderDate desc "
+                        + "OFFSET ? ROWS "
+                        + "FETCH FIRST 5 ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
+                stm.setInt(1, (page - 1) * 5);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -234,6 +239,42 @@ public class OrderDAO implements Serializable {
             }
         }
         return null;
+    }
+
+    public int getNewOrderPage()
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From Orders "
+                        + "where Status = 'Wait for confirmation' ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage = total / 5;
+                    if (countPage % 5 != 0 && countPage % 2 != 0) {
+                        countPage++;
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
     }
 
     public boolean takeActionOrder(String StaffID, String OrderID, String status) throws SQLException, ClassNotFoundException {
@@ -265,7 +306,7 @@ public class OrderDAO implements Serializable {
         return false;
     }
 
-    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose)
+    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose, int page)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -281,20 +322,29 @@ public class OrderDAO implements Serializable {
                             + "from Orders ord "
                             + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                             + "inner join Account acc on acc.AccountID = ord.AccountID "
-                            + "where ord.StaffID = ? and ord.ServiceID = ? ";
+                            + "where ord.StaffID = ? and ord.ServiceID = ? "
+                            + "Order by ord.OrderDate desc "
+                            + "OFFSET ? ROWS "
+                            + "FETCH FIRST 5 ROWS ONLY ";
                 } else {
                     sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
                             + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
                             + "from Orders ord "
                             + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                             + "inner join Account acc on acc.AccountID = ord.AccountID "
-                            + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status = ? ";
+                            + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status = ? "
+                            + "Order by ord.OrderDate desc "
+                            + "OFFSET ? ROWS "
+                            + "FETCH FIRST 5 ROWS ONLY ";
                 }
                 stm = con.prepareStatement(sql);
                 stm.setString(1, StaffID);
                 stm.setInt(2, serviceID);
-                if (!status_choose.equals("All")) {
+                if (status_choose.equals("All")) {
+                    stm.setInt(3, (page - 1) * 5);
+                } else {
                     stm.setString(3, status_choose);
+                    stm.setInt(4, (page - 1) * 5);
                 }
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -332,6 +382,55 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
+    public int getMyOrderPage(String StaffID, int serviceID, String status_choose)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String sql = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                if (status_choose.equals("All")) {
+                    sql = "Select count(*) "
+                            + "From Orders "
+                            + "where StaffID = ? and ServiceID = ? ";
+                } else {
+                    sql = "Select count(*) "
+                            + "From Orders "
+                            + "where StaffID = ? and ServiceID = ? and Status = ? ";
+                }
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, StaffID);
+                stm.setInt(2, serviceID);
+                if (!status_choose.equals("All")) {
+                    stm.setString(3, status_choose);
+                }
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage = total / 5;
+                    if (countPage % 5 != 0 && countPage % 2 != 0) {
+                        countPage++;
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+
     public boolean UpdateStatusOrder(String OrderID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -358,6 +457,52 @@ public class OrderDAO implements Serializable {
             }
         }
         return false;
+    }
+
+    public OrderDTO getOrderByOrderID(String orderID)
+            throws SQLException, ClassNotFoundException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        OrderDTO result = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select OrderID, ServiceID, acc.FullName, StaffID, ShipAddress, ShipCity, PhoneNumber, "
+                        + "Delivery_charges, Total_Order, OrderDate, ord.Status "
+                        + "from Orders ord "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID  "
+                        + "where OrderID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return result = new OrderDTO(rs.getString("OrderID"),
+                            rs.getInt("ServiceID"),
+                            rs.getString("FullName"),
+                            rs.getString("StaffID"),
+                            rs.getString("ShipAddress"),
+                            rs.getString("ShipCity"),
+                            rs.getString("PhoneNumber"),
+                            rs.getDate("OrderDate"),
+                            rs.getFloat("Delivery_charges"),
+                            rs.getFloat("Total_Order"),
+                            rs.getString("Status"));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 
 }

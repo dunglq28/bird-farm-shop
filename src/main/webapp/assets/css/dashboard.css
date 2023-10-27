@@ -18,19 +18,14 @@ body {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 110px;
+     width: 280px;
     height: 100vh;
     padding: 0 1.7rem;
     color: #fff;
     overflow: hidden;
-    transition: all 0.5 linear;
     background: #0D6780;
 }
 
-.sidebar:hover {
-    width: 280px;
-    transition: 0.5s;
-}
 
 .logo {
     height: 80px;
@@ -234,4 +229,49 @@ tr:nth-child(even) {
     width: 150px;
     height: 150px;
     object-fit: cover;
+}
+
+.pagination__option a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #111111;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    -webkit-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+    margin-right: 6px;
+    text-decoration: none;
+}
+.pagination__option a.active{
+    background-color: #0D6780;
+    color: white;
+    border: 1px solid #0D6780;
+}
+
+.pagination__option a:last-child {
+    margin-right: 0;
+}
+
+.pagination__option a i {
+    font-weight: 600;
+}
+
+.pagination__option a:hover {
+    background: rgb(37,118,140);
+    border-color: rgb(37,118,140);
+    color: #ffffff;
+}
+.btn.btn-secondary.active {
+    background-color: rgb(13,103,128);
+}
+
+.btn-secondary:hover {
+    background-color: rgb(13,103,128);
+
 }
