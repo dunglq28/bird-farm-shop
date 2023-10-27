@@ -171,7 +171,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public List<OrderDTO> ViewNewStaffOrders(int page)
+    public List<OrderDTO> ViewNewStaffOrders(int page, String searchValue)
             throws SQLException, ClassNotFoundException {
 
         Connection con = null;
@@ -186,13 +186,16 @@ public class OrderDAO implements Serializable {
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
-                        + "where ord.Status = 'Wait for confirmation' "
+                        + "where ord.Status = 'Wait for confirmation' and ord.OrderID like ? "
+                        + "or ord.Status = 'Wait for confirmation' and acc.FullName like ? "
                         + "Order by ord.OrderDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 5 ROWS ONLY ";
+                        + "FETCH FIRST 6 ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, (page - 1) * 5);
+                stm.setString(1, "%" + searchValue + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setInt(3, (page - 1) * 6);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -229,7 +232,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public int getNewOrderPage()
+    public int getNewOrderPage(String searchValue)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -238,14 +241,18 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Select count(*) "
-                        + "From Orders "
-                        + "where Status = 'Wait for confirmation' ";
+                        + "from Orders ord "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID "
+                        + "where ord.Status = 'Wait for confirmation' and ord.OrderID like ? "
+                        + "or ord.Status = 'Wait for confirmation' and acc.FullName like ? ";
                 stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                stm.setString(2, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
-                    int countPage = total / 5;
-                    if (countPage % 5 != 0 && countPage % 2 != 0) {
+                    int countPage = total / 6;
+                    if (countPage % 6 != 0 && countPage % 2 != 0) {
                         countPage++;
                     }
                     return countPage;
@@ -294,7 +301,7 @@ public class OrderDAO implements Serializable {
         return false;
     }
 
-    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose, int page)
+    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose, int page, String searchValue)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -310,16 +317,22 @@ public class OrderDAO implements Serializable {
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
-                        + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? "
+                        + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and ord.OrderID like ? "
+                        + "or ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and acc.FullName like ? "
                         + "Order by ord.OrderDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 5 ROWS ONLY ";
+                        + "FETCH FIRST 6 ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, StaffID);
                 stm.setInt(2, serviceID);
                 stm.setString(3, "%" + status_choose + "%");
-                stm.setInt(4, (page - 1) * 5);
+                stm.setString(4, "%" + searchValue + "%");
+                stm.setString(5, StaffID);
+                stm.setInt(6, serviceID);
+                stm.setString(7, "%" + status_choose + "%");
+                stm.setString(8, "%" + searchValue + "%");
+                stm.setInt(9, (page - 1) * 6);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -356,7 +369,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public int getMyOrderPage(String StaffID, int serviceID, String status_choose)
+    public int getMyOrderPage(String StaffID, int serviceID, String status_choose, String searchValue)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -365,19 +378,25 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Select count(*) "
-                        + "From Orders "
-                        + "where StaffID = ? and ServiceID = ? and Status like ? ";
+                        + "From Orders ord "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID "
+                        + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and ord.OrderID like ? "
+                        + "or ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and acc.FullName like ? ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, StaffID);
                 stm.setInt(2, serviceID);
                 stm.setString(3, "%" + status_choose + "%");
-
+                stm.setString(4, "%" + searchValue + "%");
+                stm.setString(5, StaffID);
+                stm.setInt(6, serviceID);
+                stm.setString(7, "%" + status_choose + "%");
+                stm.setString(8, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
-                    int countPage = total / 5;
-                    if (countPage % 5 != 0 && countPage % 2 != 0) {
+                    int countPage = total / 6;
+                    if (countPage % 6 != 0 && countPage % 2 != 0) {
                         countPage++;
                     }
                     return countPage;

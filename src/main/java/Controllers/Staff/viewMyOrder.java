@@ -29,6 +29,7 @@ public class viewMyOrder extends HttpServlet {
         String serviceID = request.getParameter("txtServiceID");
         String status = request.getParameter("Status");
         String page = request.getParameter("page");
+        String searchValue = request.getParameter("txtSearch");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -42,6 +43,9 @@ public class viewMyOrder extends HttpServlet {
             if (status == null || status.equals("All")) {
                 status = "";
             }
+            if (searchValue == null) {
+                searchValue = "";
+            }
             if (page == null) {
                 page = "1";
             }
@@ -49,8 +53,8 @@ public class viewMyOrder extends HttpServlet {
             OrderDAO dao = new OrderDAO();
             StaffDAO staffdao = new StaffDAO();
             StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status);
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage);
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue);
 
             int start = 1;
             int distance = 4;

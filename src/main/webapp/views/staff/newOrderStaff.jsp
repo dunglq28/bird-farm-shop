@@ -21,8 +21,6 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-
-
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
@@ -32,10 +30,11 @@
                         <h2>Order Management</h2>
                     </div>
                     <div class="user--info">
-                        <div class="search--box">
+                        <form action="viewNewOrder" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input type="text" placeholder="search" />
-                        </div>
+                            <input name="txtSearch" value="" type="text" placeholder="Search" />
+                            <button type="submit"></button>
+                        </form>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>

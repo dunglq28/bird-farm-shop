@@ -52,6 +52,9 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
                     }
+                    if (account != null && account.getRoleName().equals("Staff")) {
+                        url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                    }
                 }
             }
 

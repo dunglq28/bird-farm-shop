@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="./assets/css/resetcss.css">
         <link rel="stylesheet" href="./assets/css/grid.css">
         <link rel="stylesheet" href="./assets/css/base.css">
-        <link rel="stylesheet" href="./assets/css/newhome.css">
+        <link rel="stylesheet" href="./assets/css/newhome.css">        
         <link rel="stylesheet" href="./assets/css/header.css">
         <link rel="stylesheet" href="./assets/css/responsiveHomepage.css">
     </head>

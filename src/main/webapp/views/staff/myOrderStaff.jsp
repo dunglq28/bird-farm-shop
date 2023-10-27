@@ -32,10 +32,11 @@
                         <h2>Order Management</h2>
                     </div>
                     <div class="user--info">
-                        <div class="search--box">
+                        <form action="viewMyOrder-staff" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input type="text" placeholder="search" />
-                        </div>
+                            <input name="txtSearch" value="" type="text" placeholder="Search" />
+                            <button type="submit"></button>
+                        </form>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
