@@ -14,6 +14,11 @@
         <link rel="stylesheet" href="./assets/css/header.css">
         <link rel="stylesheet" href="./assets/css/responsiveHomepage.css">
     </head>
+    <style>
+        .introduction-text{
+            font-size: 150%;
+        }
+    </style>
     <body>
         <jsp:include page="/components/header.jsp"></jsp:include>
             <div class="intro">
@@ -27,48 +32,48 @@
 
                     <div class="content active">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                        <p>
+                        <p class="introduction-text">
                             We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="product_list?productType=bird">Shop now</a>
+                        <a href="product_list?productType=bird" class="introduction-text">Shop now</a>
                     </div>
                     <div class="content">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                        <p>
+                        <p class="introduction-text" >
                             We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="product_list?productType=bird">Shop now</a>
+                        <a href="product_list?productType=bird" class="introduction-text">Shop now</a>
                     </div>
                     <div class="content">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                        <p>
+                        <p class="introduction-text">
                             We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="product_list?productType=bird">Shop now</a>
+                        <a href="product_list?productType=bird" class="introduction-text">Shop now</a>
                     </div>
                     <div class="content">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                        <p>
+                        <p class="introduction-text">
                             We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="product_list?productType=bird">Shop now</a>
+                        <a href="product_list?productType=bird" class="introduction-text">Shop now</a>
                     </div>
                     <div class="content">
                         <h1>WELCOME TO<br><span>BIRD FARM SHOP</span></h1>
-                        <p>
+                        <p class="introduction-text">
                             We believe in simplicity and integrity, ensuring a life that’s honest, down to earth and true to self. 
                             We are friendly, fun-loving and bursting with heaps of energy, spreading the joy with everyone we meet.
                             We enjoy spending quality time together while shopping online with friends and family - doing the things we love as one big unit.
                         </p>
-                        <a href="product_list?productType=bird">Shop now</a>
+                        <a href="product_list?productType=bird" class="introduction-text">Shop now</a>
                     </div>
 
                     <div class="slider-navigation">
@@ -87,7 +92,7 @@
                     <h3>"Healthy environment - Healthy birds"</h3>
                 </div>
                 <div>
-                    <P>“Bird Farm” is our step towards sustainable development. With the goal of building an environmentally 
+                    <P class="introduction-text">“Bird Farm” is our step towards sustainable development. With the goal of building an environmentally 
                         friendly farm, our farm has a diverse ecological habitat: cool air with many trees, carefully selected 
                         and rich natural food sources for birds. Fiber and minerals for healthy birds.</P>
                 </div>
