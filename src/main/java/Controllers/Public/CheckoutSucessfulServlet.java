@@ -141,8 +141,8 @@ public class CheckoutSucessfulServlet extends HttpServlet {
 
                             bndao = new Bird_Nest_TrackingDAO();
                             bnId = bndao.createBirdNestID();
-                            bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0,
-                                    account.getAccountID(), serviceID, Float.parseFloat(totalOrder),
+                            bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0,0,0,
+                                    account.getAccountID(), serviceID, Float.parseFloat(totalOrder),0,
                                     orderDate, orderDate, null, "Wait for confirmation");
                             bndao.createBirdNestTracking(bndto);
                             session.removeAttribute("MALE_BIRD_CHOOSE");
