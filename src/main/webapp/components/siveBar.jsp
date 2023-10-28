@@ -19,8 +19,9 @@
 
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
             <li>
-                <a href="viewNewOrder">
+                <a href="viewNewOrder" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
+                     <span class="cart-number">10</span>
                     <span>Orders in queue</span>
                 </a>
             </li>

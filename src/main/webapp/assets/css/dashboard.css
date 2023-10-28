@@ -276,3 +276,22 @@ tr:nth-child(even) {
     background-color: rgb(13,103,128);
 
 }
+
+.sidebar .menu .list-cart-icon {
+    position: relative;
+}
+
+.sidebar .menu .list-cart-icon .cart-number {
+    background-color: #ddd7d7;
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    left: 12px;
+    color: #0D6780;
+    font-size: 11px;
+    border-radius: 12px;
+    width: 25px;
+    height: 15px;
+    text-align: center;
+    color: #fff;
+}
