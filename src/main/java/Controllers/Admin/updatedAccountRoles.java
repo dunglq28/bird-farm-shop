@@ -1,14 +1,13 @@
 package Controllers.Admin;
 
+import Daos.AccountDAO;
 import Daos.AdminDAO;
-import Daos.OrderDAO;
 import Daos.StaffDAO;
-import Models.OrderDTO;
+import Models.AccountDTO;
 import Models.StaffDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,38 +17,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "updatedAccount", urlPatterns = {"/updatedAccount"})
-public class updatedAccount extends HttpServlet {
+@WebServlet(name = "updatedAccountRoles", urlPatterns = {"/updatedAccountRoles"})
+public class updatedAccountRoles extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
+        String accountid = request.getParameter("accountid");
+        String Role = request.getParameter("role");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-        String status = request.getParameter("status");
-        String accountID = request.getParameter("accountID");
         try {
-            boolean status_update;
-            status_update = status.equals("Enable");
-            AdminDAO dao = new AdminDAO();
-            OrderDAO ord = new OrderDAO();
-            StaffDAO staff = new StaffDAO();
-            boolean result = dao.UpdatedStatus(accountID, status_update);
-            if (result && status_update == true) {
+            int roleID = 4;
+            long millis = System.currentTimeMillis();
+            java.sql.Date date = new java.sql.Date(millis);
+            AccountDAO dao = new AccountDAO();
+            AccountDTO accDTO = dao.getAccountByID(accountid);
+            StaffDAO staffDAO = new StaffDAO();
+            AdminDAO adDAO = new AdminDAO();
+            if (Role.equals("Staff")) {
+                roleID = 3;
+                StaffDTO staff = new StaffDTO(staffDAO.createStafftID(), accDTO.getFullName(), accDTO.getEmail(), null, null, null,
+                        "M1", accDTO.getAccountID(), date, true);
+                staffDAO.createStaff(staff);
+            } else if (Role.equals("Manager")) {
+                roleID = 2;
+            } else if (Role.equals("Admin")) {
+                roleID = 1;
+            }
+            boolean result = adDAO.UpdatedRole(accountid, roleID);
+            if (result) {
                 url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
-            } else if (status_update == false) {
-                StaffDTO staffDTO = staff.getStaffByAccountID(accountID);
-                if (staffDTO.getStaffID() != null) {
-                    boolean staff_result = staff.UpdateStaff(staffDTO.getAccountID());
-                    if (staff_result) {
-                        List<OrderDTO> orderList = staff.GetDestroyListStaffOrders(staffDTO.getStaffID());
-                        while (orderList != null) {
-                            ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
-                        }
-                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
-                    } else {
-                        url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-                    }
-                }
             }
 
         } finally {
@@ -73,9 +70,9 @@ public class updatedAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountRoles.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountRoles.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,9 +90,9 @@ public class updatedAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountRoles.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountRoles.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

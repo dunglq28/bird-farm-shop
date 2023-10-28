@@ -97,6 +97,12 @@ public class OrderDTO {
     
     
 
+    public OrderDTO(String orderID, String staffID, String status) {
+        this.orderID = orderID;
+        this.staffID = staffID;
+        this.status = status;
+    }
+
     
     
     public String getOrderDateFormat() {

@@ -93,4 +93,32 @@ public class AdminDAO {
         }
         return false;
     }
+     
+     public boolean UpdatedRole(String accountID, int roleID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "update Account "
+                        + "set RoleID = ? "
+                        + "where AccountID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, roleID);
+                stm.setString(2, accountID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }

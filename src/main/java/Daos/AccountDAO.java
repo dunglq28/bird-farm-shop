@@ -228,8 +228,8 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
-    
-     public boolean updatePasswordByAccountID(String id, String password)
+
+    public boolean updatePasswordByAccountID(String id, String password)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -258,6 +258,42 @@ public class AccountDAO implements Serializable {
             }
         }
         return false;
+    }
+
+    public AccountDTO getAccountByID(String ID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        AccountDTO account = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select acc.AccountID, acc.FullName, acc.Email "
+                        + "from Account acc inner join Roles rol on "
+                        + "acc.RoleID = rol.RoleID "
+                        + "where acc.AccountID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, ID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String AccountID = rs.getString("AccountID");
+                    String FullName = rs.getString("FullName");
+                    String Email = rs.getString("Email");
+                    return account = new AccountDTO(AccountID, FullName, Email);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 
 }
