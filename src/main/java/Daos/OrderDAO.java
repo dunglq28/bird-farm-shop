@@ -190,12 +190,12 @@ public class OrderDAO implements Serializable {
                         + "or ord.Status = 'Wait for confirmation' and acc.FullName like ? "
                         + "Order by ord.OrderDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 6 ROWS ONLY ";
+                        + "FETCH FIRST 10 ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
                 stm.setString(2, "%" + searchValue + "%");
-                stm.setInt(3, (page - 1) * 6);
+                stm.setInt(3, (page - 1) * 10);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -251,8 +251,8 @@ public class OrderDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
-                    int countPage = total / 6;
-                    if (countPage % 6 != 0 && countPage % 2 != 0) {
+                    int countPage = total / 10;
+                    if (countPage % 10 != 0 && countPage % 2 != 0) {
                         countPage++;
                     }
                     return countPage;

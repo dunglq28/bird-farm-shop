@@ -38,7 +38,6 @@
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
-
             <div class="tabular--wrapper">
                 <h3 class="main--title">New Order</h3>
                 <div class="table-container">
