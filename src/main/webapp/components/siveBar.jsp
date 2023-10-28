@@ -19,9 +19,10 @@
 
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
             <li>
+                <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
                 <a href="viewNewOrder" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
-                     <span class="cart-number">10</span>
+                    <span class="cart-number">${oDao.numberOfNewOrder}</span>
                     <span>Orders in queue</span>
                 </a>
             </li>

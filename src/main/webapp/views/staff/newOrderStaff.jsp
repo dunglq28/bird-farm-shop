@@ -61,7 +61,7 @@
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
                                     <tr>
-                                        <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
+                                        <td><a href="viewDetailOrder?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
                                         <td>${util.FormatDate(dto.orderDate)}</td>

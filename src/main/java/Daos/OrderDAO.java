@@ -271,6 +271,37 @@ public class OrderDAO implements Serializable {
         }
         return 0;
     }
+    
+    public int getNumberOfNewOrder()
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) as 'Number of new order' "
+                        + "from Orders  "
+                        + "where Status = 'Wait for confirmation' ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt("Number of new order");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
 
     public boolean takeActionOrder(String StaffID, String OrderID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
