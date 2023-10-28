@@ -63,6 +63,9 @@ public class AuthLoginServlet extends HttpServlet {
                                 : (String) session.getAttribute("HISTORY_URL");
                     }
                 }
+                if (account != null && account.getRoleName().equals("Staff")) {
+                    url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                }
             }
 
         } catch (SQLException ex) {

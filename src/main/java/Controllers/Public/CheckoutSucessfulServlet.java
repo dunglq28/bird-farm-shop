@@ -83,7 +83,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                     OrderDAO orderdao = new OrderDAO();
                     String orderID = orderdao.createOrderID();
                     OrderDTO newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
-                            orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
+                            customer.getPhone_Number(), orderDate, null, 0, shippingCash, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                     orderdao.createOrder(newOrder);
 
                     ProductDAO birdDao = new ProductDAO();
@@ -121,7 +121,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                             odDao.createOrderDetail(odDto);
                             odDto = new OrderDetailDTO(orderID, femaleBird.getProductID(), femaleBird.getPriceDiscount(), 0);
                             odDao.createOrderDetail(odDto);
-                            
+
                             quantityAvaUpdate = maleBird.getQuantity_Available() - 1;
                             if (quantityAvaUpdate == 0) {
                                 status = "Sold out";
@@ -138,7 +138,7 @@ public class CheckoutSucessfulServlet extends HttpServlet {
                             }
                             birdDao.updateQuantityAfterOrder(quantityAvaUpdate, femaleBird.getQuantity_Sold(), status, femaleBird.getProductID());
                             birdDao.updateQuantityMating(femaleBird.getQuantity_AreMating() + 1, femaleBird.getProductID());
-                            
+
                             bndao = new Bird_Nest_TrackingDAO();
                             bnId = bndao.createBirdNestID();
                             bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0,

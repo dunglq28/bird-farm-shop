@@ -17,11 +17,10 @@
             />
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <title>New Order</title>
+
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-
-
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
@@ -31,14 +30,14 @@
                         <h2>Order Management</h2>
                     </div>
                     <div class="user--info">
-                        <div class="search--box">
+                        <form action="viewNewOrder" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input type="text" placeholder="search" />
-                        </div>
+                            <input name="txtSearch" value="" type="text" placeholder="Search" />
+                            <button type="submit"></button>
+                        </form>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
-         
             <div class="tabular--wrapper">
                 <h3 class="main--title">New Order</h3>
                 <div class="table-container">
@@ -61,36 +60,50 @@
                             <c:set var="order" value="${requestScope.STAFF_ALL_ORDERS}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
-                                    <div>
-                                        <div>
-                                            <tr>
-                                                <td><a href="" class="order-detail">${dto.orderID}</a></td>
-                                                <td>${dto.serviceName}</td>
-                                                <td>${dto.accountName}</td>
-                                                <td>${util.FormatDate(dto.orderDate)}</td>
-                                                <td>${util.FormatPrice(dto.total_order_final)}</td>
-                                                <td>${dto.form_Receipt}</td>
-                                                <td>${dto.payBy}</td>
-                                                <td>${dto.status}</td>
-                                                <td>
-                                                    <div class="action">
-                                                        <a href="acceptOrder-staff?orderID=${dto.orderID}"><i class="fa-solid fa-check"></i></a>
-                                                        <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                                    </div>
-                                                    <input type="hidden" name="orderID" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                    <input type="hidden" name="" value="" />
-                                                </td>
-                                            </tr>
-                                        </div>
-                                    </div>
+                                    <tr>
+                                        <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
+                                        <td>${dto.serviceName}</td>
+                                        <td>${dto.accountName}</td>
+                                        <td>${util.FormatDate(dto.orderDate)}</td>
+                                        <td>${util.FormatPrice(dto.total_order_final)}</td>
+                                        <td>${dto.form_Receipt}</td>
+                                        <td>${dto.payBy}</td>
+                                        <td>${dto.status}</td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="acceptOrder-staff?orderID=${dto.orderID}"><i class="fa-solid fa-check"></i></a>
+                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                            </div>
+                                            <input type="hidden" name="orderID" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                            <input type="hidden" name="" value="" />
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                             </c:if>
                             </tbody>
                     </table>
                 </div>
+
             </div>
+            <div class="col-lg-12 text-center mt-2">
+                <div class="pagination__option" style="text-align: end">
+                    <c:if test="${requestScope.indexCurrent > 1}">
+                        <a href="viewNewOrder?page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewNewOrder?page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        </c:if>
+
+                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewNewOrder?page=${i}">${i}</a>
+                    </c:forEach>
+
+                    <c:if test="${requestScope.indexCurrent < requestScope.endPage}">
+                        <a href="viewNewOrder?page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewNewOrder?page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        </c:if>
+                </div>
+            </div>  
     </body>
 </html>

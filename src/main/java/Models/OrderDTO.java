@@ -20,6 +20,7 @@ public class OrderDTO {
     private String shipperID;
     private String shipAddress;
     private String shipCity;
+    private String phoneNumber;
     private Date orderDate;
     private Date orderDateFormat;
     private Date receiptDate;
@@ -33,7 +34,7 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountID = accountID;
@@ -42,6 +43,7 @@ public class OrderDTO {
         this.shipperID = shipperID;
         this.shipAddress = shipAddress;
         this.shipCity = shipCity;
+        this.phoneNumber = phoneNumber;
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
         this.discount = discount;
@@ -78,6 +80,22 @@ public class OrderDTO {
         this.discount = discount;
         this.delivery_charges = delivery_charges;
     }
+
+    public OrderDTO(String orderID, int serviceID, String accountName, String staffID, String shipAddress, String shipCity, String phoneNumber, Date orderDate, float delivery_charges, float total_Order, String status) {
+        this.orderID = orderID;
+        this.serviceID = serviceID;
+        this.accountName = accountName;
+        this.staffID = staffID;
+        this.shipAddress = shipAddress;
+        this.shipCity = shipCity;
+        this.phoneNumber = phoneNumber;
+        this.orderDate = orderDate;
+        this.delivery_charges = delivery_charges;
+        this.total_Order = total_Order;
+        this.status = status;
+    }
+    
+    
 
     public OrderDTO(String orderID, String staffID, String status) {
         this.orderID = orderID;
@@ -195,8 +213,16 @@ public class OrderDTO {
     public void setShipCity(String shipCity) {
         this.shipCity = shipCity;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
     
-    
+
 
     public Date getOrderDate() {
         return orderDate;

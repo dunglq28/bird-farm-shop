@@ -16,6 +16,8 @@ public class ProductDTO {
     private String color;
     private String gender;
     private String image;
+    private int quantity_MaleBird;
+    private int quantity_FemaleBird;
     private int quantity_Available;
     private int quantity_AreMating;
     private int quantity_Sold;
@@ -82,7 +84,7 @@ public class ProductDTO {
         this.status = status;
     }
 
-    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
+    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image,  int quantity_MaleBird,  int quantity_FemaleBird, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
         this.productID = productID;
         this.product_Name = product_Name;
         this.categoryID = categoryID;
@@ -94,6 +96,8 @@ public class ProductDTO {
         this.color = color;
         this.gender = gender;
         this.image = image;
+        this.quantity_MaleBird = quantity_MaleBird;
+        this.quantity_FemaleBird = quantity_FemaleBird;
         this.quantity_Available = quantity_Available;
         this.quantity_Sold = quantity_Sold;
         this.price = price;
@@ -199,6 +203,24 @@ public class ProductDTO {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public int getQuantity_MaleBird() {
+        return quantity_MaleBird;
+    }
+
+    public void setQuantity_MaleBird(int quantity_MaleBird) {
+        this.quantity_MaleBird = quantity_MaleBird;
+    }
+
+    public int getQuantity_FemaleBird() {
+        return quantity_FemaleBird;
+    }
+
+    public void setQuantity_FemaleBird(int quantity_FemaleBird) {
+        this.quantity_FemaleBird = quantity_FemaleBird;
+    }
+    
+    
 
     public int getQuantity_Available() {
         return quantity_Available;

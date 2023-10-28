@@ -19,8 +19,9 @@
 
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
             <li>
-                <a href="viewNewOrder">
+                <a href="viewNewOrder" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
+                     <span class="cart-number">10</span>
                     <span>Orders in queue</span>
                 </a>
             </li>
@@ -29,7 +30,7 @@
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
             <li>
                 <a href="viewMyOrder-staff?txtServiceID=1">
-                    <i class="fas fa-chart-bar"></i>
+                    <i class="fa-solid fa-file-invoice"></i>
                     <span>My Order</span>
                 </a>
             </li>
@@ -37,7 +38,7 @@
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
             <li>
                 <a href="viewMyOrder-staff?txtServiceID=2">
-                    <i class="fas fa-chart-bar"></i>
+                    <i class="fa-solid fa-file-invoice"></i>
                     <span>My Booking</span>
                 </a>
             </li>

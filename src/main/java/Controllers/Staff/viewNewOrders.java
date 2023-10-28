@@ -2,6 +2,7 @@ package Controllers.Staff;
 
 import Daos.OrderDAO;
 import Daos.StaffDAO;
+import Models.AccountDTO;
 import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -24,13 +25,49 @@ public class viewNewOrders extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
+        String page = request.getParameter("page");
+        String searchValue = request.getParameter("txtSearch");
         String url = "";
         try {
-//            HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null || !account.getRoleName().equals("Staff")) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                return;
+            }
+            if (searchValue == null) {
+                searchValue = "";
+            }
+            if (page == null) {
+                page = "1";
+            }
+            int indexPage = Integer.parseInt(page);
             OrderDAO dao = new OrderDAO();
-            List<OrderDTO> result = dao.ViewNewStaffOrders();
+            int endPage = dao.getNewOrderPage(searchValue);
+            List<OrderDTO> result = dao.ViewNewStaffOrders(indexPage, searchValue);
             request.setAttribute("STAFF_ALL_ORDERS", result);
+            int start = 1;
+            int distance = 4;
 
+            int end;
+            if (endPage < distance) {
+                end = endPage;
+            } else {
+                end = start + distance;
+            }
+
+            if (indexPage >= 4) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
+                }
+            }
+            request.setAttribute("START", start);
+            request.setAttribute("END", end);
+            request.setAttribute("indexCurrent", indexPage);
+            request.setAttribute("endPage", endPage);
             url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
 
         } finally {

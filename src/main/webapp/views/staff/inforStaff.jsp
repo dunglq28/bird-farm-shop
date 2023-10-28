@@ -1,4 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+    Document   : inforStaff
+    Created on : Oct 28, 2023, 12:07:35 PM
+    Author     : hoang
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +23,7 @@
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
-        <title>My Order</title>
+        <title>Staff</title>
 
     </head>
     <body>
@@ -29,49 +34,33 @@
                 <div class="header-wrapper">
                     <div class="header--title">
                         <span>Primary</span>
-                        <h2>Order Management</h2>
+                        <h2>Staff Management</h2>
                     </div>
                     <div class="user--info">
-                        <form action="viewMyOrder-staff" class="search--box">
+                        <div class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="" type="text" placeholder="Search" />
-                            <button type="submit"></button>
-                        </form>
+                            <input type="text" placeholder="search" />
+                        </div>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
             <div class="tabular--wrapper">
-                <c:if test="${requestScope.SERVICE_ID == 1}">
-                    <h3 class="main--title">My Order</h3>
-                </c:if>
-                <c:if test="${requestScope.SERVICE_ID != 1}">
-                    <h3 class="main--title">My Booking</h3>
-                </c:if>
-                <form action="viewMyOrder-staff">
-                    <div class="mb-4 justify-content-between align-items-sm-start">
-                        <div class="col-md-4 col-lg-6 col-xl-6">
-                            <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == '' ? 'active' : ''}" >
-                            <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}"  >
-                            <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}"  >
-                            <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}"  >
-                            <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
-                        </div>
-                    </div>
-                </form>
+                
+                <h3 class="main--title">Staff</h3>
+              
 
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
-                                <th>OrderID</th>
-                                <th>Service</th>
-                                <th>Customer Name</th>
-                                <th>Order Date</th>
-                                <th>Total</th>
-                                <th>Delivery method</th>
-                                <th>Payment method</th>
+                                <th>Acount ID</th>
+                                <th>Full Name</th>
+                                <th>Role Name</th>
+                                <th>Email</th>
+                                <th>Date created</th>
+                                <th>Created By</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,13 +69,12 @@
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
                                     <tr>
-                                        <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
-                                        <td>${dto.serviceName}</td>
-                                        <td>${dto.accountName}</td>
-                                        <td>${util.FormatDate(dto.orderDate)}</td>
-                                        <td>${util.FormatPrice(dto.total_Order)}</td>
-                                        <td>${dto.form_Receipt}</td>
-                                        <td>${dto.payBy}</td>
+                                        <td>A01</td>
+                                        <td>Tâm Péo Nguyễn</td>
+                                        <td>Staff</td>
+                                        <td>Tampeo@gmail.com</td>
+                                        <td>27/10/2023</td>
+                                        <td>Trung Luu</td>
                                         <td>
                                             <form action="updatedOrders-staff">
                                                 <select name="txtNewStatus" onchange="submit()" class="rounded-select" >

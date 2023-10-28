@@ -74,7 +74,9 @@
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 ">
                                                                 <h6 class="mb-0 text-sm-center">${util.FormatPrice(items.get(key).priceDiscount)}</h6>
-                                                                <h6 class="mb-0 text-sm-center text-muted origin-price">${util.FormatPrice(items.get(key).price)}</h6>
+                                                                <c:if test="${items.get(key).discount != 0}">
+                                                                    <h6 class="mb-0 text-sm-center text-muted origin-price">${util.FormatPrice(items.get(key).price)}</h6>
+                                                                </c:if>
                                                             </div>
                                                             <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center quantity-form">
                                                                 <form action="cart" method="POST" style="display: flex">
