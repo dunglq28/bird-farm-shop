@@ -127,11 +127,11 @@
                         </div>
                         <div class="row d-flex icon-content">
                             <div class="d-flex flex-column">
-                                <p class="font-weight-bold">Preparing<br>For Delivery</p>
+                                <p class="font-weight-bold">Booking<br>Success</p>
                             </div>
                         </div>
                     </div>
-                    <button class="pay">Booking<br>Success</button>    
+                    <button class="pay">Complete payment</button>    
                 </div>
             </div>
 
