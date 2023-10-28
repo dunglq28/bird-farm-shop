@@ -62,6 +62,8 @@
                                                                         <h6 class="text-muted">Gender: ${items.get(key).gender}</h6>
                                                                     </div>
                                                                     <h6 class="text-muted">Color: ${items.get(key).color}</h6>
+                                                                    <h6 class="text-muted">Male baby bird: 1 tam peo</h6>
+                                                                    <h6 class="text-muted">Female baby bird: 2 tam peo</h6>
                                                                 </c:if>
 
                                                                 <div class="delete-product mb-1">

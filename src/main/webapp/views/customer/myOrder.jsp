@@ -142,6 +142,12 @@
                                                                             <h6 class="mb-0">${util.FormatPrice(od.price)}</h6>
                                                                         </div>
                                                                     </div>
+                                                                     <div class="">
+                                                                        <h6 class="text-black mb-0">Male baby bird: 1</h6>
+                                                                    </div> 
+                                                                    <div class="">
+                                                                        <h6 class="text-black mb-0">Female baby bird: 1</h6>
+                                                                    </div>    
 
 
                                                                 </div>
