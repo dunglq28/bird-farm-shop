@@ -38,6 +38,8 @@ public class AccountDTO {
         this.roleName = roleName;
         this.password = passWord;
     }
+    
+    
 
     public AccountDTO(String accountID, String fullName, String email, Date date_created, String createBy, String roleName, boolean status) {
         this.accountID = accountID;

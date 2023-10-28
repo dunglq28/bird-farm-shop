@@ -1,5 +1,6 @@
 package Daos;
 
+import Models.CustomerDTO;
 import Models.OrderDTO;
 import Models.StaffDTO;
 import Utils.DBHelper;
@@ -194,4 +195,82 @@ public class StaffDAO {
         }
         return null;
     }
+
+    public String createStafftID() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select MAX(StaffID) as 'StaffID' "
+                        + "From Staffs "
+                        + "Where StaffID like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "S" + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String StaffIDMax = rs.getString("StaffID");
+                    if (StaffIDMax == null) {
+                        return "S01";
+                    } else {
+                        int num = Integer.parseInt(StaffIDMax.substring(1)) + 1;
+                        String newOrderID;
+                        if (num <= 9) {
+                            newOrderID = "S0";
+                        } else {
+                            newOrderID = "S";
+                        }
+
+                        return newOrderID.concat(String.valueOf(num));
+                    }
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public boolean createStaff(StaffDTO staff) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Insert into Staffs( "
+                        + "StaffID, Name, Email, AccountID, ManagerID, Date_created, Status "
+                        + ") values ( "
+                        + "?, ?, ?, ?, ?, ?, ? "
+                        + ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, staff.getStaffID());
+                stm.setString(2, staff.getName());
+                stm.setString(3, staff.getEmail());
+                stm.setString(4, staff.getAccountID());
+                stm.setString(5, staff.getManagerID());
+                stm.setDate(6, staff.getDate_created());
+                stm.setBoolean(7, true);
+
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
 }
