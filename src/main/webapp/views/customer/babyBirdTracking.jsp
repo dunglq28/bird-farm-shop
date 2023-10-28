@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="pay">Complete payment</button>    
+                    <button class="pay">Booking<br>Success</button>    
                 </div>
             </div>
 
