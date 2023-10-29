@@ -112,5 +112,46 @@ public class OrderDetailDAO {
         }
         return this.orderDetailList;
     }
+    
+    public Products getOrderDetailProductByOrderID(String orderId, String gender)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Products result = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = null;
+                //2.Create SQL statement string
+                sql = "select od.ProductID, od.Price "
+                        + "from Order_Details od "
+                        + "inner join Products pro on pro.ProductID = od.ProductID "
+                        + "where od.OrderID = ? and pro.Gender = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                stm.setString(2, gender);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    Products pro = new Products(rs.getString("ProductID"), null, rs.getFloat("Price"));
+                    return pro;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
 }

@@ -68,9 +68,9 @@ public class Bird_Nest_TrackingDAO implements Serializable {
             if (con != null) {
                 String sql = "Insert into Bird_Nest_Tracking ( "
                         + "Bird_Nest_ID, OrderID, Bird_Nest_Name, Eggs_Quantity, Male_Babybird, Female_Babybird, AccountID, ServiceID, "
-                        + "Deposit_Price, Total_Price, OrderDate, LastUpdateDate, NOTE, Status "
+                        + "OrderDate, LastUpdateDate, NOTE, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newBirdNest.getBird_Nest_ID());
@@ -81,12 +81,10 @@ public class Bird_Nest_TrackingDAO implements Serializable {
                 stm.setInt(6, newBirdNest.getFemale_Babybird());
                 stm.setString(7, newBirdNest.getAccountID());
                 stm.setInt(8, newBirdNest.getServiceID());
-                stm.setFloat(9, newBirdNest.getDeposit_Price());
-                stm.setFloat(10, newBirdNest.getTotal_Price());
-                stm.setDate(11, newBirdNest.getOrderDate());
-                stm.setDate(12, newBirdNest.getLastUpdateDate());
-                stm.setString(13, newBirdNest.getNote());
-                stm.setString(14, newBirdNest.getStatus());
+                stm.setDate(9, newBirdNest.getOrderDate());
+                stm.setDate(10, newBirdNest.getLastUpdateDate());
+                stm.setString(11, newBirdNest.getNote());
+                stm.setString(12, newBirdNest.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -117,7 +115,7 @@ public class Bird_Nest_TrackingDAO implements Serializable {
                 String sql = null;
                 //2.Create SQL statement string
                 sql = "select Bird_Nest_ID, OrderID, Eggs_Quantity, Male_Babybird, Female_Babybird, "
-                        + "AccountID, ServiceID, Deposit_Price, Total_Price, LastUpdateDate, Status "
+                        + "AccountID, ServiceID, LastUpdateDate, Status "
                         + "from Bird_Nest_Tracking "
                         + "where OrderID = ? ";
                 stm = con.prepareStatement(sql);
@@ -133,8 +131,6 @@ public class Bird_Nest_TrackingDAO implements Serializable {
                             rs.getInt("Female_Babybird"),
                             rs.getString("AccountID"),
                             rs.getInt("ServiceID"),
-                            rs.getFloat("Deposit_Price"),
-                            rs.getFloat("Total_Price"),
                             rs.getDate("LastUpdateDate"),
                             rs.getString("Status"));
                 }
@@ -151,5 +147,35 @@ public class Bird_Nest_TrackingDAO implements Serializable {
             }
         }
         return result;
+    }
+    
+    public boolean updateStatusBirdNestTracking(String orderID, String stauts) 
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Bird_Nest_Tracking "
+                        + "Set Status = ? "
+                        + "Where OrderID = ? ";
+                       
+                stm = con.prepareStatement(sql);
+                stm.setString(1, stauts);
+                stm.setString(2, orderID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 }
