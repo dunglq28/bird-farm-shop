@@ -84,9 +84,6 @@
                         <div class="d-flex flex-column text-sm-left">
                             <p class="mb-0">Update <span>${util.FormatDate(bird_nest_tracking.lastUpdateDate)}</span></p>
                             <p>Customer <span class="font-weight-bold">${sessionScope.CUSTOMER.fullName}</span></p>
-                            <p>Total amount: <span class="font-weight-bold">30.000.000đ</span></p>
-                            <p style="margin-bottom: 0;">Deposit: <span class="font-weight-bold">10.000.000đ</span></p>
-                            <p>Remaining amount: <span class="font-weight-bold">20.000.000đ</span></p>
                         </div>
                     </div>
                     <!-- Add class 'active' to progress -->
@@ -127,11 +124,17 @@
                         </div>
                         <div class="row d-flex icon-content">
                             <div class="d-flex flex-column">
-                                <p class="font-weight-bold">Booking<br>Success</p>
+                                <p class="font-weight-bold">Payment<br>Success</p>
                             </div>
                         </div>
                     </div>
-                    <button class="pay">Complete payment</button>    
+                    <c:if test="${bird_nest_tracking.male_Babybird != 0 && bird_nest_tracking.female_Babybird != 0 && bird_nest_tracking.status != 'Payment Success'}">
+                        <form action="Checkout" method="Post">
+                            <button type="submit" class="pay">Complete payment</button>  
+                            <input type="hidden" name="txtOrderID" value="${bird_nest_tracking.orderID}">
+                            <input type="hidden" name="txtServiceID" value="0" />
+                        </form>
+                    </c:if>
                 </div>
             </div>
 

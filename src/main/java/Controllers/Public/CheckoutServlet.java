@@ -77,7 +77,7 @@ public class CheckoutServlet extends HttpServlet {
                 session.setAttribute("PAYMENT_METHOD", "VNPAY");
                 url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
             } 
-
+       
 //        } catch (SQLException ex) {
 //            ex.printStackTrace();
 //        } catch (ClassNotFoundException ex) {

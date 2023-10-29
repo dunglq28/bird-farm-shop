@@ -12,8 +12,6 @@ public class Bird_Nest_TrackingDTO {
     private int female_Babybird;
     private String accountID;
     private int serviceID;
-    private float deposit_Price;
-    private float total_Price;
     private Date orderDate;
     private Date lastUpdateDate;
     private String note;
@@ -23,7 +21,7 @@ public class Bird_Nest_TrackingDTO {
     }
 
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, int male_Babybird, int female_Babybird, String accountID, int serviceID, float deposit_Price, float total_Price, Date orderDate, Date lastUpdateDate, String note, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, int male_Babybird, int female_Babybird, String accountID, int serviceID, Date orderDate, Date lastUpdateDate, String note, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.bird_Nest_Name = bird_Nest_Name;
@@ -32,15 +30,13 @@ public class Bird_Nest_TrackingDTO {
         this.female_Babybird = female_Babybird;
         this.accountID = accountID;
         this.serviceID = serviceID;
-        this.deposit_Price = deposit_Price;
-        this.total_Price = total_Price;
         this.orderDate = orderDate;
         this.lastUpdateDate = lastUpdateDate;
         this.note = note;
         this.status = status;
     }
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, int male_Babybird, int female_Babybird, String accountID, int serviceID, float deposit_Price, float total_Price, Date lastUpdateDate, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, int eggs_Quantity, int male_Babybird, int female_Babybird, String accountID, int serviceID, Date lastUpdateDate, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.eggs_Quantity = eggs_Quantity;
@@ -48,8 +44,6 @@ public class Bird_Nest_TrackingDTO {
         this.female_Babybird = female_Babybird;
         this.accountID = accountID;
         this.serviceID = serviceID;
-        this.deposit_Price = deposit_Price;
-        this.total_Price = total_Price;
         this.lastUpdateDate = lastUpdateDate;
         this.status = status;
     }
@@ -103,16 +97,6 @@ public class Bird_Nest_TrackingDTO {
         this.female_Babybird = female_Babybird;
     }
 
-    public float getTotal_Price() {
-        return total_Price;
-    }
-
-    public void setTotal_Price(float total_Price) {
-        this.total_Price = total_Price;
-    }
-    
-    
-
     public String getAccountID() {
         return accountID;
     }
@@ -127,15 +111,6 @@ public class Bird_Nest_TrackingDTO {
 
     public void setServiceID(int serviceID) {
         this.serviceID = serviceID;
-    }
-
-
-    public float getDeposit_Price() {
-        return deposit_Price;
-    }
-
-    public void setDeposit_Price(float deposit_Price) {
-        this.deposit_Price = deposit_Price;
     }
 
     public Date getOrderDate() {

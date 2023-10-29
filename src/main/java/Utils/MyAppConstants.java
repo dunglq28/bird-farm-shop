@@ -49,9 +49,8 @@ public class MyAppConstants {
         public static final String RECEIVING_INFO_PAGE = "/views/customer/shipping.jsp";
         public static final String MY_ORDER_PAGE = "/views/customer/myOrder.jsp";
         public static final String SERVICE_TRACKING_PAGE = "/views/customer/babyBirdTracking.jsp";
-        public static final String SERVICE_OPTION_ONE_PAGE = "/views/customer/serviceOptionOne.jsp";
+        public static final String PAYMENT_MATCH_BIRD_PAGE = "/views/customer/paymentMatchBird.jsp";
         public static final String SERVICE_OPTION_TWO_PAGE = "/views/customer/serviceOptionTwo.jsp";
-        public static final String SERVICE_OPTION_THREE_PAGE = "/views/customer/serviceOptionThree.jsp";
 
         public static final String MY_ORDER_CONTROLLER = "Order";
         public static final String BIRD_NEST_SERVICE_CONTROLLER = "Bird-Nest-Services";
