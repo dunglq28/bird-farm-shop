@@ -59,6 +59,9 @@
                                                             <h6 class="text-muted">Gender:  ${od.gender}</h6>
                                                         </div>
                                                         <h6 class="text-muted">Color:  ${od.color}</h6>
+                                                        <h6 class="text-muted">Male baby bird: 1 tam peo</h6>
+                                                        <h6 class="text-muted">Female baby bird: 2 tam peo</h6>
+                                                      
                                                     </div>
                                                     <div class="col-md-2 col-lg-2 col-xl-2 ">
                                                         <h6 class="mb-0 text-sm-center"> ${util.FormatPrice(od.price)}</h6>
