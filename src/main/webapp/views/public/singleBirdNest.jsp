@@ -153,6 +153,8 @@
                                             <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
                                             <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
                                             <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
+                                            <input type="hidden" name="quantity_MaleBird" value="${product_current.quantity_MaleBird}"/>
+                                            <input type="hidden" name="quantity_FemaleBird" value="${product_current.quantity_FemaleBird}"/>
                                             <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
                                             <input type="hidden" id="param_quantity" name="quantity_Buy" value="1" />
                                             <input type="hidden" name="price" value="${product_current.price}"/>

@@ -50,18 +50,21 @@
                                                     <div class="col-md-4 col-lg-4 col-xl-4">
                                                         <h6 class="text-black mb-0">${od.name}</h6>
                                                         <h6 class="text-muted">${od.cate_name}</h6>
-                                                        <div class="d-flex">
-                                                            <h6 class="text-muted">Age: ${od.age}</h6>
+                                                        <c:if test="${od.quantity_MaleBird ==0 && od.quantity_FemaleBird ==0}">
+                                                            <div class="d-flex">
+                                                                <h6 class="text-muted">Age: ${od.age}</h6>
 
-                                                            <h6 class="mb-0 text-sm-center text-muted"
-                                                                style="margin: 0 10px 0 10px;"> |
-                                                            </h6>
-                                                            <h6 class="text-muted">Gender:  ${od.gender}</h6>
-                                                        </div>
-                                                        <h6 class="text-muted">Color:  ${od.color}</h6>
-                                                        <h6 class="text-muted">Male baby bird: 1 tam peo</h6>
-                                                        <h6 class="text-muted">Female baby bird: 2 tam peo</h6>
-                                                      
+                                                                <h6 class="mb-0 text-sm-center text-muted"
+                                                                    style="margin: 0 10px 0 10px;"> |
+                                                                </h6>
+                                                                <h6 class="text-muted">Gender:  ${od.gender}</h6>
+                                                            </div>
+                                                            <h6 class="text-muted">Color:  ${od.color}</h6>
+                                                        </c:if>
+                                                        <c:if test="${od.quantity_MaleBird !=0 && od.quantity_FemaleBird !=0}">
+                                                            <h6 class="text-muted">Male baby bird:  ${od.quantity_MaleBird}</h6>
+                                                            <h6 class="text-muted">Female baby bird:  ${od.quantity_FemaleBird}</h6>
+                                                        </c:if>
                                                     </div>
                                                     <div class="col-md-2 col-lg-2 col-xl-2 ">
                                                         <h6 class="mb-0 text-sm-center"> ${util.FormatPrice(od.price)}</h6>

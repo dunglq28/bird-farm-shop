@@ -228,7 +228,7 @@
                                                                 </form>
                                                             </li>
                                                             <li>
-                                                                <form action="product_list" method="POST">
+                                                                <form action="product_list" method="GET">
                                                                     <c:if test="${dto.quantity_Available != 0}">
                                                                         <button name="btAction" value="Addtocart" type="submit">
                                                                             <i class="fa-solid fa-cart-plus"></i>
@@ -239,6 +239,8 @@
                                                                     <input type="hidden" name="txtServiceID" value="1" />
                                                                     <input type="hidden" name="category_Name" value="${dto.category_Name}"/>
                                                                     <input type="hidden" name="quantity_Available" value="${dto.quantity_Available}"/>
+                                                                    <input type="hidden" name="quantity_MaleBird" value="${dto.quantity_MaleBird}"/>
+                                                                    <input type="hidden" name="quantity_FemaleBird" value="${dto.quantity_FemaleBird}"/>
                                                                     <input type="hidden" name="quantity_Sold" value="${dto.quantity_Sold}"/>
                                                                     <input type="hidden" name="price" value="${dto.price}"/>
                                                                     <input type="hidden" name="txtDiscount" value="${dto.discount}"/>
@@ -280,7 +282,7 @@
 
                             <div class="col-lg-12 text-center">
                                 <div class="pagination__option">
-                                    
+
                                     <c:set var="pt" value="productType=${sessionScope.PRODUCT_TYPE}"></c:set>
                                     <c:if test="${not empty requestScope.SEARCH_VALUE}">
                                         <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>

@@ -39,7 +39,8 @@ public class ProductDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select ProductID, Product_Name, cate.Category_Name, Product_TypeID, Image, Age, Color, Gender, Quantity_Available, Price, Discount, Quantity_Sold, Status "
+                String sql = "Select ProductID, Product_Name, cate.Category_Name, Product_TypeID, Image, Age, Color, Gender, "
+                        + "Quantity_Available, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
                         + "where Product_TypeID like ? and Product_Name like ? "
@@ -47,25 +48,26 @@ public class ProductDAO implements Serializable {
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "%"+product_typeID+"%");
+                stm.setString(1, "%" + product_typeID + "%");
                 stm.setString(2, "%" + searchValue + "%");
                 stm.setInt(3, (index - 1) * 9);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String productID = rs.getString("ProductID");
-                    String product_Name = rs.getString("Product_Name");
-                    String cate_Name = rs.getString("Category_Name");
-                    String image = rs.getString("Image");
-                    int product_TypeID = rs.getInt("Product_TypeID");
-                    String age = rs.getString("Age");
-                    String color = rs.getString("Color");
-                    String gender = rs.getString("Gender");
-                    int quantity_Available = rs.getInt("Quantity_Available");
-                    float price = rs.getFloat("Price");
-                    float discount = rs.getFloat("Discount");
-                    int quantity_Sold = rs.getInt("Quantity_Sold");
-                    String status = rs.getString("Status");
-                    ProductDTO result = new ProductDTO(productID, product_Name, cate_Name, product_TypeID, age, color, gender, image, quantity_Available, quantity_Sold, price, discount, status);
+                    ProductDTO result = new ProductDTO(rs.getString("ProductID"),
+                            rs.getString("Product_Name"),
+                            rs.getString("Category_Name"),
+                            rs.getInt("Product_TypeID"),
+                            rs.getString("Age"),
+                            rs.getString("Color"),
+                            rs.getString("Gender"),
+                            rs.getString("Image"),
+                            rs.getInt("Quantity_MaleBird"),
+                            rs.getInt("Quantity_FemaleBird"),
+                            rs.getInt("Quantity_Available"),
+                            rs.getInt("Quantity_Sold"),
+                            rs.getFloat("Price"),
+                            rs.getFloat("Discount"),
+                            rs.getString("Status"));
                     if (this.productList == null) {
                         this.productList = new ArrayList<ProductDTO>();
                     }
@@ -187,64 +189,6 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public void showAllBird()
-            throws SQLException, NamingException, ClassNotFoundException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            //1.Make connection
-            con = DBHelper.makeConnection();
-            if (con != null) {
-                //2.Create SQL statement string
-                String sql = "Select * "
-                        + "From Birds ";
-                //3.Create statement object
-                stm = con.prepareStatement(sql);
-                //4.execute-query
-                rs = stm.executeQuery();
-                //5.process
-                while (rs.next()) {
-                    String birdID = rs.getString("BirdID");
-                    String bird_Name = rs.getString("Bird_Name");
-                    int categoryID = rs.getInt("CategoryID");
-                    String image = rs.getString("Image");
-                    String age = rs.getString("Age");
-                    String color = rs.getString("Color");
-                    String gender = rs.getString("Gender");
-                    int quantity = rs.getInt("Quantity_Available");
-                    float price = rs.getFloat("Price");
-                    float discount = rs.getFloat("Discount");
-                    String characteristics = rs.getString("Characteristics");
-                    String detail = rs.getString("Detail");
-                    Date date_created = rs.getDate("Date_created");
-                    String status = rs.getString("Status");
-
-                    ProductDTO dto = new ProductDTO(birdID, bird_Name, categoryID, age, color,
-                            gender, image, quantity, price,
-                            characteristics, detail, date_created, discount, status);
-
-                    if (this.productList == null) {
-                        this.productList = new ArrayList<ProductDTO>();
-
-                    }
-                    this.productList.add(dto);
-                }
-            }//end connection has opened
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-    }
-
     public ProductDTO getProductByID(String id)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -299,35 +243,34 @@ public class ProductDAO implements Serializable {
         }
         return null;
     }
-
-    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_sold, String status, String birdID)
+    
+    public ProductDTO getAllQuantityByProductID(String id)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
-
+        ResultSet rs = null;
         try {
-            //1. Make connection
             con = DBHelper.makeConnection();
             if (con != null) {
-                //2. create SQL statement string
-                String sql = "Update Products "
-                        + "Set Quantity_Available = ?, Quantity_Sold = ?, Status = ? "
-                        + "Where productID = ? ";
-                //3. Create statement object
+                String sql = "Select ProductID, Quantity_Available, Quantity_AreMating, Quantity_Sold "
+                        + "From Products "
+                        + "Where ProductID = ? ";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, quantity_available);
-                stm.setInt(2, quantity_sold);
-                stm.setString(3, status);
-                stm.setString(4, birdID);
-                //4. Excute query
-                int effectRows = stm.executeUpdate();
-                //5. Process
-                if (effectRows > 0) {
-                    return true;
+                stm.setString(1, id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    ProductDTO product = new ProductDTO(
+                            rs.getString("ProductID"),
+                            rs.getInt("Quantity_Available"),
+                            rs.getInt("Quantity_AreMating"),
+                            rs.getInt("Quantity_Sold"));
+                    return product;
                 }
-            } // end of connection has opend
-
+            }
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (stm != null) {
                 stm.close();
             }
@@ -335,10 +278,10 @@ public class ProductDAO implements Serializable {
                 con.close();
             }
         }
-        return false;
+        return null;
     }
 
-    public boolean updateQuantityMating(int quantity, String birdID)
+    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_AreMating, int quantity_sold, String status, String birdID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -349,12 +292,15 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 //2. create SQL statement string
                 String sql = "Update Products "
-                        + "Set Quantity_AreMating = ? "
+                        + "Set Quantity_Available = ?, Quantity_AreMating = ?, Quantity_Sold = ?, Status = ? "
                         + "Where productID = ? ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, quantity);
-                stm.setString(2, birdID);
+                stm.setInt(1, quantity_available);
+                stm.setInt(2, quantity_AreMating);
+                stm.setInt(3, quantity_sold);
+                stm.setString(4, status);
+                stm.setString(5, birdID);
                 //4. Excute query
                 int effectRows = stm.executeUpdate();
                 //5. Process
