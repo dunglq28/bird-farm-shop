@@ -156,17 +156,12 @@
                                                                             <h6 class="mb-0">${util.FormatPrice(od.price)}</h6>
                                                                         </div>
                                                                     </div>
-                                                                     <div class="">
-                                                                        <h6 class="text-black mb-0">Male baby bird: 1</h6>
-                                                                    </div> 
-                                                                    <div class="">
-                                                                        <h6 class="text-black mb-0">Female baby bird: 1</h6>
-                                                                    </div>    
 
 
                                                                 </div>
-                                                                <c:if test="${not empty od.color}">
-                                                                    <div class="col-md-5 col-lg-5 col-xl-5 ">
+
+                                                                <div class="col-md-5 col-lg-5 col-xl-5 ">
+                                                                    <c:if test="${not empty od.color}">
                                                                         <div class="">
                                                                             <h6 class="text-black mb-0">Color: ${od.color}</h6>
                                                                         </div>
@@ -176,8 +171,17 @@
                                                                         <div class="">
                                                                             <h6 class="text-black mb-0">Gender: ${od.gender}</h6>
                                                                         </div>
-                                                                    </div>
-                                                                </c:if>
+                                                                    </c:if>
+                                                                    <c:if test="${od.quantity_MaleBird !=0 && od.quantity_FemaleBird !=0}">
+
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Male baby bird: ${od.quantity_MaleBird}</h6>
+                                                                        </div> 
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Female baby bird: ${od.quantity_FemaleBird}</h6>
+                                                                        </div>  
+                                                                    </c:if>
+                                                                </div>
                                                             </div>
                                                         </c:forEach>
                                                     </div>
