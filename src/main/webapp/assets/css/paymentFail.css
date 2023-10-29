@@ -1,10 +1,181 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 29, 2023, 6:22:39 PM
-    Author     : hoang
-*/
+* {
+    box-sizing: border-box !important;
+    transition: ease all 0.5s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: #666666;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.80857;
+    font-weight: normal;
+    overflow-x: hidden;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: 0;
+    font-weight: normal;
+    position: relative;
+    padding: 0 0 10px 0;
+    font-weight: normal;
+    line-height: normal;
+    color: #111111;
+    margin: 0
+}
+
+h1 {
+    font-size: 24px
+}
+
+h2 {
+    font-size: 22px
+}
+
+h3 {
+    font-size: 18px
+}
+
+h4 {
+    font-size: 16px
+}
+
+h5 {
+    font-size: 14px
+}
+
+h6 {
+    font-size: 13px
+}
+
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    color: #212121;
+    text-decoration: none!important;
+    opacity: 1
+}
+
+button:focus {
+    outline: none;
+}
+
+
+
+p {
+    margin: 20px;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+a {
+    color: #222222;
+    text-decoration: none;
+    outline: none !important;
+}
+
+
+
+img {
+    max-width: 20%;
+    height: auto;
+}
+
+ :focus {
+    outline: 0;
+}
+
+
+blockquote {
+    margin: 20px 0 20px;
+    padding: 30px;
+}
+
+button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.image_2 {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding-left: 100px;
+}
+
+.cycles_text{
+    width: 100%;
+    float: left;
+    font-size: 40px;
+    color: #0D6780;
+    font-weight: bold;
+    text-align: left    ;
+    padding-top: 40px;
+}
+
+.lorem_text{
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #1c1c1c;
+    margin: 0px; 
+    font-weight: 600;
+      
+}
+
+.btn_main{
+    width: 100%;
+    display: flex;
+    padding-top: 20px;
+}
+.buy_bt{
+    width: 170px;
+    float: left;
+    background: #0D6780;
+    border-radius: 7px;
+    
+}
+.buy_bt a{
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #0D6780;
+    padding: 8px 5px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 7px;
+}
+.buy_bt a:hover{
+    color: #ffffff;
+    background-color: #0b4557;
+}
+
+
+
+
+
+
+
+
+
+
 
