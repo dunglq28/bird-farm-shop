@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "updatedAccount", urlPatterns = {"/updatedAccount"})
-public class updatedAccount extends HttpServlet {
+@WebServlet(name = "updatedAccountStatus", urlPatterns = {"/updatedAccountStatus"})
+public class updatedAccountStatus extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
@@ -49,6 +49,8 @@ public class updatedAccount extends HttpServlet {
                     } else {
                         url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
                     }
+                } else {
+                    dao.UpdatedStatus(accountID, status_update);
                 }
             }
 
@@ -73,9 +75,9 @@ public class updatedAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,9 +95,9 @@ public class updatedAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

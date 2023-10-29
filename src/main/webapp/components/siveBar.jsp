@@ -44,9 +44,9 @@
             </li>
         </c:if>
 
-        <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
+        <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
             <li>
-                <a href="#">
+                <a href="viewAllAccount">
                     <i class="fas fa-briefcase"></i>
                     <span>Account manager</span>
                 </a>

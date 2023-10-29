@@ -77,8 +77,8 @@
         <servlet-class>Controllers.Admin.viewAllAccount</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>updatedAccount</servlet-name>
-        <servlet-class>Controllers.Admin.updatedAccount</servlet-class>
+        <servlet-name>updatedAccountStatus</servlet-name>
+        <servlet-class>Controllers.Admin.updatedAccountStatus</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>updatedAccountRoles</servlet-name>
@@ -181,8 +181,8 @@
         <url-pattern>/viewAllAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>updatedAccount</servlet-name>
-        <url-pattern>/updatedAccount</url-pattern>
+        <servlet-name>updatedAccountStatus</servlet-name>
+        <url-pattern>/updatedAccountStatus</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updatedAccountRoles</servlet-name>
