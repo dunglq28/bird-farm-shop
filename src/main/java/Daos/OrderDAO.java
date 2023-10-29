@@ -224,7 +224,7 @@ public class OrderDAO implements Serializable {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, status);
                 stm.setString(2, null);
-                stm.setString(2, StaffID);
+                stm.setString(3, StaffID);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;

@@ -31,8 +31,7 @@ public class viewNewOrders extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || !account.getRoleName().equals("Admin")
-                    || !account.getRoleName().equals("Admin")) {
+            if (account == null || (!account.getRoleName().equals("Staff") && !account.getRoleName().equals("Admin"))){
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
