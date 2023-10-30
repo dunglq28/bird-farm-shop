@@ -54,6 +54,7 @@
                         <thead>
                             <tr>
                                 <th>OrderID</th>
+                                <th>StaffID</th>
                                 <th>Service</th>
                                 <th>Customer Name</th>
                                 <th>Order Date</th>
@@ -71,6 +72,7 @@
                                 <c:forEach items="${order}" var="dto">
                                     <tr>
                                         <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
+                                        <td>${dto.staffID}</td>
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
                                         <td>${util.FormatDate(dto.orderDate)}</td>
@@ -79,15 +81,10 @@
                                         <td>${dto.payBy}</td>
                                         <td>${dto.status}</td>
                                         <td>
-                                            <div class="action">
+                                            <!--<div class="action">-->
                                                 <!--<a href="#"><i class="fa-solid fa-check"></i></a>-->
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
+                                                <!--<a href="#"><i class="fa-solid fa-xmark"></i></a>-->
+                                            <!--</div>-->
                                         </td>
                                     </tr>
                                 </c:forEach>

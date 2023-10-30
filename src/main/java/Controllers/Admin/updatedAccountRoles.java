@@ -33,17 +33,34 @@ public class updatedAccountRoles extends HttpServlet {
             AccountDAO dao = new AccountDAO();
             AccountDTO accDTO = dao.getAccountByID(accountid);
             StaffDAO staffDAO = new StaffDAO();
+            StaffDTO staffDTO = new StaffDTO();
             AdminDAO adDAO = new AdminDAO();
             switch (Role) {
                 case "Staff":
                     roleID = 3;
-                    StaffDTO staff = new StaffDTO(staffDAO.createStafftID(), accDTO.getFullName(), accDTO.getEmail(), null, null, null,
-                            "M1", accDTO.getAccountID(), date, true);
-                    staffDAO.createStaff(staff);
+                    staffDTO = staffDAO.getStaffByAccountID(accountid);
+                    if (staffDTO == null) {
+                        StaffDTO staff = new StaffDTO(staffDAO.createStafftID(), accDTO.getFullName(),
+                                accDTO.getEmail(), null, null, null,
+                                "M1", accountid, date, true);
+                        staffDAO.createStaff(staff);
+                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        break;
+                    } else if (staffDTO.isStatus() == true) {
+                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        break;
+                    } else {
+                        adDAO.UpdatedStaffRole(staffDTO.getStaffID(), true);
+                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        break;
+                    }
+
+                case "Customer":
+                    staffDTO = staffDAO.getStaffByAccountID(accountid);
+                    adDAO.UpdatedStaffRole(staffDTO.getStaffID(), false);
+                    url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                     break;
-                case "Manager":
-                    roleID = 2;
-                    break;
+
                 case "Admin":
                     roleID = 1;
                     break;
