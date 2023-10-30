@@ -26,21 +26,8 @@
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
-                <div class="header-wrapper">
-                    <div class="header--title">
-                        <span>Primary</span>
-                        <h2>Order Management</h2>
-                    </div>
-                    <div class="user--info">
-                        <form action="viewMyOrder-staff" class="search--box">
-                            <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="" type="text" placeholder="Search" />
-                            <button type="submit"></button>
-                        </form>
-                    ${sessionScope.ACCOUNT.fullName}
-                </div>
-            </div>
-            <div class="tabular--wrapper">
+            <jsp:include page="/components/headerManagement.jsp"></jsp:include>
+                <div class="tabular--wrapper">
                 <c:if test="${requestScope.SERVICE_ID == 1}">
                     <h3 class="main--title">My Order</h3>
                 </c:if>

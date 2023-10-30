@@ -82,6 +82,11 @@ public class viewMyOrder extends HttpServlet {
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
+            if (serviceID.equals("1")) {
+                session.setAttribute("CURRENT_VIEW", "My order");
+            } else {
+                session.setAttribute("CURRENT_VIEW", "My booking");
+            }
             url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
 
         } finally {
