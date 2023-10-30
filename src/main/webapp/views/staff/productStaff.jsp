@@ -133,12 +133,7 @@
                         </div>
                     </tbody>
                 </table>
-                <div class="col-12 mt-2">
-                    <div class="pagination__option" style="text-align: center">
-                        <a href=""><i class="fa-solid fa-plus"></i></i></a>
-                       
-                    </div>
-                </div>
+               
             </div>
         </div>
         <div class="col-lg-12 text-center mt-2">
