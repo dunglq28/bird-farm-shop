@@ -511,7 +511,6 @@ public class OrderDAO implements Serializable {
 
     public OrderDTO getOrderByOrderID(String orderID)
             throws SQLException, ClassNotFoundException {
-
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -557,8 +556,59 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
+    public List<OrderDTO> AllOrders()
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        OrderDTO result = null;
+        String sql = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+
+                sql = "select ord.OrderID, ord.StaffID, ser.ServiceName, acc.FullName, "
+                        + "ord.OrderDate, ord.Total_Order, ord.Form_Receipt, ord.Pay_with, "
+                        + "ord.Status, ord.Discount, ord.Delivery_charges "
+                        + "from Orders ord inner join Service ser on "
+                        + "ord.ServiceID = ser.ServiceID inner join Account acc on "
+                        + "ord.AccountID = acc.AccountID ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String orderID = rs.getString("OrderID");
+                    String StaffID = rs.getString("StaffID");
+                    String serviceName = rs.getString("ServiceName");
+                    String fullname = rs.getString("FullName");
+                    Date orderDate = rs.getDate("OrderDate");
+                    String status = rs.getString("Status");
+                    String Form_Receipt = rs.getString("Form_Receipt");
+                    float Total_Order = rs.getFloat("Total_Order");
+                    float discount = rs.getFloat("Discount");
+                    float delivery_charges = rs.getFloat("Delivery_charges");
+                    String Pay_with = rs.getString("Pay_with");
+                    result = new OrderDTO(orderID, serviceName, fullname, Form_Receipt,
+                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges, StaffID);
+                    if (this.orderList == null) {
+                        this.orderList = new ArrayList<OrderDTO>();
+                    }
+                    this.orderList.add(result);
+                }
+                return this.orderList;
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
 }
-
-}
-

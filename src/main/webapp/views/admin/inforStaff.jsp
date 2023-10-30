@@ -67,7 +67,17 @@
                                         <c:if test="${dto.roleName != admin}">
                                             <td>${dto.accountID}</td>
                                             <td>${dto.fullName}</td>
-                                            <td>${dto.roleName}</td>
+                                            <td>
+                                                <form action="updatedAccountRoles">
+                                                    <select name="role" onchange="submit()" class="rounded-select" >
+                                                        <option ${dto.roleName == 'Admin' ? 'selected' : '' }>Admin</option>
+                                                        <option ${dto.roleName == 'Staff' ? 'selected' : '' }>Staff</option>
+                                                        <option ${dto.roleName == 'Customer' ? 'selected' : '' }>Customer</option>
+                                                    </select>
+                                                    <input type="hidden" name="accountid" value="${dto.accountID}"/>
+                                                    <!--<input type="hidden" name="role" value="${dto.roleName}"/>-->
+                                                </form>
+                                            </td>
                                             <td>${dto.email}</td>
                                             <td>${util.FormatDate(dto.date_created)}</td>
                                             <td>${dto.createBy}</td>
