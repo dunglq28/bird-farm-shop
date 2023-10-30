@@ -215,7 +215,7 @@
                                                                     </button></a>
                                                             </li>
                                                             <li>
-                                                                <form action="product" method="post">
+                                                                <form action="product" method="POST">
                                                                     <button>
                                                                         <i class="fa-regular fa-eye"></i>
                                                                         <input type="hidden" name="txtproductID" value="${dto.productID}"/>

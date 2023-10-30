@@ -15,6 +15,7 @@ public class MyAppConstants {
         public static final String PAYMENT_PAGE = "/views/public/payment.jsp";
         public static final String ERROR_404_PAGE = "/views/errors/errorPage404.jsp";
         public static final String SUCCESS_ORDER_PAGE = "/views/public/successOrder.jsp";
+        public static final String FAILURE_ORDER_PAGE = "/views/public/paymentFail.jsp";
         public static final String PRODUCT_DETAIL_CONTROLLER = "product";
         public static final String PRODUCT_LIST_CONTROLLER = "product_list";
         public static final String PAGING_PRODUCT_CONTROLLER = "PagingProductServlet";
@@ -23,8 +24,9 @@ public class MyAppConstants {
         public static final String CHECK_LOGIN_CONTROLLER = "CheckLoginToCheckoutServlet";
         public static final String HANDLE_PAYMENT_CONTROLLER = "HandlePaymentServlet";
         public static final String INFO_RECEIVE_CONTROLLER = "shipping";
-        public static final String CHECKOUT_SUCCESS_CONTROLLER = "Sucessful";
+        public static final String CREATE_ORDER_CONTROLLER = "CreateOrder";
         public static final String SUCCESS_ORDER_CONTROLLER = "Success-Order";
+        public static final String FAILURE_ORDER_CONTROLLER = "FailureOrder";
         public static final String SELECT_SAME_PRODUCT_CONTROLLER = "SelectSameProductServlet";
         public static final String BIRD_NEST_AVAILABLE_SERVICE_CONTROLLER = "BirdNestAvailableServlet";
         public static final String MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER = "MatchBirdAvailable";

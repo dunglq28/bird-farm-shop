@@ -78,9 +78,12 @@
                                         </span>
                                     </div>
                                     <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i> ${product_current.quantity_Available} orders</span>
-                                    <span class="text-success ms-2"${product_current.status == 'Sold out' ? 'style="color: red!important"' : ''}>
-                                        ${product_current.status}
-                                    </span>
+                                    <c:if test="${product_current.quantity_Available == 0}">
+                                        <span class="text-success ms-2" style="color: red!important">Sold out</span>
+                                    </c:if>
+                                    <c:if test="${product_current.quantity_Available != 0}">
+                                        <span class="text-success ms-2">Available</span>
+                                    </c:if>
                                 </div>
 
                                 <div class="mb-3">
