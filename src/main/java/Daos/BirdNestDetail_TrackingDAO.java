@@ -60,7 +60,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         return bndetalList;
     }
 
-    public List<BirdNestDetail_TrackingDTO> getPagingByUpdateDateDesc(int index, String bnID)
+    public List<BirdNestDetail_TrackingDTO> getPagingByUpdateDateDesc(int index, String bnID, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -74,10 +74,11 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                         + "where Bird_Nest_ID = ? "
                         + "Order by LastUpdateDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 4 ROWS ONLY";
+                        + "FETCH FIRST ? ROWS ONLY";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, bnID);
-                stm.setInt(2, (index - 1) * 4);
+                stm.setInt(2, (index - 1) * fieldShow);
+                stm.setInt(3, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String note;
@@ -110,7 +111,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         return null;
     }
 
-    public int getNumberPage(String bnID)
+    public int getNumberPage(String bnID , int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -127,11 +128,11 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                 while (rs.next()) {
                     int total = rs.getInt(1);
                     int countPage;
-                    if (total < 4) {
+                    if (total < fieldShow) {
                         countPage = 1;
                     } else {
-                        countPage = total / 4;
-                        if (countPage % 4 != 0 && countPage % 2 != 0) {
+                        countPage = total / fieldShow;
+                        if (countPage % fieldShow != 0 && countPage % 2 != 0) {
                             countPage++;
                         }
                     }

@@ -48,7 +48,7 @@ public class ServiceTrackingServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null) {
+            if (account == null) { // If customers don't login return to home
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 response.sendRedirect(url);
                 return;
@@ -59,32 +59,35 @@ public class ServiceTrackingServlet extends HttpServlet {
             }
             Bird_Nest_TrackingDAO bntdao = new Bird_Nest_TrackingDAO();
 
-            Bird_Nest_TrackingDTO bntdto = bntdao.getBNTrackingByOrderID(orderID);
+            Bird_Nest_TrackingDTO bntdto = bntdao.getBNTrackingByOrderID(orderID);// get bird nest tracking of order 
             session.setAttribute("BIRD_NEST_TRACKING", bntdto);
-            if (session.getAttribute("CUSTOMER") == null) {
+            if (session.getAttribute("CUSTOMER") == null) { // Get information of customer 
                 CustomerDAO cusdao = new CustomerDAO();
                 session.setAttribute("CUSTOMER", cusdao.getCustomerByAccountID(account.getAccountID()));
             }
 
-            if (page == null) {
+            if (page == null) { // default page to view is 1
                 page = "1";
             }
-            int indexPage = Integer.parseInt(page);
+            int indexPage = Integer.parseInt(page); // parse string to in
 
             BirdNestDetail_TrackingDAO bndetaildao = new BirdNestDetail_TrackingDAO();
-            int endPage = bndetaildao.getNumberPage(bntdto.getBird_Nest_ID());
-            List<BirdNestDetail_TrackingDTO> result = bndetaildao.getPagingByUpdateDateDesc(indexPage, bntdto.getBird_Nest_ID());
+            int fieldShow = 4; // number of field can show on one page
+            int endPage = bndetaildao.getNumberPage(bntdto.getBird_Nest_ID(), fieldShow); // get quantity of page
+            //retrieve information according to the corresponding page
+            List<BirdNestDetail_TrackingDTO> result = bndetaildao.getPagingByUpdateDateDesc(indexPage, bntdto.getBird_Nest_ID(), fieldShow);
             session.setAttribute("BN_DETAIL_TRACKING_LIST", result);
-            int start = 1;
-            int distance = 3;
 
+            int start = 1;// default pagination is 1
+            int distance = 3; // distance between start and end of pagination (Only 3 pages can be viewed at a time)
             int end;
-            if (endPage < distance) {
+            if (endPage < distance) { // if end page larger than distance set end = endpage
                 end = endPage;
-            } else {
+            } else { //if endpage higher than distance 
                 end = start + distance;
             }
 
+            // change page can be viewed when end page viewed > page current
             if (indexPage >= 3) {
                 start = indexPage - 2;
                 end = indexPage + 2;

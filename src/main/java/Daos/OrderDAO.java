@@ -65,10 +65,10 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Orders ( "
-                        + "OrderID, ServiceID, AccountID, StaffID, Form_Receipt, ShipperID, ShipAddress, ShipCity,PhoneNumber, OrderDate, ReceiptDate, "
+                        + "OrderID, ServiceID, AccountID, StaffID, Form_Receipt, ShipAddress, ShipCity,PhoneNumber, OrderDate, ReceiptDate, "
                         + "Discount, Delivery_charges, Deposit_Price, Total_Order, Pay_with, Status "
                         + ") values ( "
-                        + "?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, order.getOrderID());
@@ -76,18 +76,17 @@ public class OrderDAO implements Serializable {
                 stm.setString(3, order.getAccountID());
                 stm.setString(4, order.getStaffID());
                 stm.setString(5, order.getForm_Receipt());
-                stm.setString(6, order.getShipperID());
-                stm.setString(7, order.getShipAddress());
-                stm.setString(8, order.getShipCity());
-                stm.setString(9, order.getPhoneNumber());
-                stm.setDate(10, order.getOrderDate());
-                stm.setDate(11, order.getReceiptDate());
-                stm.setFloat(12, order.getDiscount());
-                stm.setFloat(13, order.getDelivery_charges());
-                stm.setFloat(14, order.getDeposit_Price());
-                stm.setFloat(15, order.getTotal_Order());
-                stm.setString(16, order.getPayBy());
-                stm.setString(17, order.getStatus());
+                stm.setString(6, order.getShipAddress());
+                stm.setString(7, order.getShipCity());
+                stm.setString(8, order.getPhoneNumber());
+                stm.setDate(9, order.getOrderDate());
+                stm.setDate(10, order.getReceiptDate());
+                stm.setFloat(11, order.getDiscount());
+                stm.setFloat(12, order.getDelivery_charges());
+                stm.setFloat(13, order.getDeposit_Price());
+                stm.setFloat(14, order.getTotal_Order());
+                stm.setString(15, order.getPayBy());
+                stm.setString(16, order.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
