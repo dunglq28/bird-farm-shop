@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "updatedAccount", urlPatterns = {"/updatedAccount"})
-public class updatedAccount extends HttpServlet {
+@WebServlet(name = "updatedAccountStatus", urlPatterns = {"/updatedAccountStatus"})
+public class updatedAccountStatus extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
         String status = request.getParameter("status");
         String accountID = request.getParameter("accountID");
         try {
@@ -34,21 +34,24 @@ public class updatedAccount extends HttpServlet {
             OrderDAO ord = new OrderDAO();
             StaffDAO staff = new StaffDAO();
             boolean result = dao.UpdatedStatus(accountID, status_update);
-            if (result && status_update == true) {
-                url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
-            } else if (status_update == false) {
-                StaffDTO staffDTO = staff.getStaffByAccountID(accountID);
-                if (staffDTO.getStaffID() != null) {
-                    boolean staff_result = staff.UpdateStaff(staffDTO.getAccountID());
-                    if (staff_result) {
-                        List<OrderDTO> orderList = staff.GetDestroyListStaffOrders(staffDTO.getStaffID());
-                        while (orderList != null) {
-                            ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
+            if (result) {
+                if (status_update == true){
+                    url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                }else{
+                    StaffDTO staffDTO = staff.getStaffByAccountID(accountID);
+                    if (staffDTO.getStaffID()!=null){
+                        boolean staff_result = staff.UpdateStaff(staffDTO.getStaffID());
+                        if (staff_result){
+                            List<OrderDTO> orderList = staff.GetDestroyListStaffOrders(staffDTO.getStaffID());
+                            while (orderList != null) {
+                                ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
+                            }
+                            dao.UpdatedStatus(accountID, status_update);
+                            url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        } else {
+                            url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
                         }
-                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
-                    } else {
-                        url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-                    }
+                    } 
                 }
             }
 
@@ -73,9 +76,9 @@ public class updatedAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,9 +96,9 @@ public class updatedAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(updatedAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updatedAccountStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

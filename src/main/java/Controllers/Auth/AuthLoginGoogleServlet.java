@@ -51,7 +51,7 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                         url = MyAppConstants.PublicFeatures.ERROR_PAGE;
                     }
                 }
-                if (account != null && account.getRoleName().equals("Staff")) {
+                if (account.getRoleName().equals("Staff") || account.getRoleName().equals("Admin")) {
                     url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
                 }
             }

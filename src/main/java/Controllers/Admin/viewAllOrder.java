@@ -1,39 +1,45 @@
-package Controllers.Staff;
+package Controllers.Admin;
 
 import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
+import Models.StaffDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "viewNewOrder", urlPatterns = {"/viewNewOrder"})
-public class viewNewOrders extends HttpServlet {
+public class viewAllOrder extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String serviceID = request.getParameter("txtServiceID");
+        String status = request.getParameter("Status");
         String page = request.getParameter("page");
         String searchValue = request.getParameter("txtSearch");
-        String url = "";
+        HttpSession session = request.getSession();
         try {
-            HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || (!account.getRoleName().equals("Staff") && !account.getRoleName().equals("Admin"))){
+            if (account == null || !account.getRoleName().equals("Staff")) {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
+            }
+            if (serviceID == null) {
+                serviceID = "1";
+            }
+            if (status == null || status.equals("All")) {
+                status = "";
             }
             if (searchValue == null) {
                 searchValue = "";
@@ -43,9 +49,11 @@ public class viewNewOrders extends HttpServlet {
             }
             int indexPage = Integer.parseInt(page);
             OrderDAO dao = new OrderDAO();
-            int endPage = dao.getNewOrderPage(searchValue);
-            List<OrderDTO> result = dao.ViewNewStaffOrders(indexPage, searchValue);
-            request.setAttribute("STAFF_ALL_ORDERS", result);
+            StaffDAO staffdao = new StaffDAO();
+            StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue);
+
             int start = 1;
             int distance = 4;
 
@@ -64,11 +72,14 @@ public class viewNewOrders extends HttpServlet {
                     end = endPage;
                 }
             }
+            request.setAttribute("ALL_ORDERS", result);
+            request.setAttribute("SERVICE_ID", serviceID);
+            request.setAttribute("STATUS_ORDER", status);
             request.setAttribute("START", start);
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
-            url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
+            url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
 
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -91,9 +102,9 @@ public class viewNewOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -111,9 +122,9 @@ public class viewNewOrders extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(viewNewOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewAllOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

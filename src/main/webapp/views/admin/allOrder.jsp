@@ -1,9 +1,4 @@
-<%-- 
-    Document   : inforStaff
-    Created on : Oct 28, 2023, 12:07:35 PM
-    Author     : hoang
---%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +18,7 @@
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
-        <title>Staff</title>
+        <title>My Order</title>
 
     </head>
     <body>
@@ -34,59 +29,55 @@
                 <div class="header-wrapper">
                     <div class="header--title">
                         <span>Primary</span>
-                        <h2>Staff Management</h2>
+                        <h2>Order Management</h2>
                     </div>
                     <div class="user--info">
-                        <div class="search--box">
+                        <form action="viewMyOrder-staff" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input type="text" placeholder="search" />
-                        </div>
+                            <input name="txtSearch" value="" type="text" placeholder="Search" />
+                            <button type="submit"></button>
+                        </form>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
             <div class="tabular--wrapper">
+                <c:if test="${requestScope.SERVICE_ID == 1}">
+                    <h3 class="main--title">My Order</h3>
+                </c:if>
+                <c:if test="${requestScope.SERVICE_ID != 1}">
+                    <h3 class="main--title">My Booking</h3>
+                </c:if>
                 
-                <h3 class="main--title">Staff</h3>
-              
 
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
-                                <th>Acount ID</th>
-                                <th>Full Name</th>
-                                <th>Role Name</th>
-                                <th>Email</th>
-                                <th>Date created</th>
-                                <th>Created By</th>
+                                <th>OrderID</th>
+                                <th>Service</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Total</th>
+                                <th>Delivery method</th>
+                                <th>Payment method</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         <div class="tbody-wrapper">
-                            <c:set var="order" value="${requestScope.MY_ORDERS_STAFF}"></c:set>
+                            <c:set var="order" value="${requestScope.ALL_ORDERS}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
                                     <tr>
-                                        <td>A01</td>
-                                        <td>Tâm Péo Nguyễn</td>
-                                        <td>Staff</td>
-                                        <td>Tampeo@gmail.com</td>
-                                        <td>27/10/2023</td>
-                                        <td>Trung Luu</td>
-                                        <td>
-                                            <form action="updatedOrders-staff">
-                                                <select name="txtNewStatus" onchange="submit()" class="rounded-select" >
-                                                    <option ${dto.status == 'Processing' ? 'selected' : '' }>Processing</option>
-                                                    <option ${dto.status == 'Delivering' ? 'selected' : '' }>Delivering</option>
-                                                    <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
-                                                </select>
-                                                <input type="hidden" name="txtOrderID" value="${dto.orderID}">
-                                                <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
-                                            </form>
-                                        </td>
-
+                                        <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
+                                        <td>${dto.serviceName}</td>
+                                        <td>${dto.accountName}</td>
+                                        <td>${util.FormatDate(dto.orderDate)}</td>
+                                        <td>${util.FormatPrice(dto.total_Order)}</td>
+                                        <td>${dto.form_Receipt}</td>
+                                        <td>${dto.payBy}</td>
+                                        <td>${dto.status}</td>
                                         <td>
                                             <div class="action">
                                                 <!--<a href="#"><i class="fa-solid fa-check"></i></a>-->

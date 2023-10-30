@@ -34,15 +34,21 @@ public class updatedAccountRoles extends HttpServlet {
             AccountDTO accDTO = dao.getAccountByID(accountid);
             StaffDAO staffDAO = new StaffDAO();
             AdminDAO adDAO = new AdminDAO();
-            if (Role.equals("Staff")) {
-                roleID = 3;
-                StaffDTO staff = new StaffDTO(staffDAO.createStafftID(), accDTO.getFullName(), accDTO.getEmail(), null, null, null,
-                        "M1", accDTO.getAccountID(), date, true);
-                staffDAO.createStaff(staff);
-            } else if (Role.equals("Manager")) {
-                roleID = 2;
-            } else if (Role.equals("Admin")) {
-                roleID = 1;
+            switch (Role) {
+                case "Staff":
+                    roleID = 3;
+                    StaffDTO staff = new StaffDTO(staffDAO.createStafftID(), accDTO.getFullName(), accDTO.getEmail(), null, null, null,
+                            "M1", accDTO.getAccountID(), date, true);
+                    staffDAO.createStaff(staff);
+                    break;
+                case "Manager":
+                    roleID = 2;
+                    break;
+                case "Admin":
+                    roleID = 1;
+                    break;
+                default:
+                    break;
             }
             boolean result = adDAO.UpdatedRole(accountid, roleID);
             if (result) {
