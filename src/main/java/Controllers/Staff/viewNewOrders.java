@@ -42,9 +42,10 @@ public class viewNewOrders extends HttpServlet {
                 page = "1";
             }
             int indexPage = Integer.parseInt(page);
+            int fieldShow = 10;
             OrderDAO dao = new OrderDAO();
-            int endPage = dao.getNewOrderPage(searchValue);
-            List<OrderDTO> result = dao.ViewNewStaffOrders(indexPage, searchValue);
+            int endPage = dao.getNewOrderPage(searchValue, fieldShow);
+            List<OrderDTO> result = dao.ViewNewStaffOrders(indexPage, searchValue, fieldShow);
             request.setAttribute("STAFF_ALL_ORDERS", result);
             int start = 1;
             int distance = 4;

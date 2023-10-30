@@ -70,8 +70,8 @@ public class HandlePaymentServlet extends HttpServlet {
                 if (orderID != session.getAttribute("OLD_ORDER_ID")) {
                     OrderDAO odao = new OrderDAO();
                     OrderDetailDAO oddao = new OrderDetailDAO();
-                    Products proMale = oddao.getOrderDetailProductByOrderID(orderID, "Male");
-                    Products proFemale = oddao.getOrderDetailProductByOrderID(orderID, "Female");
+                    Products proMale = oddao.getOrderDetailProductGenderByOrderID(orderID, "Male");
+                    Products proFemale = oddao.getOrderDetailProductGenderByOrderID(orderID, "Female");
                     session.setAttribute("OLD_ORDER_ID", orderID);
                     //Take the amount the customer has deposited
                     session.setAttribute("DEPOSIT_PRICE", odao.getOrderByOrderID(orderID).getDeposit_Price());

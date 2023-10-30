@@ -1,11 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controllers.Customer;
 
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
-import Models.AccountDTO;
-import Models.OrderDTO;
+import Daos.ProductDAO;
+import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,51 +22,61 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "Order", urlPatterns = {"/Order"})
-public class MyOrderServlet extends HttpServlet {
+/**
+ *
+ * @author hj
+ */
+@WebServlet(name = "CancelOrder", urlPatterns = {"/CancelOrder"})
+public class CancelOrderServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.CustomerFeatures.MY_ORDER_PAGE;
-        String status = request.getParameter("Status");
+        String url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
+        String orderID = request.getParameter("orderID");
         String serviceID = request.getParameter("txtServiceID");
+        String status = request.getParameter("status");
         HttpSession session = request.getSession();
+
         try {
-            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null) { // If customers don't login return to home
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
-                response.sendRedirect(url);
-                return;
-            }
-            if (status == null || status.equals("All")) { // set status empty to view all status (relative)
-                status = "";
+            if (!status.equals("Cancel")) {
+                OrderDAO odao = new OrderDAO();
+                odao.UpdateStatusOrder(orderID, "Cancel");
+                OrderDetailDAO oddao = new OrderDetailDAO();
+                List<ProductDTO> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
+                ProductDAO prodao = new ProductDAO();
+                ProductDTO prodto = new ProductDTO();
+                if (serviceID.equals("1")) {
+                    for (ProductDTO pro : productIDList) {
+                        prodto = prodao.getAllQuantityByProductID(pro.getProductID());
+                        prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating(),
+                                prodto.getQuantity_Sold() - 1, prodto.getProductID());
+                    }
+                } else {
+                    for (ProductDTO pro : productIDList) {
+                        prodto = prodao.getAllQuantityByProductID(pro.getProductID());
+                        prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating() - 1,
+                                prodto.getQuantity_Sold(), prodto.getProductID());
+                    }
+                }
+                session.setAttribute("SERVICE_ID_CANCEL", serviceID);
             }
 
-            if (serviceID == null && session.getAttribute("SERVICE_ID_CANCEL") != null) {
-                serviceID = (String) session.getAttribute("SERVICE_ID_CANCEL");
-                session.removeAttribute("SERVICE_ID_CANCEL");
-            } else if (serviceID == null) {// default serviceID is 1
-                serviceID = "1";
-            }
-
-            OrderDAO oDao = new OrderDAO();
-            OrderDetailDAO odDao = new OrderDetailDAO();
-            // Get all order of customer with status customer choose and service
-            List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status, Integer.parseInt(serviceID));
-            //Set order to view
-            session.setAttribute("ORDER_LIST", order);
-            request.setAttribute("STATUS_ORDER", status);
-            request.setAttribute("SERVICE_ID", serviceID);
-
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-
+            response.sendRedirect(url);
         }
     }
 
