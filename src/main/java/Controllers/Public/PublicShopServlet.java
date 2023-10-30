@@ -47,13 +47,14 @@ public class PublicShopServlet extends HttpServlet {
         try {
             if (button == null) {
                 button = "null";
-                if (productType.equals("bird")) {
+                // set product type of product customer want to see
+                if (productType.equals("bird")) { //show only bird
                     session.setAttribute("PRODUCT_TYPE", "bird");
                     session.setAttribute("PRODUCT_TYPE_ID", "1");
-                } else if (productType.equals("birdNest")) {
+                } else if (productType.equals("birdNest")) { // show only bird nest
                     session.setAttribute("PRODUCT_TYPE", "birdNest");
                     session.setAttribute("PRODUCT_TYPE_ID", "2");
-                } else if (productType.equals("All")) {
+                } else if (productType.equals("All")) { // show all product
                     session.setAttribute("PRODUCT_TYPE", "All");
                     session.setAttribute("PRODUCT_TYPE_ID", "");
                 }
