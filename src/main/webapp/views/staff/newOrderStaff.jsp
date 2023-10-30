@@ -24,39 +24,26 @@
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
-                <div class="header-wrapper">
-                    <div class="header--title">
-                        <span>Primary</span>
-                        <h2>Order Management</h2>
-                    </div>
-                    <div class="user--info">
-                        <form action="viewNewOrder" class="search--box">
-                            <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="" type="text" placeholder="Search" />
-                            <button type="submit"></button>
-                        </form>
-                    ${sessionScope.ACCOUNT.fullName}
-                </div>
-            </div>
-            <div class="tabular--wrapper">
-                <h3 class="main--title">New Order</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>OrderID</th>
-                                <th>Service</th>
-                                <th>Customer Name</th>
-                                <th>Order Date</th>
-                                <th>Total</th>
-                                <th>Delivery method</th>
-                                <th>Payment method</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <div class="tbody-wrapper">
+            <jsp:include page="/components/headerManagement.jsp"></jsp:include>
+                <div class="tabular--wrapper">
+                    <h3 class="main--title">New Order</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>OrderID</th>
+                                    <th>Service</th>
+                                    <th>Customer Name</th>
+                                    <th>Order Date</th>
+                                    <th>Total</th>
+                                    <th>Delivery method</th>
+                                    <th>Payment method</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <div class="tbody-wrapper">
                             <c:set var="order" value="${requestScope.STAFF_ALL_ORDERS}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">

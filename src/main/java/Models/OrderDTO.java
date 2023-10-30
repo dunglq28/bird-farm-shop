@@ -17,7 +17,6 @@ public class OrderDTO {
     private String accountName;
     private String staffID;
     private String form_Receipt;
-    private String shipperID;
     private String shipAddress;
     private String shipCity;
     private String phoneNumber;
@@ -35,13 +34,12 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float deposit_Price, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipAddress, String shipCity, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float deposit_Price, float total_Order, String payBy, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountID = accountID;
         this.staffID = staffID;
         this.form_Receipt = form_Receipt;
-        this.shipperID = shipperID;
         this.shipAddress = shipAddress;
         this.shipCity = shipCity;
         this.phoneNumber = phoneNumber;
@@ -202,14 +200,6 @@ public class OrderDTO {
         this.form_Receipt = form_Receipt;
     }
 
-    public String getShipperID() {
-        return shipperID;
-    }
-
-    public void setShipperID(String shipperID) {
-        this.shipperID = shipperID;
-    }
-
     public String getShipAddress() {
         return shipAddress;
     }
@@ -289,6 +279,5 @@ public class OrderDTO {
     public void setStatus(String status) {
         this.status = status;
     }
-
 
 }

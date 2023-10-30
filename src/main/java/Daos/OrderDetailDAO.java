@@ -22,6 +22,18 @@ import java.util.List;
  */
 public class OrderDetailDAO {
 
+    private List<Products> orderDetailList;
+
+    public List<Products> getOrderTailList() {
+        return orderDetailList;
+    }
+
+    private List<ProductDTO> ODList;
+
+    public List<ProductDTO> getODList() {
+        return ODList;
+    }
+
     public boolean createOrderDetail(OrderDetailDTO orderDetail) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -53,12 +65,6 @@ public class OrderDetailDAO {
             }
         }
         return false;
-    }
-
-    private List<Products> orderDetailList;
-
-    public List<Products> getOrderTailList() {
-        return orderDetailList;
     }
 
     public List<Products> getOrderDetailByOrderID(String orderId)
@@ -116,7 +122,7 @@ public class OrderDetailDAO {
         return this.orderDetailList;
     }
 
-    public Products getOrderDetailProductByOrderID(String orderId, String gender)
+    public Products getOrderDetailProductGenderByOrderID(String orderId, String gender)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -155,6 +161,47 @@ public class OrderDetailDAO {
             }
         }
         return null;
+    }
+
+    public List<ProductDTO> getOrderDetailProductByOrderID(String orderId)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = null;
+                //2.Create SQL statement string
+                sql = "select ProductID "
+                        + "from Order_Details "
+                        + "where OrderID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    ProductDTO pro = new ProductDTO(rs.getString("ProductID"), 0, 0, 0);
+                    if (this.ODList == null) {
+                        this.ODList = new ArrayList<ProductDTO>();
+                    }
+                    this.ODList.add(pro);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return this.ODList;
     }
 
 }

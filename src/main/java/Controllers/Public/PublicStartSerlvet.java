@@ -27,6 +27,7 @@ public class PublicStartSerlvet extends HttpServlet {
         if (account != null && account.getRoleName().equals("Customer")) {
             url = MyAppConstants.PublicFeatures.HOME_PAGE;
         } 
+        session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.HOME_CONTROLLER);
         RequestDispatcher dis = request.getRequestDispatcher(url);
         dis.forward(request, response);
 

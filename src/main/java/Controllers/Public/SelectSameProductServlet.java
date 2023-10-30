@@ -53,6 +53,15 @@ public class SelectSameProductServlet extends HttpServlet {
 
         try {
             ProductDTO productCurrent = (ProductDTO) session.getAttribute("PRODUCT_CURRENT");
+            
+            //After add product to cart get old bird to view
+            if (product_name == null && productTypeID == null && ageChoose == null && genderChoose == null) {
+                product_name = productCurrent.getProduct_Name();
+                productTypeID = String.valueOf(productCurrent.getProduct_TypeID());
+                ageChoose = productCurrent.getAge();
+                genderChoose = productCurrent.getGender();
+            }
+            
 
             ProductDAO dao = new ProductDAO();
             ProductDTO product = null;
@@ -73,7 +82,7 @@ public class SelectSameProductServlet extends HttpServlet {
                 }
 
                 product = (ProductDTO) session.getAttribute("PRODUCT_CURRENT");
-
+                //Take birds according to the age and gender of the customer's choice
                 if (ageChoose != null && genderChoose != null) {
                     for (ProductDTO productDto : result) {
                         if (productDto.getGender().equals(genderChoose) && productDto.getAge().equals(ageChoose)) {
@@ -81,7 +90,8 @@ public class SelectSameProductServlet extends HttpServlet {
                         }
                     }
                 }
-
+                
+                //Filter bird gender by age
                 if (request.getParameter("txtproductID") == null && !ageChoose.equals(product.getAge())) {
                     genderList.clear();
                     for (ProductDTO productDto : result) {
@@ -91,26 +101,28 @@ public class SelectSameProductServlet extends HttpServlet {
                         }
                     }
                 }
-
+                
+                // set age and gender list of bird
                 request.setAttribute("AGE_LIST", ageList);
                 request.setAttribute("GENDER_LIST", genderList);
                 product = dao.getProductByID(productID);
-
+                // set bird current customer want to see
                 session.setAttribute("PRODUCT_CURRENT", product);
+                //Get all bird have a same name to view 
                 session.setAttribute("PRODUCT_SAME_NAME", result);
                 url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
-
-            } else if (productTypeID.equals("2")) {
+                
+            } else if (productTypeID.equals("2")) { // show a detail of bird nest
                 productID = request.getParameter("txtproductID");
                 if (productID == null) {
                     productID = productCurrent.getProductID();
                 }
                 product = dao.getProductByID(productID);
-
+                // set bird nest and information of parent of bird nest cus choose
                 session.setAttribute("PRODUCT_CURRENT", product);
                 session.setAttribute("BIRD_DAD", dao.getProductByID(product.getDad_Bird_ID()));
                 session.setAttribute("BIRD_MOM", dao.getProductByID(product.getMom_Bird_ID()));
-                url = MyAppConstants.PublicFeatures.BIRD_NEST_DETAIL_PAGE;
+
             }
 
         } catch (SQLException ex) {

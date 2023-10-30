@@ -41,20 +41,22 @@ public class AddBirdServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         try {
+            // If cart is empty will create a new cart
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");
             if (cart == null) {
                 cart = new CartObj();
             }
             Products prodcut = null;
-            if (quantityMaleBird != 0 && quantityFemaleBird != 0) {
+            // Matching information of product cus choose to product model
+            if (quantityMaleBird != 0 && quantityFemaleBird != 0) { // bird nest choose
                 prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityMaleBird, quantityFemaleBird, quantityBuy, quantitySold, price, discount);
-            } else {
+            } else { // bird choose
                 prodcut = new Products(birdID, name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, discount);
             }
 
-            cart.addItemToCart(birdID, prodcut);
-            session.setAttribute("BIRD_CART", cart);
-            session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());
+            cart.addItemToCart(birdID, prodcut);// add product to cart fuction
+            session.setAttribute("BIRD_CART", cart);// set again cart 
+            session.setAttribute("CART_QUANTITY_PRODUCT", cart.getItemsLength());//take quantity of product in cart
 
             url = (String) session.getAttribute("HISTORY_URL");
 

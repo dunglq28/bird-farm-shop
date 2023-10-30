@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "viewAllAccount", urlPatterns = {"/viewAllAccount"})
 public class viewAllAccount extends HttpServlet {
@@ -21,14 +22,56 @@ public class viewAllAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = "";
+        String page = request.getParameter("page");
+        String searchValue = request.getParameter("txtSearch");
+        HttpSession session = request.getSession();
+
         try {
-            AdminDAO dao = new AdminDAO();
-            List<AccountDTO> result = dao.ViewAllAccount();
-            if (result != null) {
-                request.setAttribute("ACCOUNT_LIST", result);
-                url = MyAppConstants.AdminFeatures.ALL_ACCOUNT_PAGE;
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null || !account.getRoleName().equals("Admin")) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                return;
             }
+
+            if (searchValue == null) {
+                searchValue = "";
+            }
+            if (page == null) {
+                page = "1";
+            }
+            int indexPage = Integer.parseInt(page);
+            int fieldShow = 10;
+            AdminDAO dao = new AdminDAO();
+            List<AccountDTO> result = dao.ViewAllAccount(indexPage, searchValue, fieldShow);
+            int endPage = dao.getNumberAllAccountPage(searchValue, fieldShow);
+            request.setAttribute("ACCOUNT_LIST", result);
+            url = MyAppConstants.AdminFeatures.ALL_ACCOUNT_PAGE;
+
+            int start = 1;
+            int distance = 4;
+
+            int end;
+            if (endPage < distance) {
+                end = endPage;
+            } else {
+                end = start + distance;
+            }
+
+            if (indexPage >= 4) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
+                }
+            }
+            request.setAttribute("START", start);
+            request.setAttribute("END", end);
+            request.setAttribute("indexCurrent", indexPage);
+            request.setAttribute("endPage", endPage);
+            session.setAttribute("CURRENT_VIEW", "All account");
+
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

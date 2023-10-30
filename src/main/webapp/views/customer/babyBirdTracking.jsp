@@ -43,7 +43,7 @@
                                     </c:if>
                                 </tbody>
                             </table>
-                            <c:if test="${not empty bndetailList}">
+                            <c:if test="${requestScope.endPage > 1}">
                                 <div class="center">
                                     <div class="pagination">
                                         <c:if test="${requestScope.pageCurrent > 1}">

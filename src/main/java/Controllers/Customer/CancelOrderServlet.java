@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Public;
+package Controllers.Customer;
 
-import Models.ProductDTO;
+import Daos.OrderDAO;
+import Daos.OrderDetailDAO;
 import Daos.ProductDAO;
+import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,8 +26,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "product_list", urlPatterns = {"/product_list"})
-public class PublicShopServlet extends HttpServlet {
+@WebServlet(name = "CancelOrder", urlPatterns = {"/CancelOrder"})
+public class CancelOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,40 +41,42 @@ public class PublicShopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
-        String button = request.getParameter("btAction");
-        String productType = request.getParameter("productType");
+        String url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
+        String orderID = request.getParameter("orderID");
+        String serviceID = request.getParameter("txtServiceID");
+        String status = request.getParameter("status");
         HttpSession session = request.getSession();
 
         try {
-            if (button == null) {
-                button = "null";
-                // set product type of product customer want to see
-                if (productType.equals("bird")) { //show only bird
-                    session.setAttribute("PRODUCT_TYPE", "bird");
-                    session.setAttribute("PRODUCT_TYPE_ID", "1");
-                } else if (productType.equals("birdNest")) { // show only bird nest
-                    session.setAttribute("PRODUCT_TYPE", "birdNest");
-                    session.setAttribute("PRODUCT_TYPE_ID", "2");
-                } else if (productType.equals("All")) { // show all product
-                    session.setAttribute("PRODUCT_TYPE", "All");
-                    session.setAttribute("PRODUCT_TYPE_ID", "");
+            if (!status.equals("Cancel")) {
+                OrderDAO odao = new OrderDAO();
+                odao.UpdateStatusOrder(orderID, "Cancel");
+                OrderDetailDAO oddao = new OrderDetailDAO();
+                List<ProductDTO> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
+                ProductDAO prodao = new ProductDAO();
+                ProductDTO prodto = new ProductDTO();
+                if (serviceID.equals("1")) {
+                    for (ProductDTO pro : productIDList) {
+                        prodto = prodao.getAllQuantityByProductID(pro.getProductID());
+                        prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating(),
+                                prodto.getQuantity_Sold() - 1, prodto.getProductID());
+                    }
+                } else {
+                    for (ProductDTO pro : productIDList) {
+                        prodto = prodao.getAllQuantityByProductID(pro.getProductID());
+                        prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating() - 1,
+                                prodto.getQuantity_Sold(), prodto.getProductID());
+                    }
                 }
-
+                session.setAttribute("SERVICE_ID_CANCEL", serviceID);
             }
 
-            switch (button) {
-                case "null":
-                    url = MyAppConstants.PublicFeatures.PAGING_PRODUCT_CONTROLLER;
-                    break;
-                case "Addtocart":
-                    url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
-                    break;
-            }
-
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

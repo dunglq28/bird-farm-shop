@@ -77,7 +77,7 @@ public class AdminDAO {
         return null;
     }
 
-    ublic int getNumberAllAccountPage(String searchValue, int fieldShow)
+    public int getNumberAllAccountPage(String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;

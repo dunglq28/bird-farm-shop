@@ -112,7 +112,7 @@ public class CreateOrderServlet extends HttpServlet {
                                 birdDao.updateQuantityAfterOrder(quantityAvaUpdate, pro.getQuantity_MaleBird(), quantitySold, key);
                                 if (flag) {
                                     //Create an order to buy birds and bird's nests
-                                    newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, null, customer.getAddress(), customer.getCity(),
+                                    newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, customer.getAddress(), customer.getCity(),
                                             customer.getPhone_Number(), orderDate, null, 0, shippingCash, 0, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                                     orderdao.createOrder(newOrder);
                                     flag = false;
@@ -128,21 +128,21 @@ public class CreateOrderServlet extends HttpServlet {
                         case 2:
                             orderID = orderdao.createOrderID();
                             //Take all quantity of product to handle
-                            maleBird = birdDao.getAllQuantityByProductID(maleBird.getProductID());
+                            pro = birdDao.getAllQuantityByProductID(maleBird.getProductID());
                             //Subtract the quantity of male bird available
-                            quantityAvaUpdate = maleBird.getQuantity_Available() - 1;
+                            quantityAvaUpdate = pro.getQuantity_Available() - 1;
 
                             // update quantityBuy and quantitySold of male bird
-                            birdDao.updateQuantityAfterOrder(quantityAvaUpdate, maleBird.getQuantity_AreMating() + 1, maleBird.getQuantity_Sold(), maleBird.getProductID());
+                            birdDao.updateQuantityAfterOrder(quantityAvaUpdate, pro.getQuantity_AreMating() + 1, pro.getQuantity_Sold(), pro.getProductID());
 
                             //Same with male birds
-                            femaleBird = birdDao.getAllQuantityByProductID(femaleBird.getProductID());
-                            quantityAvaUpdate = femaleBird.getQuantity_Available() - 1;
+                            pro = birdDao.getAllQuantityByProductID(femaleBird.getProductID());
+                            quantityAvaUpdate = pro.getQuantity_Available() - 1;
 
-                            birdDao.updateQuantityAfterOrder(quantityAvaUpdate, femaleBird.getQuantity_AreMating() + 1, femaleBird.getQuantity_Sold(), femaleBird.getProductID());
+                            birdDao.updateQuantityAfterOrder(quantityAvaUpdate, pro.getQuantity_AreMating() + 1, pro.getQuantity_Sold(), pro.getProductID());
 
                             //Create an order for bird matching service
-                            newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, null, null, customer.getAddress(), customer.getCity(),
+                            newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, null, customer.getAddress(), customer.getCity(),
                                     customer.getPhone_Number(), orderDate, null, 0, 0, Float.parseFloat(totalOrder), 0, paymentMethod, "Wait for confirmation");
                             orderdao.createOrder(newOrder);
                             // Create a detail order for bird matching service with quantityBuy of product is 0
@@ -165,7 +165,8 @@ public class CreateOrderServlet extends HttpServlet {
                             // update order of this service
                             orderdao.UpdateOrder(oldOrderID, shippingMethod, shippingCash, Float.parseFloat(totalOrder), paymentMethod);
                             //update final status of tracking match bird
-                            bndao.updateStatusBirdNestTracking(oldOrderID, "Payment Success");
+//                            long millis = System.currentTimeMillis();
+                            bndao.updateStatusBirdNestTracking(oldOrderID, "Payment Success", orderDate);
                             orderID = oldOrderID;
 
                             //Take all quantity of product to handle

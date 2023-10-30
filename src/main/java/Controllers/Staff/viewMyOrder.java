@@ -50,11 +50,12 @@ public class viewMyOrder extends HttpServlet {
                 page = "1";
             }
             int indexPage = Integer.parseInt(page);
+            int fieldShow = 10;
             OrderDAO dao = new OrderDAO();
             StaffDAO staffdao = new StaffDAO();
             StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue);
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue);
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue, fieldShow);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue, fieldShow);
 
             int start = 1;
             int distance = 4;
@@ -81,6 +82,11 @@ public class viewMyOrder extends HttpServlet {
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
+            if (serviceID.equals("1")) {
+                session.setAttribute("CURRENT_VIEW", "My order");
+            } else {
+                session.setAttribute("CURRENT_VIEW", "My booking");
+            }
             url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
 
         } finally {

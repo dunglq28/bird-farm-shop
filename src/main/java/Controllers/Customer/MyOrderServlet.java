@@ -28,22 +28,27 @@ public class MyOrderServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null) {
+            if (account == null) { // If customers don't login return to home
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 response.sendRedirect(url);
                 return;
             }
-            if (status == null || status.equals("All") ) {
+            if (status == null || status.equals("All")) { // set status empty to view all status (relative)
                 status = "";
             }
 
-            if (serviceID == null ) {
+            if (serviceID == null && session.getAttribute("SERVICE_ID_CANCEL") != null) {
+                serviceID = (String) session.getAttribute("SERVICE_ID_CANCEL");
+                session.removeAttribute("SERVICE_ID_CANCEL");
+            } else if (serviceID == null) {// default serviceID is 1
                 serviceID = "1";
             }
 
             OrderDAO oDao = new OrderDAO();
             OrderDetailDAO odDao = new OrderDetailDAO();
+            // Get all order of customer with status customer choose and service
             List<OrderDTO> order = oDao.getOrderByAccountID(account.getAccountID(), status, Integer.parseInt(serviceID));
+            //Set order to view
             session.setAttribute("ORDER_LIST", order);
             request.setAttribute("STATUS_ORDER", status);
             request.setAttribute("SERVICE_ID", serviceID);

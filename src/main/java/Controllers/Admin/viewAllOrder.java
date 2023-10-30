@@ -48,11 +48,12 @@ public class viewAllOrder extends HttpServlet {
                 page = "1";
             }
             int indexPage = Integer.parseInt(page);
+            int fieldShow = 10;
             OrderDAO dao = new OrderDAO();
             StaffDAO staffdao = new StaffDAO();
             StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue);
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue);
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue,fieldShow);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue,fieldShow);
 
             int start = 1;
             int distance = 4;

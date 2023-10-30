@@ -31,8 +31,9 @@
                                     <div class="col-lg-9">
                                         <div class="p-5">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">My order</h1>
-
+                                                <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">
+                                                    ${requestScope.SERVICE_ID == 1 ? 'My order' : 'My booking'}
+                                                </h1>
                                             </div>
                                             <form action="Order">
                                                 <div class="mb-4 justify-content-between align-items-sm-start">
@@ -192,10 +193,13 @@
                                                             <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">See Bird Nest Tracking</button>
                                                         </form>
                                                     </c:if>
-                                                    <c:if test="${order.status == 'Wait for confirmation'}">
-                                                        <div class="col-12 mt-3 d-flex justify-content-end">
-                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
-                                                        </div>
+                                                    <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel' && order.serviceID != 1}">
+                                                        <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
+                                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                                            <input type="hidden" name="txtServiceID" value="${order.serviceID}">
+                                                            <input type="hidden" name="status" value="${order.status}">
+                                                        </form>
                                                     </c:if>
 
                                                     <c:if test="${order.status == 'Complete'}">
