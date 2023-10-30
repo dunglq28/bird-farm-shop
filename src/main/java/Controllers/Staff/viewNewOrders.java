@@ -69,6 +69,7 @@ public class viewNewOrders extends HttpServlet {
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
+            session.setAttribute("CURRENT_VIEW", "New order");
             url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
 
         } finally {

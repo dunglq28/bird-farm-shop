@@ -31,8 +31,9 @@
                                     <div class="col-lg-9">
                                         <div class="p-5">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">My order</h1>
-
+                                                <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">
+                                                    ${requestScope.SERVICE_ID == 1 ? 'My order' : 'My booking'}
+                                                </h1>
                                             </div>
                                             <form action="Order">
                                                 <div class="mb-4 justify-content-between align-items-sm-start">

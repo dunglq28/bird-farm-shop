@@ -19,7 +19,7 @@ public class AdminDAO {
         return accountList;
     }
 
-    public List<AccountDTO> ViewAllAccount()
+    public List<AccountDTO> ViewAllAccount(int page, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
 
         Connection con = null;
@@ -31,9 +31,20 @@ public class AdminDAO {
             if (con != null) {
                 String sql = "select acc.AccountID, acc.FullName, rol.RoleName, "
                         + "acc.Email, acc.Date_created, acc.CreateBy, acc.Status "
-                        + "from Account acc inner join Roles rol on "
-                        + "acc.RoleID = rol.RoleID ";
+                        + "from Account acc "
+                        + "inner join Roles rol on acc.RoleID = rol.RoleID "
+                        + "where acc.AccountID like ? and acc.RoleID != 1 "
+                        + "or acc.FullName like ? and acc.RoleID != 1 "
+                        + "or rol.RoleName like ? and acc.RoleID != 1 "
+                        + "Order by acc.RoleID asc "
+                        + "OFFSET ? ROWS "
+                        + "FETCH FIRST ? ROWS ONLY ";
                 stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + searchValue + "%");
+                stm.setInt(4, (page - 1) * fieldShow);
+                stm.setInt(5, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
@@ -66,7 +77,50 @@ public class AdminDAO {
         return null;
     }
 
-     public boolean UpdatedStatus(String accountID, boolean status) throws SQLException, ClassNotFoundException {
+    public int getNumberAllAccountPage(String searchValue, int fieldShow)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "from Account acc "
+                        + "inner join Roles rol on acc.RoleID = rol.RoleID "
+                        + "where acc.AccountID like ? and acc.RoleID != 1 "
+                        + "or acc.FullName like ? and acc.RoleID != 1 "
+                        + "or rol.RoleName like ? and acc.RoleID != 1 ";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + searchValue + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage = total / fieldShow;
+                    if (countPage % fieldShow != 0 && countPage % 2 != 0) {
+                        countPage++;
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+
+    public boolean UpdatedStatus(String accountID, boolean status) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -93,8 +147,8 @@ public class AdminDAO {
         }
         return false;
     }
-     
-     public boolean UpdatedRole(String accountID, int roleID) throws SQLException, ClassNotFoundException {
+
+    public boolean UpdatedRole(String accountID, int roleID) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         try {

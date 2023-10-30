@@ -3,13 +3,13 @@
 <div class="sidebar">
 
     <div class="logo">Bird Farm Shop</div>    
-    
+
     <c:set var="admin" value="Admin" />
     <c:set var="staff" value="Staff" />
     <c:set var="manager" value="Manager"/>
     <ul class="menu">
         <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
-            <li class="active">
+            <li>
                 <a href="#">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
@@ -17,19 +17,17 @@
             </li>
         </c:if>
 
-        <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
-            <li>
-                <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
+            <li class="${sessionScope.CURRENT_VIEW == 'New order' ? 'active' : ''}">
+            <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
                 <a href="viewNewOrder" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-number">${oDao.numberOfNewOrder}</span>
-                    <span>Orders in queue</span>
-                </a>
-            </li>
-        </c:if>
+                <span>Orders in queue</span>
+            </a>
+        </li>
 
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
-            <li>
+            <li class="${sessionScope.CURRENT_VIEW == 'My order' ? 'active' : ''}">
                 <a href="viewMyOrder-staff?txtServiceID=1">
                     <i class="fa-solid fa-file-invoice"></i>
                     <span>My Order</span>
@@ -37,7 +35,7 @@
             </li>
         </c:if>
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
-            <li>
+            <li class="${sessionScope.CURRENT_VIEW == 'My booking' ? 'active' : ''}">
                 <a href="viewMyOrder-staff?txtServiceID=2">
                     <i class="fa-solid fa-file-invoice"></i>
                     <span>My Booking</span>
@@ -46,7 +44,7 @@
         </c:if>
 
         <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
-            <li>
+            <li class="${sessionScope.CURRENT_VIEW == 'All account' ? 'active' : ''}">
                 <a href="viewAllAccount">
                     <i class="fas fa-briefcase"></i>
                     <span>Account manager</span>
@@ -55,7 +53,7 @@
         </c:if>
 
 
-        <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
+        <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
             <li>
                 <a href="#">
                     <i class="fas fa-question-circle"></i>

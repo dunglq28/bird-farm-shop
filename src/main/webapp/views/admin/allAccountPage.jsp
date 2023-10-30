@@ -26,45 +26,32 @@
         <jsp:include page="/components/siveBar.jsp"></jsp:include>
 
             <div class="main--content">
-                <div class="header-wrapper">
-                    <div class="header--title">
-                        <span>Primary</span>
-                        <h2>Account Management</h2>
-                    </div>
-                    <div class="user--info">
-                        <div class="search--box">
-                            <i class="fa-solid fa-search"></i>
-                            <input type="text" placeholder="search" />
-                        </div>
-                    ${sessionScope.ACCOUNT.fullName}
-                </div>
-            </div>
-            <div class="tabular--wrapper">
+            <jsp:include page="/components/headerManagement.jsp"></jsp:include>
+                <div class="tabular--wrapper">
 
-                <h3 class="main--title">Account</h3>
+                    <h3 class="main--title">Account</h3>
 
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Account ID</th>
-                                <th>Full Name</th>
-                                <th>Role Name</th>
-                                <th>Email</th>
-                                <th>Date created</th>
-                                <th>Created By</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Account ID</th>
+                                    <th>Full Name</th>
+                                    <th>Role Name</th>
+                                    <th>Email</th>
+                                    <th>Date created</th>
+                                    <th>Created By</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <c:set var="admin" value="Admin"/>
                         <div class="tbody-wrapper">
                             <c:set var="acc" value="${requestScope.ACCOUNT_LIST}"></c:set>
                             <c:if test="${not empty acc}">
                                 <c:forEach items="${acc}" var="dto">
                                     <tr>
-                                        <c:if test="${dto.roleName != admin}">
                                             <td>${dto.accountID}</td>
                                             <td>${dto.fullName}</td>
                                             <td>${dto.roleName}</td>
@@ -80,7 +67,7 @@
                                                     <input type="hidden" name="accountID" value="${dto.accountID}" />
                                                 </form>
                                             </td>
-                                        </c:if>
+                                             <td></td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -89,6 +76,23 @@
                     </table>
                 </div>
             </div>
+            <div class="col-lg-12 text-center mt-2">
+                <div class="pagination__option" style="text-align: end">
+                    <c:if test="${requestScope.indexCurrent > 1}">
+                        <a href="viewAllAccount?page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewAllAccount?page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        </c:if>
+
+                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewAllAccount?page=${i}">${i}</a>
+                    </c:forEach>
+
+                    <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                        <a href="viewAllAccount?page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewAllAccount?page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        </c:if>
+                </div>
+            </div>  
         </div>
     </body>
 </html>
