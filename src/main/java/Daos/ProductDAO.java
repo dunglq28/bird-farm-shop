@@ -43,14 +43,15 @@ public class ProductDAO implements Serializable {
                         + "Quantity_Available, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "where Product_TypeID like ? and Product_Name like ? "
+                        + "where Product_TypeID like ? and Product_Name like ? and cate.Category_Name like ?  and Status = 'true' "
                         + "Order by Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST 9 ROWS ONLY";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + product_typeID + "%");
                 stm.setString(2, "%" + searchValue + "%");
-                stm.setInt(3, (index - 1) * 9);
+                stm.setString(3, "%" + searchValue + "%");
+                stm.setInt(4, (index - 1) * 9);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     ProductDTO result = new ProductDTO(rs.getString("ProductID"),
@@ -67,7 +68,7 @@ public class ProductDAO implements Serializable {
                             rs.getInt("Quantity_Sold"),
                             rs.getFloat("Price"),
                             rs.getFloat("Discount"),
-                            rs.getString("Status"));
+                            rs.getBoolean("Status"));
                     if (this.productList == null) {
                         this.productList = new ArrayList<ProductDTO>();
                     }
@@ -99,10 +100,12 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 String sql = "Select count(*) "
                         + "From Products "
-                        + "where Product_TypeID like ? and  Product_Name like ? ";
+                        + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
+                        + "where Product_TypeID like ? and  Product_Name like ? and cate.Category_Name like ? and Status = 'true' ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + product_typeID + "%");
                 stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
@@ -139,7 +142,7 @@ public class ProductDAO implements Serializable {
                 //2.Create SQL statement string
                 String sql = "Select * "
                         + "From Products "
-                        + "Where Product_Name like ? and Product_TypeID = 1 ";
+                        + "Where Product_Name like ? and Product_TypeID = 1 and Status = 'true' ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + product_name + "%");
@@ -160,7 +163,7 @@ public class ProductDAO implements Serializable {
                     String characteristics = rs.getString("Characteristics");
                     String detail = rs.getString("Detail");
                     Date date_created = rs.getDate("Date_created");
-                    String status = rs.getString("Status");
+                    boolean status = rs.getBoolean("Status");
 
                     ProductDTO dto = new ProductDTO(productID, product_Name, categoryID, age, color,
                             gender, image, quantity, price,
@@ -200,7 +203,7 @@ public class ProductDAO implements Serializable {
                 String sql = "Select * "
                         + "From Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "Where ProductID = ? ";
+                        + "Where ProductID = ? and Status = 'true' ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -226,7 +229,7 @@ public class ProductDAO implements Serializable {
                             rs.getString("Detail"),
                             rs.getDate("Date_created"),
                             rs.getFloat("Discount"),
-                            rs.getString("Status"));
+                            rs.getBoolean("Status"));
                     return product;
                 }
             }
@@ -254,7 +257,7 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 String sql = "Select ProductID, Quantity_Available, Quantity_AreMating, Quantity_Sold "
                         + "From Products "
-                        + "Where ProductID = ? ";
+                        + "Where ProductID = ? and Status = 'true' ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -281,7 +284,7 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_AreMating, int quantity_sold, String status, String birdID)
+    public boolean updateQuantityAfterOrder(int quantity_available, int quantity_AreMating, int quantity_sold, String birdID)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -292,15 +295,14 @@ public class ProductDAO implements Serializable {
             if (con != null) {
                 //2. create SQL statement string
                 String sql = "Update Products "
-                        + "Set Quantity_Available = ?, Quantity_AreMating = ?, Quantity_Sold = ?, Status = ? "
-                        + "Where productID = ? ";
+                        + "Set Quantity_Available = ?, Quantity_AreMating = ?, Quantity_Sold = ? "
+                        + "Where productID = ? and Status = 'true' ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, quantity_available);
                 stm.setInt(2, quantity_AreMating);
                 stm.setInt(3, quantity_sold);
-                stm.setString(4, status);
-                stm.setString(5, birdID);
+                stm.setString(4, birdID);
                 //4. Excute query
                 int effectRows = stm.executeUpdate();
                 //5. Process
@@ -334,7 +336,7 @@ public class ProductDAO implements Serializable {
                 String sql = "select ProductID , Product_Name, Image, Age, Color, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
                         + "from Products "
                         + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= 1 "
-                        + "and CategoryID = ? ";
+                        + "and CategoryID = ? and Status = 'true' ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 //4.execute-query

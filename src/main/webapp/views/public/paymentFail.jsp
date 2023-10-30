@@ -28,7 +28,7 @@
 
 <body>
    <div class="cycle_section layout_padding">
-      <div class="container">
+       <div class="container" style="padding-top: 100px">
          <div class="cycle_section_3 layout_padding">
              <div class="col-md-12">
                   
@@ -41,7 +41,7 @@
                   <p class="lorem_text">There was an issue with your payment. Please ensure your card details are accurate and your account has sufficient funds.</p>
                   <p class="lorem_text">We apologize, but the payment was unsuccessful. If you need assistance or have questions, please contact us through [link to the contact page].</p>
                   <div class="btn_main">
-                     <div class="buy_bt"><a href="#">Buy Again</a></div>
+                     <div class="buy_bt"><a href="product_list?productType=${sessionScope.PRODUCT_TYPE}">Buy Again</a></div>
                    
                   </div>
                </div>

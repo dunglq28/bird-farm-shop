@@ -160,7 +160,7 @@ public class OrderDAO implements Serializable {
                         + "From Orders od "
                         + "inner join Service ser on ser.ServiceID = od.ServiceID "
                         + "where AccountID = ? and od.ServiceID = ? and Status like ? "
-                        + "order by OrderDate desc ";
+                        + "order by OrderDate desc, OrderID desc ";
 
                 //3.Create statement object
                 stm = con.prepareStatement(sql);

@@ -54,11 +54,13 @@
                                         </span>
                                     </div>
                                     <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i> ${product_current.quantity_Available} orders</span>
-                                    <span class="text-success ms-2"${product_current.status == 'Sold out' ? 'style="color: red!important"' : ''}>
-                                        ${product_current.status}
-                                    </span>
+                                    <c:if test="${product_current.quantity_Available == 0}">
+                                        <span class="text-success ms-2" style="color: red!important">Sold out</span>
+                                    </c:if>
+                                    <c:if test="${product_current.quantity_Available != 0}">
+                                       <span class="text-success ms-2">Available</span>
+                                    </c:if>
                                 </div>
-
                                 <div class="mb-3">
                                     <span class="h5" style="color:#0D6780">${utilPrice.FormatPrice(product_current.priceDiscount)}</span>
                                     <span class="text-muted">/for a bird</span>
@@ -78,7 +80,7 @@
 
                                 <hr />
                                 <div class="row mb-4">
-                                    <form action="product" id="myForm" class="row col-lg-8" method="get">
+                                    <form action="product" id="myForm" class="row col-lg-8" method="POST">
                                         <input type="hidden" name="txtproductName" value="${product_current.product_Name}"/>
                                         <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
                                         <div class="col-md-6 col-6">

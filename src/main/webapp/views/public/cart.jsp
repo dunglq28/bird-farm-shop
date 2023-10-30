@@ -198,7 +198,7 @@
                                          class="img-fluid mb-4 mr-3">
                                     <h3><strong>Your Cart is Empty</strong></h3>
                                     <h4>Add something to make me happy</h4>
-                                    <a href="product_list?productType=bird" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
+                                    <a href="product_list?productType=${sessionScope.PRODUCT_TYPE}" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
                                         Shopping</a>
                                 </div>
                             </div>
