@@ -20,7 +20,7 @@
 </div>
 
 
-<c:if test="${sessionScope.SERVICE_ID != 4}">
+<c:if test="${sessionScope.SERVICE_ID != 2}">
     <hr class="my-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="fw-bold mb-0 text-black">Delivery method </h4>

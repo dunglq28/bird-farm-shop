@@ -33,6 +33,8 @@ public class AddBirdServlet extends HttpServlet {
         float discount = Float.parseFloat(request.getParameter("txtDiscount"));
         int quantityBuy = Integer.parseInt(request.getParameter("quantity_Buy"));
         int quantityAvailable = Integer.parseInt(request.getParameter("quantity_Available"));
+        int quantityMaleBird = Integer.parseInt(request.getParameter("quantity_MaleBird"));
+        int quantityFemaleBird = Integer.parseInt(request.getParameter("quantity_FemaleBird"));
         int quantitySold = Integer.parseInt(request.getParameter("quantity_Sold"));
         String lastSearch = request.getParameter("lastsearch");
         String page = request.getParameter("page");
@@ -44,10 +46,10 @@ public class AddBirdServlet extends HttpServlet {
                 cart = new CartObj();
             }
             Products prodcut = null;
-            if (age == null && color == null && gender == null) {
-                prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityBuy, quantitySold, price, discount);
+            if (quantityMaleBird != 0 && quantityFemaleBird != 0) {
+                prodcut = new Products(name, cate_Name, img, quantityAvailable, quantityMaleBird, quantityFemaleBird, quantityBuy, quantitySold, price, discount);
             } else {
-                prodcut = new Products(birdID ,name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, discount);
+                prodcut = new Products(birdID, name, cate_Name, age, color, gender, img, quantityAvailable, quantityBuy, quantitySold, price, discount);
             }
 
             cart.addItemToCart(birdID, prodcut);

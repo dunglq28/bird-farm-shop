@@ -1,12 +1,15 @@
-
 package Controllers.Customer;
 
 import Daos.BirdNestDetail_TrackingDAO;
 import Daos.Bird_Nest_TrackingDAO;
 import Daos.CustomerDAO;
+import Daos.OrderDAO;
+import Daos.OrderDetailDAO;
 import Models.AccountDTO;
 import Models.BirdNestDetail_TrackingDTO;
 import Models.Bird_Nest_TrackingDTO;
+import Models.OrderDetailDTO;
+import Object.Products;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,6 +44,7 @@ public class ServiceTrackingServlet extends HttpServlet {
         String url = MyAppConstants.CustomerFeatures.SERVICE_TRACKING_PAGE;
         String orderID = request.getParameter("txtOrderID");
         String page = request.getParameter("page");
+        String paymentMethod = request.getParameter("PaymentMethod");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -49,11 +53,12 @@ public class ServiceTrackingServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
+
             if (orderID != null) {
                 request.setAttribute("ORDER_ID", orderID);
             }
             Bird_Nest_TrackingDAO bntdao = new Bird_Nest_TrackingDAO();
-         
+
             Bird_Nest_TrackingDTO bntdto = bntdao.getBNTrackingByOrderID(orderID);
             session.setAttribute("BIRD_NEST_TRACKING", bntdto);
             if (session.getAttribute("CUSTOMER") == null) {
@@ -79,7 +84,7 @@ public class ServiceTrackingServlet extends HttpServlet {
             } else {
                 end = start + distance;
             }
-            
+
             if (indexPage >= 3) {
                 start = indexPage - 2;
                 end = indexPage + 2;

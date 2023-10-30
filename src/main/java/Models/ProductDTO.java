@@ -27,7 +27,7 @@ public class ProductDTO {
     private String detail;
     private Date date_created;
     private float discount;
-    private String status;
+    private boolean status;
 
     public ProductDTO() {
     }
@@ -37,7 +37,33 @@ public class ProductDTO {
         this.category_Name = category_Name;
     }
 
-    public ProductDTO(String productID, String product_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, String status) {
+    public ProductDTO(String productID, String product_Name, String category_Name, int product_TypeID, String age, String color, String gender,
+            String image, int quantity_MaleBird, int quantity_FemaleBird, int quantity_Available, int quantity_Sold, float price, float discount, boolean status) {
+        this.productID = productID;
+        this.product_Name = product_Name;
+        this.category_Name = category_Name;
+        this.product_TypeID = product_TypeID;
+        this.age = age;
+        this.color = color;
+        this.gender = gender;
+        this.image = image;
+        this.quantity_MaleBird = quantity_MaleBird;
+        this.quantity_FemaleBird = quantity_FemaleBird;
+        this.quantity_Available = quantity_Available;
+        this.quantity_Sold = quantity_Sold;
+        this.price = price;
+        this.discount = discount;
+        this.status = status;
+    }
+
+    public ProductDTO(String productID, int quantity_Available, int quantity_AreMating, int quantity_Sold) {
+        this.productID = productID;
+        this.quantity_Available = quantity_Available;
+        this.quantity_AreMating = quantity_AreMating;
+        this.quantity_Sold = quantity_Sold;
+    }
+
+    public ProductDTO(String productID, String product_Name, int categoryID, String age, String color, String gender, String image, int quantity_Available, float price, String characteristics, String detail, Date date_created, float discount, boolean status) {
         this.productID = productID;
         this.product_Name = product_Name;
         this.categoryID = categoryID;
@@ -54,37 +80,8 @@ public class ProductDTO {
         this.status = status;
     }
 
-    public ProductDTO(String productID, String product_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_AreMating, int quantity_Sold, float price, float discount) {
-        this.productID = productID;
-        this.product_Name = product_Name;
-        this.age = age;
-        this.color = color;
-        this.gender = gender;
-        this.image = image;
-        this.quantity_Available = quantity_Available;
-        this.quantity_AreMating = quantity_AreMating;
-        this.quantity_Sold = quantity_Sold;
-        this.price = price;
-        this.discount = discount;
-    }
-
-    public ProductDTO(String productID, String product_Name, String category_Name, int product_TypeID, String age, String color, String gender, String image, int quantity_Available, int quantity_Sold, float price, float discount, String status) {
-        this.productID = productID;
-        this.product_Name = product_Name;
-        this.category_Name = category_Name;
-        this.product_TypeID = product_TypeID;
-        this.age = age;
-        this.color = color;
-        this.gender = gender;
-        this.image = image;
-        this.quantity_Available = quantity_Available;
-        this.quantity_Sold = quantity_Sold;
-        this.price = price;
-        this.discount = discount;
-        this.status = status;
-    }
-
-    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID, String mom_Bird_ID, String age, String color, String gender, String image,  int quantity_MaleBird,  int quantity_FemaleBird, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, String status) {
+    public ProductDTO(String productID, String product_Name, int categoryID, String category_Name, int product_TypeID, String dad_Bird_ID,
+            String mom_Bird_ID, String age, String color, String gender, String image, int quantity_MaleBird, int quantity_FemaleBird, int quantity_Available, int quantity_Sold, float price, String characteristics, String detail, Date date_created, float discount, boolean status) {
         this.productID = productID;
         this.product_Name = product_Name;
         this.categoryID = categoryID;
@@ -108,12 +105,18 @@ public class ProductDTO {
         this.status = status;
     }
 
-    public ProductDTO(String product_Name, String category_Name, String age, String color, String gender) {
+    public ProductDTO(String productID, String product_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_AreMating, int quantity_Sold, float price, float discount) {
+        this.productID = productID;
         this.product_Name = product_Name;
-        this.category_Name = category_Name;
         this.age = age;
         this.color = color;
         this.gender = gender;
+        this.image = image;
+        this.quantity_Available = quantity_Available;
+        this.quantity_AreMating = quantity_AreMating;
+        this.quantity_Sold = quantity_Sold;
+        this.price = price;
+        this.discount = discount;
     }
 
     public String getProductID() {
@@ -219,8 +222,6 @@ public class ProductDTO {
     public void setQuantity_FemaleBird(int quantity_FemaleBird) {
         this.quantity_FemaleBird = quantity_FemaleBird;
     }
-    
-    
 
     public int getQuantity_Available() {
         return quantity_Available;
@@ -286,11 +287,11 @@ public class ProductDTO {
         this.discount = discount;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

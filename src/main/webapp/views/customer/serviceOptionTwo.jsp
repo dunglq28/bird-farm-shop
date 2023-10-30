@@ -70,7 +70,7 @@
             </nav>
         </div>
         <!-- header -->
-        <form action="Checkout"  class="container py-3 h-100 " method="get">
+        <form action="Checkout"  class="container py-3 h-100 " method="POST">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
@@ -253,15 +253,11 @@
                                             <h6 class="text-uppercase">Temporary</h6>
                                             <h6>${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
                                         </div>
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <h6 class="text-uppercase">Transport Fee</h6>
-                                            <h6 id="Ship">${utilPrice.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
-                                        </div>
                                         <div class=" d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
                                             <h6>0</h6>
                                         </div>
-                                        <c:set var="total_order" value="${sessionScope.SHIPPING_CASH + requestScope.SERVICE_PRICE}"></c:set>
+                                        <c:set var="total_order" value="${requestScope.SERVICE_PRICE}"></c:set>
                                             <div class="d-flex justify-content-between mb-2">
                                                 <h5 class="text-uppercase">Total price</h5>
                                                 <h5 id="total_order">${utilPrice.FormatPrice(total_order)}</h5>

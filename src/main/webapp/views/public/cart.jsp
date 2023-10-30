@@ -63,6 +63,10 @@
                                                                     </div>
                                                                     <h6 class="text-muted">Color: ${items.get(key).color}</h6>
                                                                 </c:if>
+                                                                <c:if test="${empty items.get(key).age}">
+                                                                    <h6 class="text-muted">Male baby bird: ${items.get(key).quantity_MaleBird}</h6>
+                                                                    <h6 class="text-muted">Female baby bird: ${items.get(key).quantity_FemaleBird}</h6>
+                                                                </c:if>
 
                                                                 <div class="delete-product mb-1">
                                                                     <a href="remove-bird?BirdID=${key}" class="delete-icon text-decoration-none ">
@@ -194,7 +198,7 @@
                                          class="img-fluid mb-4 mr-3">
                                     <h3><strong>Your Cart is Empty</strong></h3>
                                     <h4>Add something to make me happy</h4>
-                                    <a href="product_list?productType=bird" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
+                                    <a href="product_list?productType=${sessionScope.PRODUCT_TYPE}" class="btn-back btn cart-btn-transform m-3 " data-abc="true">Continue
                                         Shopping</a>
                                 </div>
                             </div>

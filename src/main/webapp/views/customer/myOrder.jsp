@@ -75,12 +75,14 @@
                                                                             </h6>
                                                                         </div>
                                                                     </div>
-                                                                    <div class=" justify-content-center align-content-center">
-                                                                        <div class="d-flex"
-                                                                             style="margin:0 10px 0  0;">
-                                                                            <h6 class="mb-0 text-sm-start">Payment: ${order.payBy}</h6>
+                                                                    <c:if test="${not empty order.form_Receipt}">
+                                                                        <div class=" justify-content-center align-content-center">
+                                                                            <div class="d-flex"
+                                                                                 style="margin:0 10px 0  0;">
+                                                                                <h6 class="mb-0 text-sm-start">Payment: ${order.payBy}</h6>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </c:if>
                                                                 </div>
                                                                 <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
                                                                      style="">
@@ -93,27 +95,39 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-xl-12 d-flex"style=" margin-top: 8px;">
-                                                                <div class=" align-content-center">
-                                                                    <div class="d-flex">
-                                                                        <h6 class="mb-0 text-sm-start">Receiving method: ${order.form_Receipt} </h6>
+                                                                <c:if test="${not empty order.form_Receipt}">
+                                                                    <div class=" align-content-center">
+                                                                        <div class="d-flex">
+                                                                            <h6 class="mb-0 text-sm-start">Receiving method: ${order.form_Receipt} </h6>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <h6 class="mb-0 text-sm-center"
-                                                                    style="margin: 0 10px 0 10px;"> |
-                                                                </h6>
+                                                                    <h6 class="mb-0 text-sm-center"
+                                                                        style="margin: 0 10px 0 10px;"> |
+                                                                    </h6>
+                                                                </c:if>
                                                                 <div class=" align-content-center">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Service: ${order.serviceName} </h6>
                                                                     </div>
                                                                 </div>
-                                                                <h6 class="mb-0 text-sm-center"
-                                                                    style="margin: 0 10px 0 10px;"> |
-                                                                </h6>
-                                                                <div class=" align-content-center ">
-                                                                    <h6 class="text-sm-start">Total: ${util.FormatPrice(order.total_order_final)}</h6>
-                                                                </div>
-                                                            </div>
 
+                                                                <c:if test="${order.total_Order == 0}">
+                                                                    <h6 class="mb-0 text-sm-center"
+                                                                        style="margin: 0 10px 0 10px;"> |
+                                                                    </h6>
+                                                                    <div class=" align-content-center ">
+                                                                        <h6 class="text-sm-start">Deposit price: ${util.FormatPrice(order.deposit_Price)}</h6>
+                                                                    </div>
+                                                                </c:if>
+                                                                <c:if test="${order.total_Order != 0}">
+                                                                    <h6 class="mb-0 text-sm-center"
+                                                                        style="margin: 0 10px 0 10px;"> |
+                                                                    </h6>
+                                                                    <div class=" align-content-center ">
+                                                                        <h6 class="text-sm-start">Total price: ${util.FormatPrice(order.total_Order + order.delivery_charges)}</h6>
+                                                                    </div>
+                                                                </c:if>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row d-flex mt-3">
@@ -145,8 +159,9 @@
 
 
                                                                 </div>
-                                                                <c:if test="${not empty od.color}">
-                                                                    <div class="col-md-5 col-lg-5 col-xl-5 ">
+
+                                                                <div class="col-md-5 col-lg-5 col-xl-5 ">
+                                                                    <c:if test="${not empty od.color}">
                                                                         <div class="">
                                                                             <h6 class="text-black mb-0">Color: ${od.color}</h6>
                                                                         </div>
@@ -156,8 +171,17 @@
                                                                         <div class="">
                                                                             <h6 class="text-black mb-0">Gender: ${od.gender}</h6>
                                                                         </div>
-                                                                    </div>
-                                                                </c:if>
+                                                                    </c:if>
+                                                                    <c:if test="${od.quantity_MaleBird !=0 && od.quantity_FemaleBird !=0}">
+
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Male baby bird: ${od.quantity_MaleBird}</h6>
+                                                                        </div> 
+                                                                        <div class="">
+                                                                            <h6 class="text-black mb-0">Female baby bird: ${od.quantity_FemaleBird}</h6>
+                                                                        </div>  
+                                                                    </c:if>
+                                                                </div>
                                                             </div>
                                                         </c:forEach>
                                                     </div>

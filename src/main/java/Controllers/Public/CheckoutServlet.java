@@ -72,12 +72,12 @@ public class CheckoutServlet extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("COD") || button.equals("Booking") && paymentMethod.equals("COD")) {
                 session.setAttribute("PAYMENT_METHOD", "COD");
-                url = MyAppConstants.PublicFeatures.CHECKOUT_SUCCESS_CONTROLLER;
+                url = MyAppConstants.PublicFeatures.CREATE_ORDER_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("VNPAY") || button.equals("Booking") && paymentMethod.equals("VNPAY")) {
                 session.setAttribute("PAYMENT_METHOD", "VNPAY");
                 url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
             } 
-
+       
 //        } catch (SQLException ex) {
 //            ex.printStackTrace();
 //        } catch (ClassNotFoundException ex) {

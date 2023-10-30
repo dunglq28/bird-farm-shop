@@ -74,6 +74,12 @@
                                 <h5>ORDER ID: <span class="text-secondary font-weight-bold order">#${bird_nest_tracking.orderID}</span></h5>
                             <h6>SERVICE: <span class="text-secondary  order">Pair birds of customers upon request</span></h6>
                             <h6>EGG QUANTITY: <span class="text-secondary order">${bird_nest_tracking.eggs_Quantity}</span></h6>
+                                <c:if test="${bird_nest_tracking.male_Babybird != 0}">
+                                <h6>MALE BABY BIRD: <span class="text-secondary order">${bird_nest_tracking.male_Babybird}</span></h6>
+                                </c:if>
+                                <c:if test="${bird_nest_tracking.female_Babybird != 0}">
+                                <h6>FEMALE BABY BIRD: <span class="text-secondary order">${bird_nest_tracking.female_Babybird}</span></h6>
+                                </c:if>
                         </div>
                         <div class="d-flex flex-column text-sm-left">
                             <p class="mb-0">Update <span>${util.FormatDate(bird_nest_tracking.lastUpdateDate)}</span></p>
@@ -118,11 +124,17 @@
                         </div>
                         <div class="row d-flex icon-content">
                             <div class="d-flex flex-column">
-                                <p class="font-weight-bold">Preparing<br>For Delivery</p>
+                                <p class="font-weight-bold">Payment<br>Success</p>
                             </div>
                         </div>
                     </div>
-                    <button class="pay">Complete payment</button>    
+                    <c:if test="${bird_nest_tracking.male_Babybird != 0 && bird_nest_tracking.female_Babybird != 0 && bird_nest_tracking.status != 'Payment Success'}">
+                        <form action="Checkout" method="Post">
+                            <button type="submit" class="pay">Complete payment</button>  
+                            <input type="hidden" name="txtOrderID" value="${bird_nest_tracking.orderID}">
+                            <input type="hidden" name="txtServiceID" value="0" />
+                        </form>
+                    </c:if>
                 </div>
             </div>
 

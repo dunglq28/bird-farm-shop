@@ -8,6 +8,7 @@ package Controllers.Staff;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
+import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "viewDetailOrderServlet", urlPatterns = {"/viewDetailOrderServlet"})
+@WebServlet(name = "viewDetailOrder", urlPatterns = {"/viewDetailOrder"})
 public class viewDetailOrderServlet extends HttpServlet {
 
     /**
@@ -39,7 +40,7 @@ public class viewDetailOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
+        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("OrderID");
         HttpSession session = request.getSession();
 
@@ -50,9 +51,15 @@ public class viewDetailOrderServlet extends HttpServlet {
                 return;
             }
             OrderDAO dao = new OrderDAO();
-            request.setAttribute("ORDER", dao.getOrderByOrderID(orderID));
+            OrderDTO order =  dao.getOrderByOrderID(orderID);
+            request.setAttribute("ORDER", order);
             OrderDetailDAO oddao = new OrderDetailDAO();
             request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
+            if (order.getServiceID() == 1) {
+                url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
+            } else {
+                
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -78,9 +78,12 @@
                                         </span>
                                     </div>
                                     <span class="text-muted"><i class="fa-solid fa-cart-shopping"></i> ${product_current.quantity_Available} orders</span>
-                                    <span class="text-success ms-2"${product_current.status == 'Sold out' ? 'style="color: red!important"' : ''}>
-                                        ${product_current.status}
-                                    </span>
+                                    <c:if test="${product_current.quantity_Available == 0}">
+                                        <span class="text-success ms-2" style="color: red!important">Sold out</span>
+                                    </c:if>
+                                    <c:if test="${product_current.quantity_Available != 0}">
+                                        <span class="text-success ms-2">Available</span>
+                                    </c:if>
                                 </div>
 
                                 <div class="mb-3">
@@ -153,6 +156,8 @@
                                             <input type="hidden" name="category_Name" value="${product_current.category_Name}"/>
                                             <input type="hidden" name="txtproductTypeID" value="${product_current.product_TypeID}"/>
                                             <input type="hidden" name="quantity_Available" value="${product_current.quantity_Available}"/>
+                                            <input type="hidden" name="quantity_MaleBird" value="${product_current.quantity_MaleBird}"/>
+                                            <input type="hidden" name="quantity_FemaleBird" value="${product_current.quantity_FemaleBird}"/>
                                             <input type="hidden" name="quantity_Sold" value="${product_current.quantity_Sold}"/>
                                             <input type="hidden" id="param_quantity" name="quantity_Buy" value="1" />
                                             <input type="hidden" name="price" value="${product_current.price}"/>

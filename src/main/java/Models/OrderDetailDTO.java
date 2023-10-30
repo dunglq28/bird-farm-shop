@@ -32,6 +32,13 @@ public class OrderDetailDTO {
         this.quantity_Buy = quantity_Buy;
     }
 
+    public OrderDetailDTO(String productID, String bird_gender, float price) {
+        this.productID = productID;
+        this.bird_gender = bird_gender;
+        this.price = price;
+    }
+    
+
     public OrderDetailDTO(String bird_name, String cate_name, String bird_gender, String bird_image, String bird_color, String bird_age, float price, int quantity_Buy) {
         this.bird_name = bird_name;
         this.cate_name = cate_name;

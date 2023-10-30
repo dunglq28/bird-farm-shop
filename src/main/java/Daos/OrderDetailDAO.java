@@ -73,7 +73,8 @@ public class OrderDetailDAO {
             if (con != null) {
                 String sql = null;
                 //2.Create SQL statement string
-                sql = "select product.Product_Name, od.Price, od.Quantity_Buy, product.Image, product.Color, product.Age, product.Gender, cate.Category_Name "
+                sql = "select product.Product_Name, od.Price, od.Quantity_Buy, product.Image, product.Color, product.Age, product.Gender, "
+                        + "product.Quantity_MaleBird ,product.Quantity_FemaleBird, cate.Category_Name "
                         + "from Order_Details od "
                         + "inner join Products product on product.ProductID = od.ProductID "
                         + "inner join Category cate on cate.CategoryID = product.CategoryID "
@@ -87,12 +88,14 @@ public class OrderDetailDAO {
                     String product_Name = rs.getString("Product_Name");
                     float price = rs.getFloat("Price");
                     int quantity_Buy = rs.getInt("Quantity_Buy");
+                    int quantity_MaleBird = rs.getInt("Quantity_MaleBird");
+                    int quantity_FemaleBird = rs.getInt("Quantity_FemaleBird");
                     String image = rs.getString("Image");
                     String color = rs.getString("Color");
                     String age = rs.getString("Age");
                     String gender = rs.getString("Gender");
                     String cate_Name = rs.getString("Category_Name");
-                    result = new Products(product_Name, cate_Name, age, color, gender, image, quantity_Buy, price);
+                    result = new Products(product_Name, cate_Name, age, color, gender, image, quantity_Buy, quantity_MaleBird, quantity_FemaleBird, price);
                     if (this.orderDetailList == null) {
                         this.orderDetailList = new ArrayList<Products>();
                     }
@@ -111,6 +114,47 @@ public class OrderDetailDAO {
             }
         }
         return this.orderDetailList;
+    }
+
+    public Products getOrderDetailProductByOrderID(String orderId, String gender)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        Products result = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = null;
+                //2.Create SQL statement string
+                sql = "select od.ProductID, od.Price "
+                        + "from Order_Details od "
+                        + "inner join Products pro on pro.ProductID = od.ProductID "
+                        + "where od.OrderID = ? and pro.Gender = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                stm.setString(2, gender);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    Products pro = new Products(rs.getString("ProductID"), null, rs.getFloat("Price"));
+                    return pro;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 
 }

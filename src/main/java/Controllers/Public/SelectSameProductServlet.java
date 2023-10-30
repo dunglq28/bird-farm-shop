@@ -54,13 +54,6 @@ public class SelectSameProductServlet extends HttpServlet {
         try {
             ProductDTO productCurrent = (ProductDTO) session.getAttribute("PRODUCT_CURRENT");
 
-            if (product_name == null && productTypeID == null && ageChoose == null && genderChoose == null) {
-                product_name = productCurrent.getProduct_Name();
-                productTypeID = String.valueOf(productCurrent.getProduct_TypeID());
-                ageChoose = productCurrent.getAge();
-                genderChoose = productCurrent.getGender();
-            }
-
             ProductDAO dao = new ProductDAO();
             ProductDTO product = null;
             List<ProductDTO> result = null;
@@ -69,6 +62,7 @@ public class SelectSameProductServlet extends HttpServlet {
                 result = dao.getProductByName(product_name);
                 List<String> ageList = new ArrayList<String>();
                 List<String> genderList = new ArrayList<String>();
+                //Take all age and gender of same bird
                 for (ProductDTO productDto : result) {
                     if (!ageList.contains(productDto.getAge())) {
                         ageList.add(productDto.getAge());
@@ -77,9 +71,8 @@ public class SelectSameProductServlet extends HttpServlet {
                         genderList.add(productDto.getGender());
                     }
                 }
-                if (productID.isEmpty()) {
-                    product = (ProductDTO) session.getAttribute("PRODUCT_CURRENT");
-                }
+
+                product = (ProductDTO) session.getAttribute("PRODUCT_CURRENT");
 
                 if (ageChoose != null && genderChoose != null) {
                     for (ProductDTO productDto : result) {
@@ -89,7 +82,7 @@ public class SelectSameProductServlet extends HttpServlet {
                     }
                 }
 
-                if (product != null && !ageChoose.equals(product.getAge())) {
+                if (request.getParameter("txtproductID") == null && !ageChoose.equals(product.getAge())) {
                     genderList.clear();
                     for (ProductDTO productDto : result) {
                         if (productDto.getAge().equals(ageChoose)) {

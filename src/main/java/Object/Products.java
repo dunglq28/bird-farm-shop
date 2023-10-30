@@ -34,7 +34,8 @@ public class Products {
     public Products() {
     }
 
-    public Products(String productID, String name, String cate_name, String dad_Bird_ID, String mom_Bird_ID, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
+    public Products(String productID, String name, String cate_name, String dad_Bird_ID, String mom_Bird_ID, String image,
+            int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
         this.productID = productID;
         this.name = name;
         this.cate_name = cate_name;
@@ -46,6 +47,12 @@ public class Products {
         this.quantitySold = quantitySold;
         this.price = price;
         this.discount = discount;
+    }
+
+    public Products(String productID, String gender, float price) {
+        this.productID = productID;
+        this.gender = gender;
+        this.price = price;
     }
 
     public Products(String productID, String name, String cate_name, String age, String color, String gender, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
@@ -63,18 +70,22 @@ public class Products {
         this.discount = discount;
     }
 
-    public Products(String name, String cate_name, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
+    public Products(String name, String cate_name, String image, int quantityAvailable, int quantity_MaleBird, int quantity_FemaleBird,
+            int quantityBuy, int quantitySold, float price, float discount) {
         this.name = name;
         this.cate_name = cate_name;
         this.image = image;
         this.quantityAvailable = quantityAvailable;
+        this.quantity_MaleBird = quantity_MaleBird;
+        this.quantity_FemaleBird = quantity_FemaleBird;
         this.quantityBuy = quantityBuy;
         this.quantitySold = quantitySold;
         this.price = price;
         this.discount = discount;
     }
 
-    public Products(String name, String cate_name, String age, String color, String gender, String image, int quantityBuy, float price) {
+    public Products(String name, String cate_name, String age, String color, String gender, String image, int quantityBuy,
+            int quantity_MaleBird, int quantity_FemaleBird, float price) {
         this.name = name;
         this.cate_name = cate_name;
         this.age = age;
@@ -82,6 +93,8 @@ public class Products {
         this.gender = gender;
         this.image = image;
         this.quantityBuy = quantityBuy;
+        this.quantity_MaleBird = quantity_MaleBird;
+        this.quantity_FemaleBird = quantity_FemaleBird;
         this.price = price;
     }
 
@@ -172,8 +185,6 @@ public class Products {
     public void setQuantity_FemaleBird(int quantity_FemaleBird) {
         this.quantity_FemaleBird = quantity_FemaleBird;
     }
-    
-    
 
     public int getQuantityAvailable() {
         return quantityAvailable;
