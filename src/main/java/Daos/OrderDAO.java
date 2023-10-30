@@ -557,5 +557,4 @@ public class OrderDAO implements Serializable {
         }
         return null;
     }
-
 }
