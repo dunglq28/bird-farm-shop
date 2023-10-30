@@ -192,10 +192,13 @@
                                                             <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">See Bird Nest Tracking</button>
                                                         </form>
                                                     </c:if>
-                                                    <c:if test="${order.status == 'Wait for confirmation'}">
-                                                        <div class="col-12 mt-3 d-flex justify-content-end">
-                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
-                                                        </div>
+                                                    <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel' && order.serviceID != 1}">
+                                                        <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
+                                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                                            <input type="hidden" name="txtServiceID" value="${order.serviceID}">
+                                                            <input type="hidden" name="status" value="${order.status}">
+                                                        </form>
                                                     </c:if>
 
                                                     <c:if test="${order.status == 'Complete'}">

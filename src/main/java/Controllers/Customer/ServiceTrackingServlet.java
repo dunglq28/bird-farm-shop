@@ -72,7 +72,7 @@ public class ServiceTrackingServlet extends HttpServlet {
             int indexPage = Integer.parseInt(page); // parse string to in
 
             BirdNestDetail_TrackingDAO bndetaildao = new BirdNestDetail_TrackingDAO();
-            int fieldShow = 4; // number of field can show on one page
+            int fieldShow = 3; // number of field can show on one page
             int endPage = bndetaildao.getNumberPage(bntdto.getBird_Nest_ID(), fieldShow); // get quantity of page
             //retrieve information according to the corresponding page
             List<BirdNestDetail_TrackingDTO> result = bndetaildao.getPagingByUpdateDateDesc(indexPage, bntdto.getBird_Nest_ID(), fieldShow);

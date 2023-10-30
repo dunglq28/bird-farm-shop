@@ -9,6 +9,7 @@ import Models.Bird_Nest_TrackingDTO;
 import Utils.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -149,7 +150,7 @@ public class Bird_Nest_TrackingDAO implements Serializable {
         return result;
     }
     
-    public boolean updateStatusBirdNestTracking(String orderID, String stauts) 
+    public boolean updateStatusBirdNestTracking(String orderID, String stauts, Date date) 
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -158,11 +159,12 @@ public class Bird_Nest_TrackingDAO implements Serializable {
             if (con != null) {
                 String sql = "Update Bird_Nest_Tracking "
                         + "Set Status = ? "
-                        + "Where OrderID = ? ";
+                        + "Where OrderID = ? and LastUpdateDate = ? ";
                        
                 stm = con.prepareStatement(sql);
                 stm.setString(1, stauts);
                 stm.setString(2, orderID);
+                stm.setDate(3, date);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;

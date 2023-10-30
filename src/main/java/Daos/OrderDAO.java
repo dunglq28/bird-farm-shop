@@ -204,7 +204,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public List<OrderDTO> ViewNewStaffOrders(int page, String searchValue)
+    public List<OrderDTO> ViewNewStaffOrders(int page, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
 
         Connection con = null;
@@ -223,12 +223,13 @@ public class OrderDAO implements Serializable {
                         + "or ord.Status = 'Wait for confirmation' and acc.FullName like ? "
                         + "Order by ord.OrderDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 10 ROWS ONLY ";
+                        + "FETCH FIRST ? ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
                 stm.setString(2, "%" + searchValue + "%");
-                stm.setInt(3, (page - 1) * 10);
+                stm.setInt(3, (page - 1) * fieldShow);
+                stm.setInt(4, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -265,7 +266,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public int getNewOrderPage(String searchValue)
+    public int getNewOrderPage(String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -284,8 +285,8 @@ public class OrderDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
-                    int countPage = total / 10;
-                    if (countPage % 10 != 0 && countPage % 2 != 0) {
+                    int countPage = total / fieldShow;
+                    if (countPage % fieldShow != 0 && countPage % 2 != 0) {
                         countPage++;
                     }
                     return countPage;
@@ -365,7 +366,7 @@ public class OrderDAO implements Serializable {
         return false;
     }
 
-    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose, int page, String searchValue)
+    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose, int page, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -385,7 +386,7 @@ public class OrderDAO implements Serializable {
                         + "or ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and acc.FullName like ? "
                         + "Order by ord.OrderDate desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 6 ROWS ONLY ";
+                        + "FETCH FIRST ? ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, StaffID);
@@ -396,7 +397,8 @@ public class OrderDAO implements Serializable {
                 stm.setInt(6, serviceID);
                 stm.setString(7, "%" + status_choose + "%");
                 stm.setString(8, "%" + searchValue + "%");
-                stm.setInt(9, (page - 1) * 6);
+                stm.setInt(9, (page - 1) * fieldShow);
+                stm.setInt(10, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
@@ -433,7 +435,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public int getMyOrderPage(String StaffID, int serviceID, String status_choose, String searchValue)
+    public int getMyOrderPage(String StaffID, int serviceID, String status_choose, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -459,8 +461,8 @@ public class OrderDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
-                    int countPage = total / 6;
-                    if (countPage % 6 != 0 && countPage % 2 != 0) {
+                    int countPage = total / fieldShow;
+                    if (countPage % fieldShow != 0 && countPage % 2 != 0) {
                         countPage++;
                     }
                     return countPage;

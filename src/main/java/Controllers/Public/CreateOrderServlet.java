@@ -165,7 +165,8 @@ public class CreateOrderServlet extends HttpServlet {
                             // update order of this service
                             orderdao.UpdateOrder(oldOrderID, shippingMethod, shippingCash, Float.parseFloat(totalOrder), paymentMethod);
                             //update final status of tracking match bird
-                            bndao.updateStatusBirdNestTracking(oldOrderID, "Payment Success");
+//                            long millis = System.currentTimeMillis();
+                            bndao.updateStatusBirdNestTracking(oldOrderID, "Payment Success", orderDate);
                             orderID = oldOrderID;
 
                             //Take all quantity of product to handle
