@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
-        <title>Staff</title>
+        <title>Admin</title>
 
     </head>
     <body>
@@ -29,7 +29,7 @@
                 <div class="header-wrapper">
                     <div class="header--title">
                         <span>Primary</span>
-                        <h2>Staff Management</h2>
+                        <h2>Account Management</h2>
                     </div>
                     <div class="user--info">
                         <div class="search--box">
@@ -41,7 +41,7 @@
             </div>
             <div class="tabular--wrapper">
 
-                <h3 class="main--title">Staff</h3>
+                <h3 class="main--title">Account</h3>
 
                 <div class="table-container">
                     <table>
@@ -81,17 +81,6 @@
                                                 </form>
                                             </td>
                                         </c:if>
-<!--                                        <td>
-                                            <div class="action">
-                                                <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                        </td>-->
                                     </tr>
                                 </c:forEach>
                             </c:if>

@@ -84,6 +84,10 @@
         <servlet-name>updatedAccountRoles</servlet-name>
         <servlet-class>Controllers.Admin.updatedAccountRoles</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewAllOrder</servlet-name>
+        <servlet-class>Controllers.Admin.viewAllOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>log-in</servlet-name>
         <url-pattern>/log-in</url-pattern>
@@ -187,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>updatedAccountRoles</servlet-name>
         <url-pattern>/updatedAccountRoles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAllOrder</servlet-name>
+        <url-pattern>/viewAllOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

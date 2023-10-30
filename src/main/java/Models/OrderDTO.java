@@ -26,6 +26,7 @@ public class OrderDTO {
     private Date receiptDate;
     private float discount;
     private float delivery_charges;
+    private float deposit_Price;
     private float total_Order;
     private float total_order_final;
     private String payBy;
@@ -34,7 +35,7 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipperID, String shipAddress, String shipCity, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float deposit_Price, float total_Order, String payBy, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountID = accountID;
@@ -49,12 +50,12 @@ public class OrderDTO {
         this.discount = discount;
         this.delivery_charges = delivery_charges;
         this.total_Order = total_Order;
+        this.deposit_Price = deposit_Price;
         this.payBy = payBy;
         this.status = status;
     }
-    
 
-    public OrderDTO(String orderID, int serviceID, String serviceName, String form_Receipt, Date orderDate, float discount, float delivery_charges, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, int serviceID, String serviceName, String form_Receipt, Date orderDate, float discount, float delivery_charges, float deposit_Price, float total_Order, String payBy, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.serviceName = serviceName;
@@ -62,12 +63,13 @@ public class OrderDTO {
         this.orderDate = orderDate;
         this.discount = discount;
         this.delivery_charges = delivery_charges;
+        this.deposit_Price = deposit_Price;
         this.total_Order = total_Order;
         this.payBy = payBy;
         this.status = status;
     }
 
-    public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float total_Order, 
+    public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float total_Order,
             String payBy, String status, float discount, float delivery_charges) {
         this.orderID = orderID;
         this.serviceName = serviceName;
@@ -81,21 +83,22 @@ public class OrderDTO {
         this.delivery_charges = delivery_charges;
     }
 
-    public OrderDTO(String orderID, int serviceID, String accountName, String staffID, String shipAddress, String shipCity, String phoneNumber, Date orderDate, float delivery_charges, float total_Order, String status) {
+    public OrderDTO(String orderID, int serviceID, String accountName, String staffID, String form_Receipt, String shipAddress,
+            String shipCity, String phoneNumber, Date orderDate, float delivery_charges, float deposit_Price, float total_Order, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountName = accountName;
         this.staffID = staffID;
+        this.form_Receipt = form_Receipt;
         this.shipAddress = shipAddress;
         this.shipCity = shipCity;
         this.phoneNumber = phoneNumber;
         this.orderDate = orderDate;
         this.delivery_charges = delivery_charges;
+        this.deposit_Price = deposit_Price;
         this.total_Order = total_Order;
         this.status = status;
     }
-    
-    
 
     public OrderDTO(String orderID, String staffID, String status) {
         this.orderID = orderID;
@@ -103,8 +106,6 @@ public class OrderDTO {
         this.status = status;
     }
 
-    
-    
     public String getOrderDateFormat() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         return sdf.format(this.orderDate);
@@ -153,8 +154,6 @@ public class OrderDTO {
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
-    
-    
 
     public String getAccountID() {
         return accountID;
@@ -171,8 +170,6 @@ public class OrderDTO {
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
-    
-    
 
     public String getStaffID() {
         return staffID;
@@ -221,8 +218,6 @@ public class OrderDTO {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-
 
     public Date getOrderDate() {
         return orderDate;
@@ -248,6 +243,14 @@ public class OrderDTO {
         this.discount = discount;
     }
 
+    public float getDeposit_Price() {
+        return deposit_Price;
+    }
+
+    public void setDeposit_Price(float deposit_Price) {
+        this.deposit_Price = deposit_Price;
+    }
+
     public float getTotal_Order() {
         return total_Order;
     }
@@ -271,5 +274,5 @@ public class OrderDTO {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
 }
