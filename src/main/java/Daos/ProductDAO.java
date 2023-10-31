@@ -30,7 +30,7 @@ public class ProductDAO implements Serializable {
         return productList;
     }
 
-    public List<ProductDTO> getPagingByCreateDateDesc(int index, String product_typeID, String searchValue)
+    public List<ProductDTO> getPagingByCreateDateDesc(int index, String product_typeID, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -45,15 +45,16 @@ public class ProductDAO implements Serializable {
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
                         + "where Product_TypeID like ? and Product_Name like ? and Status = 'true' "
                         + "or Product_TypeID like ? and cate.Category_Name like ?  and Status = 'true' "
-                        + "Order by Date_created desc "
+                        + "Order by Product_TypeID asc, Date_created desc "
                         + "OFFSET ? ROWS "
-                        + "FETCH FIRST 9 ROWS ONLY";
+                        + "FETCH FIRST ? ROWS ONLY";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + product_typeID + "%");
                 stm.setString(2, "%" + searchValue + "%");
                 stm.setString(3, "%" + product_typeID + "%");
                 stm.setString(4, "%" + searchValue + "%");
-                stm.setInt(5, (index - 1) * 9);
+                stm.setInt(5, (index - 1) * fieldShow);
+                stm.setInt(6, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     ProductDTO result = new ProductDTO(rs.getString("ProductID"),
@@ -92,7 +93,7 @@ public class ProductDAO implements Serializable {
         return null;
     }
 
-    public int getNumberPage(String product_typeID, String searchValue)
+    public int getNumberPage(String product_typeID, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -113,11 +114,41 @@ public class ProductDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
-                    int countPage = total / 9;
-                    if (countPage % 9 != 0 && countPage % 2 != 0) {
+                    int countPage = total / fieldShow;
+                    if (countPage % fieldShow != 0 && countPage % 2 != 0) {
                         countPage++;
                     }
                     return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public int getNumberOfProduct()
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From Products ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
                 }
             }
         } finally {

@@ -54,8 +54,8 @@
 
 
         <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
-            <li>
-                <a href="#">
+            <li class="${sessionScope.CURRENT_VIEW == 'All product' ? 'active' : ''}">
+                <a href="viewAllProduct">
                     <i class="fas fa-question-circle"></i>
                     <span>Products</span>
                 </a>
