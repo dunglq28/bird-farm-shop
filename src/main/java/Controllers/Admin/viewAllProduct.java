@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Public;
+package Controllers.Admin;
 
 import Daos.ProductDAO;
+import Models.AccountDTO;
 import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -24,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "PagingProductServlet", urlPatterns = {"/PagingProductServlet"})
-public class PagingProductServlet extends HttpServlet {
+@WebServlet(name = "viewAllProduct", urlPatterns = {"/viewAllProduct"})
+public class viewAllProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,36 +40,32 @@ public class PagingProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = MyAppConstants.AdminFeatures.ALL_PRODUCT_PAGE;
         String page = request.getParameter("page");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
-        String searchValue = request.getParameter("lastSearch");
-        String productType = request.getParameter("productType");
+        String searchValue = request.getParameter("txtSearch");
         HttpSession session = request.getSession();
 
         try {
-            String product_typeID;
-            if (searchValue == null && request.getAttribute("SEARCH_VALUE") == null) {
-                searchValue = "";
-            } else if (session.getAttribute("SEARCH_VALUE") != null && searchValue == null) {
-                searchValue = (String) request.getAttribute("SEARCH_VALUE");
-            }
-            
-            if (productType == null) {
-                product_typeID = "";
-            } else {
-                product_typeID = (String) session.getAttribute("PRODUCT_TYPE_ID");
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null || !account.getRoleName().equals("Admin")) {
+                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                return;
             }
 
+            if (searchValue == null) {
+                searchValue = "";
+            }
             if (page == null) {
                 page = "1";
             }
             int indexPage = Integer.parseInt(page);
-            int fieldShow = 9;
+            int fieldShow = 10;
+
             ProductDAO dao = new ProductDAO();
 
-            int endPage = dao.getNumberPage(product_typeID.trim(), searchValue.trim(),fieldShow);
-            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID.trim(), searchValue.trim(),fieldShow);
-            session.setAttribute("PRODUCT_LIST", result);
+            int endPage = dao.getNumberPage("", searchValue.trim(), fieldShow);
+            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, "", searchValue.trim(), fieldShow);
+            request.setAttribute("PRODUCT_LIST", result);
             int start = 1;
             int distance = 4;
 
@@ -92,22 +89,8 @@ public class PagingProductServlet extends HttpServlet {
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
-
-            if (page == null) {
-                url = "";
-            } else if (page.equals("1")) {
-                url = "product_list"
-                        + "?productType=" + session.getAttribute("PRODUCT_TYPE");
-                session.setAttribute("HISTORY_URL", url);
-            } else if (!page.equals("1")) {
-                url = "product_list"
-                        + "?productType=" + session.getAttribute("PRODUCT_TYPE")
-                        + "&page=" + indexPage;
-                session.setAttribute("HISTORY_URL", url);
-            }
-
-            url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
-
+            request.setAttribute("NUMBER_OF_PRODUCT", dao.getNumberOfProduct());
+            session.setAttribute("CURRENT_VIEW", "All product");
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
