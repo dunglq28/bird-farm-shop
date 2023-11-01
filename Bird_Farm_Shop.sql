@@ -112,7 +112,7 @@ CREATE TABLE Staffs
   DOB DATE,
   Gender NVARCHAR(50),
   ManagerID NVARCHAR(50) NOT NULL,
-  AccountID NVARCHAR(50) NOT NULL,
+  AccountID NVARCHAR(50) ,
   Date_created DATE NOT NULL,
   Status bit NOT NULL,
   PRIMARY KEY (StaffID),
