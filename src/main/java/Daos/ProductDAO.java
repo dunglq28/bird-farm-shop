@@ -138,6 +138,117 @@ public class ProductDAO implements Serializable {
         return 0;
     }
 
+    public List<ProductDTO> viewAllProduct(int index, String product_typeID, String searchValue, int fieldShow)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select ProductID, Product_Name, cate.Category_Name, Product_TypeID, Image, Age, Color, Gender, "
+                        + "Quantity_Available, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
+                        + "from Products "
+                        + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
+                        + "where Product_TypeID like ? and Product_Name like ? "
+                        + "or Product_TypeID like ? and cate.Category_Name like ? "
+                        + "or Product_TypeID like ? and ProductID like ? "
+                        + "Order by Product_TypeID asc, Date_created desc "
+                        + "OFFSET ? ROWS "
+                        + "FETCH FIRST ? ROWS ONLY";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + product_typeID + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + product_typeID + "%");
+                stm.setString(4, "%" + searchValue + "%");
+                stm.setString(5, "%" + product_typeID + "%");
+                stm.setString(6, "%" + searchValue + "%");
+                stm.setInt(7, (index - 1) * fieldShow);
+                stm.setInt(8, fieldShow);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    ProductDTO result = new ProductDTO(rs.getString("ProductID"),
+                            rs.getString("Product_Name"),
+                            rs.getString("Category_Name"),
+                            rs.getInt("Product_TypeID"),
+                            rs.getString("Age"),
+                            rs.getString("Color"),
+                            rs.getString("Gender"),
+                            rs.getString("Image"),
+                            rs.getInt("Quantity_MaleBird"),
+                            rs.getInt("Quantity_FemaleBird"),
+                            rs.getInt("Quantity_Available"),
+                            rs.getInt("Quantity_Sold"),
+                            rs.getFloat("Price"),
+                            rs.getFloat("Discount"),
+                            rs.getBoolean("Status"));
+                    if (this.productList == null) {
+                        this.productList = new ArrayList<ProductDTO>();
+                    }
+                    this.productList.add(result);
+                }
+                return this.productList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public int getNumberPageAllProduct(String product_typeID, String searchValue, int fieldShow)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From Products "
+                        + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
+                        + "where Product_TypeID like ? and Product_Name like ? "
+                        + "or Product_TypeID like ? and cate.Category_Name like ?  "
+                        + "or Product_TypeID like ? and ProductID like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + product_typeID + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + product_typeID + "%");
+                stm.setString(4, "%" + searchValue + "%");
+                stm.setString(5, "%" + product_typeID + "%");
+                stm.setString(6, "%" + searchValue + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage = total / fieldShow;
+                    if (countPage % fieldShow != 0 && countPage % 2 != 0) {
+                        countPage++;
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+
     public int getNumberOfProduct()
             throws SQLException, ClassNotFoundException {
         Connection con = null;

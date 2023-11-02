@@ -5,12 +5,15 @@
  */
 package Controllers.Admin;
 
+import Daos.CategoryDAO;
 import Daos.ProductDAO;
 import Models.AccountDTO;
+import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +40,7 @@ public class updateProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String productID = request.getParameter("ProductID");
         HttpSession session = request.getSession();
 
@@ -47,15 +50,24 @@ public class updateProductServlet extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
+            CategoryDAO catedao = new CategoryDAO();
             ProductDAO prodao = new ProductDAO();
-         
+            ProductDTO prodto = prodao.getProductByID(productID);
+            request.setAttribute("PRODUCT_UPDATE", prodto);
+            request.setAttribute("CATE_LIST", catedao.getAllCate());
+            if (prodto.getProduct_TypeID() == 2) {
+                request.setAttribute("MALE_BIRD_LIST", prodao.getBirdByGender("Male", prodto.getCategoryID(), 0));
+                request.setAttribute("FEMALE_BIRD_LIST", prodao.getBirdByGender("Female", prodto.getCategoryID(), 0));
+            }
+            request.setAttribute("PRODUCT_TYPE", prodto.getProduct_TypeID());
+            url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_PAGE;
 
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
-        } finally {
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
     }
 
