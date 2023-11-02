@@ -44,8 +44,8 @@ public class viewAllProduct extends HttpServlet {
 
             ProductDAO dao = new ProductDAO();
 
-            int endPage = dao.getNumberPage("", searchValue.trim(), fieldShow);
-            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, "", searchValue.trim(), fieldShow);
+            int endPage = dao.getNumberPageAllProduct("", searchValue.trim(), fieldShow);
+            List<ProductDTO> result = dao.viewAllProduct(indexPage, "", searchValue.trim(), fieldShow);
             request.setAttribute("PRODUCT_LIST", result);
             int start = 1;
             int distance = 4;

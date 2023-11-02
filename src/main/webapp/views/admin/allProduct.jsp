@@ -110,13 +110,14 @@
                                                     <option ${pro.status == 'Enable' ? 'selected' : '' }>Enable</option>
                                                     <option ${pro.status == 'Disable' ? 'selected' : '' }>Disable</option>
                                                 </select>
+                                                <input type="hidden" name="accountID" value="${dto.accountID}" />
                                                 <input type="hidden" name="productID" value="${pro.productID}" />
                                             </form>
                                         </td>
                                         <td>
                                             <div class="d-flex">
                                                 <h6 class="mb-0 text-sm-center text-muted" style="margin-right: 10px;">
-                                                    <a class="text-decoration-none text-muted" href="">
+                                                    <a class="text-decoration-none text-muted" href="updateProduct?ProductID=${pro.productID}">
                                                         <i class="far fa-edit"></i> 
                                                     </a>
                                                 </h6>

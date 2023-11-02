@@ -22,6 +22,7 @@ public class FormatCurrency {
         String priceFormat = currencyVN.format(price);
         return priceFormat;
     }
+   
 
     public static String FormatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
