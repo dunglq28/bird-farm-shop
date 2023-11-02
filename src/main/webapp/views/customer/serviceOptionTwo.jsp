@@ -234,9 +234,9 @@
                                             </a>
                                         </div>
 
-                                        <hr class="my-4">
+                                        <!--<hr class="my-4">-->
 
-                                        <h5 class="text-uppercase mb-2">Voucher</h5>
+<!--                                        <h5 class="text-uppercase mb-2">Voucher</h5>
                                         <div class="input-group rounded mb-3">
                                             <input type="search" class="form-control rounded"
                                                    placeholder="Enter your voucher" aria-label="Search"
@@ -244,7 +244,7 @@
                                             <span class="input-group-text border-0" id="search-addon">
                                                 <a href="#"><i class="fas fa-search"></i></a>
                                             </span>
-                                        </div>
+                                        </div>-->
 
 
                                         <hr class="my-4">
@@ -253,10 +253,10 @@
                                             <h6 class="text-uppercase">Temporary</h6>
                                             <h6>${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
                                         </div>
-                                        <div class=" d-flex justify-content-between mb-3">
+<!--                                        <div class=" d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
                                             <h6>0</h6>
-                                        </div>
+                                        </div>-->
                                         <c:set var="total_order" value="${requestScope.SERVICE_PRICE}"></c:set>
                                             <div class="d-flex justify-content-between mb-2">
                                                 <h5 class="text-uppercase">Total price</h5>
