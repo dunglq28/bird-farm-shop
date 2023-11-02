@@ -112,7 +112,7 @@ CREATE TABLE Staffs
   DOB DATE,
   Gender NVARCHAR(50),
   ManagerID NVARCHAR(50) NOT NULL,
-  AccountID NVARCHAR(50) ,
+  AccountID NVARCHAR(50) NOT NULL,
   Date_created DATE NOT NULL,
   Status bit NOT NULL,
   PRIMARY KEY (StaffID),
@@ -170,7 +170,6 @@ CREATE TABLE Bird_Nest_Tracking
   ServiceID INT NOT NULL,
   OrderDate DATE NOT NULL,
   LastUpdateDate Date NOT NULL,
-  NOTE NVARCHAR(500),
   Status NVARCHAR(50) NOT NULL,
   PRIMARY KEY (Bird_Nest_ID),
   FOREIGN KEY (OrderID ) REFERENCES Orders(OrderID ),
@@ -193,7 +192,7 @@ INSERT INTO Roles(RoleID,RoleName) VALUES
 INSERT INTO Account(AccountID,Password,FullName,Email,Date_created,CreateBy, RoleID,Status ) VALUES 
 ('A100', null,'Quang Dũng', 'lequangdung232@gmail.com', CAST(N'2023/10/24' AS DATE), 'Goole', 3, 'true');
 INSERT INTO Account(AccountID,Password,FullName,Email,Date_created,CreateBy, RoleID,Status ) VALUES 
-('A0', null,'Admin Luu', 'luuhtse171875@fpt.edu.vn', CAST(N'2023/10/24' AS DATE), 'Google', 1, 'true');
+('A0', null,'Bird Farm Shop', 'thebird.farm.1704@gmail.com', CAST(N'2023/10/24' AS DATE), 'Google', 1, 'true');
 
 INSERT INTO Staffs(StaffID,AccountID,Name,Email,Phone_Number,DOB,Gender,ManagerID,Date_created,Status ) VALUES 
 ('S1', 'A100','Quang Dũng', 'lequangdung232@gmail.com',null,null,null,'S2', CAST(N'2023/10/24' AS DATE), 'true');
