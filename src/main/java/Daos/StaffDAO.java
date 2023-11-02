@@ -79,7 +79,7 @@ public class StaffDAO {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                        + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
+                        + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
@@ -95,12 +95,13 @@ public class StaffDAO {
                     Date orderDate = rs.getDate("OrderDate");
                     String status = rs.getString("Status");
                     String Form_Receipt = rs.getString("Form_Receipt");
+                    float deposit_price = rs.getFloat("Deposit_Price");
                     float Total_Order = rs.getFloat("Total_Order");
                     float discount = rs.getFloat("Discount");
                     float delivery_charges = rs.getFloat("Delivery_charges");
                     String Pay_with = rs.getString("Pay_with");
                     result = new OrderDTO(orderID, serviceName, fullname, Form_Receipt,
-                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges);
+                            orderDate, deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }
@@ -203,18 +204,18 @@ public class StaffDAO {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select MAX(StaffID) as 'StaffID' "
+                String sql = "Select MAX(CAST(SUBSTRING(StaffID,2,LEN(StaffID)) AS INT)) as 'StaffID'  "
                         + "From Staffs "
                         + "Where StaffID like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "S" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String StaffIDMax = rs.getString("StaffID");
-                    if (StaffIDMax == null) {
+                    int StaffIDMax = rs.getInt("StaffID");
+                    if (StaffIDMax == 0) {
                         return "S01";
                     } else {
-                        int num = Integer.parseInt(StaffIDMax.substring(1)) + 1;
+                        int num = StaffIDMax + 1;
                         String newOrderID;
                         if (num <= 9) {
                             newOrderID = "S0";

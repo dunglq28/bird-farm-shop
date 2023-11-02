@@ -154,7 +154,7 @@ public class CreateOrderServlet extends HttpServlet {
                             bnId = bndao.createBirdNestID();
                             bndto = new Bird_Nest_TrackingDTO(bnId, orderID, null, 0, 0, 0,
                                     account.getAccountID(), serviceID,
-                                    orderDate, orderDate, null, "Wait for confirmation");
+                                    orderDate, orderDate, "Wait for confirmation");
                             bndao.createBirdNestTracking(bndto);
                             // remove session of male and female bird
                             session.removeAttribute("MALE_BIRD_CHOOSE");

@@ -34,8 +34,8 @@
                     <div class="user--info">
                         <form action="viewMyOrder-staff" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="${param.txtSearch}" type="text" placeholder="Search"/>
-                            <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}"/>
+                            <input name="lastSearch" value="${param.lastSearch}" type="text" placeholder="Search"/>
+                        <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}"/>
                         <button type="submit"></button>
                     </form>
                     ${sessionScope.ACCOUNT.fullName}
@@ -85,7 +85,12 @@
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
                                         <td>${util.FormatDate(dto.orderDate)}</td>
-                                        <td>${util.FormatPrice(dto.total_Order)}</td>
+                                        <c:if test="${dto.total_order_final == 0}">
+                                            <td>${util.FormatPrice(dto.deposit_Price)}</td>
+                                        </c:if>
+                                        <c:if test="${dto.total_order_final != 0}">
+                                            <td>${util.FormatPrice(dto.total_order_final)}</td>
+                                        </c:if>
                                         <td>${dto.form_Receipt}</td>
                                         <td>${dto.payBy}</td>
                                         <td>
@@ -121,18 +126,21 @@
             </div>
             <div class="col-lg-12 text-center mt-2">
                 <div class="pagination__option" style="text-align: end">
+                    <c:if test="${not empty requestScope.SEARCH_VALUE}">
+                        <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>
+                    </c:if>
                     <c:if test="${requestScope.indexCurrent > 1}">
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=1"><i class="fa fa-angle-double-left"></i></a>
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&${search}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&${search}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
                         </c:if>
 
                     <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
-                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${i}">${i}</a>
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&${search}&page=${i}">${i}</a>
                     </c:forEach>
 
                     <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&${search}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&${search}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
                         </c:if>
                 </div>
             </div>  

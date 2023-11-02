@@ -26,12 +26,12 @@ public class viewNewOrders extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
-        String searchValue = request.getParameter("txtSearch");
+        String searchValue = request.getParameter("lastSearch");
         String url = "";
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || (!account.getRoleName().equals("Staff") && !account.getRoleName().equals("Admin"))){
+            if (account == null || (!account.getRoleName().equals("Staff") && !account.getRoleName().equals("Admin"))) {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
@@ -65,6 +65,7 @@ public class viewNewOrders extends HttpServlet {
                     end = endPage;
                 }
             }
+            request.setAttribute("SEARCH_VALUE", searchValue);
             request.setAttribute("START", start);
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
