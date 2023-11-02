@@ -105,12 +105,12 @@
                                         <td>${pro.quantity_Available}</td>
                                         <td>${pro.quantity_Sold}</td>
                                         <td>
-                                            <form action="">
-                                                <select name="" onchange="submit()" class="rounded-select" >
-                                                    <option>Enable</option>
-                                                    <option>Disable</option>
+                                            <form action="updateProductStatus">
+                                                <select name="status" onchange="submit()" class="rounded-select" >
+                                                    <option ${pro.status == 'Enable' ? 'selected' : '' }>Enable</option>
+                                                    <option ${pro.status == 'Disable' ? 'selected' : '' }>Disable</option>
                                                 </select>
-                                                <input type="hidden" name="accountID" value="${dto.accountID}" />
+                                                <input type="hidden" name="productID" value="${pro.productID}" />
                                             </form>
                                         </td>
                                         <td>

@@ -62,10 +62,11 @@ public class AuthLoginServlet extends HttpServlet {
                         url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
                                 : (String) session.getAttribute("HISTORY_URL");
                     }
+                    else if (account.getRoleName().equals("Staff") || account.getRoleName().equals("Admin")) {
+                        url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                    }
                 }
-                if (account != null && (account.getRoleName().equals("Staff") || account.getRoleName().equals("Admin"))) {
-                    url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
-                }
+
             }
 
         } catch (SQLException ex) {
