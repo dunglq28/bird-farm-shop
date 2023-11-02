@@ -79,7 +79,8 @@ public class MyAppConstants {
         public static final String UPDATE_PRODUCT_PAGE = "/views/admin/updateProduct.jsp";
 //        public static final String STAFF_ORDER_PAGE = "/views/staff/myOrderStaff.jsp";
         public static final String VIEW_ALL_ACCOUNT_CONTROLLER = "viewAllAccount";
-         public static final String VIEW_ALL_PRODUCT_CONTROLLER = "viewAllProduct";
+        public static final String VIEW_ALL_PRODUCT_CONTROLLER = "viewAllProduct";
+        public static final String UPDATE_PRODUCT_CONTROLLER = "updateProduct";
 //        public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
 //        public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
 

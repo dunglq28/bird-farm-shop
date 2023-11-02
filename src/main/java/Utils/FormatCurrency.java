@@ -22,14 +22,18 @@ public class FormatCurrency {
         String priceFormat = currencyVN.format(price);
         return priceFormat;
     }
-   
+
+    public static int FormatNumber(float price) {
+        int priceF = (int) price;
+        return priceF;
+    }
 
     public static String FormatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         return sdf.format(date);
     }
-    
-     public static int FormatDiscount(float discount) {
+
+    public static int FormatDiscount(float discount) {
         int value = (int) (discount * 100);
         return value;
     }

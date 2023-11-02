@@ -43,9 +43,9 @@ public class ProductDAO implements Serializable {
                         + "Quantity_Available, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "where Product_TypeID like ? and Product_Name like ? "
-                        + "or Product_TypeID like ? and cate.Category_Name like ?  "
-                        + "or Product_TypeID like ? and ProductID like ? "
+                        + "where Product_TypeID like ? and Product_Name like ? and Status = 'true'  "
+                        + "or Product_TypeID like ? and cate.Category_Name like ?  and Status = 'true'  "
+                        + "or Product_TypeID like ? and ProductID like ? and Status = 'true' "
                         + "Order by Product_TypeID asc, Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY";
@@ -108,12 +108,15 @@ public class ProductDAO implements Serializable {
                         + "From Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
                         + "where Product_TypeID like ? and Product_Name like ? and Status = 'true' "
-                        + "or Product_TypeID like ? and cate.Category_Name like ?  and Status = 'true' ";
+                        + "or Product_TypeID like ? and cate.Category_Name like ?  and Status = 'true' "
+                        + "or Product_TypeID like ? and ProductID like ? and Status = 'true' ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + product_typeID + "%");
                 stm.setString(2, "%" + searchValue + "%");
                 stm.setString(3, "%" + product_typeID + "%");
                 stm.setString(4, "%" + searchValue + "%");
+                stm.setString(5, "%" + product_typeID + "%");
+                stm.setString(6, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
@@ -631,7 +634,58 @@ public class ProductDAO implements Serializable {
                 if (effecRows > 0) {
                     return true;
                 }
+
             }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateProduct(ProductDTO pro)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2. create SQL statement string
+                String sql = "Update Products "
+                        + "Set Product_Name = ?, Dad_Bird_ID = ?, Mom_Bird_ID = ?, Image = ?, Age = ?, Color = ?, Gender = ?, "
+                        + "Quantity_Available = ?, Quantity_MaleBird = ?, Quantity_FemaleBird = ?, Price = ?, Discount = ?, "
+                        + "Characteristics = ?, Detail = ? "
+                        + "Where ProductID = ? ";
+                //3. Create statement object
+                stm = con.prepareStatement(sql);
+                stm.setString(1, pro.getProduct_Name());
+                stm.setString(2, pro.getDad_Bird_ID());
+                stm.setString(3, pro.getMom_Bird_ID());
+                stm.setString(4, pro.getImage());
+                stm.setString(5, pro.getAge());
+                stm.setString(6, pro.getColor());
+                stm.setString(7, pro.getGender());
+                stm.setInt(8, pro.getQuantity_Available());
+                stm.setInt(9, pro.getQuantity_MaleBird());
+                stm.setInt(10, pro.getQuantity_FemaleBird());
+                stm.setFloat(11, pro.getPrice());
+                stm.setFloat(12, pro.getDiscount());
+                stm.setString(13, pro.getCharacteristics());
+                stm.setString(14, pro.getDetail());
+                stm.setString(15, pro.getProductID());
+                int effectRows = stm.executeUpdate();
+                //5. Process
+                if (effectRows > 0) {
+                    return true;
+                }
+            } // end of connection has opend
+
         } finally {
             if (stm != null) {
                 stm.close();
