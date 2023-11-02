@@ -11,30 +11,30 @@ package Models;
  */
 public class CategoryDTO {
 
-    private String CategoryID;
-    private String Category_Name;
+    private String categoryID;
+    private String category_Name;
 
-    public CategoryDTO(String CategoryID, String Category_Name) {
-        this.CategoryID = CategoryID;
-        this.Category_Name = Category_Name;
+    public CategoryDTO(String categoryID, String category_Name) {
+        this.categoryID = categoryID;
+        this.category_Name = category_Name;
     }
 
     public String getCategoryID() {
-        return CategoryID;
+        return categoryID;
     }
 
-    public void setCategoryID(String CategoryID) {
-        this.CategoryID = CategoryID;
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
     }
 
     public String getCategory_Name() {
-        return Category_Name;
+        return category_Name;
     }
 
-    public void setCategory_Name(String Category_Name) {
-        this.Category_Name = Category_Name;
+    public void setCategory_Name(String category_Name) {
+        this.category_Name = category_Name;
     }
-    
-    
+
+   
 
 }

@@ -52,8 +52,8 @@ public class viewAllOrder extends HttpServlet {
             OrderDAO dao = new OrderDAO();
             StaffDAO staffdao = new StaffDAO();
             StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue,fieldShow);
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue,fieldShow);
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue, fieldShow);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue, fieldShow);
 
             int start = 1;
             int distance = 4;
@@ -73,6 +73,7 @@ public class viewAllOrder extends HttpServlet {
                     end = endPage;
                 }
             }
+            request.setAttribute("SEARCH_VALUE", searchValue);
             request.setAttribute("ALL_ORDERS", result);
             request.setAttribute("SERVICE_ID", serviceID);
             request.setAttribute("STATUS_ORDER", status);

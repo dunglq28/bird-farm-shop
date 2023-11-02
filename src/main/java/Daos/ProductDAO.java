@@ -45,6 +45,7 @@ public class ProductDAO implements Serializable {
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
                         + "where Product_TypeID like ? and Product_Name like ? and Status = 'true' "
                         + "or Product_TypeID like ? and cate.Category_Name like ?  and Status = 'true' "
+                        + "or Product_TypeID like ? and ProductID like ?  and Status = 'true' "
                         + "Order by Product_TypeID asc, Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY";
@@ -53,8 +54,10 @@ public class ProductDAO implements Serializable {
                 stm.setString(2, "%" + searchValue + "%");
                 stm.setString(3, "%" + product_typeID + "%");
                 stm.setString(4, "%" + searchValue + "%");
-                stm.setInt(5, (index - 1) * fieldShow);
-                stm.setInt(6, fieldShow);
+                stm.setString(5, "%" + product_typeID + "%");
+                stm.setString(6, "%" + searchValue + "%");
+                stm.setInt(7, (index - 1) * fieldShow);
+                stm.setInt(8, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     ProductDTO result = new ProductDTO(rs.getString("ProductID"),
@@ -134,7 +137,7 @@ public class ProductDAO implements Serializable {
         }
         return 0;
     }
-    
+
     public int getNumberOfProduct()
             throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -357,7 +360,7 @@ public class ProductDAO implements Serializable {
         return false;
     }
 
-    public List<ProductDTO> getBirdByGender(String gender, int cateID)
+    public List<ProductDTO> getBirdByGender(String gender, int cateID, int quantity)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -370,13 +373,14 @@ public class ProductDAO implements Serializable {
                 //2.Create SQL statement string
                 String sql = "select ProductID , Product_Name, Image, Age, Color, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
                         + "from Products "
-                        + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= 1 "
+                        + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= ? "
                         + "and CategoryID = ? and Status = 'true' ";
                 //3.Create statement object
                 stm = con.prepareStatement(sql);
                 //4.execute-query
                 stm.setString(1, gender);
-                stm.setInt(2, cateID);
+                stm.setInt(2, quantity);
+                stm.setInt(3, cateID);
                 rs = stm.executeQuery();
                 //5.process
                 while (rs.next()) {
@@ -407,6 +411,125 @@ public class ProductDAO implements Serializable {
             }
         }
         return this.productList;
+    }
+
+    public String createProductID() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select MAX(CAST(SUBSTRING(ProductID,2,LEN(ProductID)) AS INT)) as 'ProductID'  "
+                        + "From Products "
+                        + "Where ProductID like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "B" + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int ProductIDMax = rs.getInt("ProductID");
+                    if (ProductIDMax == 0) {
+                        return "B01";
+                    } else {
+                        int num = ProductIDMax + 1;
+                        String newProductID;
+                        if (num <= 9) {
+                            newProductID = "B0";
+                        } else {
+                            newProductID = "B";
+                        }
+
+                        return newProductID.concat(String.valueOf(num));
+                    }
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public boolean createProduct(ProductDTO product) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Insert into Products ( "
+                        + "ProductID, Product_Name, CategoryID, Product_TypeID, Dad_Bird_ID, Mom_Bird_ID, Image, Age, Color, Gender, "
+                        + "Quantity_Available, Quantity_AreMating, Quantity_Sold, Quantity_MaleBird, Quantity_FemaleBird, Price, "
+                        + "Discount, Characteristics, Detail, Date_created, Status "
+                        + ") values ( "
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + ") ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, product.getProductID());
+                stm.setString(2, product.getProduct_Name());
+                stm.setInt(3, product.getCategoryID());
+                stm.setInt(4, product.getProduct_TypeID());
+                stm.setString(5, product.getDad_Bird_ID());
+                stm.setString(6, product.getMom_Bird_ID());
+                stm.setString(7, product.getImage());
+                stm.setString(8, product.getAge());
+                stm.setString(9, product.getColor());
+                stm.setString(10, product.getGender());
+                stm.setInt(11, product.getQuantity_Available());
+                stm.setInt(12, product.getQuantity_AreMating());
+                stm.setInt(13, product.getQuantity_Sold());
+                stm.setInt(14, product.getQuantity_MaleBird());
+                stm.setInt(15, product.getQuantity_FemaleBird());
+                stm.setFloat(16, product.getPrice());
+                stm.setFloat(17, product.getDiscount());
+                stm.setString(18, product.getCharacteristics());
+                stm.setString(19, product.getDetail());
+                stm.setDate(20, product.getDate_created());
+                stm.setBoolean(21, true);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean DeleteProductByProductID(String proID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Delete "
+                        + "From Products "
+                        + "Where ProductID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, proID);
+                int effecRows = stm.executeUpdate();
+                if (effecRows > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 
 }

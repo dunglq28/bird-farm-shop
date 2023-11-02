@@ -91,13 +91,13 @@
                     <div class="form-group">
                         <input name="txtFullName" value="<c:if test="${not empty cus.fullName}">${cus.fullName}</c:if><c:if test="${not empty requestScope.FULLNAME}">${requestScope.FULLNAME}</c:if>"  
                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Enter FullName">
+                           placeholder="Enter FullName" required>
                 </div>
                 <div class="form-group">
-                    <input name="txtPhone" value="${cus.phone_Number}" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
+                        <input name="txtPhone" value="${cus.phone_Number}" required="" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
                 </div>
                 <div  class="form-choose ">
-                    <select name="txtCity" class="form-select" aria-label="Default select example">
+                    <select name="txtCity" class="form-select" aria-label="Default select example" required>
                         <option>Choose your city</option>
                         <c:if test="${not empty cus.city}">
                             <option selected>${cus.city}</option>

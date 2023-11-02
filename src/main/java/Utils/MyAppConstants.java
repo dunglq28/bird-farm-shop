@@ -72,10 +72,13 @@ public class MyAppConstants {
     }
 
     public class AdminFeatures {
+
         public static final String ALL_ACCOUNT_PAGE = "/views/admin/allAccountPage.jsp";
         public static final String ALL_PRODUCT_PAGE = "/views/admin/allProduct.jsp";
+        public static final String CREATE_PRODUCT_PAGE = "/views/admin/createProduct.jsp";
 //        public static final String STAFF_ORDER_PAGE = "/views/staff/myOrderStaff.jsp";
         public static final String VIEW_ALL_ACCOUNT_CONTROLLER = "viewAllAccount";
+         public static final String VIEW_ALL_PRODUCT_CONTROLLER = "viewAllProduct";
 //        public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
 //        public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
 

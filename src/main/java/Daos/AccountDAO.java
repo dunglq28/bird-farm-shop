@@ -90,18 +90,18 @@ public class AccountDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select MAX(AccountID) as 'AccountID' "
+                String sql = "Select MAX(CAST(SUBSTRING(AccountID,2,LEN(AccountID)) AS INT)) as 'AccountID'  "
                         + "From Account "
                         + "Where AccountID like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "A" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String AccountIDMax = rs.getString("AccountID");
-                    if (AccountIDMax == null) {
+                    int AccountIDMax = rs.getInt("AccountID");
+                    if (AccountIDMax == 0) {
                         return "A01";
                     } else {
-                        int num = Integer.parseInt(AccountIDMax.substring(1)) + 1;
+                        int num = AccountIDMax + 1;
                         String newOrderID;
                         if (num <= 9) {
                             newOrderID = "A0";

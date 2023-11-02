@@ -29,7 +29,7 @@ public class viewMyOrder extends HttpServlet {
         String serviceID = request.getParameter("txtServiceID");
         String status = request.getParameter("Status");
         String page = request.getParameter("page");
-        String searchValue = request.getParameter("txtSearch");
+        String searchValue = request.getParameter("lastSearch");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -75,6 +75,7 @@ public class viewMyOrder extends HttpServlet {
                     end = endPage;
                 }
             }
+            request.setAttribute("SEARCH_VALUE", searchValue);
             request.setAttribute("MY_ORDERS_STAFF", result);
             request.setAttribute("SERVICE_ID", serviceID);
             request.setAttribute("STATUS_ORDER", status);

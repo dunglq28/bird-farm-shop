@@ -46,19 +46,19 @@ public class viewDetailOrderServlet extends HttpServlet {
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || !account.getRoleName().equals("Staff")) {
+            if (account == null || account.getRoleName().equals("Customer")) {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             OrderDAO dao = new OrderDAO();
-            OrderDTO order =  dao.getOrderByOrderID(orderID);
+            OrderDTO order = dao.getOrderByOrderID(orderID);
             request.setAttribute("ORDER", order);
             OrderDetailDAO oddao = new OrderDetailDAO();
             request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
             if (order.getServiceID() == 1) {
                 url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
             } else {
-                
+
             }
 
         } catch (SQLException ex) {

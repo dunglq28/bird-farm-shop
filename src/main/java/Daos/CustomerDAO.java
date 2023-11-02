@@ -17,18 +17,18 @@ public class CustomerDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select MAX(CustomerID) as 'CustomerID' "
+                String sql = "Select MAX(CAST(SUBSTRING(CustomerID,2,LEN(CustomerID)) AS INT)) as 'CustomerID'  "
                         + "From Customers "
                         + "Where CustomerID like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "C" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String CustomerIDMax = rs.getString("CustomerID");
-                    if (CustomerIDMax == null) {
+                    int CustomerIDMax = rs.getInt("CustomerID");
+                    if (CustomerIDMax == 0) {
                         return "C01";
                     } else {
-                        int num = Integer.parseInt(CustomerIDMax.substring(1)) + 1;
+                        int num = CustomerIDMax + 1;
                         String newOrderID;
                         if (num <= 9) {
                             newOrderID = "C0";
