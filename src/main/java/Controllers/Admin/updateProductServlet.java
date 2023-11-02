@@ -10,22 +10,30 @@ import Daos.ProductDAO;
 import Models.AccountDTO;
 import Models.ProductDTO;
 import Utils.MyAppConstants;
+import Utils.S3Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author hj
  */
 @WebServlet(name = "updateProduct", urlPatterns = {"/updateProduct"})
+//@MultipartConfig(
+//        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+//        maxFileSize = 1024 * 1024 * 10, // 10MB
+//        maxRequestSize = 1024 * 1024 * 11 // 11MB
+//)
 public class updateProductServlet extends HttpServlet {
 
     /**
@@ -42,6 +50,7 @@ public class updateProductServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String productID = request.getParameter("ProductID");
+        String button = request.getParameter("btAction");
         HttpSession session = request.getSession();
 
         try {
@@ -50,18 +59,67 @@ public class updateProductServlet extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
+            session.removeAttribute("NOTIFICATION");
+            if(productID == null) {
+                productID = (String) session.getAttribute("PRODUCT_ID_UPDATE");
+                session.setAttribute("NOTIFICATION", "Update sucessful!");
+            }
             CategoryDAO catedao = new CategoryDAO();
             ProductDAO prodao = new ProductDAO();
-            ProductDTO prodto = prodao.getProductByID(productID);
-            request.setAttribute("PRODUCT_UPDATE", prodto);
-            request.setAttribute("CATE_LIST", catedao.getAllCate());
-            if (prodto.getProduct_TypeID() == 2) {
-                request.setAttribute("MALE_BIRD_LIST", prodao.getBirdByGender("Male", prodto.getCategoryID(), 0));
-                request.setAttribute("FEMALE_BIRD_LIST", prodao.getBirdByGender("Female", prodto.getCategoryID(), 0));
+            if (button == null) {
+                ProductDTO prodto = prodao.getProductByID(productID);
+                request.setAttribute("PRODUCT_UPDATE", prodto);
+                request.setAttribute("CATE_LIST", catedao.getAllCate());
+                if (prodto.getProduct_TypeID() == 2) {
+                    request.setAttribute("MALE_BIRD_LIST", prodao.getBirdByGender("Male", prodto.getCategoryID(), 0));
+                    request.setAttribute("FEMALE_BIRD_LIST", prodao.getBirdByGender("Female", prodto.getCategoryID(), 0));
+                }
+                request.setAttribute("PRODUCT_TYPE", prodto.getProduct_TypeID());
+                url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_PAGE;
+            } else if (button.equals("Update")) {
+                String productType = request.getParameter("productType");
+                String proID = request.getParameter("productID");
+                String proName = request.getParameter("nameBird");
+                String dadbirdID = request.getParameter("dadBirdID");
+                String momBirdID = request.getParameter("momBirdID");
+                String age = request.getParameter("Age");
+                String color = request.getParameter("Color");
+                String gender = request.getParameter("Gender");
+                String urlImage = request.getParameter("image");
+                String qtyAvailable = request.getParameter("Quantity");
+                String qtyMaleBaby = request.getParameter("qtyMaleBaby");
+                String qtyFemaleBaby = request.getParameter("qtyFemaleBaby");
+                String price = request.getParameter("Price");
+                String discount = request.getParameter("Discount");
+                String characteristics = request.getParameter("Characteristic");
+                String detail = request.getParameter("Detail");
+//                Part filePart = request.getPart("file");
+//                if (!filePart.getSubmittedFileName().isEmpty()) {
+//                    String fileName = getFileName(filePart);
+//                    urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
+//                    S3Util.uploadFile(fileName, filePart.getInputStream());
+//                }
+                ProductDTO proUd = null;
+                switch (productType) {
+                    case "Bird":
+                        proUd = new ProductDTO(proID, proName, 0, 0,
+                                null, null, age, color, gender, urlImage,
+                                0, 0, Integer.parseInt(qtyAvailable),
+                                0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
+                        break;
+                    case "Bird Nest":
+                        proUd = new ProductDTO(proID, proName, 0, 0,
+                                dadbirdID, momBirdID, null, null, null, urlImage,
+                                Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
+                                0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
+                        break;
+                }
+                prodao.updateProduct(proUd);
+                url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_CONTROLLER;
+                session.setAttribute("PRODUCT_ID_UPDATE", proID);
+                response.sendRedirect(url);
+                return;
             }
-            request.setAttribute("PRODUCT_TYPE", prodto.getProduct_TypeID());
-            url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_PAGE;
-
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {
@@ -69,6 +127,14 @@ public class updateProductServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        int beginIndex = contentDisposition.indexOf("filename=") + 10;
+        int endIndex = contentDisposition.length() - 1;
+
+        return contentDisposition.substring(beginIndex, endIndex);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

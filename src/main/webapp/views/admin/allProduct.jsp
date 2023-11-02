@@ -62,6 +62,7 @@
                                 <th class="text-center">Price</th>
                                 <th class="text-center">Discount</th>
                                 <th class="text-center">Qty Available</th>
+                                <th class="text-center">Qty Matching</th>
                                 <th class="text-center">Qty Sold</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Option</th>
@@ -103,6 +104,7 @@
                                         <td>${util.FormatPrice(pro.price)}</td>
                                         <td>${util.FormatDiscount(pro.discount)}</td>
                                         <td>${pro.quantity_Available}</td>
+                                        <td>Qty Matching</td>
                                         <td>${pro.quantity_Sold}</td>
                                         <td>
                                             <form action="updateProductStatus">

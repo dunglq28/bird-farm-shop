@@ -22,34 +22,25 @@
     <body class="sub_page">
 
         <!-- book section -->
-        <form action="" class="book_section layout_padding" method="POST" enctype="multipart/form-data">
+        <!--enctype="multipart/form-data"-->
+        <form action="updateProduct" class="book_section layout_padding" method="get" >
             <div class="container">
                 <h1 class="">Update product</h1>
+                <p style="color: green; font-weight: bold">${sessionScope.NOTIFICATION}</>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form_container">
                             <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
                             <c:set var="pro" value="${requestScope.PRODUCT_UPDATE}"></c:set>
-                                <select name="productTypeID" onchange="submit()" class="form-control-select nice-select wide" required>
-                                    <option value="" disabled selected>
-                                        Product Type
-                                    </option>
-                                    <option ${pro.product_TypeID == '1' ? 'selected' : ''} value="1">
-                                    Bird
-                                </option>
-                                <option ${pro.product_TypeID == '2' ? 'selected' : ''} value="2">
-                                    Bird Nest
-                                </option>
-                            </select>
-                            <select name="cateID" class="form-control-select nice-select wide" required>
-                                <option value="" disabled selected>
-                                    Category name
-                                </option>
-                                <c:forEach items="${requestScope.CATE_LIST}" var="cateList">
-                                    <option ${pro.categoryID == cateList.categoryID ? 'selected' : ''}
-                                        value="${cateList.categoryID}">${cateList.category_Name}</option>
-                                </c:forEach>
-                            </select>
+                            <input type="hidden" name="image" value="${pro.image}">
+                            <input type="hidden" name="productID" value="${pro.productID}">
+                                <div>
+                                    <input name="productType" value="${pro.product_TypeID == 1 ? 'Bird' : 'Bird Nest'}" type="text" class="form-control" readonly/>
+                            </div>
+                            <div>
+                                <input value="${pro.category_Name}" type="text" class="form-control" readonly/>
+                                <input value="${pro.categoryID}" type="hidden"/>
+                            </div>
                             <div>
                                 <input name="nameBird" value="${pro.product_Name}" type="text" class="form-control" placeholder="Name" required/>
                             </div>
@@ -61,7 +52,7 @@
                                 </c:if>                           
                             </div>
                             <div>
-                                <input name="Price" value="${util.FormatPrice(pro.price)}" type="text" class="form-control" placeholder="Price" required/>
+                                <input name="Price" value="${util.FormatNumber(pro.price)}" type="number" class="form-control" placeholder="Price" required/>
                                 <c:if test="${not empty requestScope.ERROR_PRICE}">
                                     <h6 style="margin: -22px 0 22px 0; color: red">${requestScope.ERROR_PRICE}</h6>
                                 </c:if>                            
@@ -72,14 +63,14 @@
                                     <h6 style="margin: -22px 0 22px 0; color: red">${requestScope.ERROR_DISCOUNT}</h6>
                                 </c:if>                            
                             </div>
-                            <div class="form-control-upload" style="border: none;" >
+<!--                            <div class="form-control-upload" style="border: none;" >
                                 <div>
                                     <div class="d-flex align-content-center text-center">
                                         <p><input type="file" name="file" required onchange="showImage(this);" /></p>
-                                        <p><img id="preview" src="" alt="Photo" style="max-height: 100px;" /></p>
+                                        <p><img id="preview" src="${pro.image}" alt="Photo" style="max-height: 100px;" /></p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="row justify-content-center align-content-center">
                                 <h6 class="mb-0 col-md-2">
                                     <a href="viewAllProduct" class="text-body">
@@ -87,7 +78,7 @@
                                     </a>
                                 </h6>
                                 <div class="btn_box col-md-10">
-                                    <button name="btAction" value="Create" type="submit" class="btn btn-primary"  style="background: rgb(13,103,128); border: none;">
+                                    <button name="btAction" value="Update" type="submit" class="btn btn-primary"  style="background: rgb(13,103,128); border: none;">
                                         Update now
                                     </button>
                                 </div>
@@ -157,10 +148,10 @@
                                 </c:if>
 
                                 <div>
-                                    <input name="Characteristic" value="${pro.characteristics}" type="text" class="form-control" placeholder="Characteristic" required />
+                                    <input name="Characteristic" value="${pro.characteristics}" type="text" class="form-control" placeholder="Characteristic"/>
                                 </div>
                                 <div style="width: 100%; height: 100px;">
-                                    <textarea name="Detail"   value="" class="form-control" placeholder="Detail" required style="width: 100%; height: 125%; overflow-wrap: break-word;">${pro.detail}</textarea>
+                                    <textarea name="Detail"   value="" class="form-control" placeholder="Detail" style="width: 100%; height: 125%; overflow-wrap: break-word;">${pro.detail}</textarea>
                                 </div>
 
                             </div>
