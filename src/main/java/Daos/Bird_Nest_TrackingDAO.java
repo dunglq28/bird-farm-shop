@@ -27,18 +27,18 @@ public class Bird_Nest_TrackingDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select MAX(Bird_Nest_ID) as 'Bird_Nest_ID' "
+                String sql = "Select MAX(CAST(SUBSTRING(Bird_Nest_ID,3,LEN(Bird_Nest_ID)) AS INT)) as 'Bird_Nest_ID'  "
                         + "From Bird_Nest_Tracking "
                         + "Where Bird_Nest_ID like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "BN" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String BirdNestIDMax = rs.getString("Bird_Nest_ID");
-                    if (BirdNestIDMax == null) {
+                    int BirdNestIDMax = rs.getInt("Bird_Nest_ID");
+                    if (BirdNestIDMax == 0) {
                         return "BN01";
                     } else {
-                        int num = Integer.parseInt(BirdNestIDMax.substring(2)) + 1;
+                        int num = BirdNestIDMax + 1;
                         String newOrderID;
                         if (num <= 9) {
                             newOrderID = "BN0";
@@ -69,9 +69,9 @@ public class Bird_Nest_TrackingDAO implements Serializable {
             if (con != null) {
                 String sql = "Insert into Bird_Nest_Tracking ( "
                         + "Bird_Nest_ID, OrderID, Bird_Nest_Name, Eggs_Quantity, Male_Babybird, Female_Babybird, AccountID, ServiceID, "
-                        + "OrderDate, LastUpdateDate, NOTE, Status "
+                        + "OrderDate, LastUpdateDate, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newBirdNest.getBird_Nest_ID());
@@ -84,8 +84,7 @@ public class Bird_Nest_TrackingDAO implements Serializable {
                 stm.setInt(8, newBirdNest.getServiceID());
                 stm.setDate(9, newBirdNest.getOrderDate());
                 stm.setDate(10, newBirdNest.getLastUpdateDate());
-                stm.setString(11, newBirdNest.getNote());
-                stm.setString(12, newBirdNest.getStatus());
+                stm.setString(11, newBirdNest.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {

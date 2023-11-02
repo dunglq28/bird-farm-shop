@@ -66,10 +66,10 @@ public class MatchBirdAvailableServlet extends HttpServlet {
             if (cateChoose != null && session.getAttribute("CATE_CHOOSE_HISTORY") != cateChoose) {
                 session.setAttribute("CATE_CHOOSE_HISTORY", cateChoose);
 
-                maleBirdList = proDao.getBirdByGender("Male", Integer.parseInt(cateChoose));
+                maleBirdList = proDao.getBirdByGender("Male", Integer.parseInt(cateChoose),1);
                 session.setAttribute("MALE_BIRD_HISTORY", maleBirdList);
 
-                femaleBirdList = proDao.getBirdByGender("Female", Integer.parseInt(cateChoose));
+                femaleBirdList = proDao.getBirdByGender("Female", Integer.parseInt(cateChoose),1);
                 session.setAttribute("FEMALE_BIRD_HISTORY", femaleBirdList);
 
             } else if (cateChoose != null && session.getAttribute("CATE_CHOOSE_HISTORY") == cateChoose) {

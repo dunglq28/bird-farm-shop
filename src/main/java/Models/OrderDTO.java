@@ -67,21 +67,22 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float total_Order,
+    public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float deposit_Price, float total_Order,
             String payBy, String status, float discount, float delivery_charges) {
         this.orderID = orderID;
         this.serviceName = serviceName;
         this.accountName = accountName;
         this.form_Receipt = form_Receipt;
         this.orderDate = orderDate;
+        this.deposit_Price = deposit_Price;
         this.total_Order = total_Order;
         this.payBy = payBy;
         this.status = status;
         this.discount = discount;
         this.delivery_charges = delivery_charges;
     }
-    
-      public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float total_Order,
+
+    public OrderDTO(String orderID, String serviceName, String accountName, String form_Receipt, Date orderDate, float total_Order,
             String payBy, String status, float discount, float delivery_charges, String StaffID) {
         this.orderID = orderID;
         this.serviceName = serviceName;
@@ -281,6 +282,3 @@ public class OrderDTO {
     }
 
 }
-
-
-

@@ -14,14 +14,13 @@ public class Bird_Nest_TrackingDTO {
     private int serviceID;
     private Date orderDate;
     private Date lastUpdateDate;
-    private String note;
     private String status;
 
     public Bird_Nest_TrackingDTO() {
     }
 
 
-    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, int male_Babybird, int female_Babybird, String accountID, int serviceID, Date orderDate, Date lastUpdateDate, String note, String status) {
+    public Bird_Nest_TrackingDTO(String bird_Nest_ID, String orderID, String bird_Nest_Name, int eggs_Quantity, int male_Babybird, int female_Babybird, String accountID, int serviceID, Date orderDate, Date lastUpdateDate, String status) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.orderID = orderID;
         this.bird_Nest_Name = bird_Nest_Name;
@@ -32,7 +31,6 @@ public class Bird_Nest_TrackingDTO {
         this.serviceID = serviceID;
         this.orderDate = orderDate;
         this.lastUpdateDate = lastUpdateDate;
-        this.note = note;
         this.status = status;
     }
 
@@ -127,14 +125,6 @@ public class Bird_Nest_TrackingDTO {
 
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public String getStatus() {

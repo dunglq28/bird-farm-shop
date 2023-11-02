@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
 
-        <title>My Order</title>
+        <title>Products</title>
 
     </head>
 
@@ -30,7 +30,7 @@
                     <div class="user--info">
                         <form action="viewAllProduct" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="${param.txtSearch}" type="text" placeholder="Search" />
+                            <input name="lastSearch" value="${param.lastSearch}" type="text" placeholder="Search" />
                         <button type="submit"></button>
                     </form>
                     ${sessionScope.ACCOUNT.fullName}
@@ -43,8 +43,13 @@
                         <h1 class="fw-bold mb-0 text-black" style="color: #0D6780 !important; margin-right: 8px">Product<h6 class="text-muted align-content-center mt-3">(${requestScope.NUMBER_OF_PRODUCT} product)</h6></h1>
 
                     </div>
-
-                    <div class="text-end "><button type="button" class="btn btn-primary" style="background: #0D6780; border: #0D6780;width: 50px; "><a href=""><i class="fa-solid fa-plus" style="color: white;"></i></i></a></button></div> 
+                    <div class="text-end ">
+                        <div class="btn btn-primary" style="background: #0D6780; border: #0D6780;width: 50px; ">
+                            <a href="createProductPage">
+                                <i class="fa-solid fa-plus" style="color: white;"></i>
+                            </a>
+                        </div>
+                    </div> 
                 </div>
 
                 <div class="table-container">
@@ -111,12 +116,14 @@
                                         <td>
                                             <div class="d-flex">
                                                 <h6 class="mb-0 text-sm-center text-muted" style="margin-right: 10px;">
-                                                    <a class="text-decoration-none text-muted" href=""><i
-                                                            class="far fa-edit"></i> </a>
+                                                    <a class="text-decoration-none text-muted" href="">
+                                                        <i class="far fa-edit"></i> 
+                                                    </a>
                                                 </h6>
                                                 <h6 class="mb-0 text-sm-center text-muted">
-                                                    <a class="text-decoration-none text-muted" href=""><i
-                                                            class="fa-solid fa-delete-left"></i></i> </a>
+                                                    <a class="text-decoration-none text-muted" href="deleteProduct?ProductID=${pro.productID}">
+                                                        <i class="fa-solid fa-delete-left"></i> 
+                                                    </a>
                                                 </h6>
                                             </div>
 
@@ -131,18 +138,21 @@
             </div>
             <div class="col-lg-12 text-center mt-2">
                 <div class="pagination__option" style="text-align: end">
+                    <c:if test="${not empty requestScope.SEARCH_VALUE}">
+                        <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>
+                    </c:if>
                     <c:if test="${requestScope.indexCurrent > 1}">
-                        <a href="viewAllProduct?page=1"><i class="fa fa-angle-double-left"></i></a>
-                        <a href="viewAllProduct?page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        <a href="viewAllProduct?${search}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewAllProduct?${search}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
                         </c:if>
 
                     <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
-                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewAllProduct?page=${i}">${i}</a>
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewAllProduct?${search}&page=${i}">${i}</a>
                     </c:forEach>
 
                     <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
-                        <a href="viewAllProduct?page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                        <a href="viewAllProduct?page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        <a href="viewAllProduct?${search}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewAllProduct?${search}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
                         </c:if>
                 </div>
             </div>  

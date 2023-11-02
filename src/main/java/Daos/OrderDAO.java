@@ -24,18 +24,18 @@ public class OrderDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select MAX(OrderID) as 'OrderID' "
+                String sql = "Select MAX(CAST(SUBSTRING(OrderID,2,LEN(OrderID)) AS INT)) as 'OrderID'  "
                         + "From Orders "
                         + "Where OrderID like ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "O" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String OrderIDMax = rs.getString("OrderID");
-                    if (OrderIDMax == null) {
+                    int OrderIDMax = rs.getInt("OrderID");
+                    if (OrderIDMax == 0) {
                         return "O01";
                     } else {
-                        int num = Integer.parseInt(OrderIDMax.substring(1)) + 1;
+                        int num = OrderIDMax + 1;
                         String newOrderID;
                         if (num <= 9) {
                             newOrderID = "O0";
@@ -215,7 +215,7 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                        + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
+                        + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
@@ -241,9 +241,10 @@ public class OrderDAO implements Serializable {
                     String Pay_with = rs.getString("Pay_with");
                     String status = rs.getString("Status");
                     float discount = rs.getFloat("Discount");
+                    float deposit_price = rs.getFloat("Deposit_Price");
                     float delivery_charges = rs.getFloat("Delivery_charges");
                     result = new OrderDTO(orderID, serviceName, fullname, Form_Receipt,
-                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges);
+                            orderDate, deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }
@@ -378,7 +379,7 @@ public class OrderDAO implements Serializable {
             if (con != null) {
 
                 sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                        + "ord.Pay_with,ord.Form_Receipt, ord.Total_Order, ord.Delivery_charges, ord.Discount "
+                        + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
@@ -407,12 +408,13 @@ public class OrderDAO implements Serializable {
                     Date orderDate = rs.getDate("OrderDate");
                     String status = rs.getString("Status");
                     String Form_Receipt = rs.getString("Form_Receipt");
+                    float deposit_price = rs.getFloat("Deposit_Price");
                     float Total_Order = rs.getFloat("Total_Order");
                     float discount = rs.getFloat("Discount");
                     float delivery_charges = rs.getFloat("Delivery_charges");
                     String Pay_with = rs.getString("Pay_with");
                     result = new OrderDTO(orderID, serviceName, fullname, Form_Receipt,
-                            orderDate, Total_Order, Pay_with, status, discount, delivery_charges);
+                            orderDate,deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }

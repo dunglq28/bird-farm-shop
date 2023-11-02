@@ -24,7 +24,7 @@ public class viewAllAccount extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
         String page = request.getParameter("page");
-        String searchValue = request.getParameter("txtSearch");
+        String searchValue = request.getParameter("lastSearch");
         HttpSession session = request.getSession();
 
         try {
@@ -66,6 +66,7 @@ public class viewAllAccount extends HttpServlet {
                     end = endPage;
                 }
             }
+            request.setAttribute("SEARCH_VALUE", searchValue);
             request.setAttribute("START", start);
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);

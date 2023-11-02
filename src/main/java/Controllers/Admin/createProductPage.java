@@ -5,14 +5,10 @@
  */
 package Controllers.Admin;
 
-import Daos.ProductDAO;
 import Models.AccountDTO;
-import Models.ProductDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author hj
  */
-@WebServlet(name = "viewAllProduct", urlPatterns = {"/viewAllProduct"})
-public class viewAllProduct extends HttpServlet {
+@WebServlet(name = "createProductPage", urlPatterns = {"/createProductPage"})
+public class createProductPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,61 +36,15 @@ public class viewAllProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.AdminFeatures.ALL_PRODUCT_PAGE;
-        String page = request.getParameter("page");
-        String searchValue = request.getParameter("lastSearch");
+        String url = MyAppConstants.AdminFeatures.CREATE_PRODUCT_PAGE;
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || !account.getRoleName().equals("Admin")) {
+            if (account == null || account.getRoleName().equals("Customer")) {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
-
-            if (searchValue == null) {
-                searchValue = "";
-            }
-            if (page == null) {
-                page = "1";
-            }
-            int indexPage = Integer.parseInt(page);
-            int fieldShow = 10;
-
-            ProductDAO dao = new ProductDAO();
-
-            int endPage = dao.getNumberPage("", searchValue.trim(), fieldShow);
-            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, "", searchValue.trim(), fieldShow);
-            request.setAttribute("PRODUCT_LIST", result);
-            int start = 1;
-            int distance = 4;
-
-            int end;
-            if (endPage < distance) {
-                end = endPage;
-            } else {
-                end = start + distance;
-            }
-
-            if (indexPage >= 4) {
-                start = indexPage - 2;
-                end = indexPage + 2;
-                if (indexPage + distance >= endPage) {
-                    start = endPage - distance;
-                    end = endPage;
-                }
-            }
-            request.setAttribute("SEARCH_VALUE", searchValue);
-            request.setAttribute("START", start);
-            request.setAttribute("END", end);
-            request.setAttribute("indexCurrent", indexPage);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("NUMBER_OF_PRODUCT", dao.getNumberOfProduct());
-            session.setAttribute("CURRENT_VIEW", "All product");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

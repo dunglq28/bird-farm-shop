@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
-        <title>Admin</title>
+        <title>Accounts</title>
 
     </head>
     <body>
@@ -33,7 +33,7 @@
                     <div class="user--info">
                         <form action="viewAllAccount" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="${param.txtSearch}" type="text" placeholder="Search" />
+                            <input name="lastSearch" value="${param.lastSearch}" type="text" placeholder="Search" />
                         <button type="submit"></button>
                     </form>
                     ${sessionScope.ACCOUNT.fullName}
@@ -100,18 +100,21 @@
             </div>
             <div class="col-lg-12 text-center mt-2">
                 <div class="pagination__option" style="text-align: end">
+                    <c:if test="${not empty requestScope.SEARCH_VALUE}">
+                        <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>
+                    </c:if>
                     <c:if test="${requestScope.indexCurrent > 1}">
-                        <a href="viewAllAccount?page=1"><i class="fa fa-angle-double-left"></i></a>
-                        <a href="viewAllAccount?page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        <a href="viewAllAccount?${search}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewAllAccount?${search}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
                         </c:if>
 
                     <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
-                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewAllAccount?page=${i}">${i}</a>
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewAllAccount?${search}&page=${i}">${i}</a>
                     </c:forEach>
 
                     <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
-                        <a href="viewAllAccount?page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                        <a href="viewAllAccount?page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        <a href="viewAllAccount?${search}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewAllAccount?${search}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
                         </c:if>
                 </div>
             </div>  
