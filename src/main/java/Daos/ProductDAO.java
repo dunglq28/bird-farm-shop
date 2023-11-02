@@ -43,9 +43,9 @@ public class ProductDAO implements Serializable {
                         + "Quantity_Available, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
-                        + "where Product_TypeID like ? and Product_Name like ? and Status = 'true' "
-                        + "or Product_TypeID like ? and cate.Category_Name like ?  and Status = 'true' "
-                        + "or Product_TypeID like ? and ProductID like ?  and Status = 'true' "
+                        + "where Product_TypeID like ? and Product_Name like ? "
+                        + "or Product_TypeID like ? and cate.Category_Name like ?  "
+                        + "or Product_TypeID like ? and ProductID like ? "
                         + "Order by Product_TypeID asc, Date_created desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY";
@@ -518,6 +518,34 @@ public class ProductDAO implements Serializable {
                 stm.setString(1, proID);
                 int effecRows = stm.executeUpdate();
                 if (effecRows > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean UpdateProductStatus(String productID, boolean status) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "update Products "
+                        + "set Status = ? "
+                        + "where ProductID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setBoolean(1, status);
+                stm.setString(2, productID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
                     return true;
                 }
             }
