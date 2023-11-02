@@ -17,7 +17,7 @@
             </li>
         </c:if>
 
-            <li class="${sessionScope.CURRENT_VIEW == 'New order' ? 'active' : ''}">
+        <li class="${sessionScope.CURRENT_VIEW == 'New order' ? 'active' : ''}">
             <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
                 <a href="viewNewOrder" class="list-cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
@@ -56,12 +56,14 @@
         <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
             <li class="${sessionScope.CURRENT_VIEW == 'All product' ? 'active' : ''}">
                 <a href="viewAllProduct">
-                    <i class="fas fa-question-circle"></i>
+                    <!--<i class="fas fa-question-circle"></i>-->
+                    <span class="material-symbols-outlined">
+                        raven
+                    </span>
                     <span>Products</span>
                 </a>
             </li>
         </c:if>
-
 
 
         <li class="logout">
