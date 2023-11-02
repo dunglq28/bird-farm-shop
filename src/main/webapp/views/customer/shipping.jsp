@@ -90,7 +90,7 @@
                 <form action="Checkout" class="form-input" method="POST">
                     <div class="form-group">
                         <input name="txtFullName" value="<c:if test="${not empty cus.fullName}">${cus.fullName}</c:if><c:if test="${not empty requestScope.FULLNAME}">${requestScope.FULLNAME}</c:if>"  
-                           class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           class="form-control" id="exampleInputEmail1"
                            placeholder="Enter FullName" required>
                 </div>
                 <div class="form-group">
@@ -168,7 +168,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
+                    <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address" required>
                 </div>
                     <input type="hidden" name="txtTotalOrder" value="${sessionScope.TOTAL_ORDER}" />
                     <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />

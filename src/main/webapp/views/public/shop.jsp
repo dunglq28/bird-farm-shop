@@ -65,12 +65,12 @@
                                         <div class="accordion" id="accordionExample">
                                             <div class="card">
                                                 <div class="card-heading active">
-                                                    <a data-toggle="collapse" data-target="#collapseOne">Male</a>
+                                                    <a data-toggle="collapse" data-target="#collapseOne">Category</a>
                                                 </div>
                                                 <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <ul>
-                                                            <li><a href="#">Parrot</a></li>
+                                                            <li><a href="product_list?">Parrot</a></li>
                                                             <li><a href="#">Macaw</a></li>
                                                             <li><a href="#">Pigeon</a></li>
                                                             <li><a href="#">Jenday Conure</a></li>
@@ -90,39 +90,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="card-heading">
-                                                    <a data-toggle="collapse" data-target="#collapseTwo">Female</a>
-                                                </div>
-                                                <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <ul>
-                                                            <li><a href="#">Parrot</a></li>
-                                                            <li><a href="#">Macaw</a></li>
-                                                            <li><a href="#">Pigeon</a></li>
-                                                            <li><a href="#">Jenday Conure</a></li>
-                                                            <li><a href="#">Parakeet</a></li>
-                                                            <li><a href="#">Conure</a></li>
-                                                            <li><a href="#">Cockatiel</a></li>
-                                                            <li><a href="#">Eclectus</a></li>
-                                                            <li><a href="#">Finch</a></li>
-                                                            <li><a href="#">Cockatoo</a></li>
-                                                            <li><a href="#">Canary</a></li>
-                                                            <li><a href="#">Toucan</a></li>
-                                                            <li><a href="#">Caique</a></li>
-                                                            <li><a href="#">Duck</a></li>
-                                                            <li><a href="#">Amazon Parrot</a></li>
-                                                            <li><a href="#">Goose</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sidebar__filter">
+<!--                                <div class="sidebar__filter">
                                     <div class="section-title">
                                         <h4>Shop by price</h4>
                                     </div>
@@ -138,9 +109,9 @@
                                         </div>
                                     </div>
                                     <a href="#">Filter</a>
-                                </div>
+                                </div>-->
 
-                                <div class="sidebar__color">
+<!--                                <div class="sidebar__color">
                                     <div class="section-title">
                                         <h4>Shop by color</h4>
                                     </div>
@@ -150,43 +121,9 @@
                                             <input type="checkbox" id="black">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label for="whites">
-                                            Whites
-                                            <input type="checkbox" id="whites">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="reds">
-                                            Reds
-                                            <input type="checkbox" id="reds">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="greys">
-                                            Greys
-                                            <input type="checkbox" id="greys">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="blues">
-                                            Blues
-                                            <input type="checkbox" id="blues">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="beige">
-                                            Beige Tones
-                                            <input type="checkbox" id="beige">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="greens">
-                                            Greens
-                                            <input type="checkbox" id="greens">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="yellows">
-                                            Yellows
-                                            <input type="checkbox" id="yellows">
-                                            <span class="checkmark"></span>
-                                        </label>
+                           
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">

@@ -230,9 +230,9 @@
                                             </c:if>
                                         </c:if>
 
-                                        <hr class="my-4">
+                                        <!--<hr class="my-4">-->
 
-                                        <h5 class="text-uppercase mb-2">Voucher</h5>
+<!--                                        <h5 class="text-uppercase mb-2">Voucher</h5>
                                         <div class="input-group rounded mb-3">
                                             <input type="search" class="form-control rounded"
                                                    placeholder="Enter your voucher" aria-label="Search"
@@ -240,7 +240,7 @@
                                             <span class="input-group-text border-0" id="search-addon">
                                                 <a href="#"><i class="fas fa-search"></i></a>
                                             </span>
-                                        </div>
+                                        </div>-->
                                         <!--                                        <div class="mb-4">
                                         
                                         
@@ -264,10 +264,10 @@
                                             <h6 id="Ship">${util.FormatPrice(sessionScope.SHIPPING_CASH)}</h6>
 <!--                                            <input type="hidden" name="txtShippingCash" value="${sessionScope.SHIPPING_CASH}"/>-->
                                         </div>
-                                        <div class="d-flex justify-content-between mb-3">
+<!--                                        <div class="d-flex justify-content-between mb-3">
                                             <h6 class="text-uppercase">discount</h6>
                                             <h6>0</h6>
-                                        </div>
+                                        </div>-->
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="text-uppercase">Total price</h5>
 
