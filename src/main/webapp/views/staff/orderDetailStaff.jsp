@@ -20,7 +20,7 @@
 
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-        <jsp:include page="/components/siveBar.jsp"></jsp:include>
+        <jsp:include page="/components/sideBar.jsp"></jsp:include>
 
             <div class="container py-5 h-100 ">
                 <div class="row d-flex justify-content-center align-items-center h-100">

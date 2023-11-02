@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="../../assets/css/trackingNote.css"/>
     </head>
     <body>
-        <jsp:include page="../../components/siveBar.jsp"></jsp:include>
+        <jsp:include page="../../components/sideBar.jsp"></jsp:include>
         <div class="main--content">
             <div class="header-wrapper">
                 <div class="header--title">
