@@ -559,4 +559,58 @@ public class OrderDAO implements Serializable {
         }
         return null;
     }
+    
+     public List<OrderDTO> ViewAllOrders()
+            throws SQLException, ClassNotFoundException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        OrderDTO result = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select ord.OrderID, ord.StaffID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
+                        + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
+                        + "from Orders ord "
+                        + "inner join Service ser on ord.ServiceID = ser.ServiceID "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String orderID = rs.getString("OrderID");
+                    String staffID = rs.getString("StaffID");
+                    String serviceName = rs.getString("ServiceName");
+                    String fullname = rs.getString("FullName");
+                    Date orderDate = rs.getDate("OrderDate");
+                    String Form_Receipt = rs.getString("Form_Receipt");
+                    float Total_Order = rs.getFloat("Total_Order");
+                    String Pay_with = rs.getString("Pay_with");
+                    String status = rs.getString("Status");
+                    float discount = rs.getFloat("Discount");
+                    float deposit_price = rs.getFloat("Deposit_Price");
+                    float delivery_charges = rs.getFloat("Delivery_charges");
+                    result = new OrderDTO(orderID, staffID, serviceName, fullname, Form_Receipt,
+                            orderDate, deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
+                    if (this.orderList == null) {
+                        this.orderList = new ArrayList<OrderDTO>();
+                    }
+                    this.orderList.add(result);
+                }
+                return this.orderList;
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 }

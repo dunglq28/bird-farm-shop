@@ -23,7 +23,7 @@
     </head>
     <body>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-        <jsp:include page="/components/siveBar.jsp"></jsp:include>
+        <jsp:include page="/components/sideBar.jsp"></jsp:include>
 
             <div class="main--content">
                 <div class="header-wrapper">
@@ -62,12 +62,11 @@
                                 <th>Delivery method</th>
                                 <th>Payment method</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         <div class="tbody-wrapper">
-                            <c:set var="order" value="${requestScope.ALL_ORDERS}"></c:set>
+                            <c:set var="order" value="${ALL_ORDERS}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
                                     <tr>
@@ -81,10 +80,6 @@
                                         <td>${dto.payBy}</td>
                                         <td>${dto.status}</td>
                                         <td>
-                                            <!--<div class="action">-->
-                                                <!--<a href="#"><i class="fa-solid fa-check"></i></a>-->
-                                                <!--<a href="#"><i class="fa-solid fa-xmark"></i></a>-->
-                                            <!--</div>-->
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -94,30 +89,30 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-12 text-center mt-2">
+<!--            <div class="col-lg-12 text-center mt-2">
                 <div class="pagination__option" style="text-align: end">
-                    <c:if test="${requestScope.indexCurrent > 1}">
+                    <%--<c:if test="${requestScope.indexCurrent > 1}">--%>
                         <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=1"><i class="fa fa-angle-double-left"></i></a>
                         <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
-                        </c:if>
+                        <%--</c:if>--%>
 
-                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                    <%--<c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">--%>
                         <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${i}">${i}</a>
-                    </c:forEach>
+                    <%--</c:forEach>--%>
 
-                    <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                    <%--<c:if test="${requestScope.indexCurrent<requestScope.endPage}">--%>
                         <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
                         <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
-                        </c:if>
+                        <%--</c:if>--%>
                 </div>
-            </div>  
+            </div>  -->
         </div>
 
-        <script>
+<!--        <script>
             function submit() {
                 document.querySelector(".myForm").onsubmit();
                 document.querySelector(".myOrder").onsubmit();
             }
-        </script>
+        </script>-->
     </body>
 </html>
