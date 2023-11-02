@@ -153,9 +153,10 @@
                                 <div>
                                     <input name="Characteristic" value="${param.Characteristic}" type="text" class="form-control" placeholder="Characteristic" required />
                                 </div>
-                                <div>
-                                    <input name="Detail" value="${param.Detail}" type="text" class="form-control" placeholder="Detail" required/>
+                                <div style="width: 100%; height: 100px;">
+                                    <textarea name="Detail" class="form-control" placeholder="Detail" required style="width: 100%; height: 100%; overflow-wrap: break-word;"></textarea>
                                 </div>
+                                
 
                             </div>
                         </div>
