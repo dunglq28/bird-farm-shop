@@ -47,14 +47,13 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Account ID</th>
-                                <th>Full Name</th>
-                                <th>Role Name</th>
-                                <th>Email</th>
-                                <th>Date created</th>
-                                <th>Created By</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th >Account ID</th>
+                                <th >Full Name</th>
+                                <th >Role Name</th>
+                                <th class="text-center">Email</th>
+                                <th >Date created</th>
+                                <th >Created By</th>
+                                <th class="text-center">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,7 +88,6 @@
                                                 <input type="hidden" name="accountID" value="${dto.accountID}" />
                                             </form>
                                         </td>
-                                        <td></td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

@@ -54,8 +54,8 @@ public class viewMyOrder extends HttpServlet {
             OrderDAO dao = new OrderDAO();
             StaffDAO staffdao = new StaffDAO();
             StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue, fieldShow);
-            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), Integer.parseInt(serviceID), status, indexPage, searchValue, fieldShow);
+            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), serviceID, status, searchValue, fieldShow);
+            List<OrderDTO> result = dao.MyOrders(staDTO.getStaffID(), serviceID, status, indexPage, searchValue, fieldShow);
 
             int start = 1;
             int distance = 4;

@@ -16,22 +16,21 @@
                 </a>
             </li>
         </c:if>
+        <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
             <li class="${sessionScope.CURRENT_VIEW == 'New order' ? 'active' : ''}">
-                <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
-                    <a href="viewNewOrder" class="list-cart-icon">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="cart-number">${oDao.numberOfNewOrder}</span>
+                <a href="viewNewOrder" class="list-cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-number">${oDao.numberOfNewOrder}</span>
                     <span>Orders in queue</span>
                 </a>
             </li>
         </c:if>
         <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
-            <li class="${sessionScope.CURRENT_VIEW == 'New order' ? 'active' : ''}">
-                <jsp:useBean id="oDaoAD" class="Daos.OrderDAO"></jsp:useBean>
+            <li class="${sessionScope.CURRENT_VIEW == 'All order' ? 'active' : ''}">
                     <a href="viewAllOrder" class="list-cart-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="cart-number">${oDaoAD.numberOfNewOrder}</span>
+                        <span class="cart-number">${oDao.numberOfAllOrder}</span>
                     <span>All Orders</span>
                 </a>
             </li>

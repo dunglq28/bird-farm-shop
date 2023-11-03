@@ -40,8 +40,8 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex ">
-                        <h1 class="fw-bold mb-0 text-black" style="color: #0D6780 !important; margin-right: 8px">Product<h6 class="text-muted align-content-center mt-3">(${requestScope.NUMBER_OF_PRODUCT} product)</h6></h1>
-
+                        <h3 class="mb-0 text-black" style="color: #0D6780 !important; margin-right: 8px">Product</h3>
+                        <h6 class="text-muted align-content-center mt-2">(${requestScope.NUMBER_OF_PRODUCT} product)</h6>
                     </div>
                     <div class="text-end ">
                         <div class="btn btn-primary" style="background: #0D6780; border: #0D6780;width: 50px; ">

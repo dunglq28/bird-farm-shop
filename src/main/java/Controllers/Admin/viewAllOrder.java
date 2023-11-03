@@ -26,10 +26,9 @@ public class viewAllOrder extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.AdminFeatures.ALL_ORDER_PAGE;
-//        String serviceID = request.getParameter("txtServiceID");
-//        String status = request.getParameter("Status");
-//        String page = request.getParameter("page");
-//        String searchValue = request.getParameter("txtSearch");
+        String status = request.getParameter("Status");
+        String page = request.getParameter("page");
+        String searchValue = request.getParameter("lastSearch");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -38,52 +37,48 @@ public class viewAllOrder extends HttpServlet {
                 url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
-//            if (serviceID == null) {
-//                serviceID = "1";
-//            }
-//            if (status == null || status.equals("All")) {
-//                status = "";
-//            }
-//            if (searchValue == null) {
-//                searchValue = "";
-//            }
-//            if (page == null) {
-//                page = "1";
-//            }
-//            int indexPage = Integer.parseInt(page);
-//            int fieldShow = 10;
-            OrderDAO dao = new OrderDAO();
-//            StaffDAO staffdao = new StaffDAO();
-//            StaffDTO staDTO = staffdao.getStaffByAccountID(account.getAccountID());
-//            int endPage = dao.getMyOrderPage(staDTO.getStaffID(), Integer.parseInt(serviceID), status, searchValue, fieldShow);
-            List<OrderDTO> result = dao.ViewAllOrders();
-            request.setAttribute("ALL_ORDERS", result);
-//            int start = 1;
-//            int distance = 4;
 
-//            int end;
-//            if (endPage < distance) {
-//                end = endPage;
-//            } else {
-//                end = start + distance;
-//            }
-//
-//            if (indexPage >= 4) {
-//                start = indexPage - 2;
-//                end = indexPage + 2;
-//                if (indexPage + distance >= endPage) {
-//                    start = endPage - distance;
-//                    end = endPage;
-//                }
-//            }
-//            request.setAttribute("SEARCH_VALUE", searchValue);
-//            request.setAttribute("SERVICE_ID", serviceID);
-//            request.setAttribute("STATUS_ORDER", status);
-//            request.setAttribute("START", start);
-//            request.setAttribute("END", end);
-//            request.setAttribute("indexCurrent", indexPage);
-//            request.setAttribute("endPage", endPage);
-//            url = MyAppConstants.AdminFeatures.ALL_ORDER_PAGE;
+            if (status == null || status.equals("All")) {
+                status = "";
+            }
+            if (searchValue == null) {
+                searchValue = "";
+            }
+            if (page == null) {
+                page = "1";
+            }
+            session.setAttribute("CURRENT_VIEW", "All order");
+            int indexPage = Integer.parseInt(page);
+            int fieldShow = 10;
+            OrderDAO dao = new OrderDAO();
+            int endPage = dao.getNumberPageAllOrder(status, searchValue, fieldShow);
+            List<OrderDTO> result = dao.viewAllOrder(status, indexPage, searchValue, fieldShow);
+            request.setAttribute("ALL_ORDERS", result);
+            int start = 1;
+            int distance = 4;
+
+            int end;
+            if (endPage < distance) {
+                end = endPage;
+            } else {
+                end = start + distance;
+            }
+
+            if (indexPage >= 4) {
+                start = indexPage - 2;
+                end = indexPage + 2;
+                if (indexPage + distance >= endPage) {
+                    start = endPage - distance;
+                    end = endPage;
+                }
+            }
+            request.setAttribute("SEARCH_VALUE", searchValue);
+            request.setAttribute("STATUS_ORDER", status);
+            request.setAttribute("START", start);
+            request.setAttribute("END", end);
+            request.setAttribute("indexCurrent", indexPage);
+            request.setAttribute("endPage", endPage);
+            url = MyAppConstants.AdminFeatures.ALL_ORDER_PAGE;
 
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

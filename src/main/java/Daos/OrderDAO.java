@@ -337,6 +337,36 @@ public class OrderDAO implements Serializable {
         }
         return 0;
     }
+    
+     public int getNumberOfAllOrder()
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) as 'Number of all order' "
+                        + "from Orders  ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt("Number of all order");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
 
     public boolean takeActionOrder(String StaffID, String OrderID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -367,35 +397,33 @@ public class OrderDAO implements Serializable {
         return false;
     }
 
-    public List<OrderDTO> MyOrders(String StaffID, int serviceID, String status_choose, int page, String searchValue, int fieldShow)
+    public List<OrderDTO> MyOrders(String StaffID, String serviceID, String status_choose, int page, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         OrderDTO result = null;
-        String sql = null;
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-
-                sql = "select ord.OrderID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
+                String sql = "select ord.OrderID, ord.StaffID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
                         + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
                         + "from Orders ord "
                         + "inner join Service ser on ord.ServiceID = ser.ServiceID "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
-                        + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and ord.OrderID like ? "
-                        + "or ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and acc.FullName like ? "
+                        + "where ord.StaffID like ? and ord.ServiceID like ? and ord.Status like ? and ord.OrderID like ? "
+                        + "or ord.StaffID like ? and ord.ServiceID like ? and ord.Status like ? and acc.FullName like ? "
                         + "Order by ord.OrderDate desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY ";
 
                 stm = con.prepareStatement(sql);
-                stm.setString(1, StaffID);
-                stm.setInt(2, serviceID);
+                stm.setString(1, "%" + StaffID + "%");
+                stm.setString(2, "%" + serviceID + "%");
                 stm.setString(3, "%" + status_choose + "%");
                 stm.setString(4, "%" + searchValue + "%");
-                stm.setString(5, StaffID);
-                stm.setInt(6, serviceID);
+                stm.setString(5, "%" + StaffID + "%");
+                stm.setString(6, "%" + serviceID + "%");
                 stm.setString(7, "%" + status_choose + "%");
                 stm.setString(8, "%" + searchValue + "%");
                 stm.setInt(9, (page - 1) * fieldShow);
@@ -403,6 +431,7 @@ public class OrderDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String orderID = rs.getString("OrderID");
+                    String staffID = rs.getString("StaffID");
                     String serviceName = rs.getString("ServiceName");
                     String fullname = rs.getString("FullName");
                     Date orderDate = rs.getDate("OrderDate");
@@ -413,8 +442,8 @@ public class OrderDAO implements Serializable {
                     float discount = rs.getFloat("Discount");
                     float delivery_charges = rs.getFloat("Delivery_charges");
                     String Pay_with = rs.getString("Pay_with");
-                    result = new OrderDTO(orderID, serviceName, fullname, Form_Receipt,
-                            orderDate,deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
+                    result = new OrderDTO(orderID, staffID, serviceName, fullname, Form_Receipt,
+                            orderDate, deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
                     if (this.orderList == null) {
                         this.orderList = new ArrayList<OrderDTO>();
                     }
@@ -437,7 +466,7 @@ public class OrderDAO implements Serializable {
         return null;
     }
 
-    public int getMyOrderPage(String StaffID, int serviceID, String status_choose, String searchValue, int fieldShow)
+    public int getMyOrderPage(String StaffID, String serviceID, String status_choose, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -448,18 +477,124 @@ public class OrderDAO implements Serializable {
                 String sql = "Select count(*) "
                         + "From Orders ord "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
-                        + "where ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and ord.OrderID like ? "
-                        + "or ord.StaffID = ? and ord.ServiceID = ? and ord.Status like ? and acc.FullName like ? ";
-
+                        + "where ord.StaffID like ? and ord.ServiceID like ? and ord.Status like ? and ord.OrderID like ? "
+                        + "or ord.StaffID like ? and ord.ServiceID like ? and ord.Status like ? and acc.FullName like ? ";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, StaffID);
-                stm.setInt(2, serviceID);
+                stm.setString(1, "%" + StaffID + "%");
+                stm.setString(2, "%" + serviceID + "%");
                 stm.setString(3, "%" + status_choose + "%");
                 stm.setString(4, "%" + searchValue + "%");
-                stm.setString(5, StaffID);
-                stm.setInt(6, serviceID);
+                stm.setString(5, "%" + StaffID + "%");
+                stm.setString(6, "%" + serviceID + "%");
                 stm.setString(7, "%" + status_choose + "%");
                 stm.setString(8, "%" + searchValue + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage = total / fieldShow;
+                    if (countPage % fieldShow != 0 && countPage % 2 != 0) {
+                        countPage++;
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public List<OrderDTO> viewAllOrder(String status_choose, int page, String searchValue, int fieldShow)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        OrderDTO result = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select ord.OrderID, ord.StaffID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
+                        + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
+                        + "from Orders ord "
+                        + "inner join Service ser on ord.ServiceID = ser.ServiceID "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID "
+                        + "where ord.Status like ? and ord.OrderID like ? "
+                        + "or ord.Status like ? and acc.FullName like ? "
+                        + "Order by ord.OrderDate desc "
+                        + "OFFSET ? ROWS "
+                        + "FETCH FIRST ? ROWS ONLY ";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + status_choose + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + status_choose + "%");
+                stm.setString(4, "%" + searchValue + "%");
+                stm.setInt(5, (page - 1) * fieldShow);
+                stm.setInt(6, fieldShow);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String orderID = rs.getString("OrderID");
+                    String staffID = rs.getString("StaffID");
+                    String serviceName = rs.getString("ServiceName");
+                    String fullname = rs.getString("FullName");
+                    Date orderDate = rs.getDate("OrderDate");
+                    String status = rs.getString("Status");
+                    String Form_Receipt = rs.getString("Form_Receipt");
+                    float deposit_price = rs.getFloat("Deposit_Price");
+                    float Total_Order = rs.getFloat("Total_Order");
+                    float discount = rs.getFloat("Discount");
+                    float delivery_charges = rs.getFloat("Delivery_charges");
+                    String Pay_with = rs.getString("Pay_with");
+                    result = new OrderDTO(orderID, staffID, serviceName, fullname, Form_Receipt,
+                            orderDate, deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
+                    if (this.orderList == null) {
+                        this.orderList = new ArrayList<OrderDTO>();
+                    }
+                    this.orderList.add(result);
+                }
+                return this.orderList;
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public int getNumberPageAllOrder(String status_choose, String searchValue, int fieldShow)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From Orders ord "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID "
+                        + "where ord.Status like ? and ord.OrderID like ? "
+                        + "or ord.Status like ? and acc.FullName like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + status_choose + "%");
+                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(3, "%" + status_choose + "%");
+                stm.setString(4, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt(1);
@@ -559,58 +694,5 @@ public class OrderDAO implements Serializable {
         }
         return null;
     }
-    
-     public List<OrderDTO> ViewAllOrders()
-            throws SQLException, ClassNotFoundException {
 
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        OrderDTO result = null;
-        try {
-            con = DBHelper.makeConnection();
-            if (con != null) {
-                String sql = "select ord.OrderID, ord.StaffID, ser.ServiceName,acc.FullName, ord.OrderDate, ord.Status, "
-                        + "ord.Pay_with,ord.Form_Receipt,ord.Deposit_Price, ord.Total_Order, ord.Delivery_charges, ord.Discount "
-                        + "from Orders ord "
-                        + "inner join Service ser on ord.ServiceID = ser.ServiceID "
-                        + "inner join Account acc on acc.AccountID = ord.AccountID ";
-                stm = con.prepareStatement(sql);
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    String orderID = rs.getString("OrderID");
-                    String staffID = rs.getString("StaffID");
-                    String serviceName = rs.getString("ServiceName");
-                    String fullname = rs.getString("FullName");
-                    Date orderDate = rs.getDate("OrderDate");
-                    String Form_Receipt = rs.getString("Form_Receipt");
-                    float Total_Order = rs.getFloat("Total_Order");
-                    String Pay_with = rs.getString("Pay_with");
-                    String status = rs.getString("Status");
-                    float discount = rs.getFloat("Discount");
-                    float deposit_price = rs.getFloat("Deposit_Price");
-                    float delivery_charges = rs.getFloat("Delivery_charges");
-                    result = new OrderDTO(orderID, staffID, serviceName, fullname, Form_Receipt,
-                            orderDate, deposit_price, Total_Order, Pay_with, status, discount, delivery_charges);
-                    if (this.orderList == null) {
-                        this.orderList = new ArrayList<OrderDTO>();
-                    }
-                    this.orderList.add(result);
-                }
-                return this.orderList;
-            }
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return null;
-    }
 }

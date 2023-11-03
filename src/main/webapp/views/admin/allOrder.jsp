@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
-        <title>My Order</title>
+        <title>All Order</title>
 
     </head>
     <body>
@@ -32,22 +32,34 @@
                         <h2>Order Management</h2>
                     </div>
                     <div class="user--info">
-                        <form action="viewMyOrder-staff" class="search--box">
+                        <form action="viewAllOrder" class="search--box">
                             <i class="fa-solid fa-search"></i>
-                            <input name="txtSearch" value="" type="text" placeholder="Search" />
-                            <button type="submit"></button>
-                        </form>
+                            <input name="lastSearch" value="${param.lastSearch}" type="text" placeholder="Search" />
+                        <button type="submit"></button>
+                    </form>
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
             <div class="tabular--wrapper">
-                <c:if test="${requestScope.SERVICE_ID == 1}">
-                    <h3 class="main--title">My Order</h3>
+                <!--                <c:if test="${requestScope.SERVICE_ID == 1}">
+                                    <h3 class="main--title">My Order</h3>
                 </c:if>
                 <c:if test="${requestScope.SERVICE_ID != 1}">
                     <h3 class="main--title">My Booking</h3>
                 </c:if>
-                
+                -->
+                <form action="viewAllOrder">
+                    <div class="mb-4 justify-content-between align-items-sm-start">
+                        <div class="col-md-6 col-lg-8 col-xl-8">
+                            <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == '' ? 'active' : ''}" >
+                            <input type="submit" name="Status" value="Wait for confirmation" class="btn btn-secondary ${STATUS_ORDER == 'Wait for confirmation' ? 'active' : ''}"  >
+                            <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}"  >
+                            <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}"  >
+                            <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}"  >
+                            <input type="submit" name="Status" value="Cancel" class="btn btn-secondary ${STATUS_ORDER == 'Cancel' ? 'active' : ''}"  >
+                        </div>
+                    </div>
+                </form>
 
                 <div class="table-container">
                     <table>
@@ -55,13 +67,13 @@
                             <tr>
                                 <th>OrderID</th>
                                 <th>StaffID</th>
-                                <th>Service</th>
-                                <th>Customer Name</th>
-                                <th>Order Date</th>
-                                <th>Total</th>
-                                <th>Delivery method</th>
-                                <th>Payment method</th>
-                                <th>Status</th>
+                                <th class="text-center">Service</th>
+                                <th class="text-center">Customer Name</th>
+                                <th class="text-center">Order Date</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Delivery method</th>
+                                <th class="text-center">Payment method</th>
+                                <th class="text-center">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,8 +81,8 @@
                             <c:set var="order" value="${ALL_ORDERS}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
-                                    <tr>
-                                        <td><a href="viewDetailOrderServlet?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
+                                    <tr class="text-center">
+                                        <td><a href="viewDetailOrder?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
                                         <td>${dto.staffID}</td>
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
@@ -79,8 +91,6 @@
                                         <td>${dto.form_Receipt}</td>
                                         <td>${dto.payBy}</td>
                                         <td>${dto.status}</td>
-                                        <td>
-                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -89,30 +99,33 @@
                     </table>
                 </div>
             </div>
-<!--            <div class="col-lg-12 text-center mt-2">
+            <div class="col-lg-12 text-center mt-2">
                 <div class="pagination__option" style="text-align: end">
-                    <%--<c:if test="${requestScope.indexCurrent > 1}">--%>
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=1"><i class="fa fa-angle-double-left"></i></a>
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
-                        <%--</c:if>--%>
+                    <c:if test="${not empty requestScope.SEARCH_VALUE}">
+                        <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>
+                    </c:if>
+                    <c:if test="${requestScope.indexCurrent > 1}">
+                        <a href="viewAllOrder?Status=${STATUS_ORDER}&${search}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                        <a href="viewAllOrder?Status=${STATUS_ORDER}&${search}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                        </c:if>
 
-                    <%--<c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">--%>
-                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${i}">${i}</a>
-                    <%--</c:forEach>--%>
+                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewAllOrder?Status=${STATUS_ORDER}&${search}&page=${i}">${i}</a>
+                    </c:forEach>
 
-                    <%--<c:if test="${requestScope.indexCurrent<requestScope.endPage}">--%>
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                        <a href="viewMyOrder-staff?txtServiceID=${requestScope.SERVICE_ID}&Status=${STATUS_ORDER}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
-                        <%--</c:if>--%>
+                    <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                        <a href="viewAllOrder?Status=${STATUS_ORDER}&${search}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                        <a href="viewAllOrder?Status=${STATUS_ORDER}&${search}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        </c:if>
                 </div>
-            </div>  -->
+            </div>  
         </div>
 
-<!--        <script>
+        <script>
             function submit() {
                 document.querySelector(".myForm").onsubmit();
                 document.querySelector(".myOrder").onsubmit();
             }
-        </script>-->
+        </script>
     </body>
 </html>
