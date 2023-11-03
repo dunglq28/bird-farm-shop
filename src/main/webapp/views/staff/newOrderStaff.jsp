@@ -48,6 +48,7 @@
                                 <th>Service</th>
                                 <th>Customer Name</th>
                                 <th>Order Date</th>
+                                <th>Deposit Price</th>
                                 <th>Total</th>
                                 <th>Delivery method</th>
                                 <th>Payment method</th>
@@ -65,12 +66,8 @@
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
                                         <td>${util.FormatDate(dto.orderDate)}</td>
-                                        <c:if test="${dto.total_order_final == 0}">
-                                            <td>${util.FormatPrice(dto.deposit_Price)}</td>
-                                        </c:if>
-                                        <c:if test="${dto.total_order_final != 0}">
-                                            <td>${util.FormatPrice(dto.total_order_final)}</td>
-                                        </c:if>
+                                        <td>${util.FormatPrice(dto.deposit_Price)}</td>
+                                        <td>${util.FormatPrice(dto.total_order_final)}</td>
                                         <td>${dto.form_Receipt}</td>
                                         <td>${dto.payBy}</td>
                                         <td>${dto.status}</td>

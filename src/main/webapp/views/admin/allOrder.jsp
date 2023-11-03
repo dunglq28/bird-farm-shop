@@ -70,6 +70,7 @@
                                 <th class="text-center">Service</th>
                                 <th class="text-center">Customer Name</th>
                                 <th class="text-center">Order Date</th>
+                                <th class="text-center">Deposit Price</th>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Delivery method</th>
                                 <th class="text-center">Payment method</th>
@@ -87,7 +88,8 @@
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
                                         <td>${util.FormatDate(dto.orderDate)}</td>
-                                        <td>${util.FormatPrice(dto.total_Order)}</td>
+                                        <td>${util.FormatPrice(dto.deposit_Price)}</td>
+                                        <td>${util.FormatPrice(dto.total_order_final)}</td>
                                         <td>${dto.form_Receipt}</td>
                                         <td>${dto.payBy}</td>
                                         <td>${dto.status}</td>

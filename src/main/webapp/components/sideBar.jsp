@@ -9,12 +9,12 @@
     <c:set var="manager" value="Manager"/>
     <ul class="menu">
         <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
-            <li>
+<!--            <li>
                 <a href="#">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-            </li>
+            </li>-->
         </c:if>
         <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
