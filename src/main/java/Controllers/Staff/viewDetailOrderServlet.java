@@ -57,14 +57,44 @@ public class viewDetailOrderServlet extends HttpServlet {
             OrderDTO order = dao.getOrderByOrderID(orderID);
             request.setAttribute("ORDER", order);
             OrderDetailDAO oddao = new OrderDetailDAO();
-            request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
             if (order.getServiceID() == 1) {
+                request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
                 url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
             } else {
+                String page = request.getParameter("page");
+                if (page == null) {
+                    page = "1";
+                }
+                int indexPage = Integer.parseInt(page);
+                int fieldShow = 5;
                 BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
-                List<BirdNestDetail_TrackingDTO> trackingNote = trackingDetail.getListTrackingByOrderId(orderID);
+                int endPage = trackingDetail.getNumberPageTrackingNote(orderID, fieldShow);
+                List<BirdNestDetail_TrackingDTO> trackingNote = trackingDetail.getListTrackingByOrderId(orderID, indexPage, fieldShow);
                 request.setAttribute("BIRD_TRACKING_NOTE", trackingNote);
                 request.setAttribute("PARENT_BIRD", oddao.getParentProductByOrderID(orderID));
+                int start = 1;
+                int distance = 4;
+
+                int end;
+                if (endPage < distance) {
+                    end = endPage;
+                } else {
+                    end = start + distance;
+                }
+
+                if (indexPage >= 4) {
+                    start = indexPage - 2;
+                    end = indexPage + 2;
+                    if (indexPage + distance >= endPage) {
+                        start = endPage - distance;
+                        end = endPage;
+                    }
+                }
+                request.setAttribute("ORDER_ID", orderID);
+                request.setAttribute("START", start);
+                request.setAttribute("END", end);
+                request.setAttribute("indexCurrent", indexPage);
+                request.setAttribute("endPage", endPage);
                 url = MyAppConstants.StaffFeatures.TRACKING_COUPLE_BIRD_DETAIL_PAGE;
             }
 
