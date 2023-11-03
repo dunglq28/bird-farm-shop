@@ -101,7 +101,7 @@
                                 <li class="${bird_nest_tracking.status != 'Wait for confirmation' &&
                                              bird_nest_tracking.status != 'Processing' &&
                                              bird_nest_tracking.status != 'Mating' &&
-                                             bird_nest_tracking.status != 'Tracking Egg' ? 'active' : ''} step0">
+                                             bird_nest_tracking.status != 'Tracking Eggs' ? 'active' : ''} step0">
                                 </li>
                             </ul>
                         </div>
@@ -119,7 +119,7 @@
                         </div>
                         <div class="row d-flex icon-content">
                             <div class="d-flex flex-column">
-                                <p class="font-weight-bold">Tracking<br>Egg</p>
+                                <p class="font-weight-bold">Tracking<br>Eggs</p>
                             </div>
                         </div>
                         <div class="row d-flex icon-content">
