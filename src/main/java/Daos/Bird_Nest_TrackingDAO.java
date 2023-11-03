@@ -179,4 +179,68 @@ public class Bird_Nest_TrackingDAO implements Serializable {
         }
         return false;
     }
+    
+    public boolean updateStatusBirdNestTracking(String birdNestID, int numOfEggs, int numOfMales, int numOfFemales, Date currentDate, String status) 
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Bird_Nest_Tracking "
+                        + "Set Eggs_Quantity = ?, Male_Babybird = ?, Female_Babybird = ?, Status = ?, LastUpdateDate = ? "
+                        + "Where Bird_Nest_ID = ?";
+                       
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, numOfEggs);
+                stm.setInt(2, numOfMales);
+                stm.setInt(3, numOfFemales);
+                stm.setString(4, status);
+                stm.setDate(5, currentDate);
+                stm.setString(6, birdNestID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    
+        public boolean updateStatusBirdNestTracking(String orderId, String status) 
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Update Bird_Nest_Tracking "
+                        + "Set Status = ? "
+                        + "Where OrderID = ?";
+                       
+                stm = con.prepareStatement(sql);
+                stm.setString(1, status);
+                stm.setString(2, orderId);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }

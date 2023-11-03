@@ -54,7 +54,7 @@ public class Products {
         this.gender = gender;
         this.price = price;
     }
-
+    
     public Products(String productID, String name, String cate_name, String age, String color, String gender, String image, int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
         this.productID = productID;
         this.name = name;

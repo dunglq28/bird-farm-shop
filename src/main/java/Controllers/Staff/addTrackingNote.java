@@ -6,30 +6,24 @@
 package Controllers.Staff;
 
 import Daos.BirdNestDetail_TrackingDAO;
-import Daos.OrderDAO;
-import Daos.OrderDetailDAO;
-import Models.AccountDTO;
+import Daos.Bird_Nest_TrackingDAO;
 import Models.BirdNestDetail_TrackingDTO;
-import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author hj
+ * @author Admin
  */
-@WebServlet(name = "viewDetailOrder", urlPatterns = {"/viewDetailOrder"})
-public class viewDetailOrderServlet extends HttpServlet {
+@WebServlet(name = "addTrackingNote", urlPatterns = {"/addTrackingNote"})
+public class addTrackingNote extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,35 +37,32 @@ public class viewDetailOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
-        String orderID = request.getParameter("OrderID");
-        HttpSession session = request.getSession();
+
+        String url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+        String orderId = request.getParameter("orderId");
+        String action = request.getParameter("action");
 
         try {
-            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || account.getRoleName().equals("Customer")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
-                return;
-            }
-            OrderDAO dao = new OrderDAO();
-            OrderDTO order = dao.getOrderByOrderID(orderID);
-            request.setAttribute("ORDER", order);
-            OrderDetailDAO oddao = new OrderDetailDAO();
-            request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
-            if (order.getServiceID() == 1) {
-                url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
-            } else {
+            if (!action.equals("Cancel")) {
+                String birdNestId = request.getParameter("birdNestId");
+                String eggs = request.getParameter("numberOfEggs");
+                String males = request.getParameter("maleBirds");
+                String females = request.getParameter("femaleBirds");
+                String note = request.getParameter("note");
+                String status = request.getParameter("progress");
+                int numOfEggs = Integer.parseInt(eggs);
+                int numOfMales = Integer.parseInt(males);
+                int numOfFemales = Integer.parseInt(females);
+                long millis = System.currentTimeMillis();
+                Date currentDate = new Date(millis);
                 BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
-                List<BirdNestDetail_TrackingDTO> trackingNote = trackingDetail.getListTrackingByOrderId(orderID);
-                request.setAttribute("BIRD_TRACKING_NOTE", trackingNote);
-                request.setAttribute("PARENT_BIRD", oddao.getParentProductByOrderID(orderID));
-                url = MyAppConstants.StaffFeatures.TRACKING_COUPLE_BIRD_DETAIL_PAGE;
+                Bird_Nest_TrackingDAO tracking = new Bird_Nest_TrackingDAO();
+                boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, currentDate));
+                boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate, status);
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
+        } catch (Exception e) {
+            log(e.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

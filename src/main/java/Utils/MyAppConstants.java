@@ -68,6 +68,9 @@ public class MyAppConstants {
         public static final String VIEW_ALL_ORDER_CONTROLLER = "viewNewOrder";
         public static final String VIEW_MY_ORDER_CONTROLLER = "viewMyOrder-staff";
         public static final String UPDATE_ORDER_CONTROLLER = "updatedOrders-staff";
+        public static final String TRACKING_COUPLE_BIRD_NOTE_PAGE = "/views/staff/trackingCoupleBirdNote.jsp";
+        public static final String TRACKING_COUPLE_BIRD_DETAIL_PAGE = "/views/staff/trackingCoupleBirdDetail.jsp";
+        public static final String VIEW_DETAIL_ORDER_CONTROLLER = "viewDetailOrder";
 
     }
 
