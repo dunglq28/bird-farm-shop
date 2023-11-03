@@ -233,7 +233,7 @@
                                         </div>
                                         <input type="hidden" name="txtOrderID" value="${sessionScope.OLD_ORDER_ID}" />
                                         <input type="hidden" name="txtServiceID" value="0" />
-                                        <input name="btAction" value="Order" type="submit" class="btn btn-dark btn-block btn-lg"
+                                        <input name="btAction" value="Pay" type="submit" class="btn btn-dark btn-block btn-lg"
                                                data-mdb-ripple-color="dark" 
                                                style="background-color:rgb(13,103,128) ;"/>
                                     </div>

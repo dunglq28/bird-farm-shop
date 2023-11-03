@@ -100,24 +100,27 @@
                                                 </table>
                                             </div>
                                         </c:if>
-                                        <div class="col-lg-12 text-center mt-2">
-                                            <div class="pagination__option" style="text-align: end">
-                                                <c:set var="ord" value="OrderID=${requestScope.ORDER_ID}"></c:set>
-                                                <c:if test="${requestScope.indexCurrent > 1}">
-                                                    <a href="viewDetailOrder?${ord}&page=1"><i class="fa fa-angle-double-left"></i></a>
-                                                    <a href="viewDetailOrder?${ord}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
-                                                    </c:if>
+                                        <c:if test="${requestScope.endPage > 1}">
+                                            <div class="col-lg-12 text-center mt-2">
+                                                <div class="pagination__option" style="text-align: end">
+                                                    <c:set var="ord" value="OrderID=${requestScope.ORDER_ID}"></c:set>
+                                                    <c:if test="${requestScope.indexCurrent > 1}">
+                                                        <a href="viewDetailOrder?${ord}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                                                        <a href="viewDetailOrder?${ord}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                                                        </c:if>
 
-                                                <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
-                                                    <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewDetailOrder?${ord}&page=${i}">${i}</a>
-                                                </c:forEach>
+                                                    <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                                                        <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewDetailOrder?${ord}&page=${i}">${i}</a>
+                                                    </c:forEach>
 
-                                                <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
-                                                    <a href="viewDetailOrder?${ord}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
-                                                    <a href="viewDetailOrder?${ord}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
-                                                    </c:if>
-                                            </div>
-                                        </div>  
+                                                    <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                                                        <a href="viewDetailOrder?${ord}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                                                        <a href="viewDetailOrder?${ord}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                                                        </c:if>
+                                                </div>
+                                            </div>  
+                                        </c:if>
+
                                         <c:if test="${empty trackingNote}">
                                             <div class="row">
                                                 <h4 class="text-sm-center m-3">No Tracking Note Found</h4>
