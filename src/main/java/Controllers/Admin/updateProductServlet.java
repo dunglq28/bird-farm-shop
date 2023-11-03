@@ -11,6 +11,7 @@ import Models.AccountDTO;
 import Models.ProductDTO;
 import Utils.MyAppConstants;
 import Utils.S3Util;
+import Utils.Validation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -29,11 +30,11 @@ import javax.servlet.http.Part;
  * @author hj
  */
 @WebServlet(name = "updateProduct", urlPatterns = {"/updateProduct"})
-//@MultipartConfig(
-//        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-//        maxFileSize = 1024 * 1024 * 10, // 10MB
-//        maxRequestSize = 1024 * 1024 * 11 // 11MB
-//)
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 11 // 11MB
+)
 public class updateProductServlet extends HttpServlet {
 
     /**
@@ -60,25 +61,27 @@ public class updateProductServlet extends HttpServlet {
                 return;
             }
             session.removeAttribute("NOTIFICATION");
-            if(productID == null) {
+            if (productID == null) {
                 productID = (String) session.getAttribute("PRODUCT_ID_UPDATE");
                 session.setAttribute("NOTIFICATION", "Update sucessful!");
             }
+            if (button == null) {
+                button = "";
+            }
             CategoryDAO catedao = new CategoryDAO();
             ProductDAO prodao = new ProductDAO();
-            if (button == null) {
-                ProductDTO prodto = prodao.getProductByID(productID);
-                request.setAttribute("PRODUCT_UPDATE", prodto);
-                request.setAttribute("CATE_LIST", catedao.getAllCate());
-                if (prodto.getProduct_TypeID() == 2) {
-                    request.setAttribute("MALE_BIRD_LIST", prodao.getBirdByGender("Male", prodto.getCategoryID(), 0));
-                    request.setAttribute("FEMALE_BIRD_LIST", prodao.getBirdByGender("Female", prodto.getCategoryID(), 0));
-                }
-                request.setAttribute("PRODUCT_TYPE", prodto.getProduct_TypeID());
-                url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_PAGE;
-            } else if (button.equals("Update")) {
+            ProductDTO prodto = prodao.getProductByID(productID);
+            request.setAttribute("PRODUCT_UPDATE", prodto);
+            request.setAttribute("CATE_LIST", catedao.getAllCate());
+            if (prodto.getProduct_TypeID() == 2) {
+                request.setAttribute("MALE_BIRD_LIST", prodao.getBirdByGender("Male", prodto.getCategoryID(), 0));
+                request.setAttribute("FEMALE_BIRD_LIST", prodao.getBirdByGender("Female", prodto.getCategoryID(), 0));
+            }
+            request.setAttribute("PRODUCT_TYPE", prodto.getProduct_TypeID());
+            url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_PAGE;
+            if (button.equals("Update")) {
                 String productType = request.getParameter("productType");
-                String proID = request.getParameter("productID");
+                String proID = request.getParameter("ProductID");
                 String proName = request.getParameter("nameBird");
                 String dadbirdID = request.getParameter("dadBirdID");
                 String momBirdID = request.getParameter("momBirdID");
@@ -93,33 +96,62 @@ public class updateProductServlet extends HttpServlet {
                 String discount = request.getParameter("Discount");
                 String characteristics = request.getParameter("Characteristic");
                 String detail = request.getParameter("Detail");
-//                Part filePart = request.getPart("file");
-//                if (!filePart.getSubmittedFileName().isEmpty()) {
-//                    String fileName = getFileName(filePart);
-//                    urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
+                Part filePart = request.getPart("file");
+                if (!filePart.getSubmittedFileName().isEmpty()) {
+                    String fileName = getFileName(filePart);
+                    urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
 //                    S3Util.uploadFile(fileName, filePart.getInputStream());
-//                }
+                }
                 ProductDTO proUd = null;
+                boolean flag = true;
                 switch (productType) {
                     case "Bird":
-                        proUd = new ProductDTO(proID, proName, 0, 0,
-                                null, null, age, color, gender, urlImage,
-                                0, 0, Integer.parseInt(qtyAvailable),
-                                0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
+                        if (!Validation.checkNumberGreater0(qtyAvailable)) {
+                            request.setAttribute("ERROR_QTY_AVAI", "Number must be greater than 0");
+                            flag = false;
+                        }
+                        if (!Validation.checkNumberGreater0(price)) {
+                            request.setAttribute("ERROR_PRICE", "Number must be greater than 0");
+                            flag = false;
+                        }
+                        if (!Validation.checkDiscountValid(discount)) {
+                            request.setAttribute("ERROR_DISCOUNT", "Discount must be greater than 0 and lower than 100");
+                            flag = false;
+                        }
+                        if (flag) {
+                            proUd = new ProductDTO(proID, proName, 0, 0,
+                                    null, null, age, color, gender, urlImage,
+                                    0, 0, Integer.parseInt(qtyAvailable),
+                                    0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
+                        }
                         break;
                     case "Bird Nest":
-                        proUd = new ProductDTO(proID, proName, 0, 0,
-                                dadbirdID, momBirdID, null, null, null, urlImage,
-                                Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
-                                0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
+                        if (!Validation.checkNumberGreater0(qtyMaleBaby)) {
+                            request.setAttribute("ERROR_QTY_MBAY", "Number must be greater than 0");
+                            flag = false;
+                        }
+                        if (!Validation.checkNumberGreater0(qtyFemaleBaby)) {
+                            request.setAttribute("ERROR_QTY_FMBABY", "Number must be greater than 0");
+                            flag = false;
+                        }
+                        if (flag) {
+                            proUd = new ProductDTO(proID, proName, 0, 0,
+                                    dadbirdID, momBirdID, null, null, null, urlImage,
+                                    Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
+                                    0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
+                        }
                         break;
                 }
-                prodao.updateProduct(proUd);
-                url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_CONTROLLER;
-                session.setAttribute("PRODUCT_ID_UPDATE", proID);
-                response.sendRedirect(url);
-                return;
+                if (flag) {
+                    prodao.updateProduct(proUd);
+                    url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_CONTROLLER;
+                    session.setAttribute("PRODUCT_ID_UPDATE", proID);
+                    response.sendRedirect(url);
+                    return;
+                }
             }
+
+            request.setAttribute("PRODUCT_ID_UPDATE", productID);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {

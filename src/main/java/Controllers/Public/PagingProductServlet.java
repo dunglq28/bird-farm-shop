@@ -5,6 +5,7 @@
  */
 package Controllers.Public;
 
+import Daos.CategoryDAO;
 import Daos.ProductDAO;
 import Models.ProductDTO;
 import Utils.MyAppConstants;
@@ -43,16 +44,22 @@ public class PagingProductServlet extends HttpServlet {
         String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
         String searchValue = request.getParameter("lastSearch");
         String productType = request.getParameter("productType");
+        String cate = request.getParameter("Category");
         HttpSession session = request.getSession();
 
         try {
             String product_typeID;
+            CategoryDAO catedao = new CategoryDAO();
+
             if (searchValue == null && request.getAttribute("SEARCH_VALUE") == null) {
                 searchValue = "";
             } else if (session.getAttribute("SEARCH_VALUE") != null && searchValue == null) {
                 searchValue = (String) request.getAttribute("SEARCH_VALUE");
             }
-            
+            if (cate != null) {
+                searchValue = cate;
+            }
+
             if (productType == null) {
                 product_typeID = "";
             } else {
@@ -66,8 +73,8 @@ public class PagingProductServlet extends HttpServlet {
             int fieldShow = 9;
             ProductDAO dao = new ProductDAO();
 
-            int endPage = dao.getNumberPage(product_typeID.trim(), searchValue.trim(),fieldShow);
-            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID.trim(), searchValue.trim(),fieldShow);
+            int endPage = dao.getNumberPage(product_typeID.trim(), searchValue.trim(), fieldShow);
+            List<ProductDTO> result = dao.getPagingByCreateDateDesc(indexPage, product_typeID.trim(), searchValue.trim(), fieldShow);
             session.setAttribute("PRODUCT_LIST", result);
             int start = 1;
             int distance = 4;
@@ -87,6 +94,7 @@ public class PagingProductServlet extends HttpServlet {
                     end = endPage;
                 }
             }
+            request.setAttribute("CATE_LIST", catedao.getAllCate());
             request.setAttribute("SEARCH_VALUE", searchValue);
             request.setAttribute("START", start);
             request.setAttribute("END", end);

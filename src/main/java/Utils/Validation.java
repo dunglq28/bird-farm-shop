@@ -26,5 +26,21 @@ public class Validation {
         }
         return false;
     }
+    
+    public static boolean checkDiscountValid(String qty) {
+        if (qty != null) {
+            if (!qty.isEmpty()) {
+                float value = Float.parseFloat(qty);
+                if (value <= 100 && value >=0) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+        return false;
+    }
 
 }

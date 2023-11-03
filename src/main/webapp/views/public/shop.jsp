@@ -35,8 +35,7 @@
         <jsp:include page="/components/header.jsp"></jsp:include>
             <!-- header    -->
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
-
-
+        <c:set var="pt" value="productType=${sessionScope.PRODUCT_TYPE}"></c:set>
             <!-- Breadcrumb Begin -->
             <div class="breadcrumb-option">
                 <div class="container">
@@ -70,64 +69,60 @@
                                                 <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <ul>
-                                                            <li><a href="product_list?">Parrot</a></li>
-                                                            <li><a href="#">Macaw</a></li>
-                                                            <li><a href="#">Pigeon</a></li>
-                                                            <li><a href="#">Jenday Conure</a></li>
-                                                            <li><a href="#">Parakeet</a></li>
-                                                            <li><a href="#">Conure</a></li>
-                                                            <li><a href="#">Cockatiel</a></li>
-                                                            <li><a href="#">Eclectus</a></li>
-                                                            <li><a href="#">Finch</a></li>
-                                                            <li><a href="#">Cockatoo</a></li>
-                                                            <li><a href="#">Canary</a></li>
-                                                            <li><a href="#">Toucan</a></li>
-                                                            <li><a href="#">Caique</a></li>
-                                                            <li><a href="#">Duck</a></li>
-                                                            <li><a href="#">Amazon Parrot</a></li>
-                                                            <li><a href="#">Goose</a></li>
-                                                        </ul>
-                                                    </div>
+                                                            <li>
+                                                                <a href="product_list?${pt}">
+                                                                All
+                                                            </a>
+                                                        </li>
+                                                        <c:forEach items="${requestScope.CATE_LIST}" var="cateList">
+                                                            <li>
+                                                                <a href="product_list?${pt}&Category=${cateList.category_Name}">
+                                                                    ${cateList.category_Name}
+                                                                </a>
+                                                            </li>
+                                                        </c:forEach>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="sidebar__filter">
-                                    <div class="section-title">
-                                        <h4>Shop by price</h4>
-                                    </div>
-                                    <div class="filter-range-wrap">
-                                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                             data-min="33" data-max="99"></div>
-                                        <div class="range-slider">
-                                            <div class="price-input">
-                                                <p>Price:</p>
-                                                <input type="text" id="minamount">
-                                                <input type="text" id="maxamount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#">Filter</a>
-                                </div>-->
-
-<!--                                <div class="sidebar__color">
-                                    <div class="section-title">
-                                        <h4>Shop by color</h4>
-                                    </div>
-                                    <div class="size__list color__list">
-                                        <label for="black">
-                                            Blacks
-                                            <input type="checkbox" id="black">
-                                            <span class="checkmark"></span>
-                                        </label>
-                           
-                                    </div>
-                                </div>-->
                             </div>
+                            <!--                                <div class="sidebar__filter">
+                                                                <div class="section-title">
+                                                                    <h4>Shop by price</h4>
+                                                                </div>
+                                                                <div class="filter-range-wrap">
+                                                                    <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                                                         data-min="33" data-max="99"></div>
+                                                                    <div class="range-slider">
+                                                                        <div class="price-input">
+                                                                            <p>Price:</p>
+                                                                            <input type="text" id="minamount">
+                                                                            <input type="text" id="maxamount">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <a href="#">Filter</a>
+                                                            </div>-->
+
+                            <!--                                <div class="sidebar__color">
+                                                                <div class="section-title">
+                                                                    <h4>Shop by color</h4>
+                                                                </div>
+                                                                <div class="size__list color__list">
+                                                                    <label for="black">
+                                                                        Blacks
+                                                                        <input type="checkbox" id="black">
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                       
+                                                                </div>
+                                                            </div>-->
                         </div>
-                        <div class="col-lg-9 col-md-9">
-                            <div class="row">
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                        <div class="row">
                             <c:set var="productList" value="${sessionScope.PRODUCT_LIST}"></c:set>
                             <c:if test="${not empty productList}">
                                 <c:forEach items="${productList}" var="dto" varStatus="counter">
@@ -220,7 +215,6 @@
                             <div class="col-lg-12 text-center">
                                 <div class="pagination__option">
 
-                                    <c:set var="pt" value="productType=${sessionScope.PRODUCT_TYPE}"></c:set>
                                     <c:if test="${not empty requestScope.SEARCH_VALUE}">
                                         <c:set var="search" value="lastSearch=${requestScope.SEARCH_VALUE}"></c:set>
                                     </c:if>
