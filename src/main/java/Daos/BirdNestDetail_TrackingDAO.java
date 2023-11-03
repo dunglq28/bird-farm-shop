@@ -149,7 +149,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         return 0;
     }
 
-    public List<BirdNestDetail_TrackingDTO> getListTrackingByOrderId(String orderId)
+    public List<BirdNestDetail_TrackingDTO> getListTrackingByOrderId(String orderId, int page, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -158,12 +158,17 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "select trdt.Bird_Nest_ID, trdt.LastUpdateDate, trdt.NOTE "
-                        + "from BirdNestDetail_Tracking trdt " 
-                        +"inner join Bird_Nest_Tracking tr on trdt.Bird_Nest_ID = tr.Bird_Nest_ID "
-                        +"inner join Orders od on tr.OrderID = od.OrderID "
-                        +"where od.OrderID = ?";
+                        + "from BirdNestDetail_Tracking trdt "
+                        + "inner join Bird_Nest_Tracking tr on trdt.Bird_Nest_ID = tr.Bird_Nest_ID "
+                        + "inner join Orders od on tr.OrderID = od.OrderID "
+                        + "where od.OrderID = ? "
+                        + "Order by trdt.LastUpdateDate desc "
+                        + "OFFSET ? ROWS "
+                        + "FETCH FIRST ? ROWS ONLY ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, orderId);
+                stm.setInt(2, (page - 1) * fieldShow);
+                stm.setInt(3, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"), rs.getString("NOTE"), rs.getDate("LastUpdateDate"));
@@ -186,5 +191,48 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             }
         }
         return null;
+    }
+
+    public int getNumberPageTrackingNote(String orderID, int fieldShow)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select count(*) "
+                        + "From BirdNestDetail_Tracking trdt "
+                        + "inner join Bird_Nest_Tracking tr on trdt.Bird_Nest_ID = tr.Bird_Nest_ID "
+                        + "where tr.OrderID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt(1);
+                    int countPage;
+                    if (total < fieldShow) {
+                        countPage = 1;
+                    } else {
+                        countPage = total / fieldShow;
+                        if (countPage % fieldShow != 0 && countPage % 2 != 0) {
+                            countPage++;
+                        }
+                    }
+                    return countPage;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
     }
 }

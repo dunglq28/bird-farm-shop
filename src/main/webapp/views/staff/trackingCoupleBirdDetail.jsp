@@ -20,9 +20,14 @@
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="./assets/css/trackingNote.css"/>
+        <style>
+            .sidebar .menu .list-cart-icon .cart-number {
+                bottom: 28px;
+            }
+        </style>
     </head>
     <body>
-        <jsp:include page="../../components/sideBar.jsp"></jsp:include>
+        <jsp:include page="/components/sideBar.jsp"></jsp:include>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
         <c:set var="order" value="${requestScope.ORDER}" ></c:set>
             <div class="container py-5 h-100 ms-5">
@@ -80,7 +85,7 @@
                                                         <tr>
                                                             <th>Bird Nest ID</th>
                                                             <th>Last Updated Date</th>
-                                                            <th>Note</th>
+                                                            <th class="text-center">Note</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -95,6 +100,24 @@
                                                 </table>
                                             </div>
                                         </c:if>
+                                        <div class="col-lg-12 text-center mt-2">
+                                            <div class="pagination__option" style="text-align: end">
+                                                <c:set var="ord" value="OrderID=${requestScope.ORDER_ID}"></c:set>
+                                                <c:if test="${requestScope.indexCurrent > 1}">
+                                                    <a href="viewDetailOrder?${ord}&page=1"><i class="fa fa-angle-double-left"></i></a>
+                                                    <a href="viewDetailOrder?${ord}&page=${requestScope.indexCurrent-1}"><i class="fa fa-angle-left"></i></a>
+                                                    </c:if>
+
+                                                <c:forEach begin="${requestScope.START}" end="${requestScope.END}" var="i">
+                                                    <a class="${requestScope.indexCurrent==i ? "active" : ""}" href="viewDetailOrder?${ord}&page=${i}">${i}</a>
+                                                </c:forEach>
+
+                                                <c:if test="${requestScope.indexCurrent<requestScope.endPage}">
+                                                    <a href="viewDetailOrder?${ord}&page=${requestScope.indexCurrent+1}"><i class="fa fa-angle-right"></i></a>
+                                                    <a href="viewDetailOrder?${ord}&page=${requestScope.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                                                    </c:if>
+                                            </div>
+                                        </div>  
                                         <c:if test="${empty trackingNote}">
                                             <div class="row">
                                                 <h4 class="text-sm-center m-3">No Tracking Note Found</h4>
