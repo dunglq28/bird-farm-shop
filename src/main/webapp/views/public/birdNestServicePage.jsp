@@ -42,7 +42,7 @@
                         <form action="Bird-Nest-Services" method="POST">
                             <div class="col-sm-6">
                                 <div class="thumbnail">
-                                    <img src="https://cdn.pixabay.com/photo/2018/05/24/02/07/bird-eggs-3425657_1280.jpg"
+                                    <img src="https://cdn.pixabay.com/photo/2014/07/05/16/29/hatchlings-384896_1280.jpg"
                                          width="600" height="400">
                                     <p><strong>Available at shop</strong></p>
                                     <p>
