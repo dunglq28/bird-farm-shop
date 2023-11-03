@@ -16,10 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author hj
- */
 public class BirdNestDetail_TrackingDAO implements Serializable {
 
     public boolean createBirdNestDetailTracking(BirdNestDetail_TrackingDTO newBirdNest) throws SQLException, ClassNotFoundException {
@@ -111,7 +107,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         return null;
     }
 
-    public int getNumberPage(String bnID , int fieldShow)
+    public int getNumberPage(String bnID, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -151,5 +147,44 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             }
         }
         return 0;
+    }
+
+    public List<BirdNestDetail_TrackingDTO> getListTrackingByOrderId(String orderId)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "select trdt.Bird_Nest_ID, trdt.LastUpdateDate, trdt.NOTE "
+                        + "from BirdNestDetail_Tracking trdt " 
+                        +"inner join Bird_Nest_Tracking tr on trdt.Bird_Nest_ID = tr.Bird_Nest_ID "
+                        +"inner join Orders od on tr.OrderID = od.OrderID "
+                        +"where od.OrderID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"), rs.getString("NOTE"), rs.getDate("LastUpdateDate"));
+                    if (this.bndetalList == null) {
+                        this.bndetalList = new ArrayList<>();
+                    }
+                    this.bndetalList.add(result);
+                }
+                return bndetalList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 }

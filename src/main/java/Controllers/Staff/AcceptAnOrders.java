@@ -1,8 +1,10 @@
 package Controllers.Staff;
 
+import Daos.Bird_Nest_TrackingDAO;
 import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.AccountDTO;
+import Models.OrderDTO;
 import Models.StaffDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -31,9 +33,13 @@ public class AcceptAnOrders extends HttpServlet {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             OrderDAO oddao = new OrderDAO();
             StaffDAO staDAO = new StaffDAO();
+            Bird_Nest_TrackingDAO trackingDao = new Bird_Nest_TrackingDAO();
             StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
             boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
-
+            OrderDTO order = oddao.getOrderByOrderID(orderID);
+            if (order.getServiceID() == 2) {
+                boolean updateTrackingStatus = trackingDao.updateStatusBirdNestTracking(orderID, "Processing");
+            }
             if(odSuccess == true){
                 url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
             }

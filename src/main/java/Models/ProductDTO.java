@@ -63,6 +63,14 @@ public class ProductDTO {
         this.status = status;
     }
     
+    public ProductDTO(String productID, String product_Name, String color, String gender, String image, float price) {
+        this.productID = productID;
+        this.product_Name = product_Name;
+        this.color = color;
+        this.gender = gender;
+        this.image = image;
+        this.price = price;
+    }
     
 
     public ProductDTO(String productID, String product_Name, String category_Name, int product_TypeID, String age, String color, String gender,

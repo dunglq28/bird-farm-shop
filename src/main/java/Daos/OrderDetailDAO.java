@@ -204,4 +204,47 @@ public class OrderDetailDAO {
         return this.ODList;
     }
 
+    public List<ProductDTO> getParentProductByOrderID(String orderId)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<ProductDTO> listParent = null;
+        try {
+            //1.Make connection
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = null;
+                //2.Create SQL statement string
+                sql = "select pro.ProductID, pro.Product_Name, pro.Gender, od.Price, pro.Image, pro.Color "
+                        + "from Order_Details od "
+                        + "inner join Products pro on pro.ProductID = od.ProductID "
+                        + "where od.OrderID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, orderId);
+                //4.execute-query
+                rs = stm.executeQuery();
+                //5.process
+                while (rs.next()) {
+                    ProductDTO pro = new ProductDTO(rs.getString("ProductID"), rs.getString("Product_Name"), rs.getString("Color"), rs.getString("Gender"), rs.getString("Image"), rs.getFloat("Price"));
+                    if (listParent == null) {
+                        listParent = new ArrayList<>();
+                    }
+                    listParent.add(pro);
+                }
+                return listParent;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 }
