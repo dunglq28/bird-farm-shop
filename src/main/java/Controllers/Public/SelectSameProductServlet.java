@@ -122,6 +122,7 @@ public class SelectSameProductServlet extends HttpServlet {
                 session.setAttribute("PRODUCT_CURRENT", product);
                 session.setAttribute("BIRD_DAD", dao.getProductByID(product.getDad_Bird_ID()));
                 session.setAttribute("BIRD_MOM", dao.getProductByID(product.getMom_Bird_ID()));
+                url = MyAppConstants.PublicFeatures.BIRD_NEST_DETAIL_PAGE;
 
             }
 
