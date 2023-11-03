@@ -93,8 +93,8 @@ public class createProductServlet extends HttpServlet {
                 request.setAttribute("ERROR_PRICE", "Number must be greater than 0");
                 flag = false;
             }
-            if (!Validation.checkNumberGreater0(discount)) {
-                request.setAttribute("ERROR_DISCOUNT", "Number must be greater than 0");
+            if (!Validation.checkDiscountValid(discount)) {
+                request.setAttribute("ERROR_DISCOUNT", "Discount must be greater than 0 and lower than 100");
                 flag = false;
             }
 
@@ -112,7 +112,7 @@ public class createProductServlet extends HttpServlet {
                     ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType),
                             null, null, age, color, gender, urlImage,
                             0, 0, Integer.parseInt(qtyAvailable),
-                            0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount)/100, true);
+                            0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount) / 100, true);
                     prodao.createProduct(newPro);
                     url = MyAppConstants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
                     response.sendRedirect(url);
@@ -122,7 +122,7 @@ public class createProductServlet extends HttpServlet {
                     ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType),
                             dadbirdID, momBirdID, null, null, null, urlImage,
                             Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
-                            0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount)/100, true);
+                            0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount) / 100, true);
                     prodao.createProduct(newPro);
                     url = MyAppConstants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
                     response.sendRedirect(url);

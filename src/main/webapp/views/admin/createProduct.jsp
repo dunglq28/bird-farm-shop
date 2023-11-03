@@ -156,10 +156,10 @@
                                 </c:if>
 
                                 <div>
-                                    <input name="Characteristic" value="${param.Characteristic}" type="text" class="form-control" placeholder="Characteristic" required />
+                                    <input name="Characteristic" value="${param.Characteristic}" type="text" class="form-control" placeholder="Characteristic"  />
                                 </div>
                                 <div style="width: 100%; height: 100px;">
-                                    <textarea name="Detail" class="form-control" placeholder="Detail" required style="width: 100%; height: 125%; overflow-wrap: break-word;">${param.Detail}</textarea>
+                                    <textarea name="Detail" class="form-control" placeholder="Detail"  style="width: 100%; height: 125%; overflow-wrap: break-word;">${param.Detail}</textarea>
                                 </div>
                             </div>
                         </div>
