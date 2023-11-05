@@ -106,7 +106,7 @@ public class createProductServlet extends HttpServlet {
                 String newProID = prodao.createProductID();
                 long millis = System.currentTimeMillis();
                 java.sql.Date orderDate = new java.sql.Date(millis);
-//                S3Util.uploadFile(fileName, filePart.getInputStream());
+                S3Util.uploadFile(fileName, filePart.getInputStream());
                 if (productType.equals("1")) {
                     urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
                     ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType),

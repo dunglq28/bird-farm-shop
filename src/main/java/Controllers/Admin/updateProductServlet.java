@@ -100,7 +100,7 @@ public class updateProductServlet extends HttpServlet {
                 if (!filePart.getSubmittedFileName().isEmpty()) {
                     String fileName = getFileName(filePart);
                     urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
-//                    S3Util.uploadFile(fileName, filePart.getInputStream());
+                    S3Util.uploadFile(fileName, filePart.getInputStream());
                 }
                 ProductDTO proUd = null;
                 boolean flag = true;

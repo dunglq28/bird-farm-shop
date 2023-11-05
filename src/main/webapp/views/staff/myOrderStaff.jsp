@@ -19,6 +19,11 @@
         <link rel="stylesheet" href="./assets/css/homePage.css">
 
         <title>My Order</title>
+        <style>
+            .sidebar .menu .list-cart-icon .cart-number {
+                bottom: 26px;
+            }
+        </style>
 
     </head>
     <body>
@@ -75,7 +80,7 @@
                                 <th>Delivery method</th>
                                 <th>Payment method</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <!--<th>Action</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -106,9 +111,9 @@
                                             </form>
                                         </td>
 
-                                        <td>
+<!--                                        <td>
                                             <div class="action">
-                                                <!--<a href="#"><i class="fa-solid fa-check"></i></a>-->
+                                                <a href="#"><i class="fa-solid fa-check"></i></a>
                                                 <a href="#"><i class="fa-solid fa-xmark"></i></a>
                                             </div>
                                             <input type="hidden" name="" value="" />
@@ -116,7 +121,7 @@
                                             <input type="hidden" name="" value="" />
                                             <input type="hidden" name="" value="" />
                                             <input type="hidden" name="" value="" />
-                                        </td>
+                                        </td>-->
                                     </tr>
                                 </c:forEach>
                             </c:if>

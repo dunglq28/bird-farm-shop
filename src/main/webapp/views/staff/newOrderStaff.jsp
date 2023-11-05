@@ -16,7 +16,13 @@
             referrerpolicy="no-referrer"
             />
         <link rel="stylesheet" href="./assets/css/dashboard.css" />
+        <link rel="stylesheet" href="./assets/css/homePage.css">
         <title>New Order</title>
+        <style>
+            .sidebar .menu .list-cart-icon .cart-number {
+                bottom: 26px;
+            }
+        </style>
 
     </head>
     <body>
@@ -73,8 +79,8 @@
                                         <td>${dto.status}</td>
                                         <td>
                                             <div class="action">
-                                                <a href="acceptOrder-staff?orderID=${dto.orderID}"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
+                                                <a href="acceptOrder-staff?orderID=${dto.orderID}"><i class="fa-solid fa-check" style="color: green"></i></a>
+                                                <!--<a href="#"><i class="fa-solid fa-xmark"></i></a>-->    
                                             </div>
                                             <input type="hidden" name="orderID" value="" />
                                             <input type="hidden" name="" value="" />
