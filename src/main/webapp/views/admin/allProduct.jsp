@@ -77,22 +77,22 @@
                                         <td>${pro.productID}</td>
                                         <td>
                                             <div class="d-flex justify-content-lg-start align-items-center">
-                                                <div class="" style="max-width: 70px;">
+                                                <div class="" style="max-width: 100px;">
                                                     <img src="${pro.image}" class="img-fluid rounded-3" alt="Bird Image">
                                                 </div>
                                                 <div class="" style="margin-left: 5px; text-align: left">
-                                                    <h6 class="text-black" style="font-size: 14px;">${pro.product_Name}</h6>
+                                                    <h6 class="text-black">${pro.product_Name}</h6>
                                                     <c:if test="${pro.product_TypeID == 1}">
                                                         <div class="d-flex">
-                                                            <h6 style="font-size: 12px;">${pro.age}</h6>
-                                                            <h6 class="mb-0 text-sm-center" style="margin: 0 5px; font-size: 12px;">|</h6>
-                                                            <h6 style="font-size: 12px;">${pro.gender}</h6>
+                                                            <h6>${pro.age}</h6>
+                                                            <h6 class="mb-0 text-sm-center" style="margin: 0 5px;">|</h6>
+                                                            <h6>${pro.gender}</h6>
                                                         </div>
-                                                        <h6 style="font-size: 12px;">${pro.color}</h6>
+                                                        <h6>${pro.color}</h6>
                                                     </c:if>
                                                     <c:if test="${pro.product_TypeID != 1}">
-                                                        <h6 class="text-muted" style="font-size: 12px;">Male baby bird: ${pro.quantity_MaleBird}</h6>
-                                                        <h6 class="text-muted" style="font-size: 12px;">Female baby bird: ${pro.quantity_FemaleBird}</h6>
+                                                        <h6 class="text-muted">Male baby bird: ${pro.quantity_MaleBird}</h6>
+                                                        <h6 class="text-muted">Female baby bird: ${pro.quantity_FemaleBird}</h6>
                                                     </c:if>
                                                 </div>
 
