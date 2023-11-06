@@ -31,7 +31,7 @@ public class updatedAccountStatus extends HttpServlet {
             boolean status_update;
             status_update = status.equals("Enable");
             AdminDAO dao = new AdminDAO();
-            OrderDAO ord = new OrderDAO();
+//            OrderDAO ord = new OrderDAO();
             StaffDAO staff = new StaffDAO();
             boolean result = dao.UpdatedStatus(accountID, status_update);
             if (result) {
@@ -42,10 +42,10 @@ public class updatedAccountStatus extends HttpServlet {
                     if (staffDTO.getStaffID()!=null){
                         boolean staff_result = staff.UpdateStaff(staffDTO.getStaffID());
                         if (staff_result){
-                            List<OrderDTO> orderList = staff.GetDestroyListStaffOrders(staffDTO.getStaffID());
-                            while (orderList != null) {
-                                ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
-                            }
+//                            List<OrderDTO> orderList = staff.GetDestroyListStaffOrders(staffDTO.getStaffID());
+//                            while (orderList != null) {
+//                                ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
+//                            }
                             dao.UpdatedStatus(accountID, status_update);
                             url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                         } else {
