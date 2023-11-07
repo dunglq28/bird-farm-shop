@@ -19,10 +19,8 @@ body {
 }
 
 .form-wrapper form {
-  background: #ebe9e9;
   border-radius: 5px;
-  width: 50%;
-  height: 50%;
+  width: 70%;
   padding: 1% 2%;
 }
 

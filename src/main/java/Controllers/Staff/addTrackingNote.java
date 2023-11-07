@@ -38,12 +38,12 @@ public class addTrackingNote extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+        String url = "";
         String orderId = request.getParameter("orderId");
         String action = request.getParameter("action");
 
         try {
-            if (!action.equals("Cancel")) {
+            if (action.equals("Add note")) {
                 String birdNestId = request.getParameter("birdNestId");
                 String eggs = request.getParameter("numberOfEggs");
                 String males = request.getParameter("maleBirds");
@@ -57,10 +57,20 @@ public class addTrackingNote extends HttpServlet {
                 Date currentDate = new Date(millis);
                 BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
                 Bird_Nest_TrackingDAO tracking = new Bird_Nest_TrackingDAO();
-                boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, currentDate));
-                boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate, status);
+                int total = numOfFemales + numOfMales;
+                if (total <= numOfEggs) {
+                    boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, currentDate));
+                    boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate, status);
+                    if (updateTracking && addNote) {
+                        url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
+                    }
+                } else {
+                    request.setAttribute("EGG_ERROR", "The total number of male and female nestlings must not exceed the number of available eggs");
+                    url = MyAppConstants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
+                }
+            } else {
+                url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
             }
-            url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
         } catch (Exception e) {
             log(e.getMessage());
         } finally {

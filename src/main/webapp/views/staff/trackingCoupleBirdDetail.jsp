@@ -30,6 +30,7 @@
         <jsp:include page="/components/sideBar.jsp"></jsp:include>
         <jsp:useBean id="util" class="Utils.FormatCurrency"></jsp:useBean>
         <c:set var="order" value="${requestScope.ORDER}" ></c:set>
+        <c:set var="birdNest" value="${requestScope.BIRD_TRACKING}" ></c:set>
             <div class="container py-5 h-100 ms-5">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12">
@@ -71,12 +72,14 @@
                                             <div class="col-md-6">
                                                 <h5 class="fw-bold mb-0 text-black" style=" color: rgb(13, 103, 128);">Tracking Note</h5>
                                             </div>
-                                            <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                                <form action="newNoteTracking">
-                                                    <input type="hidden" name="orderId" value="${order.orderID}" />
-                                                    <input class="p-2 rounded" style="background: rgb(13, 103, 128);  color: #FFF;" type="submit" value="Add note" />
-                                                </form>
-                                            </div>
+                                            <c:if test="${birdNest.status ne 'Payment Success'}">
+                                                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                                    <form action="newNoteTracking">
+                                                        <input type="hidden" name="orderId" value="${order.orderID}" />
+                                                        <input class="p-2 rounded" style="background: rgb(13, 103, 128);  color: #FFF;" type="submit" value="Add note" />
+                                                    </form>
+                                                </div>
+                                            </c:if>
                                         </div>
                                         <c:if test="${not empty trackingNote}">
                                             <div class="row m-2">
@@ -126,7 +129,17 @@
                                                 <h4 class="text-sm-center m-3">No Tracking Note Found</h4>
                                             </div>
                                         </c:if>
-
+                                        <div class="row">
+                                            <div>
+                                                <h5>Number of eggs: ${birdNest.eggs_Quantity}</h5>
+                                            </div>
+                                            <div>
+                                                <h5>Number of male baby birds: ${birdNest.male_Babybird}</h5>
+                                            </div>
+                                            <div>
+                                                <h5>Number of female baby birds: ${birdNest.female_Babybird}</h5>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="card-body p-4">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -174,11 +187,6 @@
                                             <div class=" d-flex justify-content-between align-items-center mb-1">
                                                 <h5 class="fw-bold mb-0 text-black" style=" color: rgb(13, 103, 128);">Deposit</h5>
                                                 <h5 class="mb-0 text-muted">${util.FormatPrice(order.deposit_Price)}</h5>
-                                            </div>
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary"
-                                                        style="width: 65px; background-color: #0D6780 ; border: #0D6780;"><i
-                                                        class="fa-solid fa-check fa-lq"></i></button>
                                             </div>
                                         </div>
                                     </div>
