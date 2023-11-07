@@ -5,11 +5,15 @@
  */
 package Controllers.Customer;
 
+import Daos.AccountDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Daos.ProductDAO;
+import Models.AccountDTO;
+import Models.OrderDTO;
 import Models.ProductDTO;
 import Utils.MyAppConstants;
+import Utils.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -22,22 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author hj
- */
 @WebServlet(name = "CancelOrder", urlPatterns = {"/CancelOrder"})
 public class CancelOrderServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,6 +41,9 @@ public class CancelOrderServlet extends HttpServlet {
         try {
             if (!status.equals("Cancel")) {
                 OrderDAO odao = new OrderDAO();
+                OrderDTO oDTO = odao.getOrderByOrderID(orderID);
+                AccountDAO aDAO = new AccountDAO();
+                List<AccountDTO> aDTO = aDAO.getAdminEmail();
                 odao.UpdateStatusOrder(orderID, "Cancel");
                 OrderDetailDAO oddao = new OrderDetailDAO();
                 List<ProductDTO> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
@@ -60,6 +54,18 @@ public class CancelOrderServlet extends HttpServlet {
                         prodto = prodao.getAllQuantityByProductID(pro.getProductID());
                         prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating(),
                                 prodto.getQuantity_Sold() - 1, prodto.getProductID());
+                    }
+                    if (oDTO.getPayBy().equals("VNPAY")) {
+                            for (AccountDTO dto : aDTO) {
+                            SendMail mailHome = new SendMail();
+                            String subject = "Refund invoice to customer ";
+                            String text = "Refund request, <br><br>"
+                                    + "The Order"+ orderID + "  pay by VNPay has been cancelled please contact with the customer to refund money <br><br>"
+                                    + "PLEASE notice that all admin will receive this email, make sure that only one person do this action<br>"
+                                    + "Best regards, <br>"
+                                    + "BirdFarmShop";
+                            mailHome.sendCode(dto.getEmail(), subject, text);
+                        }
                     }
                 } else {
                     for (ProductDTO pro : productIDList) {

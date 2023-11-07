@@ -658,9 +658,9 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "select OrderID, ServiceID, Form_Receipt, acc.FullName, StaffID, ShipAddress, ShipCity, PhoneNumber, "
-                        + "Delivery_charges, Deposit_Price, Total_Order, OrderDate, ord.Status "
+                        + "Delivery_charges, Deposit_Price, Total_Order, OrderDate, ord.Status, ord.Pay_with "
                         + "from Orders ord "
-                        + "inner join Account acc on acc.AccountID = ord.AccountID  "
+                        + "inner join Account acc on acc.AccountID = ord.AccountID "
                         + "where OrderID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, orderID);
@@ -678,7 +678,8 @@ public class OrderDAO implements Serializable {
                             rs.getFloat("Delivery_charges"),
                             rs.getFloat("Deposit_Price"),
                             rs.getFloat("Total_Order"),
-                            rs.getString("Status"));
+                            rs.getString("Status"),
+                            rs.getString("Pay_with"));
                 }
             }
         } finally {

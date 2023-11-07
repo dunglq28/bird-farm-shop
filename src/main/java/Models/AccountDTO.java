@@ -51,6 +51,11 @@ public class AccountDTO {
         this.status = status;
     }
 
+    public AccountDTO(String email) {
+        this.email = email;
+    }
+    
+
     public int getRoleID() {
         return roleID;
     }
