@@ -142,7 +142,7 @@
                                                 </li>
                                                 <li>The price of a baby female bird is equal to half the price of the female
                                                     bird.</li>
-                                                <li>The upfront payment is equal to the price of a male and female bird plus shipping costs.</li>
+                                                <li>The prepayment is equal to the price of a cheapest baby bird plus shipping fee.</li>
                                                 <li>Total cost is equal to the price of one baby bird multiplied by the
                                                     number of baby male/female birds in the nest plus the shipping fee minus the
                                                     prepayment.</li>
