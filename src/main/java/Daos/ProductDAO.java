@@ -71,6 +71,7 @@ public class ProductDAO implements Serializable {
                             rs.getInt("Quantity_MaleBird"),
                             rs.getInt("Quantity_FemaleBird"),
                             rs.getInt("Quantity_Available"),
+                            0,
                             rs.getInt("Quantity_Sold"),
                             rs.getFloat("Price"),
                             rs.getFloat("Discount"),
@@ -151,7 +152,7 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Select ProductID, Product_Name, cate.Category_Name, Product_TypeID, Image, Age, Color, Gender, "
-                        + "Quantity_Available, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
+                        + "Quantity_Available, Quantity_AreMating, Quantity_MaleBird, Quantity_FemaleBird, Price, Discount, Quantity_Sold, Status "
                         + "from Products "
                         + "inner join Category cate on Products.CategoryID =  cate.CategoryID "
                         + "where Product_TypeID like ? and Product_Name like ? "
@@ -182,6 +183,7 @@ public class ProductDAO implements Serializable {
                             rs.getInt("Quantity_MaleBird"),
                             rs.getInt("Quantity_FemaleBird"),
                             rs.getInt("Quantity_Available"),
+                            rs.getInt("Quantity_AreMating"),
                             rs.getInt("Quantity_Sold"),
                             rs.getFloat("Price"),
                             rs.getFloat("Discount"),
