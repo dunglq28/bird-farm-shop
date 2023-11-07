@@ -114,7 +114,7 @@ public class OrderDTO {
     }
 
     public OrderDTO(String orderID, int serviceID, String accountName, String staffID, String form_Receipt, String shipAddress,
-            String shipCity, String phoneNumber, Date orderDate, float delivery_charges, float deposit_Price, float total_Order, String status) {
+            String shipCity, String phoneNumber, Date orderDate, float delivery_charges, float deposit_Price, float total_Order, String status, String PayBy) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountName = accountName;
@@ -128,6 +128,7 @@ public class OrderDTO {
         this.deposit_Price = deposit_Price;
         this.total_Order = total_Order;
         this.status = status;
+        this.payBy = PayBy;
     }
 
     public OrderDTO(String orderID, String staffID, String status) {

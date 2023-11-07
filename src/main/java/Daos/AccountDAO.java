@@ -1,12 +1,15 @@
 package Daos;
 
 import Models.AccountDTO;
+import Models.OrderDTO;
 import Utils.DBHelper;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountDAO implements Serializable {
 
@@ -295,5 +298,47 @@ public class AccountDAO implements Serializable {
         }
         return null;
     }
+    
+     private List<AccountDTO> accountList;
 
+    public List<AccountDTO> getAccountList() {
+        return accountList;
+    }
+    
+public List<AccountDTO> getAdminEmail() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        AccountDTO account = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "Select Email "
+                        + "From Account "
+                        + "Where RoleID = 1 ";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    account = new AccountDTO(rs.getString("Email"));
+                if (this.accountList == null) {
+                        this.accountList = new ArrayList<AccountDTO>();
+                    }
+                    this.accountList.add(account);
+                }
+                return this.accountList;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+    
 }
