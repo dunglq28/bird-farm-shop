@@ -6,10 +6,12 @@
 package Controllers.Staff;
 
 import Daos.BirdNestDetail_TrackingDAO;
+import Daos.Bird_Nest_TrackingDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
 import Models.BirdNestDetail_TrackingDTO;
+import Models.Bird_Nest_TrackingDTO;
 import Models.OrderDTO;
 import Utils.MyAppConstants;
 import java.io.IOException;
@@ -70,6 +72,9 @@ public class viewDetailOrderServlet extends HttpServlet {
                 BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
                 int endPage = trackingDetail.getNumberPageTrackingNote(orderID, fieldShow);
                 List<BirdNestDetail_TrackingDTO> trackingNote = trackingDetail.getListTrackingByOrderId(orderID, indexPage, fieldShow);
+                Bird_Nest_TrackingDAO bnDao = new Bird_Nest_TrackingDAO();
+                Bird_Nest_TrackingDTO bntracking = bnDao.getBNTrackingByOrderID(orderID);
+                request.setAttribute("BIRD_TRACKING", bntracking);
                 request.setAttribute("BIRD_TRACKING_NOTE", trackingNote);
                 request.setAttribute("PARENT_BIRD", oddao.getParentProductByOrderID(orderID));
                 int start = 1;

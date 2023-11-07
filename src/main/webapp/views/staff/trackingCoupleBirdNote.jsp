@@ -25,12 +25,13 @@
         <jsp:include page="../../components/sideBar.jsp"></jsp:include>
         <c:set var="tracking" value="${requestScope.BIRD_NEST_TRACKING}"/>
         <c:set var="orderId" value="${requestScope.ORDER_ID}"/>
-            <div class="main--content">
-                <div class="header-wrapper">
-                    <div class="header--title">
-                        <h2>Tracking Note</h2>
-                    </div>
-                    <div class="user--info">
+        <c:set var="eggError" value="${requestScope.EGG_ERROR}" />
+        <div class="main--content">
+            <div class="header-wrapper">
+                <div class="header--title">
+                    <h2>Tracking Note</h2>
+                </div>
+                <div class="user--info">
                     ${sessionScope.ACCOUNT.fullName}
                 </div>
             </div>
@@ -54,22 +55,37 @@
                         </div>
                         <div class="form-group row">
                             <label for="numberOfEggs" class="col-sm-3 col-form-label"
-                                   >Eggs</label
+                                   >Number of eggs</label
                             >
                             <div class="col-sm-9">
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="numberOfEggs"
-                                    min="0"
-                                    value="${tracking.eggs_Quantity}"
-                                    name="numberOfEggs"
-                                    />
+                                <c:choose>
+                                    <c:when test="${tracking.status eq 'Tracking Eggs'}">
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="numberOfEggs"
+                                            min="0"
+                                            value="${tracking.eggs_Quantity}"
+                                            name="numberOfEggs"
+                                            readonly
+                                            />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="numberOfEggs"
+                                            min="0"
+                                            value="${tracking.eggs_Quantity}"
+                                            name="numberOfEggs"
+                                            />
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="maleBirds" class="col-sm-3 col-form-label"
-                                   >Male birds</label
+                                   >Number of male baby birds</label
                             >
                             <div class="col-sm-9">
                                 <input
@@ -84,7 +100,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="femaleBirds" class="col-sm-3 col-form-label"
-                                   >Female birds</label
+                                   >Number of female baby birds</label
                             >
                             <div class="col-sm-9">
                                 <input
@@ -111,36 +127,35 @@
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">Progress</label>
                             <div class="col-sm-9">
-                            <select id="status" class="col-5 form-control" name="progress">
-                                <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing'}">
-                                        <option selected>Processing</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option>Processing</option>
-                                    </c:otherwise>
-                                </c:choose>
+                                <select id="status" class="col-5 form-control" name="progress">
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Processing'}">
+                                            <option selected>Processing</option>
+                                            <option>Mating</option>
+                                            <option>Tracking Eggs</option>
+                                        </c:when>
+                                    </c:choose>
 
-                                <c:choose>
-                                    <c:when test="${tracking.status eq 'Mating'}">
-                                        <option selected>Mating</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option>Mating</option>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Mating'}">
+                                            <option selected>Mating</option>
+                                            <option>Tracking Eggs</option>
+                                        </c:when>
+                                    </c:choose>
 
-                                <c:choose>
-                                    <c:when test="${tracking.status eq 'Tracking Eggs'}">
-                                        <option selected>Tracking Eggs</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option>Tracking Eggs</option>
-                                    </c:otherwise>
-                                </c:choose>
-                            </select>
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Tracking Eggs'}">
+                                            <option selected>Tracking Eggs</option>
+                                        </c:when>
+                                    </c:choose>
+                                </select>
                             </div>
                         </div>
+                        <c:if test="${not empty eggError}">
+                            <div form-group row mb-4>
+                                <font style="color: red;">${eggError}</font>
+                            </div>
+                        </c:if>
                         <div class="form-group row add-note">
                             <input type="hidden" name="orderId" value="${orderId}" />
                             <input type="submit" name="action" value="Cancel" />
@@ -149,6 +164,5 @@
                     </form>
                 </div>
             </div>
-        </div>
     </body>
 </html>
