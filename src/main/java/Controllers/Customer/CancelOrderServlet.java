@@ -50,6 +50,7 @@ public class CancelOrderServlet extends HttpServlet {
                 ProductDAO prodao = new ProductDAO();
                 ProductDTO prodto = new ProductDTO();
                 if (serviceID.equals("1")) {
+                                    //Thêm code ở đây nè
                     for (ProductDTO pro : productIDList) {
                         prodto = prodao.getAllQuantityByProductID(pro.getProductID());
                         prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating(),

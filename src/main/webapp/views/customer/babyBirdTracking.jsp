@@ -128,7 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    <c:if test="${bird_nest_tracking.male_Babybird != 0 && bird_nest_tracking.female_Babybird != 0 && bird_nest_tracking.status != 'Payment Success'}">
+                    <c:if test="${bird_nest_tracking.male_Babybird != 0  && bird_nest_tracking.status != 'Payment Success' || bird_nest_tracking.female_Babybird != 0 && bird_nest_tracking.status != 'Payment Success'}">
                         <form action="Checkout" method="Post">
                             <button type="submit" class="pay">Complete payment</button>  
                             <input type="hidden" name="txtOrderID" value="${bird_nest_tracking.orderID}">
