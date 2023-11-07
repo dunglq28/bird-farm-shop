@@ -82,7 +82,7 @@
                                             <c:set var="customer" value="${sessionScope.CUSTOMER}"></c:set>
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h4 class="fw-bold mb-0 text-black">Information receive</h4>
-                                                    <a href="shipping?txtServiceID=${sessionScope.SERVICE_ID}?txtTotalOrder=${sessionScope.TOTAL_ORDER}" class="change-icon text-decoration-none">
+                                                    <a href="shipping?txtServiceID=${sessionScope.SERVICE_ID}" class="change-icon text-decoration-none">
                                                     <h6 class="mb-0 text-muted change_info">Change information</h6>
                                                 </a>
                                             </div>
@@ -187,7 +187,7 @@
                                             <hr class="my-4">
 
                                             <div class="pt-5">
-                                                <h6 class="mb-0"><a href="#!" class="text-body"><i
+                                                <h6 class="mb-0"><a href="Service_Tracking?txtOrderID=${sessionScope.OLD_ORDER_ID}" class="text-body"><i
                                                             class="fas fa-long-arrow-alt-left me-2"></i>Back</a>
                                                 </h6>
                                             </div>

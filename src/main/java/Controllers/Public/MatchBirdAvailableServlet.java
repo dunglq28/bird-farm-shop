@@ -66,10 +66,10 @@ public class MatchBirdAvailableServlet extends HttpServlet {
             if (cateChoose != null && session.getAttribute("CATE_CHOOSE_HISTORY") != cateChoose) {
                 session.setAttribute("CATE_CHOOSE_HISTORY", cateChoose);
 
-                maleBirdList = proDao.getBirdByGender("Male", Integer.parseInt(cateChoose),1);
+                maleBirdList = proDao.getBirdByGender("Male", Integer.parseInt(cateChoose), 1);
                 session.setAttribute("MALE_BIRD_HISTORY", maleBirdList);
 
-                femaleBirdList = proDao.getBirdByGender("Female", Integer.parseInt(cateChoose),1);
+                femaleBirdList = proDao.getBirdByGender("Female", Integer.parseInt(cateChoose), 1);
                 session.setAttribute("FEMALE_BIRD_HISTORY", femaleBirdList);
 
             } else if (cateChoose != null && session.getAttribute("CATE_CHOOSE_HISTORY") == cateChoose) {
@@ -78,12 +78,14 @@ public class MatchBirdAvailableServlet extends HttpServlet {
             }
 
             float servicePrice = 0;
+            float babyBirdMalePrice = 0;
+            float babyBirdFemalePrice = 0;
             if (maleBirdIDChoose != null) {
                 for (ProductDTO birdMaleChoose : maleBirdList) {
                     if (birdMaleChoose.getProductID().equals(maleBirdIDChoose)) {
                         session.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
                         request.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
-                        servicePrice += birdMaleChoose.getPriceDiscount() / 2;
+                        babyBirdMalePrice = birdMaleChoose.getPriceDiscount() / 2;
                     }
                 }
             }
@@ -93,9 +95,15 @@ public class MatchBirdAvailableServlet extends HttpServlet {
                     if (birdFemaleChoose.getProductID().equals(femaleBirdIDChoose)) {
                         session.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
                         request.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
-                        servicePrice += birdFemaleChoose.getPriceDiscount() / 2;
+                        babyBirdFemalePrice = birdFemaleChoose.getPriceDiscount() / 2;
                     }
                 }
+            }
+
+            if (babyBirdMalePrice >= babyBirdFemalePrice) {
+                servicePrice = babyBirdFemalePrice;
+            } else {
+                servicePrice = babyBirdMalePrice;
             }
 
             request.setAttribute("SERVICE_PRICE", servicePrice);

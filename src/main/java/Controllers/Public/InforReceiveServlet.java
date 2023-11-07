@@ -64,7 +64,7 @@ public class InforReceiveServlet extends HttpServlet {
                     request.setAttribute("SHIPPING_METHOD", "Fast delivery");
                     request.setAttribute("SHIPPING_CASH", 125000);
                 }
-                
+
                 customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
                 session.setAttribute("CUSTOMER", customer);
                 request.setAttribute("TOTAL_ORDER", totalOrder);
@@ -72,7 +72,9 @@ public class InforReceiveServlet extends HttpServlet {
                     url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
                 } else if (customer != null && serviceID.equals("2")) {
                     url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
-                }  
+                } else if (customer != null && serviceID.equals("0")) {
+                    url = MyAppConstants.CustomerFeatures.PAYMENT_MATCH_BIRD_PAGE;
+                }
             }
 
         } catch (SQLException ex) {
