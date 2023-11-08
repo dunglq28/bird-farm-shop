@@ -37,7 +37,7 @@
             </div>
             <div class="tabular--wrapper">
                 <div class="form-wrapper">
-                    <form action="addTrackingNote" method="POST">
+                    <form action="addTrackingNote" method="POST" id="formNoteTracking">
                         <div class="form-group row">
                             <label for="birdNestID" class="col-sm-3 col-form-label"
                                    >Bird Nest ID</label
@@ -59,7 +59,7 @@
                             >
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Tracking Eggs'}">
+                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating'}">
                                         <input
                                             type="number"
                                             class="form-control"
@@ -88,14 +88,29 @@
                                    >Number of male baby birds</label
                             >
                             <div class="col-sm-9">
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="maleBirds"
-                                    min="0"
-                                    value="${tracking.male_Babybird}"
-                                    name="maleBirds"
-                                    />
+                                <c:choose>
+                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating'}">
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="maleBirds"
+                                            min="0"
+                                            value="${tracking.male_Babybird}"
+                                            name="maleBirds"
+                                            readonly
+                                            />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="maleBirds"
+                                            min="0"
+                                            value="${tracking.male_Babybird}"
+                                            name="maleBirds"
+                                            />
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -103,14 +118,29 @@
                                    >Number of female baby birds</label
                             >
                             <div class="col-sm-9">
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="femaleBirds"
-                                    min="0"
-                                    value="${tracking.female_Babybird}"
-                                    name="femaleBirds"
-                                    />
+                                <c:choose>
+                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating'}">
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="femaleBirds"
+                                            min="0"
+                                            value="${tracking.female_Babybird}"
+                                            name="femaleBirds"
+                                            readonly
+                                            />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="femaleBirds"
+                                            min="0"
+                                            value="${tracking.female_Babybird}"
+                                            name="femaleBirds"
+                                            />
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                         <div class="form-group row">
