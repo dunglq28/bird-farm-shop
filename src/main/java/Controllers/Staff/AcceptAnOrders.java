@@ -27,21 +27,25 @@ public class AcceptAnOrders extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("orderID");
-
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             OrderDAO oddao = new OrderDAO();
             StaffDAO staDAO = new StaffDAO();
-            Bird_Nest_TrackingDAO trackingDao = new Bird_Nest_TrackingDAO();
-            StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
-            boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
-            OrderDTO order = oddao.getOrderByOrderID(orderID);
-            if (order.getServiceID() == 2) {
-                boolean updateTrackingStatus = trackingDao.updateStatusBirdNestTracking(orderID, "Processing");
-            }
-            if(odSuccess == true){
+            OrderDTO oddto = oddao.getOrderByOrderID(orderID);
+            if (oddto.getStatus().equals("Cancel")) {
                 url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+            } else {
+                Bird_Nest_TrackingDAO trackingDao = new Bird_Nest_TrackingDAO();
+                StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
+                boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
+                OrderDTO order = oddao.getOrderByOrderID(orderID);
+                if (order.getServiceID() == 2) {
+                    boolean updateTrackingStatus = trackingDao.updateStatusBirdNestTracking(orderID, "Processing");
+                }
+                if (odSuccess == true) {
+                    url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                }
             }
         } finally {
             response.sendRedirect(url);
