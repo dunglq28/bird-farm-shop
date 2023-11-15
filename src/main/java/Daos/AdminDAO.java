@@ -19,7 +19,7 @@ public class AdminDAO {
         return accountList;
     }
 
-    public List<AccountDTO> ViewAllAccount(int page, String searchValue, int fieldShow)
+    public List<AccountDTO> ViewAllAccount(int page, String searchValue, int fieldShow, String account)
             throws SQLException, ClassNotFoundException {
 
         Connection con = null;
@@ -33,18 +33,21 @@ public class AdminDAO {
                         + "acc.Email, acc.Date_created, acc.CreateBy, acc.Status "
                         + "from Account acc "
                         + "inner join Roles rol on acc.RoleID = rol.RoleID "
-                        + "where acc.AccountID like ? and acc.RoleID != 1 "
-                        + "or acc.FullName like ? and acc.RoleID != 1 "
-                        + "or rol.RoleName like ? and acc.RoleID != 1 "
+                        + "where acc.AccountID like ? and acc.RoleID != 1 and acc.AccountID != ? "
+                        + "or acc.FullName like ? and acc.RoleID != 1 and acc.AccountID != ? "
+                        + "or rol.RoleName like ? and acc.RoleID != 1 and acc.AccountID != ? "
                         + "Order by acc.RoleID asc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
-                stm.setString(2, "%" + searchValue + "%");
+                stm.setString(2, account);
                 stm.setString(3, "%" + searchValue + "%");
-                stm.setInt(4, (page - 1) * fieldShow);
-                stm.setInt(5, fieldShow);
+                stm.setString(4, account);
+                stm.setString(5, "%" + searchValue + "%");
+                stm.setString(6, account);
+                stm.setInt(7, (page - 1) * fieldShow);
+                stm.setInt(8, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String AccountID = rs.getString("AccountID");
