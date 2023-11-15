@@ -3,18 +3,19 @@
 <div class="sidebar">
 
     <div class="logo">Bird Farm Shop</div>    
+    <jsp:useBean id="util" class="Utils.Constants"></jsp:useBean>
 
     <c:set var="admin" value="Admin" />
     <c:set var="staff" value="Staff" />
     <c:set var="manager" value="Manager"/>
     <ul class="menu">
         <c:if test="${sessionScope.ACCOUNT.roleName != staff}">
-<!--            <li>
-                <a href="#">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>-->
+            <!--            <li>
+                            <a href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>-->
         </c:if>
         <jsp:useBean id="oDao" class="Daos.OrderDAO"></jsp:useBean>
         <c:if test="${sessionScope.ACCOUNT.roleName == staff}">
@@ -28,9 +29,9 @@
         </c:if>
         <c:if test="${sessionScope.ACCOUNT.roleName == admin}">
             <li class="${sessionScope.CURRENT_VIEW == 'All order' ? 'active' : ''}">
-                    <a href="viewAllOrder" class="list-cart-icon">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="cart-number">${oDao.numberOfAllOrder}</span>
+                <a href="viewAllOrder" class="list-cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-number">${oDao.numberOfAllOrder}</span>
                     <span>All Orders</span>
                 </a>
             </li>

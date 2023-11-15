@@ -44,7 +44,7 @@
                     <button class="dropbtn"><i class="fa-regular fa-circle-user "></i>${sessionScope.ACCOUNT.fullName}</button>
                     <div class="dropdown-content-wrapper">
                         <div class="dropdown-content">
-                            <a href="">My account</a>
+                            <a href="Customer">My account</a>
                             <c:if test="${sessionScope.ACCOUNT.roleName == 'Customer'}">
                                 <a href="Order">Order management</a>
                             </c:if>

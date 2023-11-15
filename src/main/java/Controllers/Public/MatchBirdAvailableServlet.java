@@ -11,7 +11,7 @@ import Daos.ServiceDAO;
 import Models.AccountDTO;
 import Models.CustomerDTO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -43,7 +43,7 @@ public class MatchBirdAvailableServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.CustomerFeatures.SERVICE_OPTION_TWO_PAGE;
+        String url = Constants.CustomerFeatures.SERVICE_OPTION_TWO_PAGE;
         String cateChoose = request.getParameter("txtCateID");
         String maleBirdIDChoose = request.getParameter("txtMaleBirdID");
         String femaleBirdIDChoose = request.getParameter("txtFemaleBirdID");

@@ -4,7 +4,7 @@ import Daos.AccountDAO;
 import Models.AccountDTO;
 import Models.LoginError;
 import Utils.EmailExample;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import Utils.SendMail;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ public class AuthForgetPassServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String email = request.getParameter("txtContact");
-        String url = MyAppConstants.AuthFeatures.FORGET_PASS_PAGE;
+        String url = Constants.AuthFeatures.FORGET_PASS_PAGE;
         EmailExample emailExample = new EmailExample();
         LoginError error = new LoginError();
         boolean foundErr = false;

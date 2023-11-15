@@ -221,7 +221,7 @@ public class OrderDAO implements Serializable {
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
                         + "where ord.Status = 'Wait for confirmation' and ord.OrderID like ? "
                         + "or ord.Status = 'Wait for confirmation' and acc.FullName like ? "
-                        + "Order by ord.OrderDate desc "
+                        + "Order by ord.OrderDate desc, ord.OrderID desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY ";
 
@@ -413,7 +413,7 @@ public class OrderDAO implements Serializable {
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
                         + "where ord.StaffID like ? and ord.ServiceID like ? and ord.Status like ? and ord.OrderID like ? "
                         + "or ord.StaffID like ? and ord.ServiceID like ? and ord.Status like ? and acc.FullName like ? "
-                        + "Order by ord.OrderDate desc "
+                        + "Order by ord.OrderDate desc, ord.OrderID desc  "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY ";
 
@@ -528,7 +528,7 @@ public class OrderDAO implements Serializable {
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
                         + "where ord.Status like ? and ord.OrderID like ? "
                         + "or ord.Status like ? and acc.FullName like ? "
-                        + "Order by ord.OrderDate desc "
+                        + "Order by ord.OrderDate desc, ord.OrderID desc  "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY ";
 

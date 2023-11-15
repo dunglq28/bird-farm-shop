@@ -5,7 +5,7 @@
  */
 package Controllers.Public;
 
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -34,7 +34,7 @@ public class SuccessOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.SUCCESS_ORDER_PAGE;
+        String url = Constants.PublicFeatures.SUCCESS_ORDER_PAGE;
         try {
 
         } finally {

@@ -11,7 +11,7 @@ import Daos.OrderDetailDAO;
 import Models.AccountDTO;
 import Models.CustomerDTO;
 import Object.Products;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -42,7 +42,7 @@ public class HandlePaymentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+        String url = Constants.PublicFeatures.PAYMENT_PAGE;
         String button = request.getParameter("btAction");
         HttpSession session = request.getSession();
 
@@ -57,12 +57,12 @@ public class HandlePaymentServlet extends HttpServlet {
 
             if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {// if there is no recipient information
                 request.setAttribute("FULLNAME", customer.getFullName());
-                url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
+                url = Constants.CustomerFeatures.RECEIVING_INFO_PAGE;
             } else if (serviceID.equals("1")) { //If customer buy birds and buy bird nests
-                url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                url = Constants.PublicFeatures.PAYMENT_PAGE;
                 session.setAttribute("CUSTOMER", customer);
             } else if (serviceID.equals("2")) { //If customer book service matching bird
-                url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
+                url = Constants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
                 session.setAttribute("CUSTOMER", customer);
             } else { //If customer complete payment of bird matching service
                 // 
@@ -85,7 +85,7 @@ public class HandlePaymentServlet extends HttpServlet {
 
                 session.setAttribute("CUSTOMER", customer);
 
-                url = MyAppConstants.CustomerFeatures.PAYMENT_MATCH_BIRD_PAGE;
+                url = Constants.CustomerFeatures.PAYMENT_MATCH_BIRD_PAGE;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

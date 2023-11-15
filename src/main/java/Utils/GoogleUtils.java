@@ -13,18 +13,18 @@ import org.apache.http.client.fluent.Request;
 public class GoogleUtils {
 
     public static String getToken(final String code) throws ClientProtocolException, IOException {
-        String response = Request.Post(MyAppConstants.Google.GOOGLE_LINK_GET_TOKEN)
-                .bodyForm(Form.form().add("client_id", MyAppConstants.Google.GOOGLE_CLIENT_ID)
-                        .add("client_secret", MyAppConstants.Google.GOOGLE_CLIENT_SECRET)
-                        .add("redirect_uri", MyAppConstants.Google.GOOGLE_REDIRECT_URI).add("code", code)
-                        .add("grant_type", MyAppConstants.Google.GOOGLE_GRANT_TYPE).build()).execute().returnContent().asString();
+        String response = Request.Post(Constants.Google.GOOGLE_LINK_GET_TOKEN)
+                .bodyForm(Form.form().add("client_id", Constants.Google.GOOGLE_CLIENT_ID)
+                        .add("client_secret", Constants.Google.GOOGLE_CLIENT_SECRET)
+                        .add("redirect_uri", Constants.Google.GOOGLE_REDIRECT_URI).add("code", code)
+                        .add("grant_type", Constants.Google.GOOGLE_GRANT_TYPE).build()).execute().returnContent().asString();
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
         return accessToken;
     }
 
     public static UserGoogleDTO getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
-        String link = MyAppConstants.Google.GOOGLE_LINK_GET_USER_INFO + accessToken;
+        String link = Constants.Google.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
         UserGoogleDTO googlePojo = new Gson().fromJson(response, UserGoogleDTO.class);
         return googlePojo;

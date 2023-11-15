@@ -7,7 +7,7 @@ package Controllers.Staff;
 
 import Daos.Bird_Nest_TrackingDAO;
 import Models.Bird_Nest_TrackingDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -29,7 +29,7 @@ public class newNoteTracking extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         
         try {
             String orderId = request.getParameter("orderId");
@@ -37,7 +37,7 @@ public class newNoteTracking extends HttpServlet {
             Bird_Nest_TrackingDTO dto = dao.getBNTrackingByOrderID(orderId);
             request.setAttribute("BIRD_NEST_TRACKING", dto);
             request.setAttribute("ORDER_ID", orderId);
-            url = MyAppConstants.StaffFeatures.TRACKING_COUPLE_BIRD_NOTE_PAGE;
+            url = Constants.StaffFeatures.TRACKING_COUPLE_BIRD_NOTE_PAGE;
         } catch(Exception e) {
             log(e.getMessage());
         } finally {

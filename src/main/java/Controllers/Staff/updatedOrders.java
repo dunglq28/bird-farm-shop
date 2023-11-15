@@ -1,7 +1,7 @@
 package Controllers.Staff;
 
 import Daos.OrderDAO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -24,7 +24,7 @@ public class updatedOrders extends HttpServlet {
             OrderDAO dao = new OrderDAO();
             boolean result = dao.UpdateStatusOrder(orderID, newStatus);
             if (result == true) {
-                url = MyAppConstants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+                url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

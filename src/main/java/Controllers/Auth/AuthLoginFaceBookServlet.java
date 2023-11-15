@@ -5,7 +5,7 @@ import Daos.CustomerDAO;
 import Models.AccountDTO;
 import Models.CustomerDTO;
 import Utils.FacebookUtils;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import com.restfb.types.User;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,13 +23,13 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+        String url = session.getAttribute("HISTORY_URL") == null ? Constants.PublicFeatures.HOME_CONTROLLER
                 : (String) session.getAttribute("HISTORY_URL");
         try {
             String code = request.getParameter("code");
 
             if (code == null || code.isEmpty()) {
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                url = Constants.AuthFeatures.LOGIN_PAGE;
             } else {
                 String accessToken = FacebookUtils.getToken(code);
                 User user = FacebookUtils.getUserInfo(accessToken);
@@ -50,10 +50,10 @@ public class AuthLoginFaceBookServlet extends HttpServlet {
                         cusDao.createCustomer(customer);
                         session.setAttribute("ACCOUNT", account);
                     } else {
-                        url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+                        url = Constants.PublicFeatures.ERROR_PAGE;
                     }
                     if (account != null && account.getRoleName().equals("Staff")) {
-                        url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                        url = Constants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
                     }
                 }
             }

@@ -2,7 +2,7 @@ package Controllers.Public;
 
 import Cart.CartObj;
 import Object.Products;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ public class AddBirdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+        String url = Constants.PublicFeatures.HOME_CONTROLLER;
         String birdID = request.getParameter("txtproductID");
         String name = request.getParameter("txtproductName");
         String cate_Name = request.getParameter("category_Name");

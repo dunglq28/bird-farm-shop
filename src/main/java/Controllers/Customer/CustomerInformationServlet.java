@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Public;
+package Controllers.Customer;
 
+import Daos.AccountDAO;
+import Daos.CustomerDAO;
+import Models.AccountDTO;
 import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hj
  */
-@WebServlet(name = "FailureOrder", urlPatterns = {"/FailureOrder"})
-public class FailureOrderServlet extends HttpServlet {
+@WebServlet(name = "Customer", urlPatterns = {"/Customer"})
+public class CustomerInformationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +39,23 @@ public class FailureOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = Constants.PublicFeatures.FAILURE_ORDER_PAGE;
-        try {
+        String url = Constants.CustomerFeatures.CUSTOMER_INFORMATION_PAGE;
+        HttpSession session = request.getSession();
 
+        try {
+            AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
+            if (account == null) { // If customers don't login return to home
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
+                response.sendRedirect(url);
+                return;
+            }
+            CustomerDAO cusdao = new CustomerDAO();
+            request.setAttribute("ACCOUNT_INFO", cusdao.getCustomerByAccountID(account.getAccountID()));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

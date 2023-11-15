@@ -6,7 +6,7 @@
 package Controllers.Staff;
 
 import Daos.Bird_Nest_TrackingDAO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +35,7 @@ public class updateStatusTracking extends HttpServlet {
             Bird_Nest_TrackingDAO dao = new Bird_Nest_TrackingDAO();
             boolean result = dao.updateStatusBirdNestTracking(orderId, status);
             if (result) {
-                url = MyAppConstants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
+                url = Constants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
             }
         } catch (Exception e) {
             log(e.getMessage());

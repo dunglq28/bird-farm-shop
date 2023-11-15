@@ -3,7 +3,7 @@ package Controllers.Admin;
 import Daos.ProductDAO;
 import Models.AccountDTO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,15 +21,15 @@ public class viewAllProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.AdminFeatures.ALL_PRODUCT_PAGE;
+        String url = Constants.AdminFeatures.ALL_PRODUCT_PAGE;
         String page = request.getParameter("page");
         String searchValue = request.getParameter("lastSearch");
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || !account.getRoleName().equals("Admin")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isAdmin)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
 

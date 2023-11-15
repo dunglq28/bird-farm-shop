@@ -1,8 +1,7 @@
 package Controllers.Admin;
 
-import Daos.AdminDAO;
 import Daos.ProductDAO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,14 +22,14 @@ public class updateProductStatus extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String ProductID = request.getParameter("productID");
         String status = request.getParameter("status");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         try {
             boolean status_update;
             status_update = status.equals("Enable");
             ProductDAO dao = new ProductDAO();
             boolean result = dao.UpdateProductStatus(ProductID, status_update);
             if (result) {
-                url = MyAppConstants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
+                url = Constants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

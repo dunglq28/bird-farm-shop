@@ -5,7 +5,7 @@ import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
 import Models.StaffDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,16 +25,16 @@ public class viewAllOrder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.AdminFeatures.ALL_ORDER_PAGE;
+        String url = Constants.AdminFeatures.ALL_ORDER_PAGE;
         String status = request.getParameter("Status");
         String page = request.getParameter("page");
         String searchValue = request.getParameter("lastSearch");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || (!account.getRoleName().equals("Staff")
+            if (account == null || (!account.getRoleName().equals(Constants.roleName.isAdmin)
                     && !account.getRoleName().equals("Admin"))) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
 
@@ -78,7 +78,7 @@ public class viewAllOrder extends HttpServlet {
             request.setAttribute("END", end);
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
-            url = MyAppConstants.AdminFeatures.ALL_ORDER_PAGE;
+            url = Constants.AdminFeatures.ALL_ORDER_PAGE;
 
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -7,7 +7,7 @@ package Controllers.Public;
 
 import Daos.ProductDAO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,7 +40,7 @@ public class ProductDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
+        String url = Constants.PublicFeatures.HOME_PAGE;
         String button = request.getParameter("btAction");
         HttpSession session = request.getSession();
 
@@ -50,11 +50,11 @@ public class ProductDetailServlet extends HttpServlet {
             }
             switch (button) {
                 case "null":
-                    url = MyAppConstants.PublicFeatures.SELECT_SAME_PRODUCT_CONTROLLER;
+                    url = Constants.PublicFeatures.SELECT_SAME_PRODUCT_CONTROLLER;
                     break;
                 case "Addtocart":
-                    session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
-                    url = MyAppConstants.PublicFeatures.ADD_TO_CART_CONTROLLER;
+                    session.setAttribute("HISTORY_URL", Constants.PublicFeatures.PRODUCT_DETAIL_CONTROLLER);
+                    url = Constants.PublicFeatures.ADD_TO_CART_CONTROLLER;
                     break;
             }
         } finally {

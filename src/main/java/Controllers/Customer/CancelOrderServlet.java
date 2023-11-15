@@ -12,7 +12,7 @@ import Daos.ProductDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import Utils.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,7 +32,7 @@ public class CancelOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
+        String url = Constants.CustomerFeatures.MY_ORDER_CONTROLLER;
         String orderID = request.getParameter("orderID");
         String serviceID = request.getParameter("txtServiceID");
         String status = request.getParameter("status");

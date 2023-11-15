@@ -6,7 +6,7 @@
 package Controllers.Admin;
 
 import Models.AccountDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -36,13 +36,13 @@ public class createProductPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.AdminFeatures.CREATE_PRODUCT_PAGE;
+        String url = Constants.AdminFeatures.CREATE_PRODUCT_PAGE;
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || account.getRoleName().equals("Customer")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isAdmin)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
         } finally {

@@ -19,7 +19,7 @@ import Models.OrderDTO;
 import Models.OrderDetailDTO;
 import Models.ProductDTO;
 import Object.Products;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -54,7 +54,7 @@ public class CreateOrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String vnPayStatus = request.getParameter("vnp_TransactionStatus");
-        String url = MyAppConstants.PublicFeatures.FAILURE_ORDER_CONTROLLER;
+        String url = Constants.PublicFeatures.FAILURE_ORDER_CONTROLLER;
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         try {
@@ -194,7 +194,7 @@ public class CreateOrderServlet extends HttpServlet {
                             break;
                     }
                     session.setAttribute("ORDER_ID", orderID);
-                    url = MyAppConstants.PublicFeatures.SUCCESS_ORDER_CONTROLLER;
+                    url = Constants.PublicFeatures.SUCCESS_ORDER_CONTROLLER;
                 }
             }
 

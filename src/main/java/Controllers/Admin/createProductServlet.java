@@ -9,7 +9,7 @@ import Daos.CategoryDAO;
 import Daos.ProductDAO;
 import Models.AccountDTO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import Utils.S3Util;
 import Utils.Validation;
 import com.amazonaws.services.s3.model.S3DataSource;
@@ -50,7 +50,7 @@ public class createProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String button = request.getParameter("btAction");
         String productType = request.getParameter("productTypeID");
         String cateID = request.getParameter("cateID");
@@ -73,8 +73,8 @@ public class createProductServlet extends HttpServlet {
         try {
             boolean flag = true;
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || account.getRoleName().equals("Customer")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isAdmin)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             if (!Validation.checkNumberGreater0(qtyAvailable)) {
@@ -114,7 +114,7 @@ public class createProductServlet extends HttpServlet {
                             0, 0, Integer.parseInt(qtyAvailable),
                             0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount) / 100, true);
                     prodao.createProduct(newPro);
-                    url = MyAppConstants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
+                    url = Constants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
                     response.sendRedirect(url);
                     return;
                 } else {
@@ -124,7 +124,7 @@ public class createProductServlet extends HttpServlet {
                             Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
                             0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount) / 100, true);
                     prodao.createProduct(newPro);
-                    url = MyAppConstants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
+                    url = Constants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
                     response.sendRedirect(url);
                     return;
                 }
@@ -137,7 +137,7 @@ public class createProductServlet extends HttpServlet {
             request.setAttribute("CATE_CHOOSE", cateID);
             request.setAttribute("CATE_LIST", catedao.getAllCate());
             request.setAttribute("PRODUCT_TYPE", productType);
-            url = MyAppConstants.AdminFeatures.CREATE_PRODUCT_PAGE;
+            url = Constants.AdminFeatures.CREATE_PRODUCT_PAGE;
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

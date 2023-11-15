@@ -25,14 +25,15 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into BirdNestDetail_Tracking ( "
-                        + "Bird_Nest_ID, LastUpdateDate, NOTE "
+                        + "Bird_Nest_ID, LastUpdateDate, NOTE, Image "
                         + ") values ( "
-                        + "?, ?, ? "
+                        + "?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newBirdNest.getBird_Nest_ID());;
                 stm.setDate(2, newBirdNest.getLastUpdateDate());
                 stm.setString(3, newBirdNest.getNote());
+                stm.setString(4, newBirdNest.getImage());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -65,10 +66,10 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "Select Bird_Nest_ID, NOTE, LastUpdateDate "
+                String sql = "Select Bird_Nest_ID, NOTE, Image, LastUpdateDate "
                         + "from BirdNestDetail_Tracking "
                         + "where Bird_Nest_ID = ? "
-                        + "Order by LastUpdateDate desc "
+                        + "Order by LastUpdateDate desc, Bird_Nest__Tracking_ID desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY";
                 stm = con.prepareStatement(sql);
@@ -85,6 +86,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                     }
                     BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"),
                             rs.getString("NOTE"),
+                            rs.getString("Image"),
                             rs.getDate("LastUpdateDate"));
                     if (this.bndetalList == null) {
                         this.bndetalList = new ArrayList<BirdNestDetail_TrackingDTO>();
@@ -157,12 +159,12 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "select trdt.Bird_Nest_ID, trdt.LastUpdateDate, trdt.NOTE "
+                String sql = "select trdt.Bird_Nest_ID, trdt.LastUpdateDate, trdt.NOTE, trdt.Image "
                         + "from BirdNestDetail_Tracking trdt "
                         + "inner join Bird_Nest_Tracking tr on trdt.Bird_Nest_ID = tr.Bird_Nest_ID "
                         + "inner join Orders od on tr.OrderID = od.OrderID "
                         + "where od.OrderID = ? "
-                        + "Order by trdt.LastUpdateDate desc "
+                        + "Order by trdt.LastUpdateDate desc, trdt.Bird_Nest__Tracking_ID desc "
                         + "OFFSET ? ROWS "
                         + "FETCH FIRST ? ROWS ONLY ";
                 stm = con.prepareStatement(sql);
@@ -171,7 +173,10 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                 stm.setInt(3, fieldShow);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"), rs.getString("NOTE"), rs.getDate("LastUpdateDate"));
+                    BirdNestDetail_TrackingDTO result = new BirdNestDetail_TrackingDTO(rs.getString("Bird_Nest_ID"), 
+                            rs.getString("NOTE"), 
+                            rs.getString("Image"), 
+                            rs.getDate("LastUpdateDate"));
                     if (this.bndetalList == null) {
                         this.bndetalList = new ArrayList<>();
                     }
@@ -211,7 +216,7 @@ public class BirdNestDetail_TrackingDAO implements Serializable {
                 while (rs.next()) {
                     int total = rs.getInt(1);
                     int countPage;
-                    if (total < fieldShow) {
+                    if (total <= fieldShow) {
                         countPage = 1;
                     } else {
                         countPage = total / fieldShow;

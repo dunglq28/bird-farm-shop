@@ -1,11 +1,11 @@
 package Controllers.Admin;
 
-import Daos.AdminDAO;
+import Daos.AccountDAO;
 import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.OrderDTO;
 import Models.StaffDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,19 +24,19 @@ public class updatedAccountStatus extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+        String url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
         String status = request.getParameter("status");
         String accountID = request.getParameter("accountID");
         try {
             boolean status_update;
             status_update = status.equals("Enable");
-            AdminDAO dao = new AdminDAO();
+            AccountDAO dao = new AccountDAO();
 //            OrderDAO ord = new OrderDAO();
             StaffDAO staff = new StaffDAO();
             boolean result = dao.UpdatedStatus(accountID, status_update);
             if (result) {
                 if (status_update == true){
-                    url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                    url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                 }else{
                     StaffDTO staffDTO = staff.getStaffByAccountID(accountID);
                     if (staffDTO.getStaffID()!=null){
@@ -47,9 +47,9 @@ public class updatedAccountStatus extends HttpServlet {
 //                                ord.UpdateStatusOrder(staffDTO.getStaffID(), "Wait for confirmation");
 //                            }
                             dao.UpdatedStatus(accountID, status_update);
-                            url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                            url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                         } else {
-                            url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+                            url = Constants.PublicFeatures.ERROR_404_PAGE;
                         }
                     } 
                 }

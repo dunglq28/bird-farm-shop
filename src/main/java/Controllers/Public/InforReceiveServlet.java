@@ -8,7 +8,7 @@ package Controllers.Public;
 import Daos.CustomerDAO;
 import Models.AccountDTO;
 import Models.CustomerDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -39,7 +39,7 @@ public class InforReceiveServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+        String url = Constants.PublicFeatures.ERROR_PAGE;
         String totalOrder = request.getParameter("txtTotalOrder");
         String shippingMethod = request.getParameter("shippingMethod");
         String fullName = request.getParameter("txtFullName");
@@ -58,7 +58,7 @@ public class InforReceiveServlet extends HttpServlet {
 
             if (button == null) {
                 request.setAttribute("TOTAL_ORDER", totalOrder);
-                url = MyAppConstants.CustomerFeatures.RECEIVING_INFO_PAGE;
+                url = Constants.CustomerFeatures.RECEIVING_INFO_PAGE;
             } else if (button.equals("Continue")) {
                 if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
                     request.setAttribute("SHIPPING_METHOD", "Fast delivery");
@@ -69,11 +69,11 @@ public class InforReceiveServlet extends HttpServlet {
                 session.setAttribute("CUSTOMER", customer);
                 request.setAttribute("TOTAL_ORDER", totalOrder);
                 if (customer != null && serviceID.equals("1")) {
-                    url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+                    url = Constants.PublicFeatures.PAYMENT_PAGE;
                 } else if (customer != null && serviceID.equals("2")) {
-                    url = MyAppConstants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
+                    url = Constants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
                 } else if (customer != null && serviceID.equals("0")) {
-                    url = MyAppConstants.CustomerFeatures.PAYMENT_MATCH_BIRD_PAGE;
+                    url = Constants.CustomerFeatures.PAYMENT_MATCH_BIRD_PAGE;
                 }
             }
 

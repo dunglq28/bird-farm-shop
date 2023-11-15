@@ -7,7 +7,7 @@ package Controllers.Public;
 
 import Daos.ProductDAO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,7 +40,7 @@ public class SelectSameProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+        String url = Constants.PublicFeatures.HOME_CONTROLLER;
         String button = request.getParameter("btAction");
 
         String product_name = request.getParameter("txtproductName");
@@ -110,7 +110,7 @@ public class SelectSameProductServlet extends HttpServlet {
                 session.setAttribute("PRODUCT_CURRENT", product);
                 //Get all bird have a same name to view 
                 session.setAttribute("PRODUCT_SAME_NAME", result);
-                url = MyAppConstants.PublicFeatures.PRODUCT_DETAIL_PAGE;
+                url = Constants.PublicFeatures.PRODUCT_DETAIL_PAGE;
                 
             } else if (productTypeID.equals("2")) { // show a detail of bird nest
                 productID = request.getParameter("txtproductID");
@@ -122,7 +122,7 @@ public class SelectSameProductServlet extends HttpServlet {
                 session.setAttribute("PRODUCT_CURRENT", product);
                 session.setAttribute("BIRD_DAD", dao.getProductByID(product.getDad_Bird_ID()));
                 session.setAttribute("BIRD_MOM", dao.getProductByID(product.getMom_Bird_ID()));
-                url = MyAppConstants.PublicFeatures.BIRD_NEST_DETAIL_PAGE;
+                url = Constants.PublicFeatures.BIRD_NEST_DETAIL_PAGE;
 
             }
 

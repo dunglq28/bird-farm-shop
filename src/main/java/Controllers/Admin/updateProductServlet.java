@@ -9,7 +9,7 @@ import Daos.CategoryDAO;
 import Daos.ProductDAO;
 import Models.AccountDTO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import Utils.S3Util;
 import Utils.Validation;
 import java.io.IOException;
@@ -49,15 +49,15 @@ public class updateProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String productID = request.getParameter("ProductID");
         String button = request.getParameter("btAction");
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || account.getRoleName().equals("Customer")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isAdmin)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             session.removeAttribute("NOTIFICATION");
@@ -78,7 +78,7 @@ public class updateProductServlet extends HttpServlet {
                 request.setAttribute("FEMALE_BIRD_LIST", prodao.getBirdByGender("Female", prodto.getCategoryID(), 0));
             }
             request.setAttribute("PRODUCT_TYPE", prodto.getProduct_TypeID());
-            url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_PAGE;
+            url = Constants.AdminFeatures.UPDATE_PRODUCT_PAGE;
             if (button.equals("Update")) {
                 String productType = request.getParameter("productType");
                 String proID = request.getParameter("ProductID");
@@ -144,7 +144,7 @@ public class updateProductServlet extends HttpServlet {
                 }
                 if (flag) {
                     prodao.updateProduct(proUd);
-                    url = MyAppConstants.AdminFeatures.UPDATE_PRODUCT_CONTROLLER;
+                    url = Constants.AdminFeatures.UPDATE_PRODUCT_CONTROLLER;
                     session.setAttribute("PRODUCT_ID_UPDATE", proID);
                     response.sendRedirect(url);
                     return;

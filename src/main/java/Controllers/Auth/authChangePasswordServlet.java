@@ -4,7 +4,7 @@ import Daos.AccountDAO;
 import Models.AccountDTO;
 import Models.RegisterError;
 import Utils.EncryptPassword;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class authChangePasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String password = request.getParameter("password");
         String confirm_password = request.getParameter("confirm_password");
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+        String url = Constants.PublicFeatures.ERROR_PAGE;
         try {
             HttpSession session = request.getSession();
             AccountDTO dto = (AccountDTO) session.getAttribute("ACCOUNT");
@@ -47,12 +47,12 @@ public class authChangePasswordServlet extends HttpServlet {
             }
             if (foundErr) {
                 request.setAttribute("CHANGE_ERROR", error);
-                url = MyAppConstants.AuthFeatures.CHANGE_PASS_PAGE;
+                url = Constants.AuthFeatures.CHANGE_PASS_PAGE;
             } else {
                 String pass = encrypt.toSHA1(password);
                 boolean result = dao.updatePasswordByAccountID(dto.getAccountID(), pass);
                 if(result){
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                    url = Constants.AuthFeatures.LOGIN_PAGE;
                 }
             }
 
