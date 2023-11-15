@@ -43,7 +43,7 @@ public class viewAllAccount extends HttpServlet {
             int indexPage = Integer.parseInt(page);
             int fieldShow = 10;
             AdminDAO dao = new AdminDAO();
-            List<AccountDTO> result = dao.ViewAllAccount(indexPage, searchValue, fieldShow);
+            List<AccountDTO> result = dao.ViewAllAccount(indexPage, searchValue, fieldShow, account.getAccountID());
             int endPage = dao.getNumberAllAccountPage(searchValue, fieldShow);
             request.setAttribute("ACCOUNT_LIST", result);
             url = MyAppConstants.AdminFeatures.ALL_ACCOUNT_PAGE;
