@@ -68,7 +68,6 @@
                                         <td>
                                             <form action="updatedAccountRoles">
                                                 <select name="role" onchange="submit()" class="rounded-select" >
-                                                    <option ${dto.roleName == 'Admin' ? 'selected' : '' }>Admin</option>
                                                     <option ${dto.roleName == 'Staff' ? 'selected' : '' }>Staff</option>
                                                     <option ${dto.roleName == 'Customer' ? 'selected' : '' }>Customer</option>
                                                 </select>

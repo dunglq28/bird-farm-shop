@@ -9,11 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Tracking Bird</title>
+        <style>
+            .sidebar .menu .list-cart-icon .cart-number {
+                bottom: 26px;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/components/sideBar.jsp"></jsp:include>
-        <div class="main--content">
+            <div class="main--content">
                 <div class="header-wrapper">
                     <div class="header--title">
                         <h2>Bird Nest Tracking Management</h2>

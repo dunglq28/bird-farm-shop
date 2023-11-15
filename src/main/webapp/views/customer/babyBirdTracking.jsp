@@ -27,6 +27,7 @@
                                         <tr>
                                             <th scope="col">Bird_Nest_ID</th>
                                             <th scope="col">NOTE</th>
+                                            <th scope="col">IMAGE</th>
                                             <th scope="col">UPDATE TIME</th>
                                         </tr>
                                     </thead>
@@ -37,6 +38,9 @@
                                             <tr>
                                                 <td>${dto.bird_Nest_ID}</td>
                                                 <td class="long-content">${dto.note}</td>
+                                                 <td><img style="width: 100%; height: 100px; padding: auto;"
+                                            src="https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_1280.jpg" />
+                                    </td>
                                                 <td>${util.FormatDate(dto.lastUpdateDate)}</td>
                                             </tr>
                                         </c:forEach>
@@ -119,7 +123,7 @@
                         </div>
                         <div class="row d-flex icon-content">
                             <div class="d-flex flex-column">
-                                <p class="font-weight-bold">Tracking<br>Eggs</p>
+                                <p class="font-weight-bold">Tracking</p>
                             </div>
                         </div>
                         <div class="row d-flex icon-content">
