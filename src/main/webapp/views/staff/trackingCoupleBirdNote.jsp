@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="./assets/css/trackingNote.css"/>
     </head>
     <body>
-        <jsp:include page="../../components/sideBar.jsp"></jsp:include>
+        <jsp:include page="../../components/sideBar.jsp"></jsp:include>  
         <c:set var="tracking" value="${requestScope.BIRD_NEST_TRACKING}"/>
         <c:set var="orderId" value="${requestScope.ORDER_ID}"/>
         <c:set var="eggError" value="${requestScope.EGG_ERROR}" />
@@ -36,7 +36,47 @@
                 </div>
             </div>
             <div class="tabular--wrapper">
-                <div class="form-wrapper">
+                <div class="form-wrapper d-flex flex-column">
+                    <form action="updateStatusTracking" method="POST">
+                        <div class="form-group row progressStatus">
+                            <label for="status" class="col-sm-3 col-form-label">Progress</label>
+                            <div class="col-sm-9">
+                                <input type="hidden" value="${tracking.bird_Nest_ID}" name="birdNestId"/>
+                                <input type="hidden" name="orderId" value="${orderId}" />
+                                <select class="col-5 form-control" name="progress" onchange="this.form.submit()">
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Processing'}">
+                                            <option selected>Processing</option>
+                                            <option>Mating</option>
+                                            <option>Tracking Eggs</option>
+                                            <option>Tracking Baby Birds</option>
+                                        </c:when>
+                                    </c:choose>
+
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Mating'}">
+                                            <option selected>Mating</option>
+                                            <option>Tracking Eggs</option>
+                                            <option>Tracking Baby Birds</option>
+                                        </c:when>
+                                    </c:choose>
+
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Tracking Eggs'}">
+                                            <option selected>Tracking Eggs</option>
+                                            <option>Tracking Baby Birds</option>
+                                        </c:when>
+                                    </c:choose>
+
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Tracking Baby Birds'}">
+                                            <option selected>Tracking Baby Birds</option>
+                                        </c:when>
+                                    </c:choose>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
                     <form action="addTrackingNote" method="POST" id="formNoteTracking">
                         <div class="form-group row">
                             <label for="birdNestID" class="col-sm-3 col-form-label"
@@ -59,7 +99,7 @@
                             >
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating'}">
+                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating' or tracking.status eq 'Tracking Baby Birds'}">
                                         <input
                                             type="number"
                                             class="form-control"
@@ -89,7 +129,7 @@
                             >
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating'}">
+                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating' or tracking.status eq 'Tracking Eggs'}">
                                         <input
                                             type="number"
                                             class="form-control"
@@ -115,11 +155,10 @@
                         </div>
                         <div class="form-group row">
                             <label for="femaleBirds" class="col-sm-3 col-form-label"
-                                   >Number of female baby birds</label
-                            >
+                                   >Number of female baby birds</label>
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating'}">
+                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating' or tracking.status eq 'Tracking Eggs'}">
                                         <input
                                             type="number"
                                             class="form-control"
@@ -154,33 +193,6 @@
                                     ></textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="status" class="col-sm-3 col-form-label">Progress</label>
-                            <div class="col-sm-9">
-                                <select id="status" class="col-5 form-control" name="progress">
-                                    <c:choose>
-                                        <c:when test="${tracking.status eq 'Processing'}">
-                                            <option selected>Processing</option>
-                                            <option>Mating</option>
-                                            <option>Tracking Eggs</option>
-                                        </c:when>
-                                    </c:choose>
-
-                                    <c:choose>
-                                        <c:when test="${tracking.status eq 'Mating'}">
-                                            <option selected>Mating</option>
-                                            <option>Tracking Eggs</option>
-                                        </c:when>
-                                    </c:choose>
-
-                                    <c:choose>
-                                        <c:when test="${tracking.status eq 'Tracking Eggs'}">
-                                            <option selected>Tracking Eggs</option>
-                                        </c:when>
-                                    </c:choose>
-                                </select>
-                            </div>
-                        </div>
                         <c:if test="${not empty eggError}">
                             <div form-group row mb-4>
                                 <font style="color: red;">${eggError}</font>
@@ -194,5 +206,10 @@
                     </form>
                 </div>
             </div>
+            <script>
+                function submitForm() {
+                    document.querySelector("#formChangeStatus").onsubmit();
+                }
+            </script>
     </body>
 </html>

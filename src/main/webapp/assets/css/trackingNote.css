@@ -11,13 +11,6 @@ body {
   font-family: "Poppins";
 }
 
-.form-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .form-wrapper form {
   border-radius: 5px;
   width: 70%;
