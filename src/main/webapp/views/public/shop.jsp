@@ -51,6 +51,8 @@
             </div>
             <!-- Breadcrumb End -->
             <!-- Shop Section Begin -->
+             <div class="notifications">
+             </div>
             <section class="shop spad">
                 <div class="container">
                     <div class="row">
@@ -162,7 +164,7 @@
                                                             <li>
                                                                 <form action="product_list" method="GET">
                                                                     <c:if test="${dto.quantity_Available != 0}">
-                                                                        <button name="btAction" value="Addtocart" type="submit">
+                                                                        <button name="btAction" value="Addtocart" id="addtocart" type="submit">
                                                                             <i class="fa-solid fa-cart-plus"></i>
                                                                         </button>
                                                                     </c:if>
@@ -258,7 +260,7 @@
         <script src="./assets/js/jquery.nicescroll.min.js"></script>
         <script src="./assets/js/main.js"></script>
         <script src="https://kit.fontawesome.com/46d5dcf0b7.js" crossorigin="anonymous"></script>
-
+        <script src="./assets/js/popup.js"></script>
 
     </body>
 
