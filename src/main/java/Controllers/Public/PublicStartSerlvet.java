@@ -1,7 +1,7 @@
 package Controllers.Public;
 
 import Models.AccountDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
@@ -21,13 +21,13 @@ public class PublicStartSerlvet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String url = MyAppConstants.PublicFeatures.HOME_PAGE;
+        String url = Constants.PublicFeatures.HOME_PAGE;
         HttpSession session = request.getSession();
         AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
         if (account != null && account.getRoleName().equals("Customer")) {
-            url = MyAppConstants.PublicFeatures.HOME_PAGE;
+            url = Constants.PublicFeatures.HOME_PAGE;
         } 
-        session.setAttribute("HISTORY_URL", MyAppConstants.PublicFeatures.HOME_CONTROLLER);
+        session.setAttribute("HISTORY_URL", Constants.PublicFeatures.HOME_CONTROLLER);
         RequestDispatcher dis = request.getRequestDispatcher(url);
         dis.forward(request, response);
 

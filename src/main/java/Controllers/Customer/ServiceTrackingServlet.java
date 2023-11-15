@@ -10,7 +10,7 @@ import Models.BirdNestDetail_TrackingDTO;
 import Models.Bird_Nest_TrackingDTO;
 import Models.OrderDetailDTO;
 import Object.Products;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ServiceTrackingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.CustomerFeatures.SERVICE_TRACKING_PAGE;
+        String url = Constants.CustomerFeatures.SERVICE_TRACKING_PAGE;
         String orderID = request.getParameter("txtOrderID");
         String page = request.getParameter("page");
         String paymentMethod = request.getParameter("PaymentMethod");
@@ -49,7 +49,7 @@ public class ServiceTrackingServlet extends HttpServlet {
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             if (account == null) { // If customers don't login return to home
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 response.sendRedirect(url);
                 return;
             }

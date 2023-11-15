@@ -8,7 +8,7 @@ package Controllers.Public;
 import Daos.CategoryDAO;
 import Daos.ProductDAO;
 import Models.ProductDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class PagingProductServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
+        String url = Constants.PublicFeatures.PRODUCT_SHOP_PAGE;
         String searchValue = request.getParameter("lastSearch");
         String productType = request.getParameter("productType");
         String cate = request.getParameter("Category");
@@ -114,7 +114,7 @@ public class PagingProductServlet extends HttpServlet {
                 session.setAttribute("HISTORY_URL", url);
             }
 
-            url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
+            url = Constants.PublicFeatures.PRODUCT_SHOP_PAGE;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -1,7 +1,7 @@
 package Controllers.Public;
 
 import Cart.CartObj;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ public class RemoveBirdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PRODUCT_SHOP_PAGE;
+        String url = Constants.PublicFeatures.PRODUCT_SHOP_PAGE;
         try {
             HttpSession session = request.getSession(false);
             CartObj cart = (CartObj) session.getAttribute("BIRD_CART");

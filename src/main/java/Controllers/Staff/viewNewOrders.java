@@ -4,7 +4,7 @@ import Daos.OrderDAO;
 import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -31,8 +31,8 @@ public class viewNewOrders extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || (!account.getRoleName().equals("Staff") && !account.getRoleName().equals("Admin"))){
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || (!account.getRoleName().equals(Constants.roleName.isStaff) && !account.getRoleName().equals(Constants.roleName.isAdmin))){
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             if (searchValue == null) {
@@ -71,7 +71,7 @@ public class viewNewOrders extends HttpServlet {
             request.setAttribute("indexCurrent", indexPage);
             request.setAttribute("endPage", endPage);
             session.setAttribute("CURRENT_VIEW", "New order");
-            url = MyAppConstants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
+            url = Constants.StaffFeatures.ALL_STAFF_ORDER_PAGE;
 
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -88,6 +88,7 @@
                                                         <tr>
                                                             <th>Bird Nest ID</th>
                                                             <th>Last Updated Date</th>
+                                                            <th>Image</th>
                                                             <th class="text-center">Note</th>
                                                         </tr>
                                                     </thead>
@@ -96,6 +97,12 @@
                                                             <tr>
                                                                 <td>${note.bird_Nest_ID}</td>
                                                                 <td>${util.FormatDate(note.lastUpdateDate)}</td>
+                                                                <td>
+                                                                    <c:if test="${not empty note.image}">
+                                                                        <img style="width: 100%; height: 100px; padding: auto;"
+                                                                             src="${note.image}" />
+                                                                    </c:if>
+                                                                </td>
                                                                 <td>${note.note}</td>
                                                             </tr>
                                                         </c:forEach>
@@ -138,6 +145,9 @@
                                             </div>
                                             <div>
                                                 <h5>Number of female baby birds: ${birdNest.female_Babybird}</h5>
+                                            </div>
+                                            <div>
+                                                <h5>Status: ${birdNest.status}</h5>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

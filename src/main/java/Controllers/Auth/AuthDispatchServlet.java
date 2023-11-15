@@ -1,6 +1,6 @@
 package Controllers.Auth;
 
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
@@ -21,28 +21,28 @@ public class AuthDispatchServlet extends HttpServlet {
         try {
             switch (button) {
                 case "loginPage":
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                    url = Constants.AuthFeatures.LOGIN_PAGE;
                     break;
                 case "homePage":
-                    url = MyAppConstants.PublicFeatures.HOME_PAGE;
+                    url = Constants.PublicFeatures.HOME_PAGE;
                     break;
                 case "logout":
-                    url = MyAppConstants.AuthFeatures.LOGOUT_CONTROLLER;
+                    url = Constants.AuthFeatures.LOGOUT_CONTROLLER;
                     break;
                 case "registerPage":
-                    url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
+                    url = Constants.AuthFeatures.REGISTER_PAGE;
                     break;
                 case "forgetPassPage":
-                    url = MyAppConstants.AuthFeatures.FORGET_PASS_PAGE;
+                    url = Constants.AuthFeatures.FORGET_PASS_PAGE;
                     break;
                 case "Send":
-                    url = MyAppConstants.AuthFeatures.FORGET_PASS_CONTROLLER;
+                    url = Constants.AuthFeatures.FORGET_PASS_CONTROLLER;
                     break;
                 case "resetPassPage":
-                    url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
+                    url = Constants.AuthFeatures.RESET_PASS_PAGE;
                     break;
                 case "CreateNewPassword":
-                    url = MyAppConstants.AuthFeatures.RESET_PASS_CONTROLLER;
+                    url = Constants.AuthFeatures.RESET_PASS_CONTROLLER;
                     break;
             }
         } finally {

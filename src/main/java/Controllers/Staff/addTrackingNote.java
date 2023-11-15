@@ -8,21 +8,29 @@ package Controllers.Staff;
 import Daos.BirdNestDetail_TrackingDAO;
 import Daos.Bird_Nest_TrackingDAO;
 import Models.BirdNestDetail_TrackingDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
+import Utils.S3Util;
 import java.io.IOException;
 import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "addTrackingNote", urlPatterns = {"/addTrackingNote"})
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 11 // 11MB
+)
 public class addTrackingNote extends HttpServlet {
 
     /**
@@ -36,6 +44,7 @@ public class addTrackingNote extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
         String url = "";
@@ -49,6 +58,8 @@ public class addTrackingNote extends HttpServlet {
                 String males = request.getParameter("maleBirds");
                 String females = request.getParameter("femaleBirds");
                 String note = request.getParameter("note");
+                Part filePart = request.getPart("file");
+                String urlImage = "";
                 int numOfEggs = Integer.parseInt(eggs);
                 int numOfMales = Integer.parseInt(males);
                 int numOfFemales = Integer.parseInt(females);
@@ -56,26 +67,38 @@ public class addTrackingNote extends HttpServlet {
                 Date currentDate = new Date(millis);
                 BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
                 Bird_Nest_TrackingDAO tracking = new Bird_Nest_TrackingDAO();
+                if (!filePart.getSubmittedFileName().isEmpty()) {
+                    String fileName = getFileName(filePart);
+//                    S3Util.uploadFile(fileName, filePart.getInputStream());
+                    urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
+                }
                 int total = numOfFemales + numOfMales;
                 if (total <= numOfEggs) {
-                    boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, currentDate));
+                    boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, urlImage, currentDate));
                     boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate);
                     if (updateTracking && addNote) {
-                        url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
+                        url = Constants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
                     }
                 } else {
                     request.setAttribute("EGG_ERROR", "The total number of male and female nestlings must not exceed the number of available eggs");
-                    url = MyAppConstants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
+                    url = Constants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
                 }
             } else {
-                url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
+                url = Constants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
             }
         } catch (Exception e) {
             log(e.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
+    }
+
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        int beginIndex = contentDisposition.indexOf("filename=") + 10;
+        int endIndex = contentDisposition.length() - 1;
+
+        return contentDisposition.substring(beginIndex, endIndex);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

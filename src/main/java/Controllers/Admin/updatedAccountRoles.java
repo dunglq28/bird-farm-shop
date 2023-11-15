@@ -1,11 +1,10 @@
 package Controllers.Admin;
 
 import Daos.AccountDAO;
-import Daos.AdminDAO;
 import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.StaffDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,7 +24,7 @@ public class updatedAccountRoles extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String accountid = request.getParameter("accountid");
         String Role = request.getParameter("role");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         try {
             int roleID = 4;
             long millis = System.currentTimeMillis();
@@ -34,9 +33,9 @@ public class updatedAccountRoles extends HttpServlet {
             AccountDTO accDTO = dao.getAccountByID(accountid);
             StaffDAO staffDAO = new StaffDAO();
             StaffDTO staffDTO = new StaffDTO();
-            AdminDAO adDAO = new AdminDAO();
+            AccountDAO adDAO = new AccountDAO();
             switch (Role) {
-                case "Staff":
+                case Constants.roleName.isStaff:
                     roleID = 3;
                     staffDTO = staffDAO.getStaffByAccountID(accountid);
                     if (staffDTO == null) {
@@ -44,24 +43,24 @@ public class updatedAccountRoles extends HttpServlet {
                                 accDTO.getEmail(), null, null, null,
                                 "M1", accountid, date, true);
                         staffDAO.createStaff(staff);
-                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                         break;
                     } else if (staffDTO.isStatus() == true) {
-                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                         break;
                     } else {
                         adDAO.UpdatedStaffRole(staffDTO.getStaffID(), true);
-                        url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                        url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                         break;
                     }
 
-                case "Customer":
+                case Constants.roleName.isCustomer:
                     staffDTO = staffDAO.getStaffByAccountID(accountid);
                     adDAO.UpdatedStaffRole(staffDTO.getStaffID(), false);
-                    url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                    url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
                     break;
 
-                case "Admin":
+                case Constants.roleName.isAdmin:
                     roleID = 1;
                     break;
                 default:
@@ -69,7 +68,7 @@ public class updatedAccountRoles extends HttpServlet {
             }
             boolean result = adDAO.UpdatedRole(accountid, roleID);
             if (result) {
-                url = MyAppConstants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
+                url = Constants.AdminFeatures.VIEW_ALL_ACCOUNT_CONTROLLER;
             }
 
         } finally {

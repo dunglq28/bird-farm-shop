@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="./assets/css/trackingNote.css"/>
     </head>
     <body>
-        <jsp:include page="../../components/sideBar.jsp"></jsp:include>  
+        <jsp:include page="/components/sideBar.jsp"></jsp:include>  
         <c:set var="tracking" value="${requestScope.BIRD_NEST_TRACKING}"/>
         <c:set var="orderId" value="${requestScope.ORDER_ID}"/>
         <c:set var="eggError" value="${requestScope.EGG_ERROR}" />
@@ -50,6 +50,7 @@
                                             <option>Mating</option>
                                             <option>Tracking Eggs</option>
                                             <option>Tracking Baby Birds</option>
+                                            <option>Final Payment</option>
                                         </c:when>
                                     </c:choose>
 
@@ -58,6 +59,7 @@
                                             <option selected>Mating</option>
                                             <option>Tracking Eggs</option>
                                             <option>Tracking Baby Birds</option>
+                                            <option>Final Payment</option>
                                         </c:when>
                                     </c:choose>
 
@@ -65,19 +67,33 @@
                                         <c:when test="${tracking.status eq 'Tracking Eggs'}">
                                             <option selected>Tracking Eggs</option>
                                             <option>Tracking Baby Birds</option>
+                                            <option>Final Payment</option>
                                         </c:when>
                                     </c:choose>
 
                                     <c:choose>
                                         <c:when test="${tracking.status eq 'Tracking Baby Birds'}">
                                             <option selected>Tracking Baby Birds</option>
+                                            <option>Final Payment</option>
+                                        </c:when>
+                                    </c:choose>
+
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Final Payment'}">
+                                            <option selected>Final Payment</option>
+                                        </c:when>
+                                    </c:choose>
+
+                                    <c:choose>
+                                        <c:when test="${tracking.status eq 'Payment Success'}">
+                                            <option selected>Payment Success</option>
                                         </c:when>
                                     </c:choose>
                                 </select>
                             </div>
                         </div>
                     </form>
-                    <form action="addTrackingNote" method="POST" id="formNoteTracking">
+                    <form action="addTrackingNote" method="POST" id="formNoteTracking" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="birdNestID" class="col-sm-3 col-form-label"
                                    >Bird Nest ID</label
@@ -99,7 +115,7 @@
                             >
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating' or tracking.status eq 'Tracking Baby Birds'}">
+                                    <c:when test="${tracking.status != 'Tracking Eggs'}">
                                         <input
                                             type="number"
                                             class="form-control"
@@ -129,16 +145,16 @@
                             >
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating' or tracking.status eq 'Tracking Eggs'}">
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="maleBirds"
-                                            min="0"
-                                            value="${tracking.male_Babybird}"
-                                            name="maleBirds"
-                                            readonly
-                                            />
+                                    <c:when test="${tracking.status != 'Tracking Baby Birds'}">
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="maleBirds"
+                                                min="0"
+                                                value="${tracking.male_Babybird}"
+                                                name="maleBirds"
+                                                readonly
+                                                />
                                     </c:when>
                                     <c:otherwise>
                                         <input
@@ -158,16 +174,16 @@
                                    >Number of female baby birds</label>
                             <div class="col-sm-9">
                                 <c:choose>
-                                    <c:when test="${tracking.status eq 'Processing' or tracking.status eq 'Mating' or tracking.status eq 'Tracking Eggs'}">
-                                        <input
-                                            type="number"
-                                            class="form-control"
-                                            id="femaleBirds"
-                                            min="0"
-                                            value="${tracking.female_Babybird}"
-                                            name="femaleBirds"
-                                            readonly
-                                            />
+                                    <c:when test="${tracking.status != 'Tracking Baby Birds'}">
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="femaleBirds"
+                                                min="0"
+                                                value="${tracking.female_Babybird}"
+                                                name="femaleBirds"
+                                                readonly
+                                                />
                                     </c:when>
                                     <c:otherwise>
                                         <input
@@ -193,6 +209,14 @@
                                     ></textarea>
                             </div>
                         </div>
+                        <div class="form-control-upload" style="border: none;" >
+                            <div>
+                                <div class="d-flex align-content-center text-center">
+                                    <p><input type="file" name="file" onchange="showImage(this);" /></p>
+                                    <p><img id="preview" src="" alt="Photo" style="max-height: 100px;" /></p>
+                                </div>
+                            </div>
+                        </div>
                         <c:if test="${not empty eggError}">
                             <div form-group row mb-4>
                                 <font style="color: red;">${eggError}</font>
@@ -201,7 +225,7 @@
                         <div class="form-group row add-note">
                             <input type="hidden" name="orderId" value="${orderId}" />
                             <input type="submit" name="action" value="Cancel" />
-                            <input type="submit" name="action" value="Add note" />
+                            <input type="submit" name="action" value="Add note" ${tracking.status  eq 'Payment Success' ? 'disabled' : ''} />
                         </div>
                     </form>
                 </div>
@@ -209,6 +233,20 @@
             <script>
                 function submitForm() {
                     document.querySelector("#formChangeStatus").onsubmit();
+                }
+                function showImage(input) {
+                    var file = input.files[0];
+                    var img = document.getElementById('preview');
+
+                    if (file) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            img.src = e.target.result;
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
                 }
             </script>
     </body>

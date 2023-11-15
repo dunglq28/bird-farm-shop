@@ -4,7 +4,7 @@ package Controllers.Auth;
 import Daos.AccountDAO;
 import Models.RegisterError;
 import Utils.EncryptPassword;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ public class AuthResetPassServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+        String url = Constants.PublicFeatures.ERROR_PAGE;
 
         String password = request.getParameter("txtPassword");
         String confirm = request.getParameter("txtConfirm");
@@ -45,13 +45,13 @@ public class AuthResetPassServlet extends HttpServlet {
 
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", error);
-                url = MyAppConstants.AuthFeatures.RESET_PASS_PAGE;
+                url = Constants.AuthFeatures.RESET_PASS_PAGE;
             } else {
                 AccountDAO dao = new AccountDAO();
                 EncryptPassword encrypt = new EncryptPassword();
                 String pass = encrypt.toSHA1(password);
                 boolean result = dao.updatePasswordByEmail(email, pass);
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                url = Constants.AuthFeatures.LOGIN_PAGE;
             }
 
         } catch (SQLException ex) {

@@ -7,7 +7,7 @@ package Controllers.Admin;
 
 import Daos.ProductDAO;
 import Models.AccountDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -37,20 +37,20 @@ public class deleteProductSerlvet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String productID = request.getParameter("ProductID");
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || account.getRoleName().equals("Customer")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isAdmin)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             ProductDAO prodao = new ProductDAO();
             boolean result = prodao.DeleteProductByProductID(productID);
             if (result) {
-                url = MyAppConstants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
+                url = Constants.AdminFeatures.VIEW_ALL_PRODUCT_CONTROLLER;
             }
 
         } catch (SQLException ex) {

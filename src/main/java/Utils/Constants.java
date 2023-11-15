@@ -1,6 +1,13 @@
 package Utils;
 
-public class MyAppConstants {
+public class Constants {
+
+    public class roleName {
+
+        public static final String isCustomer = "Customer";
+        public static final String isStaff = "Staff";
+        public static final String isAdmin = "Admin";
+    }
 
     public class PublicFeatures {
 
@@ -53,6 +60,7 @@ public class MyAppConstants {
         public static final String SERVICE_TRACKING_PAGE = "/views/customer/babyBirdTracking.jsp";
         public static final String PAYMENT_MATCH_BIRD_PAGE = "/views/customer/paymentMatchBird.jsp";
         public static final String SERVICE_OPTION_TWO_PAGE = "/views/customer/serviceOptionTwo.jsp";
+        public static final String CUSTOMER_INFORMATION_PAGE = "/views/customer/customerInfor.jsp";
 
         public static final String MY_ORDER_CONTROLLER = "Order";
         public static final String BIRD_NEST_SERVICE_CONTROLLER = "Bird-Nest-Services";

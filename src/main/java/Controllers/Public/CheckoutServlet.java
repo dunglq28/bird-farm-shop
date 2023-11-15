@@ -6,7 +6,7 @@
 package Controllers.Public;
 
 import Models.AccountDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +43,7 @@ public class CheckoutServlet extends HttpServlet {
         String serviceID = request.getParameter("txtServiceID");
         String productID = request.getParameter("txtproductID");
         String quantityBuy = request.getParameter("quantity_Buy");
-        String url = MyAppConstants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
+        String url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
         HttpSession session = request.getSession();
 
         try {
@@ -65,21 +65,21 @@ public class CheckoutServlet extends HttpServlet {
             }
 
             if (account == null) {
-                url = MyAppConstants.PublicFeatures.CHECK_LOGIN_CONTROLLER;
+                url = Constants.PublicFeatures.CHECK_LOGIN_CONTROLLER;
             } else if (button == null) {
-                url = MyAppConstants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
+                url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
             } else if (button.equals("Continue")) {
-                url = MyAppConstants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
+                url = Constants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("COD")
                     || button.equals("Booking") && paymentMethod.equals("COD")
                     || button.equals("Pay") && paymentMethod.equals("COD")) {
                 session.setAttribute("PAYMENT_METHOD", "COD");
-                url = MyAppConstants.PublicFeatures.CREATE_ORDER_CONTROLLER;
+                url = Constants.PublicFeatures.CREATE_ORDER_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("VNPAY")
                     || button.equals("Booking") && paymentMethod.equals("VNPAY")
                     || button.equals("Pay") && paymentMethod.equals("VNPAY")) {
                 session.setAttribute("PAYMENT_METHOD", "VNPAY");
-                url = MyAppConstants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
+                url = Constants.PublicFeatures.CHECKOUT_VNPAY_CONTROLLER;
             }
 
 //        } catch (SQLException ex) {

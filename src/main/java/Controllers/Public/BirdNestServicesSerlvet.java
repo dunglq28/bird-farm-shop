@@ -2,7 +2,7 @@ package Controllers.Public;
 
 import Models.AccountDTO;
 import Models.CustomerDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class BirdNestServicesSerlvet extends HttpServlet {
         try {
 
             if (button == null) {
-                url = MyAppConstants.PublicFeatures.BIRD_NEST_SERVICE_PAGE;
+                url = Constants.PublicFeatures.BIRD_NEST_SERVICE_PAGE;
             } else if (button.equals("OrderAvailableBirdNest")) {
                 session.setAttribute("BUTTON", "OrderBirdNest");
                 url = "product_list"

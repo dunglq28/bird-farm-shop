@@ -1,7 +1,7 @@
 package Controllers.Public;
 
 import Cart.CartObj;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +18,7 @@ public class PublicCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.CART_PAGE;
+        String url = Constants.PublicFeatures.CART_PAGE;
         String quantityBuy = request.getParameter("txtQuantityBuy");
         String quantityAvailable = request.getParameter("txtQuantityAvailable");
 

@@ -4,7 +4,7 @@ import Utils.EncryptPassword;
 import Daos.AccountDAO;
 import Models.AccountDTO;
 import Models.LoginError;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -23,7 +23,7 @@ public class AuthLoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+        String url = session.getAttribute("HISTORY_URL") == null ? Constants.PublicFeatures.HOME_CONTROLLER
                 : (String) session.getAttribute("HISTORY_URL");
 
         String email = request.getParameter("txtEmailLogin");
@@ -42,7 +42,7 @@ public class AuthLoginServlet extends HttpServlet {
             }
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", error);
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                url = Constants.AuthFeatures.LOGIN_PAGE;
             } else {
                 AccountDAO dao = new AccountDAO();
                 AccountDTO account = dao.getAccountByEmail(email);
@@ -51,19 +51,19 @@ public class AuthLoginServlet extends HttpServlet {
                 if (account == null) {
                     error.setWrongEmail("Email is not registered!");
                     request.setAttribute("CREATE_ERROR", error);
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                    url = Constants.AuthFeatures.LOGIN_PAGE;
                 } else if (!en_pass.trim().equals(account.getPassword())) {
                     error.setWrongPassword("Password does not match!");
                     request.setAttribute("CREATE_ERROR", error);
-                    url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                    url = Constants.AuthFeatures.LOGIN_PAGE;
                 } else {
                     session.setAttribute("ACCOUNT", account);
                     if (account.getRoleName().equals("Customer")) {
-                        url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                        url = session.getAttribute("HISTORY_URL") == null ? Constants.PublicFeatures.HOME_CONTROLLER
                                 : (String) session.getAttribute("HISTORY_URL");
                     }
                     else if (account.getRoleName().equals("Staff") || account.getRoleName().equals("Admin")) {
-                        url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                        url = Constants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
                     }
                 }
 

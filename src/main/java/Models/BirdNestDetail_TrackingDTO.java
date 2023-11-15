@@ -15,11 +15,13 @@ public class BirdNestDetail_TrackingDTO {
 
     private String bird_Nest_ID;
     private String note;
+    private String image;
     private Date lastUpdateDate;
 
-    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String note, Date lastUpdateDate) {
+    public BirdNestDetail_TrackingDTO(String bird_Nest_ID, String note, String image, Date lastUpdateDate) {
         this.bird_Nest_ID = bird_Nest_ID;
         this.note = note;
+        this.image = image;
         this.lastUpdateDate = lastUpdateDate;
     }
 
@@ -39,6 +41,14 @@ public class BirdNestDetail_TrackingDTO {
         this.note = note;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     public Date getLastUpdateDate() {
         return lastUpdateDate;
     }

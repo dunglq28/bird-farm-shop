@@ -4,7 +4,7 @@ import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -22,14 +22,14 @@ public class MyOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.CustomerFeatures.MY_ORDER_PAGE;
+        String url = Constants.CustomerFeatures.MY_ORDER_PAGE;
         String status = request.getParameter("Status");
         String serviceID = request.getParameter("txtServiceID");
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             if (account == null) { // If customers don't login return to home
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 response.sendRedirect(url);
                 return;
             }

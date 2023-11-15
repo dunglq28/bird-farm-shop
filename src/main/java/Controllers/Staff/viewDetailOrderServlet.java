@@ -13,7 +13,7 @@ import Models.AccountDTO;
 import Models.BirdNestDetail_TrackingDTO;
 import Models.Bird_Nest_TrackingDTO;
 import Models.OrderDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -45,14 +45,14 @@ public class viewDetailOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("OrderID");
         HttpSession session = request.getSession();
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || account.getRoleName().equals("Customer")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isStaff)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             OrderDAO dao = new OrderDAO();
@@ -61,7 +61,7 @@ public class viewDetailOrderServlet extends HttpServlet {
             OrderDetailDAO oddao = new OrderDetailDAO();
             if (order.getServiceID() == 1) {
                 request.setAttribute("ORDER_DETAIL", oddao.getOrderDetailByOrderID(orderID));
-                url = MyAppConstants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
+                url = Constants.StaffFeatures.ORDER_DETAIL_STAFF_PAGE;
             } else {
                 String page = request.getParameter("page");
                 if (page == null) {
@@ -100,7 +100,7 @@ public class viewDetailOrderServlet extends HttpServlet {
                 request.setAttribute("END", end);
                 request.setAttribute("indexCurrent", indexPage);
                 request.setAttribute("endPage", endPage);
-                url = MyAppConstants.StaffFeatures.TRACKING_COUPLE_BIRD_DETAIL_PAGE;
+                url = Constants.StaffFeatures.TRACKING_COUPLE_BIRD_DETAIL_PAGE;
             }
 
         } catch (SQLException ex) {

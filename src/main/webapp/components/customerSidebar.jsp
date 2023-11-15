@@ -18,21 +18,8 @@
         <hr>
         <div class="mb-5 mt-5">
             <div class="Promotion-received"></div>
-
             <div class="Promotion-received-element mb-3">
-                <a href="#" class="text-muted text-decoration-none">
-                    <h5>Account management</h5>
-                </a>
-            </div>
-            <hr class="my-4">
-            <div class="Promotion-received-element mb-3">
-                <a href="#" class="text-muted text-decoration-none">
-                    <h5>Accumulates points</h5>
-                </a>
-            </div>
-            <hr class="my-4">
-            <div class="Promotion-received-element mb-3">
-                <a href="#" class="text-muted text-decoration-none">
+                <a href="Customer" class="text-muted text-decoration-none">
                     <h5>Account information</h5>
                 </a>
             </div>

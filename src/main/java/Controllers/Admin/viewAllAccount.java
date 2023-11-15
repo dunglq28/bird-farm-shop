@@ -1,8 +1,8 @@
 package Controllers.Admin;
 
-import Daos.AdminDAO;
+import Daos.AccountDAO;
 import Models.AccountDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,8 +29,8 @@ public class viewAllAccount extends HttpServlet {
 
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || !account.getRoleName().equals("Admin")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isAdmin)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
 
@@ -42,11 +42,11 @@ public class viewAllAccount extends HttpServlet {
             }
             int indexPage = Integer.parseInt(page);
             int fieldShow = 10;
-            AdminDAO dao = new AdminDAO();
+            AccountDAO dao = new AccountDAO();
             List<AccountDTO> result = dao.ViewAllAccount(indexPage, searchValue, fieldShow, account.getAccountID());
             int endPage = dao.getNumberAllAccountPage(searchValue, fieldShow);
             request.setAttribute("ACCOUNT_LIST", result);
-            url = MyAppConstants.AdminFeatures.ALL_ACCOUNT_PAGE;
+            url = Constants.AdminFeatures.ALL_ACCOUNT_PAGE;
 
             int start = 1;
             int distance = 4;

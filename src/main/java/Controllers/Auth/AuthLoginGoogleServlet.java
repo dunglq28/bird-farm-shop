@@ -6,7 +6,7 @@ import Models.AccountDTO;
 import Models.CustomerDTO;
 import Models.UserGoogleDTO;
 import Utils.GoogleUtils;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -23,13 +23,13 @@ public class AuthLoginGoogleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+        String url = session.getAttribute("HISTORY_URL") == null ? Constants.PublicFeatures.HOME_CONTROLLER
                 : (String) session.getAttribute("HISTORY_URL");
         try {
             String code = request.getParameter("code");
 
             if (code == null || code.isEmpty()) {
-                url = MyAppConstants.AuthFeatures.LOGIN_PAGE;
+                url = Constants.AuthFeatures.LOGIN_PAGE;
             } else {
                 String accessToken = GoogleUtils.getToken(code);
                 UserGoogleDTO googlePojo = GoogleUtils.getUserInfo(accessToken);
@@ -48,13 +48,13 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                         cusDao.createCustomer(customer);
                         session.setAttribute("ACCOUNT", account);
                     } else {
-                        url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+                        url = Constants.PublicFeatures.ERROR_PAGE;
                     }
                 }
                 if (account.getRoleName().equals("Staff")) {
-                    url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                    url = Constants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
                 } else if(account.getRoleName().equals("Admin")){
-                    url = MyAppConstants.AdminFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                    url = Constants.AdminFeatures.VIEW_ALL_ORDER_CONTROLLER;
                 }
             }
 

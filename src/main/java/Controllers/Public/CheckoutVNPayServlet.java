@@ -5,7 +5,7 @@
  */
 package Controllers.Public;
 
-import Utils.MyAppConstants;
+import Utils.Constants;
 import com.vnpay.common.Config;
 import java.io.IOException;
 import java.io.PrintWriter;

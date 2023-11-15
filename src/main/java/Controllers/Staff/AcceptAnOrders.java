@@ -6,7 +6,7 @@ import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
 import Models.StaffDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,7 +25,7 @@ public class AcceptAnOrders extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("orderID");
         try {
             HttpSession session = request.getSession();
@@ -34,7 +34,7 @@ public class AcceptAnOrders extends HttpServlet {
             StaffDAO staDAO = new StaffDAO();
             OrderDTO oddto = oddao.getOrderByOrderID(orderID);
             if (oddto.getStatus().equals("Cancel")) {
-                url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                url = Constants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
             } else {
                 Bird_Nest_TrackingDAO trackingDao = new Bird_Nest_TrackingDAO();
                 StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
@@ -44,7 +44,7 @@ public class AcceptAnOrders extends HttpServlet {
                     boolean updateTrackingStatus = trackingDao.updateStatusBirdNestTracking(orderID, "Processing");
                 }
                 if (odSuccess == true) {
-                    url = MyAppConstants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
+                    url = Constants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
                 }
             }
         } finally {

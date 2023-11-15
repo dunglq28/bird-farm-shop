@@ -248,18 +248,9 @@
 
 
                                         <hr class="my-4">
-
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <h6 class="text-uppercase">Temporary</h6>
-                                            <h6>${utilPrice.FormatPrice(requestScope.SERVICE_PRICE)}</h6>
-                                        </div>
-<!--                                        <div class=" d-flex justify-content-between mb-3">
-                                            <h6 class="text-uppercase">discount</h6>
-                                            <h6>0</h6>
-                                        </div>-->
                                         <c:set var="total_order" value="${requestScope.SERVICE_PRICE}"></c:set>
                                             <div class="d-flex justify-content-between mb-2">
-                                                <h5 class="text-uppercase">Total price</h5>
+                                                <h5 class="text-uppercase">Deposit price</h5>
                                                 <h5 id="total_order">${utilPrice.FormatPrice(total_order)}</h5>
                                         </div>
                                         <input type="hidden" name="txtTotalOrder" value="${requestScope.SERVICE_PRICE}" />

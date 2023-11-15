@@ -5,7 +5,7 @@ import Daos.StaffDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
 import Models.StaffDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +25,7 @@ public class viewMyOrder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.ERROR_404_PAGE;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String serviceID = request.getParameter("txtServiceID");
         String status = request.getParameter("Status");
         String page = request.getParameter("page");
@@ -33,8 +33,8 @@ public class viewMyOrder extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
-            if (account == null || !account.getRoleName().equals("Staff")) {
-                url = MyAppConstants.PublicFeatures.HOME_CONTROLLER;
+            if (account == null || !account.getRoleName().equals(Constants.roleName.isStaff)) {
+                url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
             if (serviceID == null) {
@@ -88,7 +88,7 @@ public class viewMyOrder extends HttpServlet {
             } else {
                 session.setAttribute("CURRENT_VIEW", "My booking");
             }
-            url = MyAppConstants.StaffFeatures.STAFF_ORDER_PAGE;
+            url = Constants.StaffFeatures.STAFF_ORDER_PAGE;
 
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

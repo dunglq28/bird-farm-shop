@@ -15,7 +15,7 @@ import Models.ProductDTO;
 import Models.CustomerDTO;
 import Models.OrderDTO;
 import Models.OrderDetailDTO;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -51,7 +51,7 @@ public class CheckLoginToCheckoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MyAppConstants.PublicFeatures.PAYMENT_PAGE;
+        String url = Constants.PublicFeatures.PAYMENT_PAGE;
         HttpSession session = request.getSession();
         
         try {
@@ -63,7 +63,7 @@ public class CheckLoginToCheckoutServlet extends HttpServlet {
                 url = "guest?btAction=loginPage";
                 session.setAttribute("HISTORY_URL", "cart");
             } else if (account == null && serviceID.equals("2")) {
-                session.setAttribute("HISTORY_URL", MyAppConstants.CustomerFeatures.BIRD_NEST_SERVICE_CONTROLLER);
+                session.setAttribute("HISTORY_URL", Constants.CustomerFeatures.BIRD_NEST_SERVICE_CONTROLLER);
                 url = "guest?btAction=loginPage";
             }
             

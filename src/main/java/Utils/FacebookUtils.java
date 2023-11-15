@@ -19,8 +19,8 @@ import org.apache.http.client.fluent.Request;
 public class FacebookUtils {
 
     public static String getToken(final String code) throws ClientProtocolException, IOException {
-        String link = String.format(MyAppConstants.FaceBook.FACEBOOK_LINK_GET_TOKEN, MyAppConstants.FaceBook.FACEBOOK_APP_ID,
-                MyAppConstants.FaceBook.FACEBOOK_APP_SECRET, MyAppConstants.FaceBook.FACEBOOK_REDIRECT_URL, code);
+        String link = String.format(Constants.FaceBook.FACEBOOK_LINK_GET_TOKEN, Constants.FaceBook.FACEBOOK_APP_ID,
+                Constants.FaceBook.FACEBOOK_APP_SECRET, Constants.FaceBook.FACEBOOK_REDIRECT_URL, code);
         String response = Request.Get(link).execute().returnContent().asString();
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
@@ -28,7 +28,7 @@ public class FacebookUtils {
     }
 
     public static User getUserInfo(String accessToken) {
-        FacebookClient facebookClient = new DefaultFacebookClient(accessToken, MyAppConstants.FaceBook.FACEBOOK_APP_SECRET, Version.LATEST);
+        FacebookClient facebookClient = new DefaultFacebookClient(accessToken, Constants.FaceBook.FACEBOOK_APP_SECRET, Version.LATEST);
         return facebookClient.fetchObject("me", User.class);
     }
 }

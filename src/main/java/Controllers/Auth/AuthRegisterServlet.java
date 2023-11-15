@@ -6,7 +6,7 @@ import Models.AccountDTO;
 import Models.CustomerDTO;
 import Models.RegisterError;
 import Utils.EmailExample;
-import Utils.MyAppConstants;
+import Utils.Constants;
 import Utils.SendMail;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +28,7 @@ public class AuthRegisterServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        String url = MyAppConstants.PublicFeatures.ERROR_PAGE;
+        String url = Constants.PublicFeatures.ERROR_PAGE;
         String email = request.getParameter("txtEmail");
         String Verification = request.getParameter("txtVerification");
         String btn = request.getParameter("btAction");
@@ -108,7 +108,7 @@ public class AuthRegisterServlet extends HttpServlet {
 
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", error);
-                url = MyAppConstants.AuthFeatures.REGISTER_PAGE;
+                url = Constants.AuthFeatures.REGISTER_PAGE;
 
             } else {
                 long millis = System.currentTimeMillis();
@@ -121,7 +121,7 @@ public class AuthRegisterServlet extends HttpServlet {
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
                 session.setAttribute("ACCOUNT", account);
-                url = session.getAttribute("HISTORY_URL") == null ? MyAppConstants.PublicFeatures.HOME_CONTROLLER
+                url = session.getAttribute("HISTORY_URL") == null ? Constants.PublicFeatures.HOME_CONTROLLER
                         : (String) session.getAttribute("HISTORY_URL");
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
