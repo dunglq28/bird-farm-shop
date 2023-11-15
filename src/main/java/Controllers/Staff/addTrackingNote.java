@@ -49,7 +49,6 @@ public class addTrackingNote extends HttpServlet {
                 String males = request.getParameter("maleBirds");
                 String females = request.getParameter("femaleBirds");
                 String note = request.getParameter("note");
-                String status = request.getParameter("progress");
                 int numOfEggs = Integer.parseInt(eggs);
                 int numOfMales = Integer.parseInt(males);
                 int numOfFemales = Integer.parseInt(females);
@@ -60,7 +59,7 @@ public class addTrackingNote extends HttpServlet {
                 int total = numOfFemales + numOfMales;
                 if (total <= numOfEggs) {
                     boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, currentDate));
-                    boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate, status);
+                    boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate);
                     if (updateTracking && addNote) {
                         url = MyAppConstants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
                     }
