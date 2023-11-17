@@ -82,10 +82,10 @@
                 <h3 style="font-weight: bold !important;color: black ;">Information receive</h3>
             </div>
             <div>
-                <h5>Another address</h3>
+                <h5>We only accept delivery within Ho Chi Minh City</h3>
             </div>
 
-            <div class="row mb-4 d-flex justify-content-between align-items-center">
+            <div class="row mb-2 d-flex justify-content-between align-items-center">
                 <div class="form-check">
                     <input onchange="toggleDeliveryOption('fastDelivery')" class="form-check-input-2" type="radio" 
                            name="shippingMethod" id="fastDeliveryRadio" value="Fast delivery" checked>
