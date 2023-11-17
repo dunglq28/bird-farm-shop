@@ -42,7 +42,7 @@ public class CancelOrderServlet extends HttpServlet {
             OrderDAO odao = new OrderDAO();
             OrderDTO oDTO = odao.getOrderByOrderID(orderID);
             if (oDTO.getStatus().equals("Processing")) {
-                url = MyAppConstants.CustomerFeatures.MY_ORDER_CONTROLLER;
+                url = Constants.CustomerFeatures.MY_ORDER_CONTROLLER;
             } else {
                 if (!status.equals("Cancel")) {
                     AccountDAO aDAO = new AccountDAO();

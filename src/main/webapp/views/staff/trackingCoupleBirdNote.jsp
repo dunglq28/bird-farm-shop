@@ -48,9 +48,6 @@
                                         <c:when test="${tracking.status eq 'Processing'}">
                                             <option selected>Processing</option>
                                             <option>Mating</option>
-                                            <option>Tracking Eggs</option>
-                                            <option>Tracking Baby Birds</option>
-                                            <option>Final Payment</option>
                                         </c:when>
                                     </c:choose>
 
@@ -58,8 +55,6 @@
                                         <c:when test="${tracking.status eq 'Mating'}">
                                             <option selected>Mating</option>
                                             <option>Tracking Eggs</option>
-                                            <option>Tracking Baby Birds</option>
-                                            <option>Final Payment</option>
                                         </c:when>
                                     </c:choose>
 
@@ -67,7 +62,6 @@
                                         <c:when test="${tracking.status eq 'Tracking Eggs'}">
                                             <option selected>Tracking Eggs</option>
                                             <option>Tracking Baby Birds</option>
-                                            <option>Final Payment</option>
                                         </c:when>
                                     </c:choose>
 
@@ -81,12 +75,6 @@
                                     <c:choose>
                                         <c:when test="${tracking.status eq 'Final Payment'}">
                                             <option selected>Final Payment</option>
-                                        </c:when>
-                                    </c:choose>
-
-                                    <c:choose>
-                                        <c:when test="${tracking.status eq 'Payment Success'}">
-                                            <option selected>Payment Success</option>
                                         </c:when>
                                     </c:choose>
                                 </select>
