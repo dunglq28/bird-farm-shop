@@ -69,7 +69,7 @@ public class addTrackingNote extends HttpServlet {
                 Bird_Nest_TrackingDAO tracking = new Bird_Nest_TrackingDAO();
                 if (!filePart.getSubmittedFileName().isEmpty()) {
                     String fileName = getFileName(filePart);
-//                    S3Util.uploadFile(fileName, filePart.getInputStream());
+                    S3Util.uploadFile(fileName, filePart.getInputStream());
                     urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
                 }
                 int total = numOfFemales + numOfMales;

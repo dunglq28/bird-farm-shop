@@ -85,7 +85,7 @@
                                                                         </div>
                                                                     </c:if>
                                                                 </div>
-                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
+<!--                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
                                                                      style="">
                                                                     <div class=" align-content-center justify-content-end">
                                                                         <a href="#"class="text-muted text-decoration-none see_details_tag">
@@ -93,7 +93,7 @@
                                                                             <i class="fa-solid fa-arrow-right"></i></a>
                                                                         </a>
                                                                     </div>
-                                                                </div>
+                                                                </div>-->
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-xl-12 d-flex"style=" margin-top: 8px;">
                                                                 <c:if test="${not empty order.form_Receipt}">

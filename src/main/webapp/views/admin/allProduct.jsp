@@ -114,20 +114,19 @@
                                                 <input type="hidden" name="productID" value="${pro.productID}" />
                                             </form>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <div class="d-flex">
-                                                <h6 class="mb-0 text-sm-center text-muted" style="margin-right: 10px;">
+                                                <h6 class="mb-0 text-sm-center text-muted" style="margin-left: 20px;">
                                                     <a class="text-decoration-none text-muted" href="updateProduct?ProductID=${pro.productID}">
                                                         <i class="far fa-edit"></i> 
                                                     </a>
                                                 </h6>
-                                                <h6 class="mb-0 text-sm-center text-muted">
+<!--                                                <h6 class="mb-0 text-sm-center text-muted">
                                                     <a class="text-decoration-none text-muted" href="deleteProduct?ProductID=${pro.productID}">
                                                         <i class="fa-solid fa-delete-left"></i> 
                                                     </a>
-                                                </h6>
+                                                </h6>-->
                                             </div>
-
                                         </td>
                                     </tr>
                                 </c:forEach>
