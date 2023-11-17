@@ -163,7 +163,7 @@ public class OrderDetailDAO {
         return null;
     }
 
-    public List<ProductDTO> getOrderDetailProductByOrderID(String orderId)
+    public List<Products> getOrderDetailProductByOrderID(String orderId)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -174,7 +174,7 @@ public class OrderDetailDAO {
             if (con != null) {
                 String sql = null;
                 //2.Create SQL statement string
-                sql = "select ProductID "
+                sql = "select ProductID, Quantity_Buy  "
                         + "from Order_Details "
                         + "where OrderID = ? ";
                 stm = con.prepareStatement(sql);
@@ -183,11 +183,11 @@ public class OrderDetailDAO {
                 rs = stm.executeQuery();
                 //5.process
                 while (rs.next()) {
-                    ProductDTO pro = new ProductDTO(rs.getString("ProductID"), 0, 0, 0);
-                    if (this.ODList == null) {
-                        this.ODList = new ArrayList<ProductDTO>();
+                    Products pro = new Products(rs.getString("ProductID"), rs.getInt("Quantity_Buy"));
+                    if (this.orderDetailList == null) {
+                        this.orderDetailList = new ArrayList<Products>();
                     }
-                    this.ODList.add(pro);
+                    this.orderDetailList.add(pro);
                 }
             }
         } finally {
@@ -201,7 +201,7 @@ public class OrderDetailDAO {
                 con.close();
             }
         }
-        return this.ODList;
+        return this.orderDetailList;
     }
 
     public List<ProductDTO> getParentProductByOrderID(String orderId)
