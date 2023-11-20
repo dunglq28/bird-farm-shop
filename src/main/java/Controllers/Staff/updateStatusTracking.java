@@ -6,6 +6,8 @@
 package Controllers.Staff;
 
 import Daos.Bird_Nest_TrackingDAO;
+import Daos.OrderDAO;
+import Models.OrderDTO;
 import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,16 +28,21 @@ public class updateStatusTracking extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = "";
-        
+        String orderId = request.getParameter("orderId");
+        String status = request.getParameter("progress");
         try {
-            String orderId = request.getParameter("orderId");
-            String status = request.getParameter("progress");
-            Bird_Nest_TrackingDAO dao = new Bird_Nest_TrackingDAO();
-            boolean result = dao.updateStatusBirdNestTracking(orderId, status);
-            if (result) {
-                url = Constants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
+            OrderDAO oddao = new OrderDAO();
+            OrderDTO oddto = oddao.getOrderByOrderID(orderId);
+            if (oddto.getStatus().equals("Cancel")) {
+                url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=2";
+            } else {
+                Bird_Nest_TrackingDAO dao = new Bird_Nest_TrackingDAO();
+                boolean result = dao.updateStatusBirdNestTracking(orderId, status);
+                if (result) {
+                    url = Constants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
+                }
             }
         } catch (Exception e) {
             log(e.getMessage());
