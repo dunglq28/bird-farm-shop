@@ -7,7 +7,9 @@ package Controllers.Staff;
 
 import Daos.BirdNestDetail_TrackingDAO;
 import Daos.Bird_Nest_TrackingDAO;
+import Daos.OrderDAO;
 import Models.BirdNestDetail_TrackingDTO;
+import Models.OrderDTO;
 import Utils.Constants;
 import Utils.S3Util;
 import java.io.IOException;
@@ -52,39 +54,45 @@ public class addTrackingNote extends HttpServlet {
         String action = request.getParameter("action");
 
         try {
-            if (action.equals("Add note")) {
-                String birdNestId = request.getParameter("birdNestId");
-                String eggs = request.getParameter("numberOfEggs");
-                String males = request.getParameter("maleBirds");
-                String females = request.getParameter("femaleBirds");
-                String note = request.getParameter("note");
-                Part filePart = request.getPart("file");
-                String urlImage = "";
-                int numOfEggs = Integer.parseInt(eggs);
-                int numOfMales = Integer.parseInt(males);
-                int numOfFemales = Integer.parseInt(females);
-                long millis = System.currentTimeMillis();
-                Date currentDate = new Date(millis);
-                BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
-                Bird_Nest_TrackingDAO tracking = new Bird_Nest_TrackingDAO();
-                if (!filePart.getSubmittedFileName().isEmpty()) {
-                    String fileName = getFileName(filePart);
-                    S3Util.uploadFile(fileName, filePart.getInputStream());
-                    urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
-                }
-                int total = numOfFemales + numOfMales;
-                if (total <= numOfEggs) {
-                    boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, urlImage, currentDate));
-                    boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate);
-                    if (updateTracking && addNote) {
-                        url = Constants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
+            OrderDAO oddao = new OrderDAO();
+            OrderDTO oddto = oddao.getOrderByOrderID(orderId);
+            if (oddto.getStatus().equals("Cancel")) {
+                url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=2";
+            } else {
+                if (action.equals("Add note")) {
+                    String birdNestId = request.getParameter("birdNestId");
+                    String eggs = request.getParameter("numberOfEggs");
+                    String males = request.getParameter("maleBirds");
+                    String females = request.getParameter("femaleBirds");
+                    String note = request.getParameter("note");
+                    Part filePart = request.getPart("file");
+                    String urlImage = "";
+                    int numOfEggs = Integer.parseInt(eggs);
+                    int numOfMales = Integer.parseInt(males);
+                    int numOfFemales = Integer.parseInt(females);
+                    long millis = System.currentTimeMillis();
+                    Date currentDate = new Date(millis);
+                    BirdNestDetail_TrackingDAO trackingDetail = new BirdNestDetail_TrackingDAO();
+                    Bird_Nest_TrackingDAO tracking = new Bird_Nest_TrackingDAO();
+                    if (!filePart.getSubmittedFileName().isEmpty()) {
+                        String fileName = getFileName(filePart);
+                        S3Util.uploadFile(fileName, filePart.getInputStream());
+                        urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
+                    }
+                    int total = numOfFemales + numOfMales;
+                    if (total <= numOfEggs) {
+                        boolean addNote = trackingDetail.createBirdNestDetailTracking(new BirdNestDetail_TrackingDTO(birdNestId, note, urlImage, currentDate));
+                        boolean updateTracking = tracking.updateStatusBirdNestTracking(birdNestId, numOfEggs, numOfMales, numOfFemales, currentDate);
+                        if (updateTracking && addNote) {
+                            url = Constants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
+                        }
+                    } else {
+                        request.setAttribute("EGG_ERROR", "The total number of male and female nestlings must not exceed the number of available eggs");
+                        url = Constants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
                     }
                 } else {
-                    request.setAttribute("EGG_ERROR", "The total number of male and female nestlings must not exceed the number of available eggs");
-                    url = Constants.StaffFeatures.NEW_NOTE_CONTROLLER + "?orderId=" + orderId;
+                    url = Constants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
                 }
-            } else {
-                url = Constants.StaffFeatures.VIEW_DETAIL_ORDER_CONTROLLER + "?OrderID=" + orderId;
             }
         } catch (Exception e) {
             log(e.getMessage());
