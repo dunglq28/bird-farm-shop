@@ -21,7 +21,7 @@
         <title>My Order</title>
         <style>
             .sidebar .menu .list-cart-icon .cart-number {
-                bottom: 15px;
+                bottom: 26px;
             }
         </style>
 
@@ -99,29 +99,34 @@
                                         <td>${util.FormatPrice(dto.total_order_final)}</td>
                                         <td>${dto.form_Receipt}</td>
                                         <td>${dto.payBy}</td>
+                                        <c:set var="cancel_status" value="Cancel"></c:set>
+                                        <c:if test="${requestScope.SERVICE_ID != 1 || dto.status == cancel_status}">
+                                            <td>${dto.status}</td>
+                                        </c:if>
+                                        <c:if test="${requestScope.SERVICE_ID == 1 && dto.status != cancel_status}">
+                                            <td>
+                                                <form action="updatedOrders-staff">
+                                                    <select name="txtNewStatus" onchange="submit()" class="rounded-select" >
+                                                        <option ${dto.status == 'Processing' ? 'selected' : '' }>Processing</option>
+                                                        <option ${dto.status == 'Delivering' ? 'selected' : '' }>Delivering</option>
+                                                        <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
+                                                    </select>
+                                                    <input type="hidden" name="txtOrderID" value="${dto.orderID}">
+                                                    <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
+                                                </form>
+                                            </td>
+                                        </c:if>
                                         <td>
-                                            <form action="updatedOrders-staff">
-                                                <select name="txtNewStatus" onchange="submit()" class="rounded-select" >
-                                                    <option ${dto.status == 'Processing' ? 'selected' : '' }>Processing</option>
-                                                    <option ${dto.status == 'Delivering' ? 'selected' : '' }>Delivering</option>
-                                                    <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
-                                                </select>
-                                                <input type="hidden" name="txtOrderID" value="${dto.orderID}">
-                                                <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
-                                            </form>
+                                            <c:if test="${dto.status == 'Wait for confirmation' || dto.status != 'Cancel'}">
+                                                <form action="cancelOrderByStaff" class="col-12 mt-3 d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-secondary" style="margin: 3px;">Cancel</button>
+                                                    <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                    <input type="hidden" name="txtServiceID" value="${dto.serviceID}">
+                                                    <input type="hidden" name="status" value="${dto.status}">
+                                                </form>
+                                            </c:if>
                                         </td>
 
-<!--                                        <td>
-                                            <div class="action">
-                                                <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                        </td>-->
                                     </tr>
                                 </c:forEach>
                             </c:if>

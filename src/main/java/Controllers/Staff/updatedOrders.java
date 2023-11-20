@@ -1,6 +1,7 @@
 package Controllers.Staff;
 
 import Daos.OrderDAO;
+import Models.OrderDTO;
 import Utils.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,9 +23,14 @@ public class updatedOrders extends HttpServlet {
         String url = "";
         try {
             OrderDAO dao = new OrderDAO();
-            boolean result = dao.UpdateStatusOrder(orderID, newStatus);
-            if (result == true) {
+            OrderDTO dto = dao.getOrderByOrderID(orderID);
+            if (dto.getStatus().equals("Cancel")) {
                 url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+            } else {
+                boolean result = dao.UpdateStatusOrder(orderID, newStatus);
+                if (result == true) {
+                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
