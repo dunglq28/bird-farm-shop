@@ -100,10 +100,8 @@
                                                 <hr class="mt-0 mb-4">
                                                 <div class="row pt-1">
                                                     <div class="col-6 mb-3">
-                                                        <h6>Status </h6>
-                                                        <select class="rounded-select">
-                                                            <option value="">${order.status}</option>
-                                                        </select>
+                                                        <h6>Status </h6>                                                     
+                                                        <p class="text-muted">${order.status}</p>
                                                     </div>
                                                     <div class="col-6 mb-3">
                                                         <h6>Customer name </h6>

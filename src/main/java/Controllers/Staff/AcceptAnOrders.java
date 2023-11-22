@@ -40,10 +40,11 @@ public class AcceptAnOrders extends HttpServlet {
                 StaffDTO staDTO = staDAO.getStaffByAccountID(account.getAccountID());
                 boolean odSuccess = oddao.takeActionOrder(staDTO.getStaffID(), orderID, "Processing");
                 OrderDTO order = oddao.getOrderByOrderID(orderID);
+                boolean updateTrackingStatus = false;
                 if (order.getServiceID() == 2) {
-                    boolean updateTrackingStatus = trackingDao.updateStatusBirdNestTracking(orderID, "Processing");
+                    updateTrackingStatus = trackingDao.updateStatusBirdNestTracking(orderID, "Processing");
                 }
-                if (odSuccess == true) {
+                if (odSuccess == true || updateTrackingStatus == true) {
                     url = Constants.StaffFeatures.VIEW_ALL_ORDER_CONTROLLER;
                 }
             }

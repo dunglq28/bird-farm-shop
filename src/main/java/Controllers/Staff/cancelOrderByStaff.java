@@ -1,6 +1,6 @@
-package Controllers.Customer;
+package Controllers.Staff;
 
-import Daos.AccountDAO;
+import Daos.Bird_Nest_TrackingDAO;
 import Daos.OrderDAO;
 import Daos.OrderDetailDAO;
 import Daos.ProductDAO;
@@ -10,75 +10,68 @@ import Models.ProductDTO;
 import Object.Products;
 import Utils.Constants;
 import Utils.SendMail;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "CancelOrder", urlPatterns = {"/CancelOrder"})
-public class CancelOrderServlet extends HttpServlet {
+@WebServlet(name = "cancelOrderByStaff", urlPatterns = {"/cancelOrderByStaff"})
+public class cancelOrderByStaff extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = Constants.CustomerFeatures.MY_ORDER_CONTROLLER;
+        String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String orderID = request.getParameter("orderID");
         String serviceID = request.getParameter("txtServiceID");
         String status = request.getParameter("status");
+        String product_check = request.getParameter("Select_option");
         HttpSession session = request.getSession();
-
         try {
             if (!status.equals("Cancel")) {
                 OrderDAO odao = new OrderDAO();
-                OrderDTO oDTO = odao.getOrderByOrderID(orderID);
-                AccountDAO aDAO = new AccountDAO();
-                List<AccountDTO> aDTO = aDAO.getAdminEmail();
-                odao.UpdateStatusOrder(orderID, "Cancel");
+                boolean update_check = odao.UpdateStatusOrder(orderID, "Cancel");
+                if(update_check){
+                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=1";
+                }
                 OrderDetailDAO oddao = new OrderDetailDAO();
                 List<Products> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
                 ProductDAO prodao = new ProductDAO();
                 ProductDTO prodto = new ProductDTO();
                 if (serviceID.equals("1")) {
-                    //Thêm code ở đây nè
+                    int quantity_cancel = 0;
+                    
                     for (Products pro : productIDList) {
                         prodto = prodao.getAllQuantityByProductID(pro.getProductID());
-                        prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + pro.getQuantityBuy(), prodto.getQuantity_AreMating(),
+                        if (product_check.equals("Yes")) {
+                            quantity_cancel = pro.getQuantityBuy();
+                        } else {
+                            quantity_cancel = 0;
+                        }
+                        prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + quantity_cancel, prodto.getQuantity_AreMating(),
                                 prodto.getQuantity_Sold() - pro.getQuantityBuy(), prodto.getProductID());
                     }
-                    if (oDTO.getPayBy().equals("VNPAY")) {
-                        for (AccountDTO dto : aDTO) {
-                            SendMail mailHome = new SendMail();
-                            String subject = "Refund invoice to customer ";
-                            String text = "Refund request, <br><br>"
-                                    + "The Order" + orderID + "  pay by VNPay has been cancelled please contact with the customer to refund money <br><br>"
-                                    + "PLEASE notice that all admin will receive this email, make sure that only one person do this action<br>"
-                                    + "Best regards, <br>"
-                                    + "BirdFarmShop";
-                            mailHome.sendCode(dto.getEmail(), subject, text);
-                        }
-                    }
                 } else {
+                    Bird_Nest_TrackingDAO trackingDao = new Bird_Nest_TrackingDAO();
                     for (Products pro : productIDList) {
+                        trackingDao.updateStatusBirdNestTracking(orderID, "Cancel");
                         prodto = prodao.getAllQuantityByProductID(pro.getProductID());
                         prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating() - 1,
                                 prodto.getQuantity_Sold(), prodto.getProductID());
                     }
-                    session.setAttribute("SERVICE_ID_CANCEL", serviceID);
+                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=2";
                 }
+                session.setAttribute("CANCEL_SERVICE", serviceID);
+                session.setAttribute("STATUS_CANCEL", status);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+
         } finally {
             response.sendRedirect(url);
         }
@@ -96,7 +89,13 @@ public class CancelOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(cancelOrderByStaff.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(cancelOrderByStaff.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -110,7 +109,13 @@ public class CancelOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(cancelOrderByStaff.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(cancelOrderByStaff.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -34,6 +34,11 @@ public class Products {
     public Products() {
     }
 
+    public Products(String productID, int quantityBuy) {
+        this.productID = productID;
+        this.quantityBuy = quantityBuy;
+    }
+    
     public Products(String productID, String name, String cate_name, String dad_Bird_ID, String mom_Bird_ID, String image,
             int quantityAvailable, int quantityBuy, int quantitySold, float price, float discount) {
         this.productID = productID;

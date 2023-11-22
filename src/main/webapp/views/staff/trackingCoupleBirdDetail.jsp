@@ -72,7 +72,7 @@
                                             <div class="col-md-6">
                                                 <h5 class="fw-bold mb-0 text-black" style=" color: rgb(13, 103, 128);">Tracking Note</h5>
                                             </div>
-                                            <c:if test="${birdNest.status ne 'Payment Success'}">
+                                            <c:if test="${birdNest.status ne 'Payment Success' && birdNest.status ne 'Cancel' && order.status ne 'Wait for confirmation'}">
                                                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                                                     <form action="newNoteTracking">
                                                         <input type="hidden" name="orderId" value="${order.orderID}" />
