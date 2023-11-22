@@ -149,10 +149,11 @@
                         </div>
                     </div>
                     <c:if test="${bird_nest_tracking.status == 'Final Payment'}">
-                        <form action="Checkout" method="Post">
+                        <form action="Checkout" method="GET">
                             <button type="submit" class="pay">Complete payment</button>  
                             <input type="hidden" name="txtOrderID" value="${bird_nest_tracking.orderID}">
                             <input type="hidden" name="txtServiceID" value="0" />
+                            <input type="hidden" name="btAction" value="CompletePayment" />
                         </form>
                     </c:if>
                 </div>

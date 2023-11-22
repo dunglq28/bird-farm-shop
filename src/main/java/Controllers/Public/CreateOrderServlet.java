@@ -68,11 +68,18 @@ public class CreateOrderServlet extends HttpServlet {
             if (cart == null && maleBird == null && femaleBird == null && session.getAttribute("OLD_ORDER_ID") == null) {
                 url = "cart";
             } else {
-                String shippingMethod = (String) session.getAttribute("SHIPPING_METHOD");
+                String shippingMethod = request.getParameter("shippingMethod");
 
                 AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
                 CustomerDTO customer = (CustomerDTO) session.getAttribute("CUSTOMER");
-                int temp = (Integer) session.getAttribute("SHIPPING_CASH");
+                int temp = 0;
+                if (shippingMethod != null) {
+                    if (shippingMethod.equals("Fast delivery")) {
+                        temp = 125000;
+                    } else {
+                        temp = 0;
+                    }
+                }
 
                 float shippingCash = (float) temp;
                 String totalOrder = (String) session.getAttribute("TOTAL_ORDER");
@@ -112,7 +119,7 @@ public class CreateOrderServlet extends HttpServlet {
                                 birdDao.updateQuantityAfterOrder(quantityAvaUpdate, pro.getQuantity_MaleBird(), quantitySold, key);
                                 if (flag) {
                                     //Create an order to buy birds and bird's nests
-                                    newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, customer.getAddress(), customer.getCity(),
+                                    newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, shippingMethod, customer.getAddress(), customer.getCity(), customer.getDistrict(),
                                             customer.getPhone_Number(), orderDate, null, 0, shippingCash, 0, Float.parseFloat(totalOrder), paymentMethod, "Wait for confirmation");
                                     orderdao.createOrder(newOrder);
                                     flag = false;
@@ -142,7 +149,7 @@ public class CreateOrderServlet extends HttpServlet {
                             birdDao.updateQuantityAfterOrder(quantityAvaUpdate, pro.getQuantity_AreMating() + 1, pro.getQuantity_Sold(), pro.getProductID());
 
                             //Create an order for bird matching service
-                            newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, null, customer.getAddress(), customer.getCity(),
+                            newOrder = new OrderDTO(orderID, serviceID, account.getAccountID(), null, null, null, null, null,
                                     customer.getPhone_Number(), orderDate, null, 0, 0, Float.parseFloat(totalOrder), 0, paymentMethod, "Wait for confirmation");
                             orderdao.createOrder(newOrder);
                             // Create a detail order for bird matching service with quantityBuy of product is 0

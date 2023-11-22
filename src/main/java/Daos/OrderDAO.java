@@ -65,10 +65,11 @@ public class OrderDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Orders ( "
-                        + "OrderID, ServiceID, AccountID, StaffID, Form_Receipt, ShipAddress, ShipCity,PhoneNumber, OrderDate, ReceiptDate, "
+                        + "OrderID, ServiceID, AccountID, StaffID, Form_Receipt, ShipAddress, ShipCity, ShipDistrict, "
+                        + "PhoneNumber, OrderDate, ReceiptDate, "
                         + "Discount, Delivery_charges, Deposit_Price, Total_Order, Pay_with, Status "
                         + ") values ( "
-                        + "?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, order.getOrderID());
@@ -78,15 +79,16 @@ public class OrderDAO implements Serializable {
                 stm.setString(5, order.getForm_Receipt());
                 stm.setString(6, order.getShipAddress());
                 stm.setString(7, order.getShipCity());
-                stm.setString(8, order.getPhoneNumber());
-                stm.setDate(9, order.getOrderDate());
-                stm.setDate(10, order.getReceiptDate());
-                stm.setFloat(11, order.getDiscount());
-                stm.setFloat(12, order.getDelivery_charges());
-                stm.setFloat(13, order.getDeposit_Price());
-                stm.setFloat(14, order.getTotal_Order());
-                stm.setString(15, order.getPayBy());
-                stm.setString(16, order.getStatus());
+                stm.setString(8, order.getShipDistrict());
+                stm.setString(9, order.getPhoneNumber());
+                stm.setDate(10, order.getOrderDate());
+                stm.setDate(11, order.getReceiptDate());
+                stm.setFloat(12, order.getDiscount());
+                stm.setFloat(13, order.getDelivery_charges());
+                stm.setFloat(14, order.getDeposit_Price());
+                stm.setFloat(15, order.getTotal_Order());
+                stm.setString(16, order.getPayBy());
+                stm.setString(17, order.getStatus());
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -337,8 +339,8 @@ public class OrderDAO implements Serializable {
         }
         return 0;
     }
-    
-     public int getNumberOfAllOrder()
+
+    public int getNumberOfAllOrder()
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -511,7 +513,7 @@ public class OrderDAO implements Serializable {
         }
         return 0;
     }
-    
+
     public List<OrderDTO> viewAllOrder(String status_choose, int page, String searchValue, int fieldShow)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -657,7 +659,7 @@ public class OrderDAO implements Serializable {
         try {
             con = DBHelper.makeConnection();
             if (con != null) {
-                String sql = "select OrderID, ServiceID, Form_Receipt, acc.FullName, StaffID, ShipAddress, ShipCity, PhoneNumber, "
+                String sql = "select OrderID, ServiceID, Form_Receipt, acc.FullName, StaffID, ShipAddress, ShipCity, ShipDistrict, PhoneNumber, "
                         + "Delivery_charges, Deposit_Price, Total_Order, OrderDate, ord.Status, ord.Pay_with "
                         + "from Orders ord "
                         + "inner join Account acc on acc.AccountID = ord.AccountID "
@@ -673,6 +675,7 @@ public class OrderDAO implements Serializable {
                             rs.getString("Form_Receipt"),
                             rs.getString("ShipAddress"),
                             rs.getString("ShipCity"),
+                            rs.getString("ShipDistrict"),
                             rs.getString("PhoneNumber"),
                             rs.getDate("OrderDate"),
                             rs.getFloat("Delivery_charges"),

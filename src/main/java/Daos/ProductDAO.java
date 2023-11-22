@@ -368,6 +368,7 @@ public class ProductDAO implements Serializable {
                             rs.getInt("CategoryID"),
                             rs.getString("Category_Name"),
                             rs.getInt("Product_TypeID"),
+                            rs.getString("Same_Bird_Nest"),
                             rs.getString("Dad_Bird_ID"),
                             rs.getString("Mom_Bird_ID"),
                             rs.getString("Age"),
@@ -436,6 +437,42 @@ public class ProductDAO implements Serializable {
             }
         }
         return null;
+    }
+
+    public List<String> getAllBirdNestID() throws SQLException, ClassNotFoundException {
+        List<String> birdNestIDs = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                String sql = "SELECT ProductID "
+                        + "FROM Products "
+                        + "WHERE Product_TypeID = 2 ";
+
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    String productID = rs.getString("ProductID");
+                    birdNestIDs.add(productID);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return birdNestIDs;
     }
 
     public boolean updateQuantityAfterOrder(int quantity_available, int quantity_AreMating, int quantity_sold, String birdID)
@@ -577,34 +614,35 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 String sql = "Insert into Products ( "
-                        + "ProductID, Product_Name, CategoryID, Product_TypeID, Dad_Bird_ID, Mom_Bird_ID, Image, Age, Color, Gender, "
+                        + "ProductID, Product_Name, CategoryID, Product_TypeID, Same_Bird_Nest, Dad_Bird_ID, Mom_Bird_ID, Image, Age, Color, Gender, "
                         + "Quantity_Available, Quantity_AreMating, Quantity_Sold, Quantity_MaleBird, Quantity_FemaleBird, Price, "
                         + "Discount, Characteristics, Detail, Date_created, Status "
                         + ") values ( "
-                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
+                        + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? "
                         + ") ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, product.getProductID());
                 stm.setString(2, product.getProduct_Name());
                 stm.setInt(3, product.getCategoryID());
                 stm.setInt(4, product.getProduct_TypeID());
-                stm.setString(5, product.getDad_Bird_ID());
-                stm.setString(6, product.getMom_Bird_ID());
-                stm.setString(7, product.getImage());
-                stm.setString(8, product.getAge());
-                stm.setString(9, product.getColor());
-                stm.setString(10, product.getGender());
-                stm.setInt(11, product.getQuantity_Available());
-                stm.setInt(12, product.getQuantity_AreMating());
-                stm.setInt(13, product.getQuantity_Sold());
-                stm.setInt(14, product.getQuantity_MaleBird());
-                stm.setInt(15, product.getQuantity_FemaleBird());
-                stm.setFloat(16, product.getPrice());
-                stm.setFloat(17, product.getDiscount());
-                stm.setString(18, product.getCharacteristics());
-                stm.setString(19, product.getDetail());
-                stm.setDate(20, product.getDate_created());
-                stm.setBoolean(21, true);
+                stm.setString(5, product.getSame_Bird_Nest());
+                stm.setString(6, product.getDad_Bird_ID());
+                stm.setString(7, product.getMom_Bird_ID());
+                stm.setString(8, product.getImage());
+                stm.setString(9, product.getAge());
+                stm.setString(10, product.getColor());
+                stm.setString(11, product.getGender());
+                stm.setInt(12, product.getQuantity_Available());
+                stm.setInt(13, product.getQuantity_AreMating());
+                stm.setInt(14, product.getQuantity_Sold());
+                stm.setInt(15, product.getQuantity_MaleBird());
+                stm.setInt(16, product.getQuantity_FemaleBird());
+                stm.setFloat(17, product.getPrice());
+                stm.setFloat(18, product.getDiscount());
+                stm.setString(19, product.getCharacteristics());
+                stm.setString(20, product.getDetail());
+                stm.setDate(21, product.getDate_created());
+                stm.setBoolean(22, true);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;

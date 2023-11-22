@@ -23,8 +23,8 @@
 
         <!-- book section -->
         <form action="updateProduct" class="book_section layout_padding" method="POST" enctype="multipart/form-data">
-            <div class="container" style="padding-top: 50px">
-                <h1 style="padding-bottom: 40px">Update product</h1>
+            <div class="container">
+                <h1>Update product</h1>
                 <c:if test="${not empty sessionScope.NOTIFICATION}">
                     <p style="color: green; font-weight: bold">${sessionScope.NOTIFICATION}</>
                     </c:if>
@@ -42,6 +42,12 @@
                                 <input value="${pro.category_Name}" type="text" class="form-control" readonly/>
                                 <input value="${pro.categoryID}" type="hidden"/>
                             </div>
+                            <c:if test="${requestScope.PRODUCT_TYPE == '1'}">
+                                <div>
+                                    <input value="${pro.same_Bird_Nest}" type="text" class="form-control" readonly/>
+                                    <input value="${pro.same_Bird_Nest}" type="hidden"/>
+                                </div>
+                            </c:if>
                             <div>
                                 <input name="nameBird" value="${pro.product_Name}" type="text" class="form-control" placeholder="Name" required/>
                             </div>
@@ -64,14 +70,14 @@
                                     <h6 style="margin: -22px 0 22px 0; color: red">${requestScope.ERROR_DISCOUNT}</h6>
                                 </c:if>                            
                             </div>
-                                <div class="form-control-upload" style="border: none;" >
-                                    <div>
-                                        <div class="d-flex align-content-center text-center">
-                                            <p><input type="file" name="file" onchange="showImage(this);" /></p>
-                                            <p><img id="preview" src="${pro.image}" alt="Photo" style="max-height: 100px;" /></p>
-                                        </div>
+                            <div class="form-control-upload" style="border: none;" >
+                                <div>
+                                    <div class="d-flex align-content-center text-center">
+                                        <p><input type="file" name="file" onchange="showImage(this);" /></p>
+                                        <p><img id="preview" src="${pro.image}" alt="Photo" style="max-height: 100px;" /></p>
                                     </div>
                                 </div>
+                            </div>
                             <div class="row justify-content-center align-content-center">
                                 <h6 class="mb-0 col-md-2">
                                     <a href="viewAllProduct" class="text-body">
