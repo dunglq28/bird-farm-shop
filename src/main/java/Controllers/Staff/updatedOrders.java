@@ -20,16 +20,17 @@ public class updatedOrders extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String newStatus = request.getParameter("txtNewStatus");
         String orderID = request.getParameter("txtOrderID");
+        String serviceID = request.getParameter("txtServiceID");
         String url = "";
         try {
             OrderDAO dao = new OrderDAO();
             OrderDTO dto = dao.getOrderByOrderID(orderID);
             if (dto.getStatus().equals("Cancel")) {
-                url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+                url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=" + serviceID;
             } else {
                 boolean result = dao.UpdateStatusOrder(orderID, newStatus);
                 if (result == true) {
-                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER;
+                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=" + serviceID;
                 }
             }
         } catch (SQLException ex) {
