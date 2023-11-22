@@ -35,6 +35,8 @@ public class MyOrderServlet extends HttpServlet {
             }
             if (status == null || status.equals("All")) { // set status empty to view all status (relative)
                 status = "";
+            } else if (status.equals("Canceled")) {
+                status = "Cancel";
             }
 
             if (serviceID == null && session.getAttribute("SERVICE_ID_CANCEL") != null) {

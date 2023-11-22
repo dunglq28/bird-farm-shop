@@ -1,5 +1,4 @@
-﻿
-USE MASTER 
+﻿USE MASTER 
 GO
 DROP DATABASE IF EXISTS Bird_Farm_Shop
 GO
@@ -181,8 +180,10 @@ CREATE TABLE Bird_Nest_Tracking
 GO
 CREATE TABLE BirdNestDetail_Tracking
 (
+  Bird_Nest__Tracking_ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
   Bird_Nest_ID NVARCHAR(50) NOT NULL,
   NOTE NVARCHAR(500),
+  Image NVARCHAR(250),
   LastUpdateDate Date NOT NULL,
   FOREIGN KEY (Bird_Nest_ID) REFERENCES Bird_Nest_Tracking(Bird_Nest_ID),
 );

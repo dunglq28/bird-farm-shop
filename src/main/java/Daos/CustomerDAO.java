@@ -120,6 +120,7 @@ public class CustomerDAO implements Serializable {
                             rs.getString("Phone_Number"),
                             rs.getString("Address"),
                             rs.getString("City"),
+                            rs.getString("District"),
                             rs.getDate("DOB"),
                             rs.getDate("Date_created"),
                             rs.getBoolean("Status"));
@@ -140,7 +141,7 @@ public class CustomerDAO implements Serializable {
         return result;
     }
 
-    public CustomerDTO updateCustomer(String fullName, String phoneNumber, String address, String city, String accountId)
+    public CustomerDTO updateCustomer(String fullName, String phoneNumber, String address, String city, String district, String accountId)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -151,7 +152,7 @@ public class CustomerDAO implements Serializable {
             if (con != null) {
                 //2. create SQL statement string
                 String sql = "Update Customers "
-                        + "Set FullName = ?, Phone_Number = ?, Address = ? , City = ? "
+                        + "Set FullName = ?, Phone_Number = ?, Address = ? , City = ?, District = ? "
                         + "Where AccountID = ? ";
                 //3. Create statement object
                 stm = con.prepareStatement(sql);
@@ -159,12 +160,13 @@ public class CustomerDAO implements Serializable {
                 stm.setString(2, phoneNumber);
                 stm.setString(3, address);
                 stm.setString(4, city);
-                stm.setString(5, accountId);
+                stm.setString(5, district);
+                stm.setString(6, accountId);
                 //4. Excute query
                 int effectRows = stm.executeUpdate();
                 //5. Process
                 if (effectRows > 0) {
-                    return result = new CustomerDTO(fullName, phoneNumber, address, city);
+                    return result = new CustomerDTO(fullName, phoneNumber, address, city, district);
                 } // end of connection has opend
             }
         } finally {

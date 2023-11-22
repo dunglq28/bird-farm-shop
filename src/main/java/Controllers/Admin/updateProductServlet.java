@@ -119,7 +119,7 @@ public class updateProductServlet extends HttpServlet {
                             flag = false;
                         }
                         if (flag) {
-                            proUd = new ProductDTO(proID, proName, 0, 0,
+                            proUd = new ProductDTO(proID, proName, 0, 0, prodto.getSame_Bird_Nest(),
                                     null, null, age, color, gender, urlImage,
                                     0, 0, Integer.parseInt(qtyAvailable),
                                     0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);
@@ -135,7 +135,7 @@ public class updateProductServlet extends HttpServlet {
                             flag = false;
                         }
                         if (flag) {
-                            proUd = new ProductDTO(proID, proName, 0, 0,
+                            proUd = new ProductDTO(proID, proName, 0, 0, prodto.getSame_Bird_Nest(),
                                     dadbirdID, momBirdID, null, null, null, urlImage,
                                     Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
                                     0, 0, Float.parseFloat(price), characteristics, detail, null, Float.parseFloat(discount) / 100, true);

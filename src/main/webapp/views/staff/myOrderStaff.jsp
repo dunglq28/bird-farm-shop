@@ -21,7 +21,7 @@
         <title>My Order</title>
         <style>
             .sidebar .menu .list-cart-icon .cart-number {
-                bottom: 26px;
+                bottom: 15px;
             }
         </style>
 
@@ -80,7 +80,7 @@
                                 <th>Delivery method</th>
                                 <th>Payment method</th>
                                 <th>Status</th>
-                                <!--<th>Action</th>-->
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,19 +110,55 @@
                                                 <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
                                             </form>
                                         </td>
+                                        <td>
+                                            <c:if test="${requestScope.SERVICE_ID != 2}">
+                                                <button type="button" class="btn btn-secondary cancel-btn" style="border-radius: 7px;
+                                                        border: 2px solid rgb(13, 103, 128);
+                                                        text-align: center;
+                                                        padding: 0 10px 0 10px;
+                                                        text-align: center; color: black">Cancel</button>
+                                            </c:if>
 
-<!--                                        <td>
-                                            <div class="action">
-                                                <a href="#"><i class="fa-solid fa-check"></i></a>
-                                                <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                            </div>
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                            <input type="hidden" name="" value="" />
-                                        </td>-->
+                                            <c:if test="${requestScope.SERVICE_ID != 1}">
+                                                <c:if test="${dto.status == 'Wait for confirmation' || dto.status != 'Cancel'}">
+                                                    <form action="cancelOrderByStaff" class="col-12  d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-secondary" style="border-radius: 7px;
+                                                                border: 2px solid rgb(13, 103, 128);
+                                                                text-align: center;
+                                                                padding: 0 10px 0 10px;
+                                                                text-align: center; color: black;">Cancel</button>
+                                                        <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                        <input type="hidden" name="txtServiceID" value="${dto.serviceID}">
+                                                        <input type="hidden" name="status" value="${dto.status}">
+                                                    </form>
+                                                </c:if>
+                                            </c:if>
+                                        </td>
                                     </tr>
+                                    <form action="cancelOrderByStaff" class="col-12  d-flex justify-content-end">
+                                        <div class="modal" tabindex="-1" role="dialog" id="cancelModal">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content"> 
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Select an option</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Do you want to add this bird back into inventory?</p>
+
+
+                                                        <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                        <input type="hidden" name="txtServiceID" value="${dto.serviceID}">
+                                                        <input type="hidden" name="status" value="${dto.status}">
+
+                                                        <input type="submit" value="Yes"  data-option="1"></button>
+                                                        <input type="submit" value="No"  data-option="2"></button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </c:forEach>
                             </c:if>
                         </div>
@@ -152,11 +188,33 @@
             </div>  
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
         <script>
-            function submit() {
-                document.querySelector(".myForm").onsubmit();
-                document.querySelector(".myOrder").onsubmit();
-            }
+                                                    function submit() {
+                                                        document.querySelector(".myForm").onsubmit();
+                                                        document.querySelector(".myOrder").onsubmit();
+                                                    }
+
+
+        </script>
+        <script>
+            const cancelButtons = document.querySelectorAll('.cancel-btn');
+
+            cancelButtons.forEach(cancelButton => {
+                cancelButton.addEventListener('click', function () {
+                    const cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
+                    cancelModal.show();
+                });
+            });
+            const optionButtons = document.querySelectorAll('.option-btn');
+            optionButtons.forEach(optionButton => {
+                optionButton.addEventListener('click', function () {
+                    const selectedOption = this.getAttribute('data-option');
+                    const cancelModal = bootstrap.Modal.getInstance(document.getElementById('cancelModal'));
+                    cancelModal.hide();
+                });
+            });
         </script>
     </body>
 </html>

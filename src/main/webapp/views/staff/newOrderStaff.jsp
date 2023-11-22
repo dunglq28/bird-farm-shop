@@ -20,7 +20,7 @@
         <title>New Order</title>
         <style>
             .sidebar .menu .list-cart-icon .cart-number {
-                bottom: 26px;
+                bottom: 15px;
             }
         </style>
 

@@ -77,103 +77,84 @@
             </nav>
         </header>
         <div class="container justify-content-center ">
-            <div>
 
-            </div>
             <div>
                 <h3 style="font-weight: bold !important;color: black ;">Information receive</h3>
             </div>
             <div>
-                <h5>Another address</h3>
+                <h5>We only accept delivery within Ho Chi Minh City</h3>
             </div>
-            <c:set var="cus" value="${sessionScope.CUSTOMER}"></c:set>
-                <form action="Checkout" class="form-input" method="POST">
+            <form action="Checkout" class="form-input" method="POST">
+                <div class="row mb-2 d-flex justify-content-between align-items-center">
+                    <div class="form-check">
+                        <input onchange="toggleDeliveryOption('fastDelivery')" class="form-check-input-2" type="radio" 
+                               name="shippingMethod" id="fastDeliveryRadio" value="Fast delivery" checked>
+                        <label class="form-check-label" for="fastDeliveryRadio">
+                            Fast delivery
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input onchange="toggleDeliveryOption('receiveAtShop')" class="form-check-input-2" type="radio" 
+                               name="shippingMethod" id="receiveAtShopRadio" value="Receive directly at shop">
+                        <label class="form-check-label" for="receiveAtShopRadio">
+                            Receive directly at shop
+                        </label>
+                    </div>
+                </div>
+
+
+                <c:set var="cus" value="${sessionScope.CUSTOMER}"></c:set>
                     <div class="form-group">
-                        <input name="txtFullName" value="<c:if test="${not empty cus.fullName}">${cus.fullName}</c:if><c:if test="${not empty requestScope.FULLNAME}">${requestScope.FULLNAME}</c:if>"  
-                           class="form-control" id="exampleInputEmail1"
-                           placeholder="Enter FullName" required>
+                        <input name="txtFullName" value="<c:if test="${not empty cus.fullName}">${cus.fullName}</c:if>"
+                               class="form-control" id="exampleInputEmail1"
+                               placeholder="Enter FullName">
+                    </div>
+                    <div class="form-group">
+                        <input name="txtPhone" value="${cus.phone_Number}" required type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
                 </div>
-                <div class="form-group">
-                        <input name="txtPhone" value="${cus.phone_Number}" required="" type="text" id="typePhone" class="form-control" placeholder="Enter your phone" />
+                <div  class="form-choose " id="cityAddressSection">
+                    <input name="txtCity" value="Tp.Hồ Chí Minh" type="text" id="typePhone" class="form-control" readonly=""/>
                 </div>
-                <div  class="form-choose ">
-                    <select name="txtCity" class="form-select" aria-label="Default select example" required>
-                        <option>Choose your city</option>
-                        <c:if test="${not empty cus.city}">
-                            <option selected>${cus.city}</option>
-                        </c:if>
-                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                        <option value="Hà Nội">Hà Nội</option>
-                        <option value="Hải Phòng">Hải Phòng</option>
-                        <option value="Cần Thơ">Cần Thơ</option>
-                        <option value="Đà Nẵng">Đà Nẵng</option>
-                        <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                        <option value="Bạc Liêu">Bạc Liêu</option>
-                        <option value="Bắc Kạn">Bắc Kạn</option>
-                        <option value="Bắc Giang">Bắc Giang</option>
-                        <option value="Bắc Ninh">Bắc Ninh</option>
-                        <option value="Bến Tre">Bến Tre</option>
-                        <option value="Bình Dương">Bình Dương</option>
-                        <option value="Bình Định">Bình Định</option>
-                        <option value="Bình Phước">Bình Phước</option>
-                        <option value="Bình Thuận">Bình Thuận</option>
-                        <option value="Cà Mau">Cà Mau</option>
-                        <option value="Cao Bằng">Cao Bằng</option>
-                        <option value="Đắk Lắk">Đắk Lắk</option>
-                        <option value="Đắk Nông">Đắk Nông</option>
-                        <option value="Điện Biên">Điện Biên</option>
-                        <option value="Đồng Nai">Đồng Nai</option>
-                        <option value="Đồng Tháp">Đồng Tháp</option>
-                        <option value="Gia Lai">Gia Lai</option>
-                        <option value="Hà Giang">Hà Giang</option>
-                        <option value="Hà Nam">Hà Nam</option>
-                        <option value="Hà Tĩnh">Hà Tĩnh</option>
-                        <option value="Hải Dương">Hải Dương</option>
-                        <option value="Hậu Giang">Hậu Giang</option>
-                        <option value="Hòa Bình">Hòa Bình</option>
-                        <option value="Hưng Yên">Hưng Yên</option>
-                        <option value="Khánh Hòa">Khánh Hòa</option>
-                        <option value="Kiên Giang">Kiên Giang</option>
-                        <option value="Kon Tum">Kon Tum</option>
-                        <option value="Lai Châu">Lai Châu</option>
-                        <option value="Lâm Đồng">Lâm Đồng</option>
-                        <option value="Lạng Sơn">Lạng Sơn</option>
-                        <option value="Lào Cai">Lào Cai</option>
-                        <option value="Long An">Long An</option>
-                        <option value="Nam Định">Nam Định</option>
-                        <option value="Nghệ An">Nghệ An</option>
-                        <option value="Ninh Bình">Ninh Bình</option>
-                        <option value="Ninh Thuận">Ninh Thuận</option>
-                        <option value="Phú Thọ">Phú Thọ</option>
-                        <option value="Phú Yên">Phú Yên</option>
-                        <option value="Quảng Bình">Quảng Bình</option>
-                        <option value="Quảng Nam">Quảng Nam</option>
-                        <option value="Quảng Ngãi">Quảng Ngãi</option>
-                        <option value="Quảng Ninh">Quảng Ninh</option>
-                        <option value="Quảng Trị">Quảng Trị</option>
-                        <option value="Sóc Trăng">Sóc Trăng</option>
-                        <option value="Sơn La">Sơn La</option>
-                        <option value="Tây Ninh">Tây Ninh</option>
-                        <option value="Thái Bình">Thái Bình</option>
-                        <option value="Thái Nguyên">Thái Nguyên</option>
-                        <option value="Thanh Hóa">Thanh Hóa</option>
-                        <option value="Thừa Thiên-Huế">Thừa Thiên-Huế</option>
-                        <option value="Tiền Giang">Tiền Giang</option>
-                        <option value="Trà Vinh">Trà Vinh</option>
-                        <option value="Tuyên Quang">Tuyên Quang</option>
-                        <option value="Vĩnh Long">Vĩnh Long</option>
-                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                        <option value="Yên Bái">Yên Bái</option>
-                        <option value="Hậu Giang">Hậu Giang</option>
+
+                <div class="form-group" id="districtSection">
+                    <select name="txtDistrict" class="form-select" id="select_district" aria-label="Default select example">
+                        <option label="Choose your district"></option>
+
+                        <option ${cus.district == 'Quận 1' ? 'selected' : ''} value="Quận 1">Quận 1</option>
+                        <option ${cus.district == 'Quận 2' ? 'selected' : ''} value="Quận 2">Quận 2</option>
+                        <option ${cus.district == 'Quận 3' ? 'selected' : ''} value="Quận 3">Quận 3</option>
+                        <option ${cus.district == 'Quận 4' ? 'selected' : ''} value="Quận 4">Quận 4</option>
+                        <option ${cus.district == 'Quận 5' ? 'selected' : ''} value="Quận 5">Quận 5</option>
+                        <option ${cus.district == 'Quận 6' ? 'selected' : ''} value="Quận 6">Quận 6</option>
+                        <option ${cus.district == 'Quận 7' ? 'selected' : ''} value="Quận 7">Quận 7</option>
+                        <option ${cus.district == 'Quận 8' ? 'selected' : ''} value="Quận 8">Quận 8</option>
+                        <option ${cus.district == 'Quận 9' ? 'selected' : ''} value="Quận 9">Quận 9</option>
+                        <option ${cus.district == 'Quận 10' ? 'selected' : ''} value="Quận 10">Quận 10</option>
+                        <option ${cus.district == 'Quận 11' ? 'selected' : ''} value="Quận 11">Quận 11</option>
+                        <option ${cus.district == 'Quận 12' ? 'selected' : ''} value="Quận 12">Quận 12</option>
+                        <option ${cus.district == 'Quận Bình Tân' ? 'selected' : ''} value="Quận Bình Tân">Quận Bình Tân</option>
+                        <option ${cus.district == 'Quận Tân Phú' ? 'selected' : ''} value="Quận Tân Phú">Quận Tân Phú</option>
+                        <option ${cus.district == 'Quận Tân Bình' ? 'selected' : ''} value="Quận Tân Bình">Quận Tân Bình</option>
+                        <option ${cus.district == 'Quận Phú Nhuận' ? 'selected' : ''} value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                        <option ${cus.district == 'Quận Gò Vấp' ? 'selected' : ''} value="Quận Gò Vấp">Quận Gò Vấp</option>
+                        <option ${cus.district == 'Quận Bình Thạnh' ? 'selected' : ''} value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                        <option ${cus.district == 'Quận Thủ Đức' ? 'selected' : ''} value="Quận Thủ Đức">Quận Thủ Đức</option>
+                        <option ${cus.district == 'Huyện Củ Chi' ? 'selected' : ''} value="Huyện Củ Chi">Huyện Củ Chi</option>
+                        <option ${cus.district == 'Huyện Hóc Môn' ? 'selected' : ''} value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+                        <option ${cus.district == 'Huyện Bình Chánh' ? 'selected' : ''} value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+                        <option ${cus.district == 'Huyện Nhà Bè' ? 'selected' : ''} value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+                        <option ${cus.district == 'Huyện Cần Giờ' ? 'selected' : ''} value="Huyện Cần Giờ">Huyện Cần Giờ</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <input name="txtAddress" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address" required>
+
+
+                <div class="form-group" id="addressSection">
+                    <input name="txtAddress" id="address_input" value="${cus.address}" type="text" class="form-control" id="exampleInputAddress" placeholder="Enter your address">
                 </div>
-                    <input type="hidden" name="txtTotalOrder" value="${sessionScope.TOTAL_ORDER}" />
-                    <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
-                    <input type="hidden" name="txtproductID" value="${sessionScope.PRODUCT_ID_SERVICE}" />
-                    <input type="hidden" name="quantity_Buy" value="${sessionScope.EGG_QUANTITY}" />
+                <input type="hidden" name="txtTotalOrder" value="${sessionScope.TOTAL_ORDER}" />
+                <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
+                <input type="hidden" name="txtproductID" value="${sessionScope.PRODUCT_ID_SERVICE}" />
+                <input type="hidden" name="quantity_Buy" value="${sessionScope.EGG_QUANTITY}" />
                 <div class="form-group">
                     <input name="btAction"  value="Continue" type="submit" class="btn btn-primary" style="background-color: #0d6780;"></input>
                 </div>
@@ -181,6 +162,37 @@
             </form>
 
         </div>
+
+        <script>
+            const cityAddressSection = document.getElementById('cityAddressSection');
+            const addressSection = document.getElementById('addressSection');
+            const districtSection = document.getElementById('districtSection');
+            const districtchoose = document.getElementById('select_district');
+            const addressInput = document.getElementById('address_input');
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                addressInput.required = true;
+                districtchoose.required = true;
+            });
+
+            function toggleDeliveryOption(option) {
+                if (option === 'fastDelivery') {
+                    cityAddressSection.style.display = 'block';
+                    addressSection.style.display = 'block';
+                    districtSection.style.display = 'block';
+                    addressInput.required = true;
+                    districtchoose.required = true;
+                } else if (option === 'receiveAtShop') {
+                    cityAddressSection.style.display = 'none';
+                    addressSection.style.display = 'none';
+                    districtSection.style.display = 'none';
+                    addressInput.required = false;
+                    districtchoose.required = false;
+                }
+            }
+
+        </script>
     </body>
 
 </html>

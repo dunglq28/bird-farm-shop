@@ -43,6 +43,7 @@ public class CheckoutServlet extends HttpServlet {
         String serviceID = request.getParameter("txtServiceID");
         String productID = request.getParameter("txtproductID");
         String quantityBuy = request.getParameter("quantity_Buy");
+        String orderID = request.getParameter("txtOrderID");
         String url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
         HttpSession session = request.getSession();
 
@@ -55,21 +56,21 @@ public class CheckoutServlet extends HttpServlet {
 
             session.setAttribute("PRODUCT_ID_SERVICE", productID);
             session.setAttribute("EGG_QUANTITY", quantityBuy);
-
-            if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
-                session.setAttribute("SHIPPING_METHOD", "Fast delivery");
-                session.setAttribute("SHIPPING_CASH", 125000);
-            } else if (shippingMethod.equals("Receive directly at shop")) {
-                session.setAttribute("SHIPPING_METHOD", "Receive directly at shop");
-                session.setAttribute("SHIPPING_CASH", 0);
+            request.setAttribute("SHIPPING_METHOD", shippingMethod);
+            if (orderID != null) {
+                session.setAttribute("OrderIDBirdNest", orderID);
             }
 
             if (account == null) {
                 url = Constants.PublicFeatures.CHECK_LOGIN_CONTROLLER;
             } else if (button == null) {
                 url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
-            } else if (button.equals("Continue")) {
+            } else if (button.equals("BuyNow") || button.equals("CompletePayment")) {
                 url = Constants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
+            } else if (button.equals("Continue") && !serviceID.equals("0")) {
+                url = Constants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
+            } else if (button.equals("Continue") && serviceID.equals("0")) {
+                url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("COD")
                     || button.equals("Booking") && paymentMethod.equals("COD")
                     || button.equals("Pay") && paymentMethod.equals("COD")) {

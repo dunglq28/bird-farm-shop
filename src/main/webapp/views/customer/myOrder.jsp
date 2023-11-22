@@ -7,7 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MyOrder</title>
+        <title>My Order</title>
         <link rel="stylesheet" href="./assets/css/cart.css">
         <link rel="stylesheet" href="./assets/css/homePage.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -42,7 +42,7 @@
                                                     <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}">
-                                                    <input type="submit" name="Status" value="Canceled" class="btn btn-secondary ${STATUS_ORDER == 'Canceled' ? 'active' : ''}">
+                                                    <input type="submit" name="Status" value="Canceled" class="btn btn-secondary ${STATUS_ORDER == 'Cancel' ? 'active' : ''}">
                                                     <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
                                                 </div>
                                             </div>
@@ -85,7 +85,7 @@
                                                                         </div>
                                                                     </c:if>
                                                                 </div>
-                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
+<!--                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
                                                                      style="">
                                                                     <div class=" align-content-center justify-content-end">
                                                                         <a href="#"class="text-muted text-decoration-none see_details_tag">
@@ -93,7 +93,7 @@
                                                                             <i class="fa-solid fa-arrow-right"></i></a>
                                                                         </a>
                                                                     </div>
-                                                                </div>
+                                                                </div>-->
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-xl-12 d-flex"style=" margin-top: 8px;">
                                                                 <c:if test="${not empty order.form_Receipt}">

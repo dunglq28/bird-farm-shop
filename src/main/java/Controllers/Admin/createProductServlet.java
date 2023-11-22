@@ -53,6 +53,7 @@ public class createProductServlet extends HttpServlet {
         String url = Constants.PublicFeatures.ERROR_404_PAGE;
         String button = request.getParameter("btAction");
         String productType = request.getParameter("productTypeID");
+        String sameBirdNest = request.getParameter("birdNestID");
         String cateID = request.getParameter("cateID");
         String proName = request.getParameter("nameBird");
         String dadbirdID = request.getParameter("dadBirdID");
@@ -106,10 +107,10 @@ public class createProductServlet extends HttpServlet {
                 String newProID = prodao.createProductID();
                 long millis = System.currentTimeMillis();
                 java.sql.Date orderDate = new java.sql.Date(millis);
-                S3Util.uploadFile(fileName, filePart.getInputStream());
+//                S3Util.uploadFile(fileName, filePart.getInputStream());
                 if (productType.equals("1")) {
                     urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
-                    ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType),
+                    ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType), sameBirdNest,
                             null, null, age, color, gender, urlImage,
                             0, 0, Integer.parseInt(qtyAvailable),
                             0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount) / 100, true);
@@ -119,7 +120,7 @@ public class createProductServlet extends HttpServlet {
                     return;
                 } else {
                     urlImage = "https://bird-farm-shop.s3.ap-southeast-1.amazonaws.com/" + fileName;
-                    ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType),
+                    ProductDTO newPro = new ProductDTO(newProID, proName, Integer.parseInt(cateID), Integer.parseInt(productType), null,
                             dadbirdID, momBirdID, null, null, null, urlImage,
                             Integer.parseInt(qtyMaleBaby), Integer.parseInt(qtyFemaleBaby), Integer.parseInt(qtyAvailable),
                             0, 0, Float.parseFloat(price), characteristics, detail, orderDate, Float.parseFloat(discount) / 100, true);
@@ -136,6 +137,7 @@ public class createProductServlet extends HttpServlet {
             }
             request.setAttribute("CATE_CHOOSE", cateID);
             request.setAttribute("CATE_LIST", catedao.getAllCate());
+            request.setAttribute("BIRD_NEST_ID_LIST", prodao.getAllBirdNestID());
             request.setAttribute("PRODUCT_TYPE", productType);
             url = Constants.AdminFeatures.CREATE_PRODUCT_PAGE;
 

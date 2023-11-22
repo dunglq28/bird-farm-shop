@@ -1,4 +1,3 @@
-
 package Controllers.Customer;
 
 import Daos.AccountDAO;
@@ -73,10 +72,9 @@ public class CancelOrderServlet extends HttpServlet {
                         prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating() - 1,
                                 prodto.getQuantity_Sold(), prodto.getProductID());
                     }
+                    session.setAttribute("SERVICE_ID_CANCEL", serviceID);
                 }
-                session.setAttribute("SERVICE_ID_CANCEL", serviceID);
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

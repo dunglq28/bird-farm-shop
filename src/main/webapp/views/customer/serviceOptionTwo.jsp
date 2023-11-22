@@ -94,8 +94,8 @@
                                                     </div>
                                                     <div class="col-7">
                                                         <select name="txtCateID" onchange="submit()" class="list-dt" required=""
-                                                                style="border: 1px solid #a89a9a; color: #6c757d; text-align: center">
-                                                            <option>Species</option>
+                                                                style="border: 1px solid #a89a9a; color: #6c757d; text-align: center; ">
+                                                            <option>None</option>
                                                         <c:forEach var="cate" items="${sessionScope.ALL_CATE}">
                                                             <option ${requestScope.CATE_CHOOSE == cate.categoryID ? 'selected' : ''}
                                                                 value="${cate.categoryID}">${cate.category_Name}</option>
@@ -105,27 +105,33 @@
                                             </div>
                                             <div class="row" style="margin-top:10px">
                                                 <div class="col-5">
-                                                    <label class="pay">Parent bird*:</label>
+                                                    <label class="pay">Father bird*:</label>
                                                 </div>
                                                 <div class="col-7">
                                                     <select name="txtMaleBirdID"  onchange="submit()" class="list-dt" required=""
                                                             style="border: 1px solid #a89a9a; color: #6c757d; width: 40%; text-align: center">
-                                                        <option selected>Male</option>
+                                                        <option selected>None</option>
                                                         <c:forEach var="male_bird" items="${requestScope.MALE_BIRD}">
                                                             <option ${requestScope.MALE_BIRD_CHOOSE.productID == male_bird.productID ? 'selected' : ''}
                                                                 value="${male_bird.productID}">${male_bird.product_Name}</option>
                                                         </c:forEach>
                                                     </select>
+                                                </div>
 
-                                                    <select name="txtFemaleBirdID"  onchange="submit()"  class="list-dt"
-                                                            style="border: 1px solid #a89a9a; color: #6c757d; margin-left: 30px; width: 40%; text-align: center">
-                                                        <option selected>Female</option>
+                                            </div>
+                                            <div class="row" style="margin-top:10px">
+                                                <div class="col-5">
+                                                    <label class="pay">Mother bird*:</label>
+                                                </div>
+                                                <div class="col-7">
+                                                     <select name="txtFemaleBirdID"  onchange="submit()"  class="list-dt"
+                                                            style="border: 1px solid #a89a9a; color: #6c757d; width: 40%; text-align: center">
+                                                        <option selected>None</option>
                                                         <c:forEach var="female_bird" items="${requestScope.FEMALE_BIRD}">
                                                             <option ${requestScope.FEMALE_BIRD_CHOOSE.productID == female_bird.productID ? 'selected' : ''}
                                                                 value="${female_bird.productID}">${female_bird.product_Name}</option>
                                                         </c:forEach>
                                                     </select>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -236,15 +242,15 @@
 
                                         <!--<hr class="my-4">-->
 
-<!--                                        <h5 class="text-uppercase mb-2">Voucher</h5>
-                                        <div class="input-group rounded mb-3">
-                                            <input type="search" class="form-control rounded"
-                                                   placeholder="Enter your voucher" aria-label="Search"
-                                                   aria-describedby="search-addon" />
-                                            <span class="input-group-text border-0" id="search-addon">
-                                                <a href="#"><i class="fas fa-search"></i></a>
-                                            </span>
-                                        </div>-->
+                                        <!--                                        <h5 class="text-uppercase mb-2">Voucher</h5>
+                                                                                <div class="input-group rounded mb-3">
+                                                                                    <input type="search" class="form-control rounded"
+                                                                                           placeholder="Enter your voucher" aria-label="Search"
+                                                                                           aria-describedby="search-addon" />
+                                                                                    <span class="input-group-text border-0" id="search-addon">
+                                                                                        <a href="#"><i class="fas fa-search"></i></a>
+                                                                                    </span>
+                                                                                </div>-->
 
 
                                         <hr class="my-4">

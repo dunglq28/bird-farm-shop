@@ -123,7 +123,7 @@
                                                     <div class="col-6 mb-3"> 
                                                         <h6>Address <i class="fa-solid fa-location-dot fa-bounce"></i></h6>
                                                         <p class="text-muted">
-                                                            ${order.shipAddress}, ${order.shipCity}
+                                                            ${order.shipAddress}, ${order.shipDistrict}, ${order.shipCity}
                                                         </p>
                                                     </div>
                                                 </div>

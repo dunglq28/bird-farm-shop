@@ -44,7 +44,7 @@ public class AuthLoginGoogleServlet extends HttpServlet {
                     account = new AccountDTO(googlePojo.getId(), null, googlePojo.getName(), googlePojo.getEmail(), date, "Google", 4, "Customer", true);
                     if (dao.createAccount(account)) {
                         CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
-                                null, account.getEmail(), null, null, null, null, account.getDate_created(), true);
+                                null, account.getEmail(), null, null, null, null,null, account.getDate_created(), true);
                         cusDao.createCustomer(customer);
                         session.setAttribute("ACCOUNT", account);
                     } else {
