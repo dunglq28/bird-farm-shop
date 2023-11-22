@@ -39,33 +39,34 @@ public class InforReceiveServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = Constants.PublicFeatures.ERROR_PAGE;
+        String url = Constants.CustomerFeatures.RECEIVING_INFO_PAGE;
         String totalOrder = request.getParameter("txtTotalOrder");
         String shippingMethod = request.getParameter("shippingMethod");
         String fullName = request.getParameter("txtFullName");
         String phoneNumber = request.getParameter("txtPhone");
         String city = request.getParameter("txtCity");
+        String district = request.getParameter("txtDistrict");
         String address = request.getParameter("txtAddress");
         String button = request.getParameter("btAction");
         HttpSession session = request.getSession();
 
         try {
-
             AccountDTO account = (AccountDTO) session.getAttribute("ACCOUNT");
             CustomerDAO dao = new CustomerDAO();
-            CustomerDTO customer = null;
+            CustomerDTO customer = dao.getCustomerByAccountID(account.getAccountID());;
+            request.setAttribute("FULLNAME", customer.getFullName());
+            session.setAttribute("CUSTOMER", customer);
             String serviceID = (String) session.getAttribute("SERVICE_ID");
 
-            if (button == null) {
-                request.setAttribute("TOTAL_ORDER", totalOrder);
-                url = Constants.CustomerFeatures.RECEIVING_INFO_PAGE;
-            } else if (button.equals("Continue")) {
-                if (shippingMethod == null || shippingMethod.equals("Fast delivery")) {
-                    request.setAttribute("SHIPPING_METHOD", "Fast delivery");
+            request.setAttribute("TOTAL_ORDER", totalOrder);
+            if (button.equals("Continue")) {
+                request.setAttribute("SHIPPING_METHOD", shippingMethod);
+                if (shippingMethod.equals("Fast delivery")) {
                     request.setAttribute("SHIPPING_CASH", 125000);
+                } else {
+                    request.setAttribute("SHIPPING_CASH", 0);
                 }
-
-                customer = dao.updateCustomer(fullName, phoneNumber, address, city, account.getAccountID());
+                customer = dao.updateCustomer(fullName, phoneNumber, address, city, district, account.getAccountID());
                 session.setAttribute("CUSTOMER", customer);
                 request.setAttribute("TOTAL_ORDER", totalOrder);
                 if (customer != null && serviceID.equals("1")) {

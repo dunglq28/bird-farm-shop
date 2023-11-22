@@ -117,7 +117,7 @@ public class AuthRegisterServlet extends HttpServlet {
                 String en_pass = encrypt.toSHA1(password);
                 AccountDTO account = new AccountDTO(accDao.createAccountID(), en_pass, fullname, email, date, "Register", 4, "Customer", true);
                 CustomerDTO customer = new CustomerDTO(cusDao.createCustomerID(), account.getAccountID(), account.getFullName(),
-                        gender, account.getEmail(), null, null, null, dOB, account.getDate_created(), true);
+                        gender, account.getEmail(), null, null, null,null, dOB, account.getDate_created(), true);
                 accDao.createAccount(account);
                 cusDao.createCustomer(customer);
                 session.setAttribute("ACCOUNT", account);

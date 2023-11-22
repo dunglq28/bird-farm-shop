@@ -19,6 +19,7 @@ public class OrderDTO {
     private String form_Receipt;
     private String shipAddress;
     private String shipCity;
+    private String shipDistrict;
     private String phoneNumber;
     private Date orderDate;
     private Date orderDateFormat;
@@ -34,7 +35,8 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipAddress, String shipCity, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float deposit_Price, float total_Order, String payBy, String status) {
+    public OrderDTO(String orderID, int serviceID, String accountID, String staffID, String form_Receipt, String shipAddress, 
+            String shipCity, String shipDistrict, String phoneNumber, Date orderDate, Date receiptDate, float discount, float delivery_charges, float deposit_Price, float total_Order, String payBy, String status) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountID = accountID;
@@ -42,6 +44,7 @@ public class OrderDTO {
         this.form_Receipt = form_Receipt;
         this.shipAddress = shipAddress;
         this.shipCity = shipCity;
+        this.shipDistrict = shipDistrict;
         this.phoneNumber = phoneNumber;
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
@@ -113,8 +116,8 @@ public class OrderDTO {
         this.staffID = StaffID;
     }
 
-    public OrderDTO(String orderID, int serviceID, String accountName, String staffID, String form_Receipt, String shipAddress,
-            String shipCity, String phoneNumber, Date orderDate, float delivery_charges, float deposit_Price, float total_Order, String status, String PayBy) {
+    public OrderDTO(String orderID, int serviceID, String accountName, String staffID, String form_Receipt, String shipAddress, String shipCity,
+            String shipDistrict , String phoneNumber, Date orderDate, float delivery_charges, float deposit_Price, float total_Order, String status, String PayBy) {
         this.orderID = orderID;
         this.serviceID = serviceID;
         this.accountName = accountName;
@@ -122,6 +125,7 @@ public class OrderDTO {
         this.form_Receipt = form_Receipt;
         this.shipAddress = shipAddress;
         this.shipCity = shipCity;
+        this.shipDistrict = shipDistrict;
         this.phoneNumber = phoneNumber;
         this.orderDate = orderDate;
         this.delivery_charges = delivery_charges;
@@ -232,6 +236,14 @@ public class OrderDTO {
 
     public void setShipCity(String shipCity) {
         this.shipCity = shipCity;
+    }
+
+    public String getShipDistrict() {
+        return shipDistrict;
+    }
+
+    public void setShipDistrict(String shipDistrict) {
+        this.shipDistrict = shipDistrict;
     }
 
     public String getPhoneNumber() {

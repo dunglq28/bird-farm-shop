@@ -55,18 +55,25 @@ public class HandlePaymentServlet extends HttpServlet {
             CustomerDTO customer = null;
             customer = dao.getCustomerByAccountID(account.getAccountID());
 
-            if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {// if there is no recipient information
-                request.setAttribute("FULLNAME", customer.getFullName());
-                url = Constants.CustomerFeatures.RECEIVING_INFO_PAGE;
-            } else if (serviceID.equals("1")) { //If customer buy birds and buy bird nests
+//            if (customer.getAddress() == null && customer.getCity() == null && customer.getPhone_Number() == null) {// if there is no recipient information
+//                request.setAttribute("FULLNAME", customer.getFullName());
+//            url = Constants.CustomerFeatures.RECEIVING_INFO_PAGE;
+//            } 
+            if (serviceID.equals("1")) { //If customer buy birds and buy bird nests
                 url = Constants.PublicFeatures.PAYMENT_PAGE;
                 session.setAttribute("CUSTOMER", customer);
             } else if (serviceID.equals("2")) { //If customer book service matching bird
                 url = Constants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
                 session.setAttribute("CUSTOMER", customer);
             } else { //If customer complete payment of bird matching service
-                // 
-                String orderID = request.getParameter("txtOrderID");
+                String shippingMethod = request.getParameter("shippingMethod");
+                request.setAttribute("SHIPPING_METHOD", shippingMethod);
+                if (shippingMethod.equals("Fast delivery")) {
+                    request.setAttribute("SHIPPING_CASH", 125000);
+                } else {
+                    request.setAttribute("SHIPPING_CASH", 0);
+                }
+                String orderID = (String) session.getAttribute("OrderIDBirdNest");
                 if (orderID != session.getAttribute("OLD_ORDER_ID")) {
                     OrderDAO odao = new OrderDAO();
                     OrderDetailDAO oddao = new OrderDetailDAO();

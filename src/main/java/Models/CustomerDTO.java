@@ -11,11 +11,12 @@ public class CustomerDTO {
     private String phone_Number;
     private String address;
     private String city;
+    private String district;
     private Date dOB;
     private Date date_created;
     private boolean status;
 
-    public CustomerDTO(String customerID, String accountID, String fullName, String gender, String email, String phone_Number, String address, String city, Date dOB, Date date_created, boolean status) {
+    public CustomerDTO(String customerID, String accountID, String fullName, String gender, String email, String phone_Number, String address, String city, String district, Date dOB, Date date_created, boolean status) {
         this.customerID = customerID;
         this.accountID = accountID;
         this.fullName = fullName;
@@ -24,16 +25,18 @@ public class CustomerDTO {
         this.phone_Number = phone_Number;
         this.address = address;
         this.city = city;
+        this.district = district;
         this.dOB = dOB;
         this.date_created = date_created;
         this.status = status;
     }
 
-    public CustomerDTO(String fullName, String phone_Number, String address, String city) {
+    public CustomerDTO(String fullName, String phone_Number, String address, String city, String district) {
         this.fullName = fullName;
         this.phone_Number = phone_Number;
         this.address = address;
         this.city = city;
+        this.district = district;
     }
     
     
@@ -101,6 +104,16 @@ public class CustomerDTO {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+    
+    
 
     public Date getdOB() {
         return dOB;

@@ -49,6 +49,19 @@
                                         value="${cateList.categoryID}">${cateList.category_Name}</option>
                                 </c:forEach>
                             </select>
+                            <c:if test="${requestScope.PRODUCT_TYPE == '1'}">
+                                <select name="birdNestID" class="form-control-select nice-select wide">
+                                    <option value="" disabled selected>
+                                        Bird Nest ID
+                                    </option>
+                                    <option value="" >
+                                        None
+                                    </option>
+                                    <c:forEach items="${requestScope.BIRD_NEST_ID_LIST}" var="birdNestIDList">
+                                        <option value="${birdNestIDList}">${birdNestIDList}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
                             <div>
                                 <input name="nameBird" value="${param.nameBird}" type="text" class="form-control" placeholder="Name" required/>
                             </div>
@@ -159,7 +172,7 @@
                                     <input name="Characteristic" value="${param.Characteristic}" type="text" class="form-control" placeholder="Characteristic"  />
                                 </div>
                                 <div style="width: 100%; height: 100px;">
-                                    <textarea name="Detail" class="form-control" placeholder="Detail"  style="width: 100%; height: 125%; overflow-wrap: break-word;">${param.Detail}</textarea>
+                                    <textarea name="Detail" class="form-control" placeholder="Detail"  style="width: 100%; height: 200%; overflow-wrap: break-word;">${param.Detail}</textarea>
                                 </div>
                             </div>
                         </div>
