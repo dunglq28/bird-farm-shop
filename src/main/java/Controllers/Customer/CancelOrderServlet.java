@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers.Customer;
 
 import Daos.AccountDAO;
@@ -12,6 +7,7 @@ import Daos.ProductDAO;
 import Models.AccountDTO;
 import Models.OrderDTO;
 import Models.ProductDTO;
+import Object.Products;
 import Utils.Constants;
 import Utils.SendMail;
 import java.io.IOException;
@@ -49,21 +45,21 @@ public class CancelOrderServlet extends HttpServlet {
                     List<AccountDTO> aDTO = aDAO.getAdminEmail();
                     odao.UpdateStatusOrder(orderID, "Cancel");
                     OrderDetailDAO oddao = new OrderDetailDAO();
-                    List<ProductDTO> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
+                    List<Products> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
                     ProductDAO prodao = new ProductDAO();
                     ProductDTO prodto = new ProductDTO();
                     if (serviceID.equals("1")) {
-                        for (ProductDTO pro : productIDList) {
+                        for (Products pro : productIDList) {
                             prodto = prodao.getAllQuantityByProductID(pro.getProductID());
-                            prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating(),
-                                    prodto.getQuantity_Sold() - 1, prodto.getProductID());
+                            prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + pro.getQuantityBuy(), prodto.getQuantity_AreMating(),
+                                    prodto.getQuantity_Sold() - pro.getQuantityBuy(), prodto.getProductID());
                         }
                         if (oDTO.getPayBy().equals("VNPAY")) {
                             for (AccountDTO dto : aDTO) {
                                 SendMail mailHome = new SendMail();
                                 String subject = "Refund invoice to customer ";
                                 String text = "Refund request, <br><br>"
-                                        + "The Order" + orderID + "  pay by VNPay has been cancelled please contact with the customer to refund money <br><br>"
+                                        + "The Order " + orderID + " pay by VNPay has been cancelled please contact with the customer to refund money <br><br>"
                                         + "PLEASE notice that all admin will receive this email, make sure that only one person do this action<br>"
                                         + "Best regards, <br>"
                                         + "BirdFarmShop";
@@ -71,7 +67,7 @@ public class CancelOrderServlet extends HttpServlet {
                             }
                         }
                     } else {
-                        for (ProductDTO pro : productIDList) {
+                        for (Products pro : productIDList) {
                             prodto = prodao.getAllQuantityByProductID(pro.getProductID());
                             prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating() - 1,
                                     prodto.getQuantity_Sold(), prodto.getProductID());
@@ -80,6 +76,7 @@ public class CancelOrderServlet extends HttpServlet {
                     session.setAttribute("SERVICE_ID_CANCEL", serviceID);
                 }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

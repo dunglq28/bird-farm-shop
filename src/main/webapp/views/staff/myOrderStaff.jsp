@@ -99,19 +99,41 @@
                                         <td>${util.FormatPrice(dto.total_order_final)}</td>
                                         <td>${dto.form_Receipt}</td>
                                         <td>${dto.payBy}</td>
-                                        <td>
-                                            <form action="updatedOrders-staff">
-                                                <select name="txtNewStatus" onchange="submit()" class="rounded-select" >
-                                                    <option ${dto.status == 'Processing' ? 'selected' : '' }>Processing</option>
-                                                    <option ${dto.status == 'Delivering' ? 'selected' : '' }>Delivering</option>
-                                                    <option ${dto.status == 'Complete' ?'selected' : '' }>Complete</option>
-                                                </select>
-                                                <input type="hidden" name="txtOrderID" value="${dto.orderID}">
-                                                <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" >
-                                            </form>
+                                        <c:set var="cancel_status" value="Cancel"></c:set>
+                                            <td>
+                                            <c:if test="${dto.status == cancel_status}">
+                                                ${dto.status}
+                                            </c:if>
+
+                                            <c:if test="${dto.status != cancel_status}">
+                                                <form action="updatedOrders-staff">
+                                                    <select name="txtNewStatus" onchange="submit()" class="rounded-select" >
+                                                        <c:choose>
+                                                            <c:when test="${dto.status eq 'Processing'}">
+                                                                <option selected>Processing</option>
+                                                                <option>Delivering</option>
+                                                                <option >Complete</option>
+                                                            </c:when>
+                                                        </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${dto.status eq 'Delivering'}">
+                                                                <option selected>Delivering</option>
+                                                                <option>Complete</option>
+                                                            </c:when>
+                                                        </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${dto.status eq 'Complete'}">
+                                                                <option selected>Complete</option>
+                                                            </c:when>
+                                                        </c:choose>        
+                                                    </select>
+                                                    <input type="hidden" name="txtOrderID" value="${dto.orderID}">
+                                                    <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
+                                                </form>
+                                            </c:if>
                                         </td>
                                         <td>
-                                            <c:if test="${requestScope.SERVICE_ID != 2}">
+                                            <c:if test="${requestScope.SERVICE_ID != 2 && dto.status != cancel_status}">
                                                 <button type="button" class="btn btn-secondary cancel-btn" style="border-radius: 7px;
                                                         border: 2px solid rgb(13, 103, 128);
                                                         text-align: center;
@@ -135,30 +157,30 @@
                                             </c:if>
                                         </td>
                                     </tr>
-                                    <form action="cancelOrderByStaff" class="col-12  d-flex justify-content-end">
-                                        <div class="modal" tabindex="-1" role="dialog" id="cancelModal">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content"> 
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Select an option</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Do you want to add this bird back into inventory?</p>
 
+                                    <div class="modal" tabindex="-1" role="dialog" id="cancelModal">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content"> 
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Select an option</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you want to add this bird back into inventory?</p>
 
+                                                    <form action="cancelOrderByStaff" class="col-12  d-flex justify-content-end">
                                                         <input type="hidden" name="orderID" value="${dto.orderID}">
-                                                        <input type="hidden" name="txtServiceID" value="${dto.serviceID}">
+                                                        <input type="hidden" name="txtServiceID" value="${SERVICE_ID}">
                                                         <input type="hidden" name="status" value="${dto.status}">
 
-                                                        <input type="submit" value="Yes"  data-option="1"></button>
-                                                        <input type="submit" value="No"  data-option="2"></button>
-
-                                                    </div>
+                                                        <input type="submit" value="Yes" name="Select_option" data-option="1">
+                                                        <input type="submit" value="No" name="Select_option" data-option="2">
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+
                                 </c:forEach>
                             </c:if>
                         </div>
@@ -191,10 +213,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
-                                                    function submit() {
-                                                        document.querySelector(".myForm").onsubmit();
-                                                        document.querySelector(".myOrder").onsubmit();
-                                                    }
+                                                        function submit() {
+                                                            document.querySelector(".myForm").onsubmit();
+                                                            document.querySelector(".myOrder").onsubmit();
+                                                        }
 
 
         </script>

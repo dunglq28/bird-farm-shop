@@ -37,7 +37,10 @@ public class viewMyOrder extends HttpServlet {
                 url = Constants.PublicFeatures.HOME_CONTROLLER;
                 return;
             }
-            if (serviceID == null) {
+            if (serviceID == null && session.getAttribute("CANCEL_SERVICE") != null) {
+                serviceID = (String) session.getAttribute("CANCEL_SERVICE");
+                session.removeAttribute("CANCEL_SERVICE");
+            } else if (serviceID == null) {
                 serviceID = "1";
             }
             if (status == null || status.equals("All")) {
