@@ -55,7 +55,7 @@
         <div class="row mb-4 d-flex justify-content-between align-items-center">    
             <div class="form-check">
                 <input name="PaymentMethod" class="form-check-input-2" type="radio" checked
-                       id="VNPAY" value="COD">
+                       id="VNPAY" value="VNPAY">
                 <label class="form-check-label" for="VNPAY">
                     VNPAY online payment
                     (<a href="#" class="text-decoration-none text-muted">Link VNPAY</a>)
