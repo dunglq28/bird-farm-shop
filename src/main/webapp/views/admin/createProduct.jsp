@@ -54,7 +54,7 @@
                                     <option value="" disabled selected>
                                         Bird Nest ID
                                     </option>
-                                    <option value="" >
+                                    <option value="None" >
                                         None
                                     </option>
                                     <c:forEach items="${requestScope.BIRD_NEST_ID_LIST}" var="birdNestIDList">

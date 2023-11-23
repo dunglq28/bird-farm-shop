@@ -146,9 +146,11 @@ public class ProductDTO {
         this.status = status;
     }
 
-    public ProductDTO(String productID, String product_Name, String age, String color, String gender, String image, int quantity_Available, int quantity_AreMating, int quantity_Sold, float price, float discount) {
+    public ProductDTO(String productID, String product_Name, String same_Bird_Nest, String age, String color, String gender,
+            String image, int quantity_Available, int quantity_AreMating, int quantity_Sold, float price, float discount) {
         this.productID = productID;
         this.product_Name = product_Name;
+        this.same_Bird_Nest = same_Bird_Nest;
         this.age = age;
         this.color = color;
         this.gender = gender;
