@@ -74,7 +74,7 @@ public class InforReceiveServlet extends HttpServlet {
                 } else if (customer != null && serviceID.equals("2")) {
                     url = Constants.PublicFeatures.MATCH_BIRD_AVAILABLE_SERVICE_CONTROLLER;
                 } else if (customer != null && serviceID.equals("0")) {
-                    url = Constants.CustomerFeatures.PAYMENT_MATCH_BIRD_PAGE;
+                   url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
                 }
             }
 

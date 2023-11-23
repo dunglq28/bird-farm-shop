@@ -67,10 +67,8 @@ public class CheckoutServlet extends HttpServlet {
                 url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
             } else if (button.equals("BuyNow") || button.equals("CompletePayment")) {
                 url = Constants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
-            } else if (button.equals("Continue") && !serviceID.equals("0")) {
+            } else if (button.equals("Continue")) {
                 url = Constants.PublicFeatures.INFO_RECEIVE_CONTROLLER;
-            } else if (button.equals("Continue") && serviceID.equals("0")) {
-                url = Constants.PublicFeatures.HANDLE_PAYMENT_CONTROLLER;
             } else if (button.equals("Order") && paymentMethod.equals("COD")
                     || button.equals("Booking") && paymentMethod.equals("COD")
                     || button.equals("Pay") && paymentMethod.equals("COD")) {
