@@ -124,7 +124,7 @@
                                                     <label class="pay">Mother bird*:</label>
                                                 </div>
                                                 <div class="col-7">
-                                                     <select name="txtFemaleBirdID"  onchange="submit()"  class="list-dt"
+                                                    <select name="txtFemaleBirdID"  onchange="submit()"  class="list-dt"
                                                             style="border: 1px solid #a89a9a; color: #6c757d; width: 40%; text-align: center">
                                                         <option selected>None</option>
                                                         <c:forEach var="female_bird" items="${requestScope.FEMALE_BIRD}">
@@ -240,6 +240,10 @@
                                             </a>
                                         </div>
 
+                                        <c:if test="${not empty requestScope.NOTIFICATION}">
+                                            <br>
+                                            <p style="color: red">${requestScope.NOTIFICATION}</p>
+                                        </c:if>
                                         <!--<hr class="my-4">-->
 
                                         <!--                                        <h5 class="text-uppercase mb-2">Voucher</h5>
@@ -262,7 +266,7 @@
                                         <input type="hidden" name="txtTotalOrder" value="${requestScope.SERVICE_PRICE}" />
                                         <input type="hidden" name="total_order_final" value="${total_order}" />
                                         <input type="hidden" name="txtServiceID" value="${sessionScope.SERVICE_ID}" />
-                                        <input name="btAction" value="Booking" type="submit" ${not empty male_bird_choose && not empty female_bird_choose ? '' : 'disabled'}
+                                        <input name="btAction" value="Booking" type="submit" ${not empty male_bird_choose && not empty female_bird_choose && empty requestScope.NOTIFICATION ? '' : 'disabled'}
                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"
                                                style="background-color:rgb(13,103,128) ;">
                                     </div>

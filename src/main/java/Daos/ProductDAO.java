@@ -513,7 +513,7 @@ public class ProductDAO implements Serializable {
         return false;
     }
 
-    public List<ProductDTO> getBirdByGender(String gender, int cateID, int quantity)
+   public List<ProductDTO> getBirdByGender(String gender, int cateID, int quantity)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -524,7 +524,8 @@ public class ProductDAO implements Serializable {
             con = DBHelper.makeConnection();
             if (con != null) {
                 //2.Create SQL statement string
-                String sql = "select ProductID , Product_Name, Image, Age, Color, Gender, Quantity_Available, Quantity_AreMating, Quantity_Sold, Price, Discount "
+                String sql = "select ProductID , Product_Name, Same_Bird_Nest, Image, Age, Color, Gender, Quantity_Available, "
+                        + "Quantity_AreMating, Quantity_Sold, Price, Discount "
                         + "from Products "
                         + "where Gender = ? and Age in('Adult', 'Mature', 'Young') and Quantity_Available >= ? "
                         + "and CategoryID = ? and Status = 'true' ";
@@ -539,6 +540,7 @@ public class ProductDAO implements Serializable {
                 while (rs.next()) {
                     ProductDTO dto = new ProductDTO(rs.getString("ProductID"),
                             rs.getString("Product_Name"),
+                            rs.getString("Same_Bird_Nest"),
                             rs.getString("Age"),
                             rs.getString("Color"),
                             rs.getString("Gender"),

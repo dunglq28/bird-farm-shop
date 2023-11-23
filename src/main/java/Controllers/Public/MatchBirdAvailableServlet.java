@@ -80,12 +80,15 @@ public class MatchBirdAvailableServlet extends HttpServlet {
             float servicePrice = 0;
             float babyBirdMalePrice = 0;
             float babyBirdFemalePrice = 0;
+            String maleBirdNest = null;
+            String femaleBirdNest = null;
             if (maleBirdIDChoose != null) {
                 for (ProductDTO birdMaleChoose : maleBirdList) {
                     if (birdMaleChoose.getProductID().equals(maleBirdIDChoose)) {
                         session.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
                         request.setAttribute("MALE_BIRD_CHOOSE", birdMaleChoose);
                         babyBirdMalePrice = birdMaleChoose.getPriceDiscount() / 2;
+                        maleBirdNest = birdMaleChoose.getSame_Bird_Nest();
                     }
                 }
             }
@@ -96,6 +99,7 @@ public class MatchBirdAvailableServlet extends HttpServlet {
                         session.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
                         request.setAttribute("FEMALE_BIRD_CHOOSE", birdFemaleChoose);
                         babyBirdFemalePrice = birdFemaleChoose.getPriceDiscount() / 2;
+                        femaleBirdNest = birdFemaleChoose.getSame_Bird_Nest();
                     }
                 }
             }
@@ -106,6 +110,23 @@ public class MatchBirdAvailableServlet extends HttpServlet {
                 servicePrice = babyBirdMalePrice;
             }
 
+            if (maleBirdNest != null && femaleBirdNest != null) {
+                if (maleBirdNest.equals(femaleBirdNest)) {
+                    request.setAttribute("NOTIFICATION", "The pair of birds you selected are 2 inbred birds, please choose again");
+                }
+            }
+            if (femaleBirdNest != null) {
+                ProductDTO prodto = proDao.getProductByID(femaleBirdNest);
+                if (prodto.getDad_Bird_ID().equals(maleBirdIDChoose)) {
+                    request.setAttribute("NOTIFICATION", "The pair of birds you selected are 2 inbred birds, please choose again");
+                }
+            }
+            if (maleBirdNest != null) {
+                ProductDTO prodto = proDao.getProductByID(maleBirdNest);
+                if (prodto.getMom_Bird_ID().equals(femaleBirdIDChoose)) {
+                    request.setAttribute("NOTIFICATION", "The pair of birds you selected are 2 inbred birds, please choose again");
+                }
+            }
             request.setAttribute("SERVICE_PRICE", servicePrice);
             request.setAttribute("CATE_CHOOSE", cateChoose);
             request.setAttribute("MALE_BIRD", maleBirdList);
