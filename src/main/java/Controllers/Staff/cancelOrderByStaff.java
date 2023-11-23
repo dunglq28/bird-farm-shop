@@ -39,7 +39,7 @@ public class cancelOrderByStaff extends HttpServlet {
                 OrderDAO odao = new OrderDAO();
                 boolean update_check = odao.UpdateStatusOrder(orderID, "Cancel");
                 if(update_check){
-                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=1";
+                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=" + serviceID;
                 }
                 OrderDetailDAO oddao = new OrderDetailDAO();
                 List<Products> productIDList = oddao.getOrderDetailProductByOrderID(orderID);
@@ -66,14 +66,15 @@ public class cancelOrderByStaff extends HttpServlet {
                         prodao.updateQuantityAfterOrder(prodto.getQuantity_Available() + 1, prodto.getQuantity_AreMating() - 1,
                                 prodto.getQuantity_Sold(), prodto.getProductID());
                     }
-                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=2";
+                    url = Constants.StaffFeatures.VIEW_MY_ORDER_CONTROLLER + "?txtServiceID=" + serviceID;
                 }
                 session.setAttribute("CANCEL_SERVICE", serviceID);
                 session.setAttribute("STATUS_CANCEL", status);
+                request.setAttribute("SERVICE_ID", serviceID);
             }
 
         } finally {
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
