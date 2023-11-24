@@ -32,13 +32,13 @@
                                         <div class="p-5">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h1 class="fw-bold mb-0 text-black" style="color: rgb(13,103,128);">
-                                                    ${requestScope.SERVICE_ID == 1 ? 'My order' : 'My booking'}
-                                                </h1>
-                                            </div>
-                                            <form action="Order">
-                                                <div class="mb-4 justify-content-between align-items-sm-start">
-                                                    <div class="col-md-4 col-lg-6 col-xl-6">
-                                                        <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == '' ? 'active' : ''}">
+                                                ${requestScope.SERVICE_ID == 1 ? 'My order' : 'My booking'}
+                                            </h1>
+                                        </div>
+                                        <form action="Order">
+                                            <div class="mb-4 justify-content-between align-items-sm-start">
+                                                <div class="col-md-4 col-lg-6 col-xl-6">
+                                                    <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == '' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}">
@@ -64,6 +64,7 @@
                                                                      style="">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Order code: #${order.orderID}</h6>
+                                                                        ${order.serviceID}
                                                                         <h6 class="mb-0 text-sm-center"
                                                                             style="margin: 0 10px 0 10px;"> |
                                                                         </h6>
@@ -85,15 +86,15 @@
                                                                         </div>
                                                                     </c:if>
                                                                 </div>
-<!--                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
-                                                                     style="">
-                                                                    <div class=" align-content-center justify-content-end">
-                                                                        <a href="#"class="text-muted text-decoration-none see_details_tag">
-                                                                            See details
-                                                                            <i class="fa-solid fa-arrow-right"></i></a>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>-->
+                                                                <!--                                                                <div class="col-2 col-lg-2 col-xl-2 d-flex align-items-center"
+                                                                                                                                     style="">
+                                                                                                                                    <div class=" align-content-center justify-content-end">
+                                                                                                                                        <a href="#"class="text-muted text-decoration-none see_details_tag">
+                                                                                                                                            See details
+                                                                                                                                            <i class="fa-solid fa-arrow-right"></i></a>
+                                                                                                                                        </a>
+                                                                                                                                    </div>
+                                                                                                                                </div>-->
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-xl-12 d-flex"style=" margin-top: 8px;">
                                                                 <c:if test="${not empty order.form_Receipt}">
@@ -193,15 +194,26 @@
                                                             <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">See Bird Nest Tracking</button>
                                                         </form>
                                                     </c:if>
-                                                    <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel' && order.serviceID != 1}">
-                                                        <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
-                                                            <input type="hidden" name="orderID" value="${order.orderID}">
-                                                            <input type="hidden" name="txtServiceID" value="${order.serviceID}">
-                                                            <input type="hidden" name="status" value="${order.status}">
-                                                        </form>
+                                                    <c:if test="${order.serviceID != 2}">
+                                                        <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel'}">
+                                                            <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
+                                                                <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
+                                                                <input type="hidden" name="orderID" value="${order.orderID}">
+                                                                <input type="hidden" name="txtServiceID" value="${order.serviceID}">
+                                                                <input type="hidden" name="status" value="${order.status}">
+                                                            </form>
+                                                        </c:if>
                                                     </c:if>
-
+                                                    <c:if test="${order.serviceID != 1}">
+                                                        <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel'}">
+                                                            <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
+                                                                <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
+                                                                <input type="hidden" name="orderID" value="${order.orderID}">
+                                                                <input type="hidden" name="txtServiceID" value="${order.serviceID}">
+                                                                <input type="hidden" name="status" value="${order.status}">
+                                                            </form>
+                                                        </c:if>
+                                                    </c:if>
                                                     <c:if test="${order.status == 'Complete'}">
                                                         <div class="col-12 mt-3 d-flex justify-content-end">
                                                             <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Buy again</button>
