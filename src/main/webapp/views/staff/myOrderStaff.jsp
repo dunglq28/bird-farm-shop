@@ -24,6 +24,26 @@
             .sidebar .menu .list-cart-icon .cart-number {
                 bottom: 15px;
             }
+            /* Styles for the overlay background */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Styles for the popup form */
+            .popup-form {
+                background: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
         </style>
 
     </head>
@@ -89,7 +109,8 @@
                             <c:set var="order" value="${requestScope.MY_ORDERS_STAFF}"></c:set>
                             <c:if test="${not empty order}">
                                 <c:forEach items="${order}" var="dto">
-                                    <tr>
+                                    <c:if test="${dto.status ne 'Wait for confirmation'}">
+                                        <tr>
                                         <td><a href="viewDetailOrder?OrderID=${dto.orderID}" class="order-detail">${dto.orderID}</a></td>
                                         <td>${dto.serviceName}</td>
                                         <td>${dto.accountName}</td>
@@ -137,14 +158,13 @@
                                         <td>
                                             <c:if test="${requestScope.SERVICE_ID != 2 && dto.status != 'Cancel'}">
                                                 <c:if test="${dto.status != 'Complete'}">
-                                                    <button type="button" class="btn btn-secondary cancel-btn" style="border-radius: 7px;
+                                                    <button class="btn btn-secondary cancel-btn" onclick="openPopup('${dto.orderID}')" style="border-radius: 7px;
                                                             border: 2px solid rgb(13, 103, 128);
                                                             text-align: center;
                                                             padding: 0 10px 0 10px;
                                                             text-align: center; color: black">Cancel</button>
                                                 </c:if>
                                             </c:if>
-
                                             <c:if test="${requestScope.SERVICE_ID != 1}">
                                                 <c:if test="${dto.status == 'Wait for confirmation' || dto.status != 'Cancel'}">
                                                     <c:if test="${dto.status != 'Complete'}">
@@ -163,31 +183,25 @@
                                             </c:if>
                                         </td>
                                     </tr>
-                                    <form action="cancelOrderByStaff" class="col-12  d-flex justify-content-end">
-                                        <div class="modal" tabindex="-1" role="dialog" id="cancelModal">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content"> 
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Select an option</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Do you want to add this bird back into inventory?</p>
-                                                        <input type="hidden" name="orderID" value="${dto.orderID}">
-                                                        <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}">
-                                                        <input type="hidden" name="status" value="${dto.status}">
-                                                        <input type="submit" value="Yes" name="Select_option" data-option="1"></button>
-                                                        <input type="submit" value="No" name="Select_option" data-option="2"></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </c:if>                    
                                 </c:forEach>
                             </c:if>
                         </div>
                         </tbody>
                     </table>
+                    <!-- The overlay and the popup form -->
+                    <div id="overlay" class="overlay" onclick="closePopup()">
+                        <div class="popup-form" onclick="event.stopPropagation();">
+                            <form action="cancelOrderByStaff">
+                                <p>Do you want to add this bird back into inventory?</p>
+                                <input type="hidden" name="orderID" id="orderId" value="${dto.orderID}">
+                                <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}">
+                                <input type="hidden" name="status" value="${dto.status}">
+                                <input type="submit" value="Yes" class="btn btn-light" name="Select_option" data-option="1"></button>
+                                <input type="submit" value="No" class="btn btn-light" name="Select_option" data-option="2"></button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-12 text-center mt-2">
@@ -215,30 +229,26 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
-                                                            function submit() {
-                                                                document.querySelector(".myForm").onsubmit();
-                                                                document.querySelector(".myOrder").onsubmit();
-                                                            }
+                                function submit() {
+                                    document.querySelector(".myForm").onsubmit();
+                                    document.querySelector(".myOrder").onsubmit();
+                                }
 
 
         </script>
         <script>
-            const cancelButtons = document.querySelectorAll('.cancel-btn');
 
-            cancelButtons.forEach(cancelButton => {
-                cancelButton.addEventListener('click', function () {
-                    const cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
-                    cancelModal.show();
-                });
-            });
-            const optionButtons = document.querySelectorAll('.option-btn');
-            optionButtons.forEach(optionButton => {
-                optionButton.addEventListener('click', function () {
-                    const selectedOption = this.getAttribute('data-option');
-                    const cancelModal = bootstrap.Modal.getInstance(document.getElementById('cancelModal'));
-                    cancelModal.hide();
-                });
-            });
+            // Function to open the popup with a specific item ID
+            function openPopup(orderId) {
+                // Set the itemId in the form
+                document.getElementById("orderId").value = orderId;
+                document.getElementById("overlay").style.display = "flex";
+            }
+
+            // Function to close the popup
+            function closePopup() {
+                document.getElementById("overlay").style.display = "none";
+            }
         </script>
     </body>
 </html>
