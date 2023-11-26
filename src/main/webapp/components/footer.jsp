@@ -16,7 +16,7 @@
                 <li class="nav-item-footer"><a href="https://www.facebook.com/birdfarmshop" class="pl-0"><i class="fa fa-facebook fa-lg"></i>Bird Farm Shop</a></li>
                 <li class="nav-item-footer"><a href="" ><i class="fa-regular fa-envelope fa-lg"></i>thebird.farm.1704@gmail.com</a></li>
                 <li class="nav-item-footer"><a href="" ><i class="fa-solid fa-phone fa-lg"></i>+84 83 234 5780</a></li>
-                <li class="nav-item-footer"><a href=""><i class="fa-solid fa-location-dot fa-lg"></i>Cukuin, Daklak</a></li>
+                <li class="nav-item-footer"><a href=""><i class="fa-solid fa-location-dot fa-lg"></i>Ho Chi Minh</a></li>
             </ul>
         </div>
 

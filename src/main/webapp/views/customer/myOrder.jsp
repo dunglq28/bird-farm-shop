@@ -64,7 +64,6 @@
                                                                      style="">
                                                                     <div class="d-flex">
                                                                         <h6 class="mb-0 text-sm-start">Order code: #${order.orderID}</h6>
-                                                                        ${order.serviceID}
                                                                         <h6 class="mb-0 text-sm-center"
                                                                             style="margin: 0 10px 0 10px;"> |
                                                                         </h6>
@@ -188,11 +187,13 @@
                                                         </c:forEach>
                                                     </div>
 
-                                                    <c:if test="${order.serviceID != 1}">
-                                                        <form action="Service_Tracking" class="col-12 mt-3 d-flex justify-content-end">
-                                                            <input type="hidden" name="txtOrderID" value="${order.orderID}">
-                                                            <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">See Bird Nest Tracking</button>
-                                                        </form>
+                                                    <c:if test="${order.serviceID != 1 && order.status ne 'Cancel'}">
+                                                        <c:if test="${order.status ne 'Wait for confirmation'}">
+                                                            <form action="Service_Tracking" class="col-12 mt-3 d-flex justify-content-end">
+                                                                <input type="hidden" name="txtOrderID" value="${order.orderID}">
+                                                                <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">See Bird Nest Tracking</button>
+                                                            </form>
+                                                        </c:if>
                                                     </c:if>
                                                     <c:if test="${order.serviceID != 2}">
                                                         <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel'}">

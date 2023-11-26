@@ -155,11 +155,6 @@
                                                     <h5 class="fw-bold mb-0 text-black" style=" color: rgb(13, 103, 128);">Total Paid</h5>
                                                     <h5 class="mb-0 text-muted">${util.FormatPrice(order.total_Order + order.delivery_charges)}</h5>
                                                 </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <button type="button" class="btn btn-primary"
-                                                            style="width: 65px; background-color: #0D6780 ; border: #0D6780;"><i
-                                                            class="fa-solid fa-check fa-lq"></i></button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
