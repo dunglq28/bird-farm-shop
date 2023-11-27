@@ -139,13 +139,12 @@
                                                             <c:choose>
                                                                 <c:when test="${dto.status eq 'Processing'}">
                                                                     <option selected>Processing</option>
-                                                                    <option>Delivering</option>
+                                                                    <option>Complete</option>
                                                                 </c:when>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${dto.status eq 'Delivering'}">
-                                                                    <option selected>Delivering</option>
-                                                                    <option>Complete</option>
+                                                                <c:when test="${dto.status eq 'Complete'}">
+                                                                    <option selected>Complete</option>
                                                                 </c:when>
                                                             </c:choose>       
                                                         </select>
