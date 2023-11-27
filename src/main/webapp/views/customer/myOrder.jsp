@@ -40,7 +40,6 @@
                                                 <div class="col-md-4 col-lg-6 col-xl-6">
                                                     <input type="submit" name="Status" value="All" class="btn btn-secondary ${STATUS_ORDER == '' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Processing" class="btn btn-secondary ${STATUS_ORDER == 'Processing' ? 'active' : ''}">
-                                                    <input type="submit" name="Status" value="Delivering" class="btn btn-secondary ${STATUS_ORDER == 'Delivering' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Complete" class="btn btn-secondary ${STATUS_ORDER == 'Complete' ? 'active' : ''}">
                                                     <input type="submit" name="Status" value="Canceled" class="btn btn-secondary ${STATUS_ORDER == 'Cancel' ? 'active' : ''}">
                                                     <input type="hidden" name="txtServiceID" value="${requestScope.SERVICE_ID}" >
@@ -197,29 +196,27 @@
                                                     </c:if>
                                                     <c:if test="${order.serviceID != 2}">
                                                         <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel'}">
-                                                            <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
+                                                            <c:if test="${order.status ne 'Complete' && order.status ne 'Processing'}">
+                                                                <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
                                                                 <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
                                                                 <input type="hidden" name="orderID" value="${order.orderID}">
                                                                 <input type="hidden" name="txtServiceID" value="${order.serviceID}">
                                                                 <input type="hidden" name="status" value="${order.status}">
                                                             </form>
+                                                            </c:if>
                                                         </c:if>
                                                     </c:if>
                                                     <c:if test="${order.serviceID != 1}">
                                                         <c:if test="${order.status == 'Wait for confirmation' || order.status != 'Cancel'}">
-                                                            <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
+                                                            <c:if test="${order.status ne 'Complete' && order.status ne 'Processing'}">
+                                                                <form action="CancelOrder" class="col-12 mt-3 d-flex justify-content-end">
                                                                 <button type="submit" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Cancel</button>
                                                                 <input type="hidden" name="orderID" value="${order.orderID}">
                                                                 <input type="hidden" name="txtServiceID" value="${order.serviceID}">
                                                                 <input type="hidden" name="status" value="${order.status}">
                                                             </form>
+                                                            </c:if>
                                                         </c:if>
-                                                    </c:if>
-                                                    <c:if test="${order.status == 'Complete'}">
-                                                        <div class="col-12 mt-3 d-flex justify-content-end">
-                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">Buy again</button>
-                                                            <button type="button" class="btn btn-secondary" style="margin: 3px; background-color:rgb(13,103,128);">View rate</button>
-                                                        </div>
                                                     </c:if>
                                                     <hr class="my-4">
                                                     <input type="hidden" value=" ${odDao.orderTailList.clear()}">
